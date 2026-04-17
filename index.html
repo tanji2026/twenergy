@@ -70,34 +70,28 @@
         .feed-list {
             animation: scrollFeed 15s linear infinite;
         }
-        
         @keyframes scrollFeed {
             0% { transform: translateY(100%); }
             100% { transform: translateY(-100%); }
         }
-        
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
         }
-        
         @keyframes bounceGlow {
             0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 10px rgba(34, 197, 94, 0.4)); }
             50% { transform: translateY(-20px) scale(1.05); filter: drop-shadow(0 0 25px rgba(34, 197, 94, 0.8)); }
             100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 10px rgba(34, 197, 94, 0.4)); }
         }
-        
         @keyframes celebrateSpin {
             0% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 30px rgba(234, 179, 8, 1)); }
             50% { transform: scale(1.2) rotate(180deg); filter: drop-shadow(0 0 50px rgba(234, 179, 8, 1)); }
             100% { transform: scale(1) rotate(360deg); filter: drop-shadow(0 0 30px rgba(234, 179, 8, 1)); }
         }
-
         .anim-float { animation: float 4s ease-in-out infinite; }
         .anim-bounce-glow { animation: bounceGlow 2s cubic-bezier(0.28, 0.84, 0.42, 1) infinite; }
         .anim-celebrate { animation: celebrateSpin 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        
         #confetti-canvas {
             position: fixed;
             top: 0;
@@ -106,6 +100,9 @@
             height: 100%;
             pointer-events: none;
             z-index: 100;
+        }
+        .auth-hidden {
+            display: none !important;
         }
     </style>
 </head>
@@ -129,7 +126,12 @@
                     <div class="text-xs text-slate-400">總累積減碳</div>
                     <div class="text-sm font-bold text-green-600"><span id="global-co2">124.5</span> kg CO2e</div>
                 </div>
-                <button class="bg-slate-800 text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-slate-700 transition-colors">我的帳戶</button>
+                <div id="user-controls" class="flex items-center gap-2 auth-hidden">
+                    <span id="user-email-display" class="text-xs text-slate-500 hidden md:block"></span>
+                    <button id="accountBtn" class="bg-slate-800 text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-slate-700 transition-colors">我的帳戶</button>
+                    <button id="logoutBtn" class="text-slate-400 hover:text-slate-600 px-2">登出</button>
+                </div>
+                <button id="loginShowBtn" class="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-green-700 transition-colors">登入/註冊</button>
             </div>
         </div>
     </nav>
@@ -168,7 +170,16 @@
                 <p id="encouragement-text" class="text-sm text-slate-400 mt-2">拖拉右側滑桿，與碳吉寶寶一起改變世界</p>
             </div>
 
-            <div class="glass-card rounded-3xl p-8 shadow-xl flex flex-col justify-center">
+            <div class="glass-card rounded-3xl p-8 shadow-xl flex flex-col justify-center relative">
+                <div id="login-overlay" class="absolute inset-0 bg-white/80 backdrop-blur-sm z-20 flex flex-col items-center justify-center rounded-3xl">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg text-center">
+                        <span class="text-4xl mb-4 block">🔒</span>
+                        <h4 class="font-bold text-lg mb-2">請先登入以進行贊助</h4>
+                        <p class="text-sm text-slate-500 mb-4">登入後即可開始累積您的永續資產</p>
+                        <button onclick="document.getElementById('loginModal').classList.remove('hidden')" class="bg-green-600 text-white px-6 py-2 rounded-full font-bold hover:bg-green-700">前往登入</button>
+                    </div>
+                </div>
+
                 <h3 class="text-xl font-bold mb-6 flex items-center">
                     <svg class="w-6 h-6 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     微型永續投資試算
@@ -176,7 +187,7 @@
 
                 <div class="mb-6 p-6 bg-slate-50 rounded-2xl border border-slate-100">
                     <div class="flex justify-between items-end mb-4">
-                        <span class="text-slate-500 font-medium">預定贊助金額</span>
+                        <span class="text-slate-500 font-medium">單次贊助金額</span>
                         <div class="flex items-center">
                             <span class="text-lg font-bold text-slate-400 mr-2">NT$</span>
                             <input type="number" id="investInput" value="500" min="100" max="10000" step="100" class="text-3xl font-extrabold text-green-600 bg-transparent w-28 text-right outline-none border-b-2 border-green-200 focus:border-green-500 transition-colors">
@@ -193,14 +204,14 @@
 
                 <div class="grid grid-cols-2 gap-4 mb-8">
                     <div class="p-5 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col items-center text-center">
-                        <span class="text-xs text-emerald-600 font-bold mb-1">預期年減碳貢獻</span>
+                        <span class="text-xs text-emerald-600 font-bold mb-1">本次減碳貢獻</span>
                         <div class="text-2xl font-extrabold text-slate-800">
                             <span id="co2Display">6.0</span>
                             <span class="text-sm font-medium text-slate-500">kg</span>
                         </div>
                     </div>
                     <div class="p-5 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col items-center text-center">
-                        <span class="text-xs text-blue-600 font-bold mb-1">寶寶獲得經驗值</span>
+                        <span class="text-xs text-blue-600 font-bold mb-1">可獲得經驗值</span>
                         <div class="text-2xl font-extrabold text-slate-800">
                             <span id="expDisplay">50</span>
                             <span class="text-sm font-medium text-slate-500">EXP</span>
@@ -209,34 +220,38 @@
                 </div>
 
                 <button id="sponsorBtn" class="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                    確認贊助並認養寶寶
+                    確認贊助並注入能量
                 </button>
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2 glass-card rounded-3xl p-8 shadow-lg">
-                <h3 class="text-xl font-bold mb-6 text-slate-800">里程碑與綠色回饋</h3>
-                <p class="text-sm text-slate-500 mb-6">累積經驗值 (EXP) 解鎖對應的虛實整合獎勵，讓您的低碳行動在日常生活中延續。</p>
+                <div class="flex justify-between items-end mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800">累積里程碑與回饋</h3>
+                        <p class="text-sm text-slate-500">我的總經驗值：<span id="personal-total-exp" class="font-bold text-green-600 text-lg">0</span> EXP</p>
+                    </div>
+                </div>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div id="reward-1" class="reward-item reward-locked bg-white border-2 border-slate-100 rounded-2xl p-5 text-center">
                         <div class="text-3xl mb-2">🏅</div>
                         <h4 class="font-bold text-slate-800">淨零新星數位徽章</h4>
                         <p class="text-xs text-slate-500 mt-1">展示於個人數位憑證區</p>
-                        <div class="mt-3 inline-block bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-full font-bold">需 100 EXP</div>
+                        <div class="mt-3 inline-block bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-full font-bold" id="req-1">需 100 EXP</div>
                     </div>
                     <div id="reward-2" class="reward-item reward-locked bg-white border-2 border-slate-100 rounded-2xl p-5 text-center">
                         <div class="text-3xl mb-2">☕</div>
                         <h4 class="font-bold text-slate-800">在地低碳咖啡兌換券</h4>
                         <p class="text-xs text-slate-500 mt-1">支持地方創生與減碳農業</p>
-                        <div class="mt-3 inline-block bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-full font-bold">需 300 EXP</div>
+                        <div class="mt-3 inline-block bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-full font-bold" id="req-2">需 300 EXP</div>
                     </div>
                     <div id="reward-3" class="reward-item reward-locked bg-white border-2 border-slate-100 rounded-2xl p-5 text-center">
                         <div class="text-3xl mb-2">🌱</div>
                         <h4 class="font-bold text-slate-800">實體碳吉寶寶環保杯</h4>
                         <p class="text-xs text-slate-500 mt-1">100% 循環再生材質製作</p>
-                        <div class="mt-3 inline-block bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-full font-bold">需 800 EXP</div>
+                        <div class="mt-3 inline-block bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-full font-bold" id="req-3">需 800 EXP</div>
                     </div>
                 </div>
             </div>
@@ -269,17 +284,136 @@
                                 <p class="text-xs text-slate-400">解鎖環保杯獎勵 5分鐘前</p>
                             </div>
                         </div>
-                        <div class="flex items-center text-sm border-b border-slate-700 pb-2">
-                            <div class="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center mr-3 font-bold">林</div>
-                            <div>
-                                <p><span class="font-bold text-green-400">林O宇</span> 贊助了 <span class="font-bold">800 元</span></p>
-                                <p class="text-xs text-slate-400">獲得 80 EXP 10分鐘前</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="mt-12">
+            <h2 class="text-2xl font-extrabold text-slate-800 mb-6">探索其他淨零專案</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="project-list">
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm" onclick="switchProject(0)">
+                    <div class="h-32 bg-green-100 flex items-center justify-center relative">
+                        <span class="absolute top-2 left-2 bg-white text-xs font-bold px-2 py-1 rounded text-green-600">太陽能</span>
+                        <span class="text-4xl">☀️</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-lg mb-1">廠房屋頂太陽能建置</h4>
+                        <p class="text-xs text-slate-500 mb-4">在地綠能中小企業聯盟</p>
+                        <div class="w-full bg-slate-200 rounded-full h-2 mb-2"><div class="bg-green-500 h-2 rounded-full" style="width: 69%"></div></div>
+                        <div class="flex justify-between text-xs font-bold text-slate-600"><span class="text-green-600">69%</span><span>剩 15 天</span></div>
+                    </div>
+                </div>
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm" onclick="switchProject(1)">
+                    <div class="h-32 bg-blue-100 flex items-center justify-center relative">
+                        <span class="absolute top-2 left-2 bg-white text-xs font-bold px-2 py-1 rounded text-blue-600">生質能</span>
+                        <span class="text-4xl">🐖</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-lg mb-1">屏東養豬場沼氣發電</h4>
+                        <p class="text-xs text-slate-500 mb-4">循環農業合作社</p>
+                        <div class="w-full bg-slate-200 rounded-full h-2 mb-2"><div class="bg-green-500 h-2 rounded-full" style="width: 42%"></div></div>
+                        <div class="flex justify-between text-xs font-bold text-slate-600"><span class="text-green-600">42%</span><span>剩 30 天</span></div>
+                    </div>
+                </div>
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm" onclick="switchProject(2)">
+                    <div class="h-32 bg-yellow-100 flex items-center justify-center relative">
+                        <span class="absolute top-2 left-2 bg-white text-xs font-bold px-2 py-1 rounded text-yellow-600">循環經濟</span>
+                        <span class="text-4xl">📦</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-lg mb-1">電商物流循環包裝導入</h4>
+                        <p class="text-xs text-slate-500 mb-4">綠色電商新創團隊</p>
+                        <div class="w-full bg-slate-200 rounded-full h-2 mb-2"><div class="bg-green-500 h-2 rounded-full" style="width: 88%"></div></div>
+                        <div class="flex justify-between text-xs font-bold text-slate-600"><span class="text-green-600">88%</span><span>剩 5 天</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm mt-12">
+        <p class="mb-2">碳吉寶寶綠能群募平台 &copy; 2026 永續實作專案</p>
+        <p>本平台符合聯合國淨零排放規範，致力於縮短氣候資金斷層</p>
+    </footer>
+
+    <!-- 登入與註冊彈出視窗 -->
+    <div id="loginModal" class="fixed inset-0 bg-slate-900 bg-opacity-70 z-50 hidden flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl relative">
+            <button onclick="document.getElementById('loginModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-green-100 rounded-full mx-auto flex items-center justify-center text-3xl font-bold text-green-600 mb-2">碳</div>
+                <h2 class="text-2xl font-extrabold text-slate-800">登入平台</h2>
+                <p class="text-sm text-slate-500">開始您的淨零行動</p>
+            </div>
+            
+            <form id="loginForm" class="space-y-4">
+                <div id="auth-error" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded text-sm text-center"></div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">電子郵件</label>
+                    <input type="email" id="emailInput" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-green-500 focus:border-green-500" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">密碼</label>
+                    <input type="password" id="passwordInput" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-green-500 focus:border-green-500" required>
+                </div>
+                <div class="pt-2">
+                    <button type="submit" id="signInBtn" class="w-full bg-green-600 text-white rounded-lg py-2.5 font-bold hover:bg-green-700 transition-colors mb-2">登入</button>
+                    <button type="button" id="signUpBtn" class="w-full bg-slate-100 text-slate-700 rounded-lg py-2.5 font-bold hover:bg-slate-200 transition-colors mb-4">註冊新帳號</button>
+                    
+                    <div class="relative flex items-center justify-center w-full my-4">
+                        <div class="border-t border-slate-200 w-full"></div>
+                        <span class="bg-white px-3 text-xs text-slate-400 absolute">或</span>
+                    </div>
+                    
+                    <button type="button" id="anonLoginBtn" class="w-full border border-slate-300 text-slate-700 rounded-lg py-2.5 font-bold hover:bg-slate-50 transition-colors flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        先以訪客身分體驗
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <div id="helpModal" class="hidden bg-white w-80 rounded-2xl shadow-2xl border border-green-100 mb-4 flex flex-col overflow-hidden transform transition-all" style="height: 400px;">
+            <div class="bg-green-600 p-4 text-white flex justify-between items-center shadow-md z-10">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-2 overflow-hidden">
+                        <img src="tanjibaby.png" class="w-6 h-6 object-cover" onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm">碳吉寶寶</h4>
+                        <p class="text-[10px] text-green-200">線上服務中</p>
+                    </div>
+                </div>
+                <button id="closeHelpBtn" class="text-white hover:text-green-200 focus:outline-none">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <div id="chatMessages" class="flex-1 bg-slate-50 p-4 overflow-y-auto flex flex-col gap-3 text-sm">
+                <div class="self-start bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm border border-slate-100 max-w-[85%]">
+                    嗨！我是碳吉寶寶 🍃<br>你可以拖拉滑桿來試算減碳量，或是問我任何關於專案的問題喔！
+                </div>
+            </div>
+
+            <div class="p-3 bg-white border-t border-slate-100 flex items-center gap-2">
+                <input type="text" id="chatInput" placeholder="輸入訊息..." class="flex-1 bg-slate-100 border-none rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400">
+                <button id="sendChatBtn" class="bg-green-500 text-white rounded-full w-9 h-9 flex items-center justify-center hover:bg-green-600 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <button id="helpToggleBtn" class="bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-xl hover:shadow-2xl transition-transform transform hover:-translate-y-1 focus:outline-none flex items-center justify-center relative">
+            <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></span>
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+        </button>
     </div>
 
     <div id="successModal" class="fixed inset-0 bg-slate-900 bg-opacity-70 z-50 hidden flex items-center justify-center backdrop-blur-sm transition-opacity">
@@ -288,14 +422,217 @@
                 <span class="text-5xl">🎉</span>
             </div>
             <h2 class="text-2xl font-extrabold text-slate-800 mb-2">感謝您的贊助！</h2>
-            <p class="text-slate-600 mb-6">您已成功為地球減少了 <span id="modal-co2" class="font-bold text-green-600"></span> kg 的碳排放，並且認養了一隻碳吉寶寶。</p>
+            <p class="text-slate-600 mb-6">您本次成功為地球減少了 <span id="modal-co2" class="font-bold text-green-600"></span> kg 的碳排放，帳戶已獲得 <span id="modal-exp" class="font-bold text-blue-600"></span> EXP。</p>
             <button id="closeSuccessBtn" class="w-full bg-green-500 hover:bg-green-600 text-white rounded-xl py-3 font-bold transition-colors">
-                前往我的帳戶查看
+                繼續探索
             </button>
         </div>
     </div>
 
-    <script>
+    <div id="accountModal" class="fixed inset-0 bg-slate-900 bg-opacity-70 z-50 hidden flex items-center justify-center backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl transform scale-95 transition-transform" id="accountModalContent">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-extrabold text-slate-800">我的永續帳戶</h2>
+                <button id="closeAccountBtn" class="text-slate-400 hover:text-slate-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="flex items-center gap-4 mb-6 p-4 bg-green-50 rounded-2xl border border-green-100">
+                <div class="w-16 h-16 bg-white rounded-full overflow-hidden border-2 border-green-400">
+                    <img src="tanjibaby2.jpg" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-slate-800">碳吉寶寶 <span class="text-sm bg-green-500 text-white px-2 py-0.5 rounded-full ml-1" id="acc-level">Lv.1</span></h3>
+                    <p class="text-sm text-green-700 font-medium">總經驗值：<span id="acc-exp">0</span> EXP</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <p class="text-xs text-slate-500 font-bold mb-1">累積贊助總額</p>
+                    <p class="text-xl font-extrabold text-slate-800">NT$ <span id="acc-invested">0</span></p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <p class="text-xs text-slate-500 font-bold mb-1">總減碳貢獻</p>
+                    <p class="text-xl font-extrabold text-slate-800"><span id="acc-co2">0.0</span> <span class="text-sm font-medium text-slate-500">kg</span></p>
+                </div>
+            </div>
+            <button class="w-full bg-slate-800 hover:bg-slate-700 text-white rounded-xl py-3 font-bold transition-colors">
+                查看數位憑證區
+            </button>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInAnonymously, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        // Firebase Configuration
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "",
+            authDomain: "mock-domain",
+            projectId: "mock-project",
+            storageBucket: "mock-bucket",
+            messagingSenderId: "mock-sender",
+            appId: "mock-app"
+        };
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+
+        // UI Elements for Auth
+        const loginShowBtn = document.getElementById('loginShowBtn');
+        const userControls = document.getElementById('userControls');
+        const loginModal = document.getElementById('loginModal');
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('emailInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const signInBtn = document.getElementById('signInBtn');
+        const signUpBtn = document.getElementById('signUpBtn');
+        const anonLoginBtn = document.getElementById('anonLoginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userEmailDisplay = document.getElementById('user-email-display');
+        const authError = document.getElementById('auth-error');
+        const loginOverlay = document.getElementById('login-overlay');
+
+        // Initial Data Structure
+        const initialUserData = {
+            invested: 0,
+            co2: 0,
+            exp: 0,
+            level: 1
+        };
+
+        const initAuth = async () => {
+             if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                 try{
+                     await signInWithCustomToken(auth, __initial_auth_token);
+                 }catch(e){
+                     // fail silently in preview
+                 }
+             }
+        };
+        initAuth();
+
+        // Handle Auth State Changes
+        onAuthStateChanged(auth, async (user) => {
+            currentUser = user;
+            if (user) {
+                document.getElementById('user-controls').classList.remove('auth-hidden');
+                loginShowBtn.classList.add('auth-hidden');
+                loginOverlay.classList.add('hidden');
+                loginModal.classList.add('hidden');
+                
+                userEmailDisplay.innerText = user.isAnonymous ? '訪客使用者' : user.email;
+
+                // Setup Firestore Listener for user data
+                const userDocRef = doc(db, 'artifacts', appId, 'users', user.uid);
+                
+                // First get doc, if not exists create it
+                try {
+                    const docSnap = await getDoc(userDocRef);
+                    if (!docSnap.exists()) {
+                        await setDoc(userDocRef, initialUserData);
+                    }
+                } catch(e) {
+                    console.warn("Firestore error (likely preview mode):", e);
+                    // In preview mode or if firestore fails, we use local state
+                    Object.assign(personalData, initialUserData);
+                    updateUIFromData(personalData);
+                }
+
+                // Listen for changes
+                onSnapshot(userDocRef, (doc) => {
+                    if (doc.exists()) {
+                        const data = doc.data();
+                        Object.assign(personalData, data);
+                        updateUIFromData(personalData);
+                    }
+                }, (error) => {
+                    console.warn("Snapshot error:", error);
+                });
+
+            } else {
+                document.getElementById('user-controls').classList.add('auth-hidden');
+                loginShowBtn.classList.remove('auth-hidden');
+                loginOverlay.classList.remove('hidden');
+                
+                // Reset local data
+                Object.assign(personalData, initialUserData);
+                updateUIFromData(personalData);
+            }
+        });
+
+        // Show error message
+        const showError = (msg) => {
+            authError.innerText = msg;
+            authError.classList.remove('hidden');
+            setTimeout(() => authError.classList.add('hidden'), 3000);
+        };
+
+        // Login Show Button
+        loginShowBtn.addEventListener('click', () => {
+            loginModal.classList.remove('hidden');
+        });
+
+        // Sign In
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                showError("登入失敗：帳號或密碼錯誤");
+            }
+        });
+
+        // Sign Up
+        signUpBtn.addEventListener('click', async () => {
+            if(!emailInput.validity.valid || !passwordInput.validity.valid) {
+                 showError("請輸入有效的電子郵件與密碼");
+                 return;
+            }
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                // Initialize user document
+                await setDoc(doc(db, 'artifacts', appId, 'users', userCredential.user.uid), initialUserData);
+            } catch (error) {
+                showError("註冊失敗：" + error.message);
+            }
+        });
+
+        // Anonymous Login
+        anonLoginBtn.addEventListener('click', async () => {
+            try {
+                const userCredential = await signInAnonymously(auth);
+                await setDoc(doc(db, 'artifacts', appId, 'users', userCredential.user.uid), initialUserData);
+            } catch (error) {
+                showError("訪客登入失敗");
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            signOut(auth);
+        });
+
+        // Helper to update UI from data
+        function updateUIFromData(data) {
+            personalTotalExpEl.innerText = data.exp;
+            updateRewards(data.exp);
+            accLevel.innerText = `Lv.${data.level}`;
+            accExp.innerText = data.exp;
+            accInvested.innerText = data.invested.toLocaleString();
+            accCo2.innerText = data.co2.toFixed(1);
+        }
+
         const slider = document.getElementById('investSlider');
         const numInput = document.getElementById('investInput');
         const co2Display = document.getElementById('co2Display');
@@ -308,7 +645,18 @@
         const successModal = document.getElementById('successModal');
         const closeSuccessBtn = document.getElementById('closeSuccessBtn');
         const modalCo2 = document.getElementById('modalCo2');
+        const modalExp = document.getElementById('modalExp');
         const successModalContent = document.getElementById('successModalContent');
+
+        const accountBtn = document.getElementById('accountBtn');
+        const accountModal = document.getElementById('accountModal');
+        const closeAccountBtn = document.getElementById('closeAccountBtn');
+        const accountModalContent = document.getElementById('accountModalContent');
+        const accLevel = document.getElementById('acc-level');
+        const accExp = document.getElementById('acc-exp');
+        const accInvested = document.getElementById('acc-invested');
+        const accCo2 = document.getElementById('acc-co2');
+        const personalTotalExpEl = document.getElementById('personal-total-exp');
 
         const raisedAmountEl = document.getElementById('raised-amount');
         const heroProgress = document.getElementById('hero-progress');
@@ -316,6 +664,18 @@
         const globalCo2El = document.getElementById('global-co2');
         const feedListContainer = document.getElementById('feed-list-container');
         
+        const helpToggleBtn = document.getElementById('helpToggleBtn');
+        const helpModal = document.getElementById('helpModal');
+        const closeHelpBtn = document.getElementById('closeHelpBtn');
+        const chatInput = document.getElementById('chatInput');
+        const sendChatBtn = document.getElementById('sendChatBtn');
+        const chatMessages = document.getElementById('chatMessages');
+
+        const heroTitle = document.getElementById('hero-title');
+        const heroOrg = document.getElementById('hero-org');
+        const heroGoal = document.getElementById('hero-goal');
+        const heroTime = document.getElementById('hero-time');
+
         const canvas = document.getElementById('confetti-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -323,28 +683,105 @@
 
         const imgState = {
             normal: 'tanjibaby.png',
-            happy: 'tanjibaby2.png'
+            happy: 'tanjibaby2.jpg'
         };
 
-        let currentRaised = 3450000;
-        const targetGoal = 5000000;
+        const projects = [
+            { title: "100kW 廠房屋頂太陽能建置專案", org: "發起方：在地綠能中小企業聯盟", raised: 3450000, goal: 5000000, time: "剩餘 15 天" },
+            { title: "屏東養豬場沼氣發電專案", org: "發起方：循環農業合作社", raised: 840000, goal: 2000000, time: "剩餘 30 天" },
+            { title: "電商物流循環包裝導入專案", org: "發起方：綠色電商新創團隊", raised: 880000, goal: 1000000, time: "剩餘 5 天" }
+        ];
+
+        let currentProjectIndex = 0;
         let globalCo2 = 124.5;
+        
+        let personalData = {
+            invested: 0,
+            co2: 0,
+            exp: 0,
+            level: 1
+        };
+
         let confettiParticles = [];
         let animationFrameId = null;
 
-        function updateRewards(exp) {
+        function switchProject(index) {
+            currentProjectIndex = index;
+            const p = projects[index];
+            const pct = Math.floor((p.raised / p.goal) * 100);
+            
+            heroTitle.innerText = p.title;
+            heroOrg.innerText = p.org;
+            raisedAmountEl.innerText = p.raised.toLocaleString();
+            heroGoal.innerText = `目標：${p.goal.toLocaleString()}`;
+            heroProgress.style.width = pct + '%';
+            pctAmountEl.innerText = pct;
+            heroTime.innerText = `目前進度 ${pct}% | ${p.time}`;
+            
+            slider.value = 500;
+            numInput.value = 500;
+            syncValues(500);
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateRewards(totalExp) {
             const r1 = document.getElementById('reward-1');
             const r2 = document.getElementById('reward-2');
             const r3 = document.getElementById('reward-3');
+            const req1 = document.getElementById('req-1');
+            const req2 = document.getElementById('req-2');
+            const req3 = document.getElementById('req-3');
 
-            if(exp >= 100) { r1.classList.replace('reward-locked', 'reward-unlocked'); r1.classList.add('bg-green-50'); }
-            else { r1.classList.replace('reward-unlocked', 'reward-locked'); r1.classList.remove('bg-green-50'); }
+            if(totalExp >= 100) { 
+                r1.classList.replace('reward-locked', 'reward-unlocked'); 
+                r1.classList.add('bg-green-50');
+                req1.innerText = '已解鎖';
+                req1.classList.replace('bg-slate-100', 'bg-green-200');
+                req1.classList.replace('text-slate-600', 'text-green-800');
+            } else {
+                 r1.classList.replace('reward-unlocked', 'reward-locked'); 
+                r1.classList.remove('bg-green-50');
+                req1.innerText = '需 100 EXP';
+                req1.classList.replace('bg-green-200', 'bg-slate-100');
+                req1.classList.replace('text-green-800', 'text-slate-600');
+            }
+            
+            if(totalExp >= 300) { 
+                r2.classList.replace('reward-locked', 'reward-unlocked'); 
+                r2.classList.add('bg-green-50');
+                req2.innerText = '已解鎖';
+                req2.classList.replace('bg-slate-100', 'bg-green-200');
+                req2.classList.replace('text-slate-600', 'text-green-800');
+            }else {
+                 r2.classList.replace('reward-unlocked', 'reward-locked'); 
+                r2.classList.remove('bg-green-50');
+                req2.innerText = '需 300 EXP';
+                req2.classList.replace('bg-green-200', 'bg-slate-100');
+                req2.classList.replace('text-green-800', 'text-slate-600');
+            }
 
-            if(exp >= 300) { r2.classList.replace('reward-locked', 'reward-unlocked'); r2.classList.add('bg-green-50'); }
-            else { r2.classList.replace('reward-unlocked', 'reward-locked'); r2.classList.remove('bg-green-50'); }
+            if(totalExp >= 800) { 
+                r3.classList.replace('reward-locked', 'reward-unlocked'); 
+                r3.classList.add('bg-green-50');
+                req3.innerText = '已解鎖';
+                req3.classList.replace('bg-slate-100', 'bg-green-200');
+                req3.classList.replace('text-slate-600', 'text-green-800');
+            }else {
+                 r3.classList.replace('reward-unlocked', 'reward-locked'); 
+                r3.classList.remove('bg-green-50');
+                req3.innerText = '需 800 EXP';
+                req3.classList.replace('bg-green-200', 'bg-slate-100');
+                req3.classList.replace('text-green-800', 'text-slate-600');
+            }
+        }
 
-            if(exp >= 800) { r3.classList.replace('reward-locked', 'reward-unlocked'); r3.classList.add('bg-green-50'); }
-            else { r3.classList.replace('reward-unlocked', 'reward-locked'); r3.classList.remove('bg-green-50'); }
+        function calculateLevel(exp) {
+            if(exp >= 2000) return 5;
+            if(exp >= 1000) return 4;
+            if(exp >= 500) return 3;
+            if(exp >= 200) return 2;
+            return 1;
         }
 
         function updateBabyState(money) {
@@ -357,7 +794,7 @@
                 babyImg.classList.add('anim-bounce-glow');
                 statusText.innerText = '寶寶覺得充滿能量！';
                 statusText.className = 'text-xl font-bold text-green-600 transition-colors duration-300';
-                encouragementText.innerText = '您已經解鎖了高階綠色回饋獎勵';
+                encouragementText.innerText = '這筆贊助將帶來巨大的改變';
             } else {
                 babyImg.classList.add('anim-float');
                 statusText.innerText = '等待注入綠色資金...';
@@ -373,9 +810,7 @@
             
             co2Display.innerText = co2;
             expDisplay.innerText = exp;
-            
             updateBabyState(money);
-            updateRewards(exp);
         }
 
         slider.addEventListener('input', function() {
@@ -410,7 +845,7 @@
         function drawConfetti() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             let active = false;
-            confettiParticles.forEach((p, index) => {
+            confettiParticles.forEach((p) => {
                 p.tiltAngle += p.tiltAngleInc;
                 p.y += (Math.cos(p.tiltAngle) + 1 + p.r / 2) / 2;
                 p.x += Math.sin(p.tiltAngle) * 2;
@@ -448,21 +883,47 @@
             feedListContainer.insertBefore(div, feedListContainer.firstChild);
         }
 
-        sponsorBtn.addEventListener('click', () => {
+        sponsorBtn.addEventListener('click', async () => {
+            if (!currentUser) {
+                loginModal.classList.remove('hidden');
+                return;
+            }
+
             const money = parseInt(numInput.value);
             const co2 = parseFloat(((money / 1000) * 12).toFixed(1));
             const exp = Math.floor(money / 10);
 
-            currentRaised += money;
-            globalCo2 += co2;
-            let newPct = Math.floor((currentRaised / targetGoal) * 100);
+            projects[currentProjectIndex].raised += money;
+            const p = projects[currentProjectIndex];
+            let newPct = Math.floor((p.raised / p.goal) * 100);
             if (newPct > 100) newPct = 100;
 
-            raisedAmountEl.innerText = currentRaised.toLocaleString();
+            raisedAmountEl.innerText = p.raised.toLocaleString();
             pctAmountEl.innerText = newPct;
             heroProgress.style.width = newPct + '%';
+
+            globalCo2 += co2;
             globalCo2El.innerText = globalCo2.toFixed(1);
-            document.getElementById('modal-co2').innerText = co2.toFixed(1);
+
+            personalData.invested += money;
+            personalData.co2 += co2;
+            personalData.exp += exp;
+            personalData.level = calculateLevel(personalData.exp);
+            
+            // Save to Firestore if authenticated
+            if (currentUser) {
+                try {
+                     const userDocRef = doc(db, 'artifacts', appId, 'users', currentUser.uid);
+                     await setDoc(userDocRef, personalData);
+                } catch(e) {
+                     console.warn("Failed to save to Firestore", e);
+                }
+            }
+
+            updateUIFromData(personalData);
+
+            modalCo2.innerText = co2.toFixed(1);
+            modalExp.innerText = exp;
 
             babyImg.classList.remove('anim-float', 'anim-bounce-glow');
             void babyImg.offsetWidth;
@@ -489,8 +950,63 @@
                 slider.value = 500;
                 numInput.value = 500;
                 syncValues(500);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 200);
+        });
+
+        accountBtn.addEventListener('click', () => {
+            accountModal.classList.remove('hidden');
+            setTimeout(() => {
+                accountModalContent.classList.remove('scale-95');
+                accountModalContent.classList.add('scale-100');
+            }, 10);
+        });
+
+        closeAccountBtn.addEventListener('click', () => {
+            accountModalContent.classList.remove('scale-100');
+            accountModalContent.classList.add('scale-95');
+            setTimeout(() => {
+                accountModal.classList.add('hidden');
+            }, 200);
+        });
+
+        helpToggleBtn.addEventListener('click', () => {
+            helpModal.classList.toggle('hidden');
+            helpToggleBtn.querySelector('span').classList.add('hidden');
+        });
+        
+        closeHelpBtn.addEventListener('click', () => {
+            helpModal.classList.add('hidden');
+        });
+
+        function addMessage(text, isUser) {
+            const div = document.createElement('div');
+            if(isUser) {
+                div.className = 'self-end bg-green-500 text-white p-3 rounded-2xl rounded-tr-sm shadow-sm max-w-[85%]';
+            } else {
+                div.className = 'self-start bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm border border-slate-100 max-w-[85%]';
+            }
+            div.innerText = text;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function handleChat() {
+            const text = chatInput.value.trim();
+            if(!text) return;
+            addMessage(text, true);
+            chatInput.value = '';
+            
+            setTimeout(() => {
+                let reply = '收到你的訊息囉！您可以透過上方滑桿來試算減碳量，或是點擊下方的專案卡片探索更多喔！';
+                if(text.includes('錢') || text.includes('贊助') || text.includes('手續費')) reply = '平台目前只收取 3% 的專案媒合手續費，大部分資金都會直接運用在綠能建設上喔！';
+                if(text.includes('回饋') || text.includes('獎勵')) reply = '只要達到指定的 EXP 經驗值，就能解鎖數位徽章、咖啡券或實體環保杯喔！';
+                addMessage(reply, false);
+            }, 1000);
+        }
+
+        sendChatBtn.addEventListener('click', handleChat);
+        chatInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') handleChat();
         });
 
         window.addEventListener('resize', () => {
@@ -498,6 +1014,7 @@
             canvas.height = window.innerHeight;
         });
 
+        window.switchProject = switchProject;
         syncValues(slider.value);
 
     </script>
