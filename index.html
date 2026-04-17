@@ -181,7 +181,7 @@
                 </div>
 
                 <h3 class="text-xl font-bold mb-6 flex items-center">
-                    <svg class="w-6 h-6 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <svg class="w-6 h-6 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08-.402-2.599-1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     微型永續投資試算
                 </h3>
 
@@ -467,16 +467,23 @@
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInAnonymously, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-        // Firebase Configuration
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-            apiKey: "",
-            authDomain: "mock-domain",
-            projectId: "mock-project",
-            storageBucket: "mock-bucket",
-            messagingSenderId: "mock-sender",
-            appId: "mock-app"
+        // === 部署到 GitHub 時，請將下方的 firebaseConfig 換成你的真實設定 ===
+        const firebaseConfig = {
+            apiKey: "AIzaSyBdclG4xaT78_2LbDZaUwB1bWCFWaHAcx4",
+            authDomain: "twenergy-1e568.firebaseapp.com",
+            projectId: "twenergy-1e568",
+            storageBucket: "twenergy-1e568.firebasestorage.app",
+            messagingSenderId: "762453295327",
+            appId: "1:762453295327:web:31a1439ad15df7fb4ee96a"
         };
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        
+        // (這段是為了讓你在目前的預覽畫面還能測試所保留的輔助機制，上傳 Github 時保留或刪除皆可)
+        if (typeof __firebase_config !== 'undefined') {
+            Object.assign(firebaseConfig, JSON.parse(__firebase_config));
+        }
+        
+        // 你的專案名稱，用來區分資料庫，可以保持原樣
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'tanji-2026';
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
@@ -484,7 +491,6 @@
 
         let currentUser = null;
 
-        // UI Elements for Auth
         const loginShowBtn = document.getElementById('loginShowBtn');
         const userControls = document.getElementById('userControls');
         const loginModal = document.getElementById('loginModal');
@@ -499,7 +505,6 @@
         const authError = document.getElementById('auth-error');
         const loginOverlay = document.getElementById('login-overlay');
 
-        // Initial Data Structure
         const initialUserData = {
             invested: 0,
             co2: 0,
@@ -512,13 +517,12 @@
                  try{
                      await signInWithCustomToken(auth, __initial_auth_token);
                  }catch(e){
-                     // fail silently in preview
+                     
                  }
              }
         };
         initAuth();
 
-        // Handle Auth State Changes
         onAuthStateChanged(auth, async (user) => {
             currentUser = user;
             if (user) {
@@ -529,23 +533,18 @@
                 
                 userEmailDisplay.innerText = user.isAnonymous ? '訪客使用者' : user.email;
 
-                // Setup Firestore Listener for user data
                 const userDocRef = doc(db, 'artifacts', appId, 'users', user.uid);
                 
-                // First get doc, if not exists create it
                 try {
                     const docSnap = await getDoc(userDocRef);
                     if (!docSnap.exists()) {
                         await setDoc(userDocRef, initialUserData);
                     }
                 } catch(e) {
-                    console.warn("Firestore error (likely preview mode):", e);
-                    // In preview mode or if firestore fails, we use local state
                     Object.assign(personalData, initialUserData);
                     updateUIFromData(personalData);
                 }
 
-                // Listen for changes
                 onSnapshot(userDocRef, (doc) => {
                     if (doc.exists()) {
                         const data = doc.data();
@@ -553,7 +552,7 @@
                         updateUIFromData(personalData);
                     }
                 }, (error) => {
-                    console.warn("Snapshot error:", error);
+                    
                 });
 
             } else {
@@ -561,25 +560,21 @@
                 loginShowBtn.classList.remove('auth-hidden');
                 loginOverlay.classList.remove('hidden');
                 
-                // Reset local data
                 Object.assign(personalData, initialUserData);
                 updateUIFromData(personalData);
             }
         });
 
-        // Show error message
         const showError = (msg) => {
             authError.innerText = msg;
             authError.classList.remove('hidden');
             setTimeout(() => authError.classList.add('hidden'), 3000);
         };
 
-        // Login Show Button
         loginShowBtn.addEventListener('click', () => {
             loginModal.classList.remove('hidden');
         });
 
-        // Sign In
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = emailInput.value;
@@ -591,7 +586,6 @@
             }
         });
 
-        // Sign Up
         signUpBtn.addEventListener('click', async () => {
             if(!emailInput.validity.valid || !passwordInput.validity.valid) {
                  showError("請輸入有效的電子郵件與密碼");
@@ -601,14 +595,12 @@
             const password = passwordInput.value;
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                // Initialize user document
                 await setDoc(doc(db, 'artifacts', appId, 'users', userCredential.user.uid), initialUserData);
             } catch (error) {
                 showError("註冊失敗：" + error.message);
             }
         });
 
-        // Anonymous Login
         anonLoginBtn.addEventListener('click', async () => {
             try {
                 const userCredential = await signInAnonymously(auth);
@@ -618,12 +610,10 @@
             }
         });
 
-        // Logout
         logoutBtn.addEventListener('click', () => {
             signOut(auth);
         });
 
-        // Helper to update UI from data
         function updateUIFromData(data) {
             personalTotalExpEl.innerText = data.exp;
             updateRewards(data.exp);
@@ -910,13 +900,12 @@
             personalData.exp += exp;
             personalData.level = calculateLevel(personalData.exp);
             
-            // Save to Firestore if authenticated
             if (currentUser) {
                 try {
                      const userDocRef = doc(db, 'artifacts', appId, 'users', currentUser.uid);
                      await setDoc(userDocRef, personalData);
                 } catch(e) {
-                     console.warn("Failed to save to Firestore", e);
+                     
                 }
             }
 
