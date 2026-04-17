@@ -687,6 +687,38 @@
         </div>
     </div>
 
+    <div id="paymentModal" class="fixed inset-0 bg-slate-900 bg-opacity-70 z-50 hidden flex items-center justify-center backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl relative">
+            <button onclick="document.getElementById('paymentModal').classList.add('hidden')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition-colors bg-slate-100 p-2 rounded-full">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="text-center mb-6 border-b border-slate-100 pb-4">
+                <h2 class="text-2xl font-black text-slate-800">選擇支付方式</h2>
+                <p class="text-slate-500 mt-2 font-medium">本次贊助金額：<span id="payment-amount" class="text-green-600 font-bold text-xl ml-1"></span> 元</p>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <button class="payment-method-btn bg-slate-50 hover:bg-green-50 border-2 border-slate-100 hover:border-green-400 p-5 rounded-2xl flex flex-col items-center gap-3 transition-all hover:-translate-y-1">
+                    <span class="text-4xl">💳</span>
+                    <span class="font-bold text-slate-700">信用卡/金融卡</span>
+                </button>
+                <button class="payment-method-btn bg-slate-50 hover:bg-green-50 border-2 border-slate-100 hover:border-green-400 p-5 rounded-2xl flex flex-col items-center gap-3 transition-all hover:-translate-y-1">
+                    <span class="text-4xl text-green-500 font-black">L</span>
+                    <span class="font-bold text-slate-700">LINE Pay</span>
+                </button>
+                <button class="payment-method-btn bg-slate-50 hover:bg-green-50 border-2 border-slate-100 hover:border-green-400 p-5 rounded-2xl flex flex-col items-center gap-3 transition-all hover:-translate-y-1">
+                    <span class="text-4xl">🏪</span>
+                    <span class="font-bold text-slate-700">超商代碼繳費</span>
+                </button>
+                <button class="payment-method-btn bg-slate-50 hover:bg-green-50 border-2 border-slate-100 hover:border-green-400 p-5 rounded-2xl flex flex-col items-center gap-3 transition-all hover:-translate-y-1">
+                    <span class="text-4xl text-red-500 font-black">街</span>
+                    <span class="font-bold text-slate-700">街口支付</span>
+                </button>
+            </div>
+            <p class="text-xs text-center text-slate-400 mt-6 font-medium">本平台採用銀行信託專戶管理，確保資金安全</p>
+        </div>
+    </div>
+
     <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
         <div id="helpModal" class="hidden bg-white w-80 rounded-3xl shadow-2xl border border-slate-100 mb-4 flex flex-col overflow-hidden transform transition-all" style="height: 450px;">
             <div class="bg-gradient-to-r from-green-500 to-emerald-600 p-4 text-white flex justify-between items-center shadow-md z-10">
@@ -790,11 +822,7 @@
             appId: "1:762453295327:web:31a1439ad15df7fb4ee96a"
         };
         
-        if (typeof __firebase_config !== 'undefined') {
-            Object.assign(firebaseConfig, JSON.parse(__firebase_config));
-        }
-        
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'tanji-2026';
+        const appId = 'tanji-2026';
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
@@ -816,6 +844,9 @@
         const authError = document.getElementById('auth-error');
         const loginOverlay = document.getElementById('login-overlay');
 
+        const paymentModal = document.getElementById('paymentModal');
+        const paymentAmountDisplay = document.getElementById('payment-amount');
+
         const initialUserData = {
             invested: 0,
             co2: 0,
@@ -833,15 +864,6 @@
             userEmailDisplay.innerText = currentUser.email;
             updateUIFromData(personalData);
         }
-
-        const initAuth = async () => {
-             if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                 try{
-                     await signInWithCustomToken(auth, __initial_auth_token);
-                 }catch(e){}
-             }
-        };
-        initAuth();
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -1284,53 +1306,63 @@
             }
 
             const money = parseInt(numInput.value);
-            const co2 = parseFloat(((money / 1000) * 12).toFixed(1));
-            const exp = Math.floor(money / 10);
+            paymentAmountDisplay.innerText = money.toLocaleString();
+            paymentModal.classList.remove('hidden');
+        });
 
-            projects[currentProjectIndex].raised += money;
-            const p = projects[currentProjectIndex];
-            let newPct = Math.floor((p.raised / p.goal) * 100);
-            if (newPct > 100) newPct = 100;
+        document.querySelectorAll('.payment-method-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                paymentModal.classList.add('hidden');
+                
+                const money = parseInt(numInput.value);
+                const co2 = parseFloat(((money / 1000) * 12).toFixed(1));
+                const exp = Math.floor(money / 10);
 
-            raisedAmountEl.innerText = p.raised.toLocaleString();
-            pctAmountEl.innerText = newPct;
-            heroProgress.style.width = newPct + '%';
+                projects[currentProjectIndex].raised += money;
+                const p = projects[currentProjectIndex];
+                let newPct = Math.floor((p.raised / p.goal) * 100);
+                if (newPct > 100) newPct = 100;
 
-            globalCo2 += co2;
-            globalCo2El.innerText = globalCo2.toFixed(1);
+                raisedAmountEl.innerText = p.raised.toLocaleString();
+                pctAmountEl.innerText = newPct;
+                heroProgress.style.width = newPct + '%';
 
-            personalData.invested += money;
-            personalData.co2 += co2;
-            personalData.exp += exp;
-            personalData.level = calculateLevel(personalData.exp);
-            
-            if (currentUser && !currentUser.uid.startsWith('local-')) {
-                try {
-                     const userDocRef = doc(db, 'artifacts', appId, 'users', currentUser.uid);
-                     await setDoc(userDocRef, personalData);
-                } catch(e) {}
-            }
+                globalCo2 += co2;
+                globalCo2El.innerText = globalCo2.toFixed(1);
 
-            updateUIFromData(personalData);
+                personalData.invested += money;
+                personalData.co2 += co2;
+                personalData.exp += exp;
+                personalData.level = calculateLevel(personalData.exp);
+                
+                if (currentUser && !currentUser.uid.startsWith('local-')) {
+                    try {
+                         const userDocRef = doc(db, 'artifacts', appId, 'users', currentUser.uid);
+                         await setDoc(userDocRef, personalData);
+                    } catch(e) {}
+                }
 
-            modalCo2.innerText = co2.toFixed(1);
-            modalExp.innerText = exp;
+                updateUIFromData(personalData);
 
-            babyImg.classList.remove('anim-float', 'anim-bounce-glow');
-            void babyImg.offsetWidth;
-            babyImg.classList.add('anim-celebrate');
+                modalCo2.innerText = co2.toFixed(1);
+                modalExp.innerText = exp;
 
-            addFeedItem(money, exp, p.title);
+                babyImg.classList.remove('anim-float', 'anim-bounce-glow');
+                void babyImg.offsetWidth;
+                babyImg.classList.add('anim-celebrate');
 
-            createConfetti();
-            if(animationFrameId) cancelAnimationFrame(animationFrameId);
-            drawConfetti();
+                addFeedItem(money, exp, p.title);
 
-            successModal.classList.remove('hidden');
-            setTimeout(() => {
-                successModalContent.classList.remove('scale-95');
-                successModalContent.classList.add('scale-100');
-            }, 10);
+                createConfetti();
+                if(animationFrameId) cancelAnimationFrame(animationFrameId);
+                drawConfetti();
+
+                successModal.classList.remove('hidden');
+                setTimeout(() => {
+                    successModalContent.classList.remove('scale-95');
+                    successModalContent.classList.add('scale-100');
+                }, 10);
+            });
         });
 
         closeSuccessBtn.addEventListener('click', () => {
