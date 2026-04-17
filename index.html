@@ -40,13 +40,6 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .bounce-animation {
-            animation: bounce 0.5s cubic-bezier(0.8, 0, 1, 1) infinite alternate;
-        }
-        @keyframes bounce {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
         .reward-item {
             transition: all 0.4s ease;
         }
@@ -77,13 +70,48 @@
         .feed-list {
             animation: scrollFeed 15s linear infinite;
         }
+        
         @keyframes scrollFeed {
             0% { transform: translateY(100%); }
             100% { transform: translateY(-100%); }
         }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes bounceGlow {
+            0% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 10px rgba(34, 197, 94, 0.4)); }
+            50% { transform: translateY(-20px) scale(1.05); filter: drop-shadow(0 0 25px rgba(34, 197, 94, 0.8)); }
+            100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 0 10px rgba(34, 197, 94, 0.4)); }
+        }
+        
+        @keyframes celebrateSpin {
+            0% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 30px rgba(234, 179, 8, 1)); }
+            50% { transform: scale(1.2) rotate(180deg); filter: drop-shadow(0 0 50px rgba(234, 179, 8, 1)); }
+            100% { transform: scale(1) rotate(360deg); filter: drop-shadow(0 0 30px rgba(234, 179, 8, 1)); }
+        }
+
+        .anim-float { animation: float 4s ease-in-out infinite; }
+        .anim-bounce-glow { animation: bounceGlow 2s cubic-bezier(0.28, 0.84, 0.42, 1) infinite; }
+        .anim-celebrate { animation: celebrateSpin 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen relative bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] pb-24">
+
+    <canvas id="confetti-canvas"></canvas>
 
     <nav class="bg-white shadow-sm sticky top-0 z-40">
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
@@ -99,14 +127,14 @@
             <div class="flex items-center gap-4">
                 <div class="text-right hidden sm:block">
                     <div class="text-xs text-slate-400">總累積減碳</div>
-                    <div class="text-sm font-bold text-green-600">124.5 kg CO2e</div>
+                    <div class="text-sm font-bold text-green-600"><span id="global-co2">124.5</span> kg CO2e</div>
                 </div>
                 <button class="bg-slate-800 text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-slate-700 transition-colors">我的帳戶</button>
             </div>
         </div>
     </nav>
 
-    <div class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <div class="max-w-6xl mx-auto px-4 py-8 space-y-8 relative z-10">
         
         <div class="glass-card rounded-2xl p-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-4 border-l-4 border-l-green-500">
             <div>
@@ -116,13 +144,13 @@
             </div>
             <div class="w-full md:w-1/2">
                 <div class="flex justify-between text-sm font-bold text-slate-600 mb-1">
-                    <span id="hero-raised">已募資：NT$ 3,450,000</span>
+                    <span id="hero-raised">已募資：NT$ <span id="raised-amount">3,450,000</span></span>
                     <span id="hero-goal" class="text-green-600">目標：5,000,000</span>
                 </div>
                 <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
-                    <div id="hero-progress" class="bg-gradient-to-r from-green-400 to-green-600 h-3 rounded-full" style="width: 69%"></div>
+                    <div id="hero-progress" class="bg-gradient-to-r from-green-400 to-green-600 h-3 rounded-full transition-all duration-1000" style="width: 69%"></div>
                 </div>
-                <p id="hero-time" class="text-xs text-right mt-1 text-slate-400">目前進度 69% | 剩餘 15 天</p>
+                <p id="hero-time" class="text-xs text-right mt-1 text-slate-400">目前進度 <span id="pct-amount">69</span>% | 剩餘 15 天</p>
             </div>
         </div>
 
@@ -133,7 +161,7 @@
                 <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-emerald-200 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
 
                 <div class="relative w-56 h-56 flex items-center justify-center bg-gradient-to-b from-green-50 to-white rounded-full shadow-inner mb-6 transition-transform duration-500" id="baby-wrapper">
-                    <img id="baby-img" src="tanjibaby.png" alt="碳吉寶寶" class="w-48 h-48 object-contain z-10 transition-opacity duration-300">
+                    <img id="baby-img" src="tanjibaby.png" alt="碳吉寶寶" class="w-48 h-48 object-contain z-10 anim-float transition-opacity duration-300">
                 </div>
 
                 <h3 id="status-text" class="text-xl font-bold text-slate-500 transition-colors duration-300">等待注入綠色資金...</h3>
@@ -151,7 +179,7 @@
                         <span class="text-slate-500 font-medium">預定贊助金額</span>
                         <div class="flex items-center">
                             <span class="text-lg font-bold text-slate-400 mr-2">NT$</span>
-                            <input type="number" id="investInput" value="500" min="100" max="10000" step="100" class="text-3xl font-extrabold text-green-600 bg-transparent w-24 text-right outline-none border-b-2 border-green-200 focus:border-green-500 transition-colors">
+                            <input type="number" id="investInput" value="500" min="100" max="10000" step="100" class="text-3xl font-extrabold text-green-600 bg-transparent w-28 text-right outline-none border-b-2 border-green-200 focus:border-green-500 transition-colors">
                         </div>
                     </div>
                     
@@ -180,7 +208,7 @@
                     </div>
                 </div>
 
-                <button class="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <button id="sponsorBtn" class="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                     確認贊助並認養寶寶
                 </button>
             </div>
@@ -219,7 +247,7 @@
                     即時贊助動態
                 </h3>
                 <div class="feed-container">
-                    <div class="feed-list space-y-4">
+                    <div class="feed-list space-y-4" id="feed-list-container">
                         <div class="flex items-center text-sm border-b border-slate-700 pb-2">
                             <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center mr-3 font-bold">陳</div>
                             <div>
@@ -252,91 +280,19 @@
                 </div>
             </div>
         </div>
-
-        <div class="mt-12">
-            <h2 class="text-2xl font-extrabold text-slate-800 mb-6">探索其他淨零專案</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="project-list">
-                <div class="project-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm" onclick="switchProject(0)">
-                    <div class="h-32 bg-green-100 flex items-center justify-center relative">
-                        <span class="absolute top-2 left-2 bg-white text-xs font-bold px-2 py-1 rounded text-green-600">太陽能</span>
-                        <span class="text-4xl">☀️</span>
-                    </div>
-                    <div class="p-5">
-                        <h4 class="font-bold text-lg mb-1">廠房屋頂太陽能建置</h4>
-                        <p class="text-xs text-slate-500 mb-4">在地綠能中小企業聯盟</p>
-                        <div class="w-full bg-slate-200 rounded-full h-2 mb-2"><div class="bg-green-500 h-2 rounded-full" style="width: 69%"></div></div>
-                        <div class="flex justify-between text-xs font-bold text-slate-600"><span class="text-green-600">69%</span><span>剩 15 天</span></div>
-                    </div>
-                </div>
-                <div class="project-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm" onclick="switchProject(1)">
-                    <div class="h-32 bg-blue-100 flex items-center justify-center relative">
-                        <span class="absolute top-2 left-2 bg-white text-xs font-bold px-2 py-1 rounded text-blue-600">生質能</span>
-                        <span class="text-4xl">🐖</span>
-                    </div>
-                    <div class="p-5">
-                        <h4 class="font-bold text-lg mb-1">屏東養豬場沼氣發電</h4>
-                        <p class="text-xs text-slate-500 mb-4">循環農業合作社</p>
-                        <div class="w-full bg-slate-200 rounded-full h-2 mb-2"><div class="bg-green-500 h-2 rounded-full" style="width: 42%"></div></div>
-                        <div class="flex justify-between text-xs font-bold text-slate-600"><span class="text-green-600">42%</span><span>剩 30 天</span></div>
-                    </div>
-                </div>
-                <div class="project-card bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm" onclick="switchProject(2)">
-                    <div class="h-32 bg-yellow-100 flex items-center justify-center relative">
-                        <span class="absolute top-2 left-2 bg-white text-xs font-bold px-2 py-1 rounded text-yellow-600">循環經濟</span>
-                        <span class="text-4xl">📦</span>
-                    </div>
-                    <div class="p-5">
-                        <h4 class="font-bold text-lg mb-1">電商物流循環包裝導入</h4>
-                        <p class="text-xs text-slate-500 mb-4">綠色電商新創團隊</p>
-                        <div class="w-full bg-slate-200 rounded-full h-2 mb-2"><div class="bg-green-500 h-2 rounded-full" style="width: 88%"></div></div>
-                        <div class="flex justify-between text-xs font-bold text-slate-600"><span class="text-green-600">88%</span><span>剩 5 天</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
-    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm mt-12">
-        <p class="mb-2">碳吉寶寶綠能群募平台 &copy; 2026 永續實作專案</p>
-        <p>本平台符合聯合國淨零排放規範，致力於縮短氣候資金斷層</p>
-    </footer>
-
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
-        <div id="helpModal" class="hidden bg-white w-80 rounded-2xl shadow-2xl border border-green-100 mb-4 flex flex-col overflow-hidden transform transition-all" style="height: 400px;">
-            <div class="bg-green-600 p-4 text-white flex justify-between items-center shadow-md z-10">
-                <div class="flex items-center">
-                    <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-2 overflow-hidden">
-                        <img src="tanjibaby.png" class="w-6 h-6 object-cover" onerror="this.style.display='none'">
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-sm">碳吉寶寶</h4>
-                        <p class="text-[10px] text-green-200">線上服務中</p>
-                    </div>
-                </div>
-                <button id="closeHelpBtn" class="text-white hover:text-green-200 focus:outline-none">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
+    <div id="successModal" class="fixed inset-0 bg-slate-900 bg-opacity-70 z-50 hidden flex items-center justify-center backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full mx-4 text-center shadow-2xl transform scale-95 transition-transform" id="successModalContent">
+            <div class="w-24 h-24 bg-green-100 rounded-full mx-auto flex items-center justify-center mb-6">
+                <span class="text-5xl">🎉</span>
             </div>
-            
-            <div id="chatMessages" class="flex-1 bg-slate-50 p-4 overflow-y-auto flex flex-col gap-3 text-sm">
-                <div class="self-start bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm border border-slate-100 max-w-[85%]">
-                    嗨！我是碳吉寶寶 🍃<br>你可以拖拉滑桿來試算減碳量，或是問我任何關於專案的問題喔！
-                </div>
-            </div>
-
-            <div class="p-3 bg-white border-t border-slate-100 flex items-center gap-2">
-                <input type="text" id="chatInput" placeholder="輸入訊息..." class="flex-1 bg-slate-100 border-none rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400">
-                <button id="sendChatBtn" class="bg-green-500 text-white rounded-full w-9 h-9 flex items-center justify-center hover:bg-green-600 transition-colors">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
-                </button>
-            </div>
+            <h2 class="text-2xl font-extrabold text-slate-800 mb-2">感謝您的贊助！</h2>
+            <p class="text-slate-600 mb-6">您已成功為地球減少了 <span id="modal-co2" class="font-bold text-green-600"></span> kg 的碳排放，並且認養了一隻碳吉寶寶。</p>
+            <button id="closeSuccessBtn" class="w-full bg-green-500 hover:bg-green-600 text-white rounded-xl py-3 font-bold transition-colors">
+                前往我的帳戶查看
+            </button>
         </div>
-
-        <button id="helpToggleBtn" class="bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-xl hover:shadow-2xl transition-transform transform hover:-translate-y-1 focus:outline-none flex items-center justify-center relative">
-            <span class="absolute top-0 right-0 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></span>
-            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
-        </button>
     </div>
 
     <script>
@@ -347,83 +303,34 @@
         const babyImg = document.getElementById('baby-img');
         const statusText = document.getElementById('status-text');
         const encouragementText = document.getElementById('encouragement-text');
-        const babyWrapper = document.getElementById('baby-wrapper');
         
-        const helpToggleBtn = document.getElementById('helpToggleBtn');
-        const helpModal = document.getElementById('helpModal');
-        const closeHelpBtn = document.getElementById('closeHelpBtn');
-        const chatInput = document.getElementById('chatInput');
-        const sendChatBtn = document.getElementById('sendChatBtn');
-        const chatMessages = document.getElementById('chatMessages');
+        const sponsorBtn = document.getElementById('sponsorBtn');
+        const successModal = document.getElementById('successModal');
+        const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+        const modalCo2 = document.getElementById('modalCo2');
+        const successModalContent = document.getElementById('successModalContent');
 
-        const heroTitle = document.getElementById('hero-title');
-        const heroOrg = document.getElementById('hero-org');
-        const heroRaised = document.getElementById('hero-raised');
-        const heroGoal = document.getElementById('hero-goal');
+        const raisedAmountEl = document.getElementById('raised-amount');
         const heroProgress = document.getElementById('hero-progress');
-        const heroTime = document.getElementById('hero-time');
+        const pctAmountEl = document.getElementById('pct-amount');
+        const globalCo2El = document.getElementById('global-co2');
+        const feedListContainer = document.getElementById('feed-list-container');
+        
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
         const imgState = {
             normal: 'tanjibaby.png',
             happy: 'tanjibaby2.jpg'
         };
 
-        const projects = [
-            { title: "100kW 廠房屋頂太陽能建置專案", org: "發起方：在地綠能中小企業聯盟", raised: "3,450,000", goal: "5,000,000", pct: "69%", time: "剩餘 15 天" },
-            { title: "屏東養豬場沼氣發電專案", org: "發起方：循環農業合作社", raised: "840,000", goal: "2,000,000", pct: "42%", time: "剩餘 30 天" },
-            { title: "電商物流循環包裝導入專案", org: "發起方：綠色電商新創團隊", raised: "880,000", goal: "1,000,000", pct: "88%", time: "剩餘 5 天" }
-        ];
-
-        function switchProject(index) {
-            const p = projects[index];
-            heroTitle.innerText = p.title;
-            heroOrg.innerText = p.org;
-            heroRaised.innerText = `已募資：NT$ ${p.raised}`;
-            heroGoal.innerText = `目標：${p.goal}`;
-            heroProgress.style.width = p.pct;
-            heroTime.innerText = `目前進度 ${p.pct} | ${p.time}`;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        helpToggleBtn.addEventListener('click', () => {
-            helpModal.classList.toggle('hidden');
-            helpToggleBtn.querySelector('span').classList.add('hidden');
-        });
-        
-        closeHelpBtn.addEventListener('click', () => {
-            helpModal.classList.add('hidden');
-        });
-
-        function addMessage(text, isUser) {
-            const div = document.createElement('div');
-            if(isUser) {
-                div.className = 'self-end bg-green-500 text-white p-3 rounded-2xl rounded-tr-sm shadow-sm max-w-[85%]';
-            } else {
-                div.className = 'self-start bg-white p-3 rounded-2xl rounded-tl-sm shadow-sm border border-slate-100 max-w-[85%]';
-            }
-            div.innerText = text;
-            chatMessages.appendChild(div);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function handleChat() {
-            const text = chatInput.value.trim();
-            if(!text) return;
-            addMessage(text, true);
-            chatInput.value = '';
-            
-            setTimeout(() => {
-                let reply = '收到你的訊息囉！您可以透過上方滑桿來試算減碳量，或是點擊下方的專案卡片探索更多喔！';
-                if(text.includes('錢') || text.includes('贊助') || text.includes('手續費')) reply = '平台目前只收取 3% 的專案媒合手續費，大部分資金都會直接運用在綠能建設上喔！';
-                if(text.includes('回饋') || text.includes('獎勵')) reply = '只要達到指定的 EXP 經驗值，就能解鎖數位徽章、咖啡券或實體環保杯喔！';
-                addMessage(reply, false);
-            }, 1000);
-        }
-
-        sendChatBtn.addEventListener('click', handleChat);
-        chatInput.addEventListener('keypress', (e) => {
-            if(e.key === 'Enter') handleChat();
-        });
+        let currentRaised = 3450000;
+        const targetGoal = 5000000;
+        let globalCo2 = 124.5;
+        let confettiParticles = [];
+        let animationFrameId = null;
 
         function updateRewards(exp) {
             const r1 = document.getElementById('reward-1');
@@ -444,16 +351,18 @@
             const isHappy = money >= 5000;
             babyImg.src = isHappy ? imgState.happy : imgState.normal;
 
+            babyImg.classList.remove('anim-float', 'anim-bounce-glow', 'anim-celebrate');
+
             if (isHappy) {
+                babyImg.classList.add('anim-bounce-glow');
                 statusText.innerText = '寶寶覺得充滿能量！';
                 statusText.className = 'text-xl font-bold text-green-600 transition-colors duration-300';
                 encouragementText.innerText = '您已經解鎖了高階綠色回饋獎勵';
-                babyWrapper.classList.add('bounce-animation');
             } else {
+                babyImg.classList.add('anim-float');
                 statusText.innerText = '等待注入綠色資金...';
                 statusText.className = 'text-xl font-bold text-slate-500 transition-colors duration-300';
                 encouragementText.innerText = '拖拉右側滑桿，與碳吉寶寶一起改變世界';
-                babyWrapper.classList.remove('bounce-animation');
             }
         }
 
@@ -479,6 +388,114 @@
             if(val > 10000) val = 10000;
             slider.value = val;
             syncValues(val);
+        });
+
+        function createConfetti() {
+            const colors = ['#22c55e', '#3b82f6', '#eab308', '#ec4899', '#a855f7'];
+            for (let i = 0; i < 150; i++) {
+                confettiParticles.push({
+                    x: canvas.width / 2,
+                    y: canvas.height / 2 + 100,
+                    r: Math.random() * 6 + 2,
+                    dx: Math.random() * 20 - 10,
+                    dy: Math.random() * -15 - 5,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    tilt: Math.floor(Math.random() * 10) - 10,
+                    tiltAngle: 0,
+                    tiltAngleInc: (Math.random() * 0.07) + 0.05
+                });
+            }
+        }
+
+        function drawConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let active = false;
+            confettiParticles.forEach((p, index) => {
+                p.tiltAngle += p.tiltAngleInc;
+                p.y += (Math.cos(p.tiltAngle) + 1 + p.r / 2) / 2;
+                p.x += Math.sin(p.tiltAngle) * 2;
+                p.dy += 0.1;
+                p.y += p.dy;
+                
+                if (p.y <= canvas.height) active = true;
+
+                ctx.beginPath();
+                ctx.lineWidth = p.r;
+                ctx.strokeStyle = p.color;
+                ctx.moveTo(p.x + p.tilt + p.r, p.y);
+                ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r);
+                ctx.stroke();
+            });
+
+            if (active) {
+                animationFrameId = requestAnimationFrame(drawConfetti);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                confettiParticles = [];
+            }
+        }
+
+        function addFeedItem(money, exp) {
+            const div = document.createElement('div');
+            div.className = 'flex items-center text-sm border-b border-slate-700 pb-2 mb-4 bg-slate-800 p-2 rounded-lg';
+            div.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mr-3 font-bold text-white">您</div>
+                <div>
+                    <p><span class="font-bold text-green-400">您</span> 剛剛贊助了 <span class="font-bold">${money.toLocaleString()} 元</span></p>
+                    <p class="text-xs text-slate-400">獲得 ${exp} EXP</p>
+                </div>
+            `;
+            feedListContainer.insertBefore(div, feedListContainer.firstChild);
+        }
+
+        sponsorBtn.addEventListener('click', () => {
+            const money = parseInt(numInput.value);
+            const co2 = parseFloat(((money / 1000) * 12).toFixed(1));
+            const exp = Math.floor(money / 10);
+
+            currentRaised += money;
+            globalCo2 += co2;
+            let newPct = Math.floor((currentRaised / targetGoal) * 100);
+            if (newPct > 100) newPct = 100;
+
+            raisedAmountEl.innerText = currentRaised.toLocaleString();
+            pctAmountEl.innerText = newPct;
+            heroProgress.style.width = newPct + '%';
+            globalCo2El.innerText = globalCo2.toFixed(1);
+            document.getElementById('modal-co2').innerText = co2.toFixed(1);
+
+            babyImg.classList.remove('anim-float', 'anim-bounce-glow');
+            void babyImg.offsetWidth;
+            babyImg.classList.add('anim-celebrate');
+
+            addFeedItem(money, exp);
+
+            createConfetti();
+            if(animationFrameId) cancelAnimationFrame(animationFrameId);
+            drawConfetti();
+
+            successModal.classList.remove('hidden');
+            setTimeout(() => {
+                successModalContent.classList.remove('scale-95');
+                successModalContent.classList.add('scale-100');
+            }, 10);
+        });
+
+        closeSuccessBtn.addEventListener('click', () => {
+            successModalContent.classList.remove('scale-100');
+            successModalContent.classList.add('scale-95');
+            setTimeout(() => {
+                successModal.classList.add('hidden');
+                slider.value = 500;
+                numInput.value = 500;
+                syncValues(500);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 200);
+        });
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         });
 
         syncValues(slider.value);
