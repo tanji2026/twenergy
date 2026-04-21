@@ -206,7 +206,7 @@
                     <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-emerald-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 pointer-events-none"></div>
 
                     <div class="relative w-64 h-64 flex items-center justify-center bg-white rounded-full shadow-inner mb-8 border-4 border-white overflow-hidden cursor-pointer shrink-0" id="parallax-wrapper">
-                        <img id="baby-img" src="tanjibaby.png" alt="碳吉寶寶" class="w-full h-full object-cover rounded-full z-10 select-none transition-opacity duration-300 anim-float" draggable="false" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzIyYzU1ZSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
+                        <img id="baby-img" src="tanjibaby.png" alt="碳吉寶寶" class="w-full h-full object-cover rounded-full z-10 select-none anim-float" draggable="false" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzIyYzU1ZSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
                         <video id="baby-vid" src="tanjibaby_hi.mp4" class="absolute inset-0 w-full h-full object-cover rounded-full z-20 hidden pointer-events-none" muted playsinline></video>
                     </div>
 
@@ -1131,6 +1131,18 @@
 
         parallaxWrapper.addEventListener('click', (e) => {
             createFloatingElement(e.clientX, e.clientY, ['🍃', '💚', '✨'][Math.floor(Math.random() * 3)]);
+            
+            if (babyVid.classList.contains('hidden') || babyVid.paused) {
+                babyImg.classList.add('hidden');
+                babyVid.classList.remove('hidden');
+                babyVid.currentTime = 0;
+                babyVid.play().catch(e => {});
+            }
+        });
+
+        babyVid.addEventListener('ended', () => {
+            babyVid.classList.add('hidden');
+            babyImg.classList.remove('hidden');
         });
 
         function createFloatingElement(x, y, emoji) {
@@ -1256,21 +1268,10 @@
             const isHappy = money >= 5000;
             
             if (isHappy) {
-                babyImg.classList.add('opacity-0');
-                setTimeout(() => babyImg.classList.add('hidden'), 300);
-                babyVid.classList.remove('hidden');
-                babyVid.currentTime = 0;
-                babyVid.play().catch(e=>{});
-                
                 statusText.innerText = '寶寶覺得充滿能量！';
                 statusText.className = 'text-xl sm:text-2xl font-extrabold text-green-600 transition-colors duration-300 drop-shadow-sm break-words';
                 encouragementText.innerText = '這筆贊助將為地球帶來巨大的改變';
             } else {
-                babyImg.classList.remove('hidden');
-                setTimeout(() => babyImg.classList.remove('opacity-0'), 10);
-                babyVid.classList.add('hidden');
-                babyVid.pause();
-                
                 statusText.innerText = '等待注入綠色資金...';
                 statusText.className = 'text-xl sm:text-2xl font-extrabold text-slate-500 transition-colors duration-300 break-words';
                 encouragementText.innerText = '試著點擊碳吉寶寶，或拖拉右側滑桿';
