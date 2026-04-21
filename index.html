@@ -205,13 +205,17 @@
                     <div class="absolute -top-20 -right-20 w-40 h-40 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 pointer-events-none"></div>
                     <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-emerald-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 pointer-events-none"></div>
 
-                    <div class="relative w-64 h-64 flex items-center justify-center bg-white rounded-full shadow-inner mb-8 border-4 border-white overflow-hidden cursor-pointer shrink-0" id="parallax-wrapper">
-                        <img id="baby-img" src="tanjibaby.png" alt="碳吉寶寶" class="w-full h-full object-cover rounded-full z-10 select-none anim-float" draggable="false" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzIyYzU1ZSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
+                    <div class="relative w-64 h-64 flex items-center justify-center bg-white rounded-full shadow-inner mb-6 border-4 border-white overflow-hidden shrink-0" id="parallax-wrapper">
+                        <img id="baby-img" src="tanjibaby.png" alt="碳吉寶寶" class="w-full h-full object-cover rounded-full z-10 select-none transition-opacity duration-300 anim-float" draggable="false" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzIyYzU1ZSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
                         <video id="baby-vid" src="tanjibaby_hi.mp4" class="absolute inset-0 w-full h-full object-cover rounded-full z-20 hidden pointer-events-none" muted playsinline></video>
                     </div>
 
-                    <h3 id="status-text" class="text-xl sm:text-2xl font-extrabold text-slate-500 transition-colors duration-300 break-words">等待注入綠色資金...</h3>
-                    <p id="encouragement-text" class="text-sm sm:text-base text-slate-400 mt-3 font-medium">試著點擊碳吉寶寶，或進行微型永續投資試算</p>
+                    <button id="dailyCheckInBtn" class="mb-5 bg-emerald-50 text-emerald-700 hover:bg-emerald-500 hover:text-white border border-emerald-200 px-6 py-3 rounded-full font-extrabold text-sm transition-all shadow-sm flex items-center gap-2 group relative z-30">
+                        <span class="text-lg group-hover:scale-110 transition-transform">🌱</span> 每日永續打卡 (+5 EXP)
+                    </button>
+
+                    <h3 id="status-text" class="text-xl sm:text-2xl font-extrabold text-slate-500 transition-colors duration-300 break-words">等待完成日常任務...</h3>
+                    <p id="encouragement-text" class="text-sm sm:text-base text-slate-400 mt-3 font-medium">完成每日打卡，或前往「投資試算區」</p>
                 </div>
 
                 <div class="glass-card bg-white rounded-[2.5rem] p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col justify-center relative">
@@ -823,7 +827,7 @@
             
             <div id="chatMessages" class="flex-1 bg-slate-50 p-4 sm:p-5 overflow-y-auto flex flex-col gap-3 sm:gap-4 text-xs sm:text-sm scroll-smooth">
                 <div class="self-start bg-white p-3 sm:p-4 rounded-2xl rounded-tl-sm shadow-sm border border-slate-100 max-w-[90%] text-slate-700 leading-relaxed font-medium break-words">
-                    嗨！我是碳吉寶寶 🍃<br><br>你可以拖拉左邊的滑桿來試算減碳量，或是問我任何關於「手續費」、「回饋獎勵」或「如何贊助」的問題喔！
+                    嗨！我是碳吉寶寶 🍃<br><br>你可以拖拉「投資試算區」的滑桿來試算減碳量，或是問我任何關於「手續費」、「回饋獎勵」或「如何贊助」的問題喔！
                 </div>
             </div>
 
@@ -1066,6 +1070,7 @@
         const babyVid = document.getElementById('baby-vid');
         const statusText = document.getElementById('status-text');
         const encouragementText = document.getElementById('encouragement-text');
+        const dailyCheckInBtn = document.getElementById('dailyCheckInBtn');
         
         const sponsorBtn = document.getElementById('sponsorBtn');
         const successModal = document.getElementById('successModal');
@@ -1115,6 +1120,7 @@
 
         let currentProjectIndex = 0;
         let globalCo2 = 124.5;
+        let hasCheckedInToday = false;
         
         let personalData = {
             invested: 0,
@@ -1127,23 +1133,6 @@
         let animationFrameId = null;
 
         const parallaxWrapper = document.getElementById('parallax-wrapper');
-        const interactionZone = document.getElementById('interaction-zone');
-
-        parallaxWrapper.addEventListener('click', (e) => {
-            createFloatingElement(e.clientX, e.clientY, ['🍃', '💚', '✨'][Math.floor(Math.random() * 3)]);
-            
-            if (babyVid.classList.contains('hidden') || babyVid.paused) {
-                babyImg.classList.add('hidden');
-                babyVid.classList.remove('hidden');
-                babyVid.currentTime = 0;
-                babyVid.play().catch(e => {});
-            }
-        });
-
-        babyVid.addEventListener('ended', () => {
-            babyVid.classList.add('hidden');
-            babyImg.classList.remove('hidden');
-        });
 
         function createFloatingElement(x, y, emoji) {
             const el = document.createElement('div');
@@ -1155,27 +1144,55 @@
             setTimeout(() => el.remove(), 1000);
         }
 
-        function createEnergyParticle() {
-            const sliderRect = slider.getBoundingClientRect();
-            const babyRect = parallaxWrapper.getBoundingClientRect();
-            
-            const startX = sliderRect.left + (slider.value / 10000) * sliderRect.width;
-            const startY = sliderRect.top;
-            
-            const endX = babyRect.left + babyRect.width / 2;
-            const endY = babyRect.top + babyRect.height / 2;
+        dailyCheckInBtn.addEventListener('click', async (e) => {
+            if (!currentUser) {
+                loginModal.classList.remove('hidden');
+                return;
+            }
+            if (hasCheckedInToday) return;
 
-            const particle = document.createElement('div');
-            particle.className = 'energy-particle';
-            particle.style.left = startX + 'px';
-            particle.style.top = startY + 'px';
+            hasCheckedInToday = true;
             
-            particle.style.setProperty('--tx', (endX - startX) + 'px');
-            particle.style.setProperty('--ty', (endY - startY) + 'px');
+            dailyCheckInBtn.innerHTML = '<span class="text-lg">✅</span> 今日已打卡';
+            dailyCheckInBtn.classList.replace('bg-emerald-50', 'bg-slate-100');
+            dailyCheckInBtn.classList.replace('text-emerald-700', 'text-slate-500');
+            dailyCheckInBtn.classList.replace('border-emerald-200', 'border-slate-200');
+            dailyCheckInBtn.classList.remove('hover:bg-emerald-500', 'hover:text-white', 'cursor-pointer');
+            dailyCheckInBtn.classList.add('cursor-not-allowed');
+
+            babyImg.classList.add('hidden');
+            babyVid.classList.remove('hidden');
+            babyVid.currentTime = 0;
+            babyVid.play().catch(err => {});
+
+            statusText.innerText = '寶寶覺得充滿能量！';
+            statusText.className = 'text-xl sm:text-2xl font-extrabold text-green-600 transition-colors duration-300 drop-shadow-sm break-words';
+            encouragementText.innerText = '感謝你今天的日常減碳行動！';
+
+            const btnRect = dailyCheckInBtn.getBoundingClientRect();
+            createFloatingElement(btnRect.left + btnRect.width / 2, btnRect.top, '✨');
+
+            personalData.exp += 5;
+            personalData.level = calculateLevel(personalData.exp);
             
-            document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), 800);
-        }
+            if (currentUser && !currentUser.uid.startsWith('local-')) {
+                try {
+                     const userDocRef = doc(db, 'artifacts', appId, 'users', currentUser.uid);
+                     await setDoc(userDocRef, personalData);
+                } catch(error) {}
+            }
+            updateUIFromData(personalData);
+            addFeedItem(0, 5, '每日永續打卡');
+        });
+
+        babyVid.addEventListener('ended', () => {
+            babyVid.classList.add('hidden');
+            babyImg.classList.remove('hidden');
+            
+            statusText.innerText = '今日打卡任務完成！';
+            statusText.className = 'text-xl sm:text-2xl font-extrabold text-slate-500 transition-colors duration-300 break-words';
+            encouragementText.innerText = '前往「投資試算區」探索更多計畫';
+        });
 
         window.showProjectDetails = function() {
             const modal = document.getElementById('projectDetailsModal');
@@ -1264,39 +1281,18 @@
             return 1;
         }
 
-        function updateBabyState(money) {
-            const isHappy = money >= 5000;
-            
-            if (isHappy) {
-                statusText.innerText = '寶寶覺得充滿能量！';
-                statusText.className = 'text-xl sm:text-2xl font-extrabold text-green-600 transition-colors duration-300 drop-shadow-sm break-words';
-                encouragementText.innerText = '這筆贊助將為地球帶來巨大的改變';
-            } else {
-                statusText.innerText = '等待注入綠色資金...';
-                statusText.className = 'text-xl sm:text-2xl font-extrabold text-slate-500 transition-colors duration-300 break-words';
-                encouragementText.innerText = '試著點擊碳吉寶寶，或拖拉右側滑桿';
-            }
-        }
-
-        let lastSliderValue = 500;
-        function syncValues(value, isSliding = false) {
+        function syncValues(value) {
             const money = parseInt(value);
             const co2 = ((money / 1000) * 12).toFixed(1);
             const exp = Math.floor(money / 10);
             
             co2Display.innerText = co2;
             expDisplay.innerText = exp;
-            updateBabyState(money);
-
-            if(isSliding && Math.abs(money - lastSliderValue) > 200) {
-                createEnergyParticle();
-                lastSliderValue = money;
-            }
         }
 
         slider.addEventListener('input', function() {
             numInput.value = this.value;
-            syncValues(this.value, true);
+            syncValues(this.value);
         });
 
         numInput.addEventListener('input', function() {
@@ -1354,10 +1350,15 @@
         function addFeedItem(money, exp, projectName) {
             const div = document.createElement('div');
             div.className = 'flex items-center text-sm bg-slate-800/80 p-3 rounded-xl border border-green-500/30 mb-4 transform transition-all shadow-lg';
+            
+            let actionText = money > 0 
+                ? `贊助了 <span class="font-bold text-white">${projectName} ${money.toLocaleString()} 元</span>` 
+                : `完成了 <span class="font-bold text-white">${projectName}</span>`;
+                
             div.innerHTML = `
                 <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center mr-4 font-bold text-white shadow-md shrink-0">您</div>
                 <div class="flex-1 min-w-0">
-                    <p class="break-words"><span class="font-bold text-green-300">您</span> 剛剛贊助了 <span class="font-bold text-white">${projectName} ${money.toLocaleString()} 元</span></p>
+                    <p class="break-words"><span class="font-bold text-green-300">您</span> 剛剛${actionText}</p>
                     <div class="flex flex-wrap justify-between items-center mt-1 gap-2">
                         <span class="text-xs text-green-200 font-bold bg-green-900/50 px-2 py-0.5 rounded whitespace-nowrap">+${exp} EXP</span>
                         <span class="text-[10px] text-slate-400 whitespace-nowrap">剛剛</span>
@@ -1503,9 +1504,9 @@
                 } else if(text.includes('你好') || text.includes('嗨') || text.includes('哈囉')) {
                     reply = "你好呀！我是碳吉寶寶 🍃 很高興為你服務！";
                 } else if(text.includes('贊助') || text.includes('怎麼用') || text.includes('教學')) {
-                    reply = "很簡單！只要拖拉畫面中間的滑桿，選擇你想贊助的金額，再按下確認按鈕就可以囉！1000元就可以減少12kg碳排喔！";
+                    reply = "很簡單！只要拖拉「投資試算區」的滑桿，選擇你想贊助的金額，再按下確認按鈕就可以囉！1000元就可以減少12kg碳排喔！";
                 } else if(text.includes('碳吉') || text.includes('寶寶') || text.includes('名字')) {
-                    reply = "叫我嗎？我會一直陪著你完成淨零任務喔！試著在畫面上點點看我吧！";
+                    reply = "叫我嗎？我會一直陪著你完成淨零任務喔！記得每天來找我點擊「每日永續打卡」喔！";
                 }
 
                 addMessage(reply, false);
