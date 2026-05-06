@@ -12,7 +12,7 @@
 
 ### 2.1 系統架構圖
 
-本系統採用 **Serverless 無伺服器架構** 設計，前端採純前端框架整合 Tailwind CSS，後端依賴 Firebase 進行身分驗證與資料儲存。
+本系統採用 Serverless 無伺服器架構 設計，前端採純前端框架整合 Tailwind CSS，後端依賴 Firebase 進行身分驗證與資料儲存。
 
 ```mermaid
 graph TD
@@ -51,15 +51,15 @@ graph TD
 
 ### 2.2 系統範圍
 
-* **展示層**: 採用 Tailwind CSS 建構響應式介面（RWD），包含玻璃擬物化卡片、動態互動面板、跑馬燈與五彩紙屑（Confetti）動畫特效。
-* **業務邏輯層**: 負責處理投資金額轉換減碳量（$1000 = 12kg CO2e）、經驗值（EXP）升級算法、每日打卡邏輯與解鎖回饋品機制。
-* **數據存取層**: 串接 Firebase Authentication 處理多重登入管道，並利用 Cloud Firestore 儲存使用者的投資總額、碳排減少量、經驗值與等級。
+- 展示層: 採用 Tailwind CSS 建構響應式介面（RWD）。為提升渲染效能，全面採用純色與微透明邊框的卡片設計，並導入主次分明的排版架構。針對核心吉祥物打造「深色科技感培養艙」，運用放射狀漸層（Radial Gradient）與即時光影連動特效，配合跑馬燈與五彩紙屑（Confetti）動畫提升互動感。
+- 業務邏輯層: 負責處理投資金額轉換減碳量（$1000 = 12kg CO2e）、經驗值（EXP）升級算法、每日打卡邏輯，以及滑桿數值與吉祥物狀態的即時視覺連動計算。
+- 數據存取層: 串接 Firebase Authentication 處理多重登入管道，並利用 Cloud Firestore 儲存使用者的投資總額、碳排減少量、經驗值與等級。
 
 ### 2.3 交付項目
 
-1. **網頁應用程式**: `index.html` (單頁式應用，內含完整模組化 JS)。
-2. **靜態圖資與多媒體**: 存放於 `assets/` 目錄內之碳吉寶寶圖片（`.png`, `.jpg`）與互動影片（`.mp4`）。
-3. **系統規格文件**: 本 `README.md` 規格書。
+1. 網頁應用程式: `index.html` (單頁式應用，內含完整模組化 JS)。
+2. 靜態圖資與多媒體: 存放於 `assets/` 目錄內之碳吉寶寶圖片（`.png`, `.jpg`）與互動影片（`.mp4`）。
+3. 系統規格文件: 本 `README.md` 規格書。
 
 ---
 
@@ -67,12 +67,12 @@ graph TD
 
 | 需求編號 | 功能名稱 | 參與者 | 功能描述 | 業務邏輯/備註 |
 | --- | --- | --- | --- | --- |
-| **FR-01** | **永續帳戶授權** | 投資人 | 提供 Email/密碼註冊、登入或「訪客匿名登入」功能，建立專屬帳戶。 | 透過 Firebase Auth 驗證，若斷線或異常則啟動本地（Local）模擬登入備援。 |
-| **FR-02** | **微型投資試算** | 投資人 | 拖拉滑桿（Range Slider）或手動輸入，即時試算單次贊助的減碳貢獻與獲取經驗值。 | 運算公式：每贊助 1,000 元相當於減少 12kg 碳排；每 10 元獲取 1 EXP。 |
-| **FR-03** | **多元支付模擬** | 投資人 | 提供信用卡、行動支付、超商代碼、電子錢包等支付選項介面。 | 完成支付後觸發前端 Confetti 動畫，並將數據寫入 Firestore。 |
-| **FR-04** | **日常永續打卡** | 投資人 | 點擊按鈕進行每日任務打卡，獲取微量 EXP 並與碳吉寶寶互動。 | 打卡後獲得 5 EXP，介面切換動態 MP4 影像，當日限制單次觸發。 |
-| **FR-05** | **里程碑回饋解鎖** | 系統 | 依據累積的總經驗值，自動解鎖對應的虛實整合獎勵。 | 門檻設定：100 EXP (數位徽章)、300 EXP (咖啡券)、800 EXP (環保杯)。 |
-| **FR-06** | **個人/平台影響力報告** | 投資人/系統 | 可檢視個人總減碳量、等級；另提供全站總募集資金、參與人數與減碳達成率。 | 運用視覺化進度條與模態框（Modal）呈現即時數據與狀態。 |
+| FR-01 | 永續帳戶授權 | 投資人 | 提供 Email/密碼註冊、登入或「訪客匿名登入」功能，建立專屬帳戶。 | 透過 Firebase Auth 驗證，若斷線或異常則啟動本地（Local）模擬登入備援。 |
+| FR-02 | 微型投資試算與互動連動 | 投資人 | 拖拉滑桿或手動輸入，即時試算贊助的減碳貢獻與 EXP。同時觸發碳吉寶寶培養艙的視覺連動（金額越大，寶寶放大與發光效果越強）。 | 運算公式：每贊助 1,000 元減少 12kg 碳排；每 10 元獲取 1 EXP。 |
+| FR-03 | 多元支付模擬 | 投資人 | 提供信用卡、行動支付、超商代碼、電子錢包等支付選項介面。 | 完成支付後觸發前端 Confetti 動畫，並將數據寫入 Firestore。 |
+| FR-04 | 日常永續打卡 | 投資人 | 點擊按鈕進行每日任務打卡，獲取微量 EXP 並與碳吉寶寶互動。 | 打卡後獲得 5 EXP，介面切換動態 MP4 影像，當日限制單次觸發。 |
+| FR-05 | 里程碑回饋解鎖 | 系統 | 依據累積的總經驗值，自動解鎖對應的虛實整合獎勵。 | 門檻設定：100 EXP (數位徽章)、300 EXP (咖啡券)、800 EXP (環保杯)。 |
+| FR-06 | 個人/平台影響力報告 | 投資人/系統 | 可檢視個人總減碳量、等級；另提供全站總募集資金、參與人數與減碳達成率。 | 運用視覺化進度條與模態框（Modal）呈現即時數據與狀態。 |
 
 ---
 
@@ -80,18 +80,19 @@ graph TD
 
 ### 4.1 安全性要求
 
-* **權限控管**: 依賴 Firebase 安全規則（Security Rules）保護使用者個人投資與 EXP 數據不被越權竄改。
-* **本地沙盒備援**: 若外部 API (Firebase) 發生阻擋或異常，系統可自動降級為本地端物件狀態暫存（In-memory storage），確保功能可持續體驗。
+- 權限控管: 依賴 Firebase 安全規則（Security Rules）保護使用者個人投資與 EXP 數據不被越權竄改。
+- 本地沙盒備援: 若外部 API (Firebase) 發生阻擋或異常，系統可自動降級為本地端物件狀態暫存（In-memory storage），確保功能可持續體驗。
 
-### 4.2 系統效能
+### 4.2 系統效能 (Performance Optimized)
 
-* **前端渲染**: 採用 Tailwind CSS CDN 與 CSS 原生動畫（Keyframes），避免過多重量級 JavaScript 函式庫拖慢初始載入速度。
-* **響應式設計**: 針對手機端（Mobile-first）優化浮動客服面板、模態框（Modal）視窗與滑動反饋。
+- 前端渲染優化: 捨棄極度消耗 GPU 效能的毛玻璃（backdrop-filter）與大面積濾鏡模糊（filter: blur），全面改採純色背景、微透明邊框與 CSS 原生放射狀漸層（radial-gradient）來模擬光影深度，大幅提升中低階手機的渲染幀率與滾動流暢度。
+- 多媒體延遲載入 (Lazy Loading): 針對隱藏的互動式影片元素（碳吉寶寶打卡 MP4）加入 `preload="none"` 屬性，避免網頁初始載入時浪費頻寬下載暫未使用的媒體資源，縮短白畫面時間。
+- 資源載入順序: 預先載入 (Preconnect) Google Fonts 伺服器，提升自訂字型的繪製速度。
 
 ### 4.3 可用性與準確性
 
-* **異常處理 (Fallback)**: 若 `assets/` 內的圖片或影片遺失，系統內建 Base64 SVG 的 `onerror` 替換機制，確保畫面不破圖。
-* **即時反饋**: 所有狀態變更（打卡、贊助、切換專案）皆須於 0.5 秒內完成前端數據綁定（Data Binding）與畫面更新。
+- 異常處理 (Fallback): 若 `assets/` 內的圖片或影片遺失，系統內建 Base64 SVG 的 `onerror` 替換機制，確保畫面不破圖。
+- 資訊層級 (Visual Hierarchy): 採用主次分明的版面架構，頂部整併「主資訊看板」，下方劃分「行動互動區」，降低使用者閱讀數據的認知負擔。
 
 ---
 
@@ -103,17 +104,17 @@ graph TD
 
 #### 介面 A: 身分驗證 (Firebase Auth)
 
-* **模組**: `signInWithEmailAndPassword`, `createUserWithEmailAndPassword`, `signInAnonymously`
-* **狀態監聽**: `onAuthStateChanged`
-* **行為**: 驗證通過後，讀取 `user.uid` 作為資料庫文檔的主鍵。
+- 模組: `signInWithEmailAndPassword`, `createUserWithEmailAndPassword`, `signInAnonymously`
+- 狀態監聽: `onAuthStateChanged`
+- 行為: 驗證通過後，讀取 `user.uid` 作為資料庫文檔的主鍵。
 
 #### 介面 B: 使用者數據同步 (Cloud Firestore)
 
-* **路徑**: `artifacts/tanji-2026/users/{uid}`
-* **操作**:
-  * `setDoc`: 寫入或更新個人投資總額、CO2、EXP 與 Level。
-  * `onSnapshot`: 建立即時監聽器，確保跨視窗操作時數據保持同步。
-* **資料結構 (JSON 格式)**:
+- 路徑: `artifacts/tanji-2026/users/{uid}`
+- 操作:
+  - `setDoc`: 寫入或更新個人投資總額、CO2、EXP 與 Level。
+  - `onSnapshot`: 建立即時監聽器，確保跨視窗操作時數據保持同步。
+- 資料結構 (JSON 格式):
 ```json
 {
   "invested": 1500,
@@ -129,19 +130,19 @@ graph TD
 
 ### 前置需求
 
-* 支援 ES6 模組（`<script type="module">`）的現代瀏覽器 (Chrome, Edge, Safari)。
-* Firebase 專案環境 (需啟用 Authentication 與 Cloud Firestore)。
+- 支援 ES6 模組（`<script type="module">`）的現代瀏覽器 (Chrome, Edge, Safari)。
+- Firebase 專案環境 (需啟用 Authentication 與 Cloud Firestore)。
 
 ### 部署步驟
 
-1. **取得程式碼**: 將 `index.html` 與相關素材放入專案資料夾。
-2. **素材準備**: 於根目錄建立 `assets/` 資料夾，放置以下檔案：
-   * `tanjibaby.png` (靜態頭像)
-   * `tanjibaby2.jpg` (個人帳戶頭像)
-   * `tanjibaby_hi.mp4` (打卡互動影片)
-3. **Firebase 設定 (可選)**:
-   * 預設程式碼已包含測試用配置檔（`firebaseConfig`）。若要連接至您自己的資料庫，請於 `<script type="module">` 內替換 `firebaseConfig` 變數。
-   * 確認您的 Firestore 規則允許客戶端讀寫（測試階段可短暫開啟）。
-4. **本機端測試**: 
-   * 由於使用 ES6 Module 與 CORS 安全限制，請使用 Live Server 或本地伺服器（如 `python -m http.server` 或 `npx serve`）啟動網頁。
-5. **正式發布**: 將專案推送至 GitHub，並透過 GitHub Pages 或 Vercel 等靜態託管服務直接發布即可上線。
+1. 取得程式碼: 將 `index.html` 與相關素材放入專案資料夾。
+2. 素材準備: 於根目錄建立 `assets/` 資料夾，放置以下檔案：
+   - `tanjibaby.png` (靜態頭像)
+   - `tanjibaby2.jpg` (個人帳戶頭像)
+   - `tanjibaby_hi.mp4` (打卡互動影片)
+3. Firebase 設定 (可選):
+   - 預設程式碼已包含測試用配置檔（`firebaseConfig`）。若要連接至您自己的資料庫，請於 `<script type="module">` 內替換 `firebaseConfig` 變數。
+   - 確認您的 Firestore 規則允許客戶端讀寫（測試階段可短暫開啟）。
+4. 本機端測試: 
+   - 由於使用 ES6 Module 與 CORS 安全限制，請使用 Live Server 或本地伺服器（如 `python -m http.server` 或 `npx serve`）啟動網頁。
+5. 正式發布: 將專案推送至 GitHub，並透過 GitHub Pages 或 Vercel 等靜態託管服務直接發布即可上線。
