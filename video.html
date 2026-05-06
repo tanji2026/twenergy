@@ -13,7 +13,7 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { green: '#10b981', blue: '#0ea5e9', dark: '#0f172a' }
+                        brand: { green: '#10b981', blue: '#0ea5e9' }
                     },
                     fontFamily: { sans: ['Noto Sans TC', 'sans-serif'] }
                 }
@@ -32,21 +32,29 @@
             transform-origin: top left;
         }
         
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border-radius: 24px;
         }
 
+        .perspective-wrapper {
+            perspective: 2000px;
+        }
+        
+        .isometric-ui {
+            transform: rotateY(-15deg) rotateX(10deg) rotateZ(2deg);
+            transform-style: preserve-3d;
+        }
+        
         .glow-blob-1 {
             position: absolute;
-            top: -150px;
-            left: -150px;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(16,185,129,0.35) 0%, rgba(15,23,42,0) 70%);
+            top: -100px;
+            left: -100px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(16,185,129,0.4) 0%, rgba(15,23,42,0) 70%);
             border-radius: 50%;
             z-index: 0;
         }
@@ -54,10 +62,10 @@
         .glow-blob-2 {
             position: absolute;
             bottom: -200px;
-            right: -200px;
-            width: 1000px;
-            height: 1000px;
-            background: radial-gradient(circle, rgba(14,165,233,0.25) 0%, rgba(15,23,42,0) 70%);
+            right: -100px;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(14,165,233,0.3) 0%, rgba(15,23,42,0) 70%);
             border-radius: 50%;
             z-index: 0;
         }
@@ -66,119 +74,138 @@
             position: absolute;
             inset: 0;
             background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: 0;
+            opacity: 0.5;
         }
 
-        .floating { animation: float 6s ease-in-out infinite; }
-        .floating-delay-1 { animation: float 6s ease-in-out 1s infinite; }
-        .floating-delay-2 { animation: float 6s ease-in-out 2s infinite; }
+        @keyframes scan {
+            0% { left: -10%; }
+            100% { left: 110%; }
+        }
         
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
         @media (max-width: 1350px) {
-            .thumbnail-container { transform: scale(0.8); }
+            .thumbnail-container {
+                transform: scale(0.8);
+            }
         }
         @media (max-width: 1100px) {
-            .thumbnail-container { transform: scale(0.6); }
+            .thumbnail-container {
+                transform: scale(0.6);
+            }
         }
         @media (max-width: 800px) {
-            .thumbnail-container { transform: scale(0.4); }
+            .thumbnail-container {
+                transform: scale(0.4);
+            }
         }
     </style>
 </head>
-<body class="bg-gray-900 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-800 min-h-screen flex items-center justify-center p-4">
 
     <button id="download-btn" class="fixed top-4 left-4 bg-brand-green hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-xl shadow-lg z-50 flex items-center gap-3 transition-all duration-300 transform hover:-translate-y-1">
         <i class="fa-solid fa-download text-xl"></i>
         <span>下載高品質縮圖 (PNG)</span>
     </button>
 
-    <div class="thumbnail-container" id="thumbnail-canvas">
-        <!-- 背景元素 -->
+    <div class="thumbnail-container flex items-center" id="thumbnail-canvas">
         <div class="glow-blob-1"></div>
         <div class="glow-blob-2"></div>
         <div class="grid-bg"></div>
 
-        <div class="relative z-10 w-full h-full flex items-center px-16">
+        <div class="w-5/12 pl-20 relative z-20 flex flex-col justify-center h-full">
             
-            <!-- 左側：強烈的重點文字區 -->
-            <div class="w-6/12 flex flex-col justify-center h-full pr-8">
-                
-                <!-- 品牌 Logo 區 -->
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="w-20 h-20 bg-gradient-to-br from-brand-green to-brand-blue rounded-3xl flex items-center justify-center text-white font-bold text-4xl shadow-[0_0_30px_rgba(16,185,129,0.4)]">
-                        <i class="fa-solid fa-leaf"></i>
-                    </div>
-                    <div>
-                        <span class="block text-2xl text-brand-green font-bold tracking-widest mb-1">全台首創 淨零群募平台</span>
-                        <span class="font-black text-5xl tracking-tight text-white">碳吉 <span class="font-light">TanJi</span></span>
-                    </div>
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-16 h-16 bg-gradient-to-br from-brand-green to-brand-blue rounded-2xl flex items-center justify-center text-white font-bold text-3xl shadow-lg shadow-brand-green/30">
+                    <i class="fa-solid fa-leaf"></i>
                 </div>
-
-                <!-- 核心標題 -->
-                <h1 class="text-[85px] font-black text-white leading-[1.1] mb-6 tracking-wide drop-shadow-2xl">
-                    全民參與<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-cyan-400">淨零群募平台</span>
-                </h1>
-
-                <!-- 賣點副標題 -->
-                <div class="space-y-4 border-l-8 border-brand-green pl-6 mt-4">
-                    <p class="text-4xl text-white font-bold drop-shadow-md">
-                        百元贊助 <span class="text-brand-green mx-2">✕</span> 專款專用
-                    </p>
-                    <p class="text-3xl text-slate-300 font-bold">
-                        遊戲化永續回饋機制
-                    </p>
-                </div>
+                <span class="font-bold text-5xl tracking-tight text-white">碳吉 <span class="text-brand-green font-light">TanJi</span></span>
             </div>
 
-            <!-- 右側：碳吉寶寶與浮動 UI 展示區 -->
-            <div class="w-6/12 relative h-full flex items-center justify-center">
+            <div class="inline-block bg-brand-green/20 border border-brand-green text-brand-green font-bold px-4 py-2 rounded-full text-xl mb-6 w-max backdrop-blur-sm">
+                <i class="fa-solid fa-wallet mr-2"></i>全台首創 淨零群募平台
+            </div>
+
+            <h1 class="text-7xl font-black text-white leading-[1.15] mb-6 tracking-wide" style="text-shadow: 0 10px 20px rgba(0,0,0,0.5);">
+                百元即刻參與<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-blue" style="text-shadow: none;">綠能永續轉型</span>
+            </h1>
+
+            <p class="text-3xl text-slate-300 font-bold border-l-4 border-brand-green pl-6 mt-4">
+                微型贊助 ✕ 遊戲化回饋
+            </p>
+        </div>
+
+        <div class="w-7/12 relative z-10 perspective-wrapper pr-12">
+            <div class="isometric-ui w-full relative">
                 
-                <!-- 核心吉祥物：碳吉寶寶 (已替換為正版圖片) -->
-                <div class="relative z-20 floating w-[500px] h-[500px] flex items-center justify-center">
-                    <!-- 加上背後高光暈影，確保深灰色的寶寶在深色背景中能完美凸顯 -->
-                    <div class="absolute inset-0 bg-emerald-400/40 rounded-full blur-[100px] z-0"></div>
-                    <img src="tanjibaby.png" alt="碳吉寶寶" class="w-full h-full object-contain relative z-10 drop-shadow-[0_30px_50px_rgba(16,185,129,0.6)]">
-                </div>
-
-                <!-- 浮動 UI 1：贊助與減碳效益 -->
-                <div class="glass-card absolute top-24 left-0 p-6 flex items-center gap-5 z-30 floating-delay-1 border-l-4 border-l-brand-green">
-                    <div class="w-16 h-16 rounded-2xl bg-white flex items-center justify-center text-brand-green text-3xl shadow-inner">
-                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                <div class="glass-panel rounded-3xl p-8 w-full max-w-[800px] ml-auto relative">
+                    
+                    <div class="flex gap-2 mb-6">
+                        <div class="w-4 h-4 rounded-full bg-red-500"></div>
+                        <div class="w-4 h-4 rounded-full bg-yellow-500"></div>
+                        <div class="w-4 h-4 rounded-full bg-green-500"></div>
                     </div>
-                    <div>
-                        <div class="text-slate-300 font-bold text-lg mb-1">本次贊助 NT$ 500</div>
-                        <div class="text-3xl font-black text-white">
-                            減碳 <span class="text-brand-green">6.0</span> kg
+
+                    <div class="flex gap-4 mb-8">
+                        <div class="flex-grow relative">
+                            <i class="fa-solid fa-solar-panel absolute left-5 top-1/2 transform -translate-y-1/2 text-slate-400 text-xl"></i>
+                            <div class="w-full bg-slate-800/80 border border-slate-600 rounded-xl py-5 pl-14 pr-4 text-white text-xl flex items-center">
+                                100kW 廠房屋頂太陽能建置...
+                                <div class="ml-auto flex items-center gap-2">
+                                    <span class="w-3 h-3 bg-brand-green rounded-full animate-pulse"></span>
+                                    <span class="text-sm text-brand-green font-mono">募資中</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="grid grid-cols-2 gap-6 mb-6">
+                        
+                        <div class="bg-emerald-500/20 border-2 border-emerald-500/50 p-6 rounded-2xl flex items-start gap-5 transform translate-z-10 shadow-2xl shadow-emerald-900/20">
+                            <div class="bg-emerald-500 p-4 rounded-xl text-white text-3xl"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+                            <div>
+                                <h4 class="font-bold text-emerald-300 text-lg">預估減碳貢獻</h4>
+                                <p class="text-4xl font-black text-white mt-1 mb-1">6.0 <span class="text-xl">kg</span></p>
+                                <span class="bg-emerald-500/30 text-emerald-200 text-xs px-2 py-1 rounded">科學數據量化評估</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-500/20 border-2 border-blue-500/50 p-6 rounded-2xl flex items-start gap-5 transform translate-z-10 shadow-2xl shadow-blue-900/20">
+                            <div class="bg-blue-500 p-4 rounded-xl text-white text-3xl"><i class="fa-solid fa-star"></i></div>
+                            <div>
+                                <h4 class="font-bold text-blue-300 text-lg">獲得寶寶經驗值</h4>
+                                <p class="text-4xl font-black text-white mt-1 mb-1">+50 <span class="text-xl">EXP</span></p>
+                                <span class="bg-blue-500/30 text-blue-200 text-xs px-2 py-1 rounded">解鎖專屬永續回饋</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="bg-slate-800/80 border border-slate-600 rounded-2xl p-6 relative overflow-hidden h-[160px] flex flex-col justify-center items-center text-center">
+                        <div class="text-2xl text-slate-300 font-bold mb-1 relative z-10">
+                            本次贊助金額
+                        </div>
+                        <div class="text-5xl font-black text-white relative z-10">
+                            <span class="text-brand-green">NT$</span> 500
+                        </div>
+                        <div class="absolute inset-0 bg-brand-green/10" style="background-image: radial-gradient(rgba(16, 185, 129, 0.4) 1px, transparent 1px); background-size: 20px 20px;"></div>
+                        <div class="absolute top-0 bottom-0 w-8 bg-gradient-to-r from-transparent via-brand-green to-transparent opacity-80" style="animation: scan 3s linear infinite; left: -10%;"></div>
+                    </div>
+
                 </div>
 
-                <!-- 浮動 UI 2：獲得經驗值 -->
-                <div class="glass-card absolute bottom-24 right-0 p-6 flex items-center gap-5 z-30 floating-delay-2 border-l-4 border-l-blue-400">
-                    <div class="w-16 h-16 rounded-2xl bg-blue-500 flex items-center justify-center text-white text-3xl shadow-lg">
-                        <i class="fa-solid fa-star"></i>
+                <div class="absolute -bottom-10 -left-16 bg-white rounded-2xl p-5 shadow-2xl flex items-center gap-5 transform translate-z-20 border-4 border-slate-100">
+                    <div class="w-20 h-20 rounded-full bg-slate-50 flex items-center justify-center border-2 border-slate-100 overflow-hidden shadow-inner">
+                        <img src="tanjibaby.png" alt="碳吉寶寶" class="w-full h-full object-cover">
                     </div>
                     <div>
-                        <div class="text-blue-200 font-bold text-lg mb-1">永續帳戶已注入能量</div>
-                        <div class="text-3xl font-black text-white">
-                            獲得 <span class="text-blue-400">+50</span> EXP
-                        </div>
+                        <div class="text-sm text-slate-500 font-bold mb-1">碳吉寶寶 Lv.1</div>
+                        <div class="text-2xl font-black text-slate-800">感謝你的贊助！</div>
                     </div>
-                </div>
-
-                <!-- 背景光環裝飾 -->
-                <div class="absolute inset-0 flex items-center justify-center z-0">
-                    <div class="w-[500px] h-[500px] border border-emerald-500/30 rounded-full animate-[spin_20s_linear_infinite] border-dashed"></div>
-                    <div class="absolute w-[600px] h-[600px] border border-blue-500/20 rounded-full animate-[spin_30s_linear_infinite_reverse]"></div>
+                    <div class="text-brand-green text-4xl ml-3"><i class="fa-solid fa-circle-check"></i></div>
                 </div>
 
             </div>
@@ -191,51 +218,36 @@
             const originalText = btn.innerHTML;
             const target = document.getElementById('thumbnail-canvas');
             
-            // 處理中狀態
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xl"></i><span>處理中...</span>';
             btn.style.pointerEvents = 'none';
             btn.style.opacity = '0.8';
 
-            // 移除可能影響截圖的縮放與動畫
             const originalTransform = target.style.transform;
             target.style.transform = 'scale(1)';
-            
-            // 停用所有浮動動畫以防止截圖模糊
-            const floatingElements = target.querySelectorAll('.floating, .floating-delay-1, .floating-delay-2');
-            floatingElements.forEach(el => el.style.animation = 'none');
 
-            // 確保字型載入
-            document.fonts.ready.then(() => {
-                setTimeout(() => {
-                    html2canvas(target, {
-                        width: 1280,
-                        height: 720,
-                        scale: 2, // 提高解析度 (2560x1440)
-                        backgroundColor: '#0f172a',
-                        useCORS: true,
-                        logging: false
-                    }).then(canvas => {
-                        const link = document.createElement('a');
-                        link.download = '碳吉_TanJi_影片縮圖.png';
-                        link.href = canvas.toDataURL('image/png');
-                        link.click();
-                        
-                        // 恢復原狀
-                        target.style.transform = originalTransform;
-                        floatingElements.forEach(el => el.style.animation = '');
-                        btn.innerHTML = originalText;
-                        btn.style.pointerEvents = 'auto';
-                        btn.style.opacity = '1';
-                    }).catch(err => {
-                        console.error(err);
-                        alert('抱歉，截圖處理發生錯誤。');
-                        target.style.transform = originalTransform;
-                        floatingElements.forEach(el => el.style.animation = '');
-                        btn.innerHTML = originalText;
-                        btn.style.pointerEvents = 'auto';
-                        btn.style.opacity = '1';
-                    });
-                }, 500); // 緩衝時間
+            html2canvas(target, {
+                width: 1280,
+                height: 720,
+                scale: 2,
+                backgroundColor: '#0f172a',
+                useCORS: true,
+                logging: false
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'TanJi_Thumbnail_UI.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                target.style.transform = originalTransform;
+                btn.innerHTML = originalText;
+                btn.style.pointerEvents = 'auto';
+                btn.style.opacity = '1';
+            }).catch(err => {
+                console.error(err);
+                alert('抱歉，截圖處理發生錯誤。');
+                btn.innerHTML = originalText;
+                btn.style.pointerEvents = 'auto';
+                btn.style.opacity = '1';
             });
         });
     </script>
