@@ -7,11 +7,16 @@
     <title>TanJi 淨零群募平台</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .font-cute {
-            font-family: 'M PLUS Rounded 1c', sans-serif;
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc;
+            scroll-behavior: smooth;
+        }
+        .font-num {
+            font-family: 'Fredoka', sans-serif;
         }
         input[type=range] {
             -webkit-appearance: none;
@@ -20,14 +25,14 @@
         }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            height: 28px;
-            width: 28px;
+            height: 24px;
+            width: 24px;
             border-radius: 50%;
-            background: #22c55e;
+            background: #10b981;
             cursor: pointer;
-            margin-top: -10px;
-            border: 4px solid #fff;
-            box-shadow: 0 4px 10px rgba(34, 197, 94, 0.4);
+            margin-top: -8px;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
             transition: transform 0.1s;
             position: relative;
             z-index: 10;
@@ -40,7 +45,7 @@
             height: 8px;
             cursor: pointer;
             background: #e2e8f0;
-            border-radius: 4px;
+            border-radius: 9999px;
         }
         input[type=range]:focus {
             outline: none;
@@ -56,38 +61,33 @@
             filter: grayscale(0%);
             opacity: 1;
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border-color: #22c55e;
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.15);
+            border-color: #10b981;
         }
         .project-card {
             cursor: pointer;
         }
         .feed-container {
-            height: 150px;
+            height: 160px;
             overflow: hidden;
             position: relative;
         }
         .feed-list {
-            animation: scrollFeed 15s linear infinite;
+            animation: scrollFeed 18s linear infinite;
         }
         @keyframes scrollFeed {
             0% { transform: translateY(100%); }
             100% { transform: translateY(-100%); }
         }
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        @keyframes particleFlow {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
         }
         @keyframes floatUpLeaf {
             0% { opacity: 1; transform: translateY(0) scale(0.5) rotate(0deg); }
             100% { opacity: 0; transform: translateY(-80px) scale(1.5) rotate(45deg); }
         }
-        .anim-float { animation: float 4s ease-in-out infinite; }
+        .anim-float { animation: float 5s ease-in-out infinite; }
         .floating-leaf {
             position: absolute;
             pointer-events: none;
@@ -107,148 +107,182 @@
         .auth-hidden { display: none !important; }
     </style>
 </head>
-<body class="text-slate-800 font-sans min-h-screen relative overflow-x-hidden bg-slate-50">
+<body class="text-slate-700 antialiased overflow-x-hidden selection:bg-emerald-100 selection:text-emerald-900">
 
     <canvas id="confetti-canvas"></canvas>
 
-    <nav class="bg-white shadow-sm border-b border-slate-100 sticky top-0 z-40">
+    <nav class="bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 sticky top-0 z-40">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center shrink-0">
-                <span class="text-xl sm:text-2xl font-cute font-extrabold tracking-tight text-slate-800 whitespace-nowrap">TanJi 淨零群募平台</span>
+            <div class="flex items-center shrink-0 gap-2">
+                <span class="text-xl sm:text-2xl font-bold tracking-tight text-emerald-800 flex items-center gap-1.5">
+                    <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    TanJi 淨零群募
+                </span>
             </div>
-            <div class="hidden lg:flex items-center gap-6 font-bold text-slate-500 text-sm whitespace-nowrap">
-                <a href="#projects" class="hover:text-green-600 transition-colors">探索專案</a>
-                <a href="#success-cases" class="hover:text-green-600 transition-colors">成功案例</a>
-                <a href="#rewards" class="hover:text-green-600 transition-colors">永續回饋</a>
-                <a href="#payment-flow" class="hover:text-green-600 transition-colors">金流安全</a>
-                <a href="#education" class="hover:text-green-600 transition-colors">永續小學堂</a>
-                <a href="#about" class="hover:text-green-600 transition-colors">關於平台</a>
+            <div class="hidden lg:flex items-center gap-8 font-medium text-slate-500 text-sm whitespace-nowrap">
+                <a href="#projects" class="hover:text-emerald-600 transition-colors">探索專案</a>
+                <a href="#success-cases" class="hover:text-emerald-600 transition-colors">成功案例</a>
+                <a href="#rewards" class="hover:text-emerald-600 transition-colors">永續回饋</a>
+                <a href="#payment-flow" class="hover:text-emerald-600 transition-colors">金流安全</a>
+                <a href="#education" class="hover:text-emerald-600 transition-colors">永續小學堂</a>
+                <a href="#about" class="hover:text-emerald-600 transition-colors">關於平台</a>
             </div>
             <div class="flex items-center gap-4 shrink-0">
                 <div class="text-right hidden sm:block">
-                    <div class="text-xs text-slate-400">總累積減碳</div>
-                    <div class="text-sm font-bold text-green-600"><span id="global-co2">124.5</span> kg CO2e</div>
+                    <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">全站累積減碳</div>
+                    <div class="text-sm font-black text-emerald-600 font-num"><span id="global-co2">124.5</span> kg CO2e</div>
                 </div>
+                <button id="navAdminBtn" onclick="openAdminModal()" class="hidden bg-rose-50 text-rose-600 px-4 py-2 rounded-full text-xs font-bold border border-rose-100 hover:bg-rose-100 transition-colors flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    管理員工具箱
+                </button>
                 <div id="user-controls" class="flex items-center gap-2 auth-hidden">
-                    <span id="user-email-display" class="text-xs text-slate-500 hidden md:block"></span>
                     <button id="accountBtn" class="bg-slate-800 text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-slate-700 transition-colors shadow-sm">我的帳戶</button>
                     <button id="logoutBtn" class="text-slate-400 hover:text-slate-600 px-2 font-bold text-sm">登出</button>
                 </div>
-                <button id="loginShowBtn" class="bg-green-600 text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-green-700 transition-colors shadow-sm">登入/註冊</button>
+                <button id="loginShowBtn" class="bg-emerald-600 text-white px-5 py-2.5 rounded-full text-sm font-bold hover:bg-emerald-700 transition-colors shadow-sm">登入/註冊</button>
             </div>
         </div>
     </nav>
 
+    <div id="adminModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full relative border border-slate-200 shadow-2xl">
+            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1 bg-slate-100 rounded-full">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 class="text-lg font-black text-rose-600 mb-6 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                管理員動態調度後台
+            </h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-2">調度專案</label>
+                    <select id="adminProjectSelect" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold outline-none">
+                        <option value="0">廠房屋頂太陽能建置專案</option>
+                        <option value="1">屏東養豬場沼氣發電專案</option>
+                        <option value="2">電商物流循環包裝導入專案</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-2">手動灌入募集資金金額 (NT$)</label>
+                    <input type="number" id="adminRaisedInput" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold outline-none font-num" placeholder="例如：250000">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-2">插播綠色調度跑馬燈公告</label>
+                    <input type="text" id="adminAnnounceInput" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none" placeholder="例如：台南科學園區加入本次屋頂合作綠能計劃！">
+                </div>
+                <button onclick="applyAdminChanges()" class="w-full bg-rose-600 hover:bg-rose-700 text-white rounded-xl py-3 font-bold transition-all text-sm mt-4">
+                    確認送出並部署至主網
+                </button>
+            </div>
+        </div>
+    </div>
+
     <section class="py-12 relative bg-slate-50">
         <div class="max-w-6xl mx-auto px-4 space-y-8">
-            
-            <div class="bg-white rounded-[2rem] p-8 md:p-10 shadow-sm border border-slate-200 flex flex-col lg:flex-row gap-8 lg:gap-12 items-center relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-2 h-full bg-green-500"></div>
+            <div class="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-sm border border-slate-100 flex flex-col lg:flex-row gap-8 lg:gap-12 items-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-2.5 h-full bg-emerald-500"></div>
                 <div class="flex-1 w-full self-start">
-                    <span class="bg-green-100 text-green-700 text-xs font-extrabold px-3 py-1 rounded-full mb-4 inline-block tracking-wide">現正募資中</span>
-                    <h1 id="hero-title" class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-800 leading-tight mb-3 break-words">100kW 廠房屋頂太陽能建置專案</h1>
-                    <p id="hero-org" class="text-sm sm:text-base text-slate-500 font-medium mb-6">提案方：在地綠能中小企業聯盟</p>
-                    <button onclick="showProjectDetails()" class="inline-flex items-center justify-center bg-white border-2 border-green-500 text-green-600 px-6 py-2.5 rounded-xl text-sm font-extrabold hover:bg-green-500 hover:text-white transition-all duration-300 shadow-sm group whitespace-nowrap">
-                        查看專案詳情 
+                    <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block tracking-wide border border-emerald-100">綠色低碳專案進行中</span>
+                    <h1 id="hero-title" class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 leading-tight mb-3 break-words">100kW 廠房屋頂太陽能建置專案</h1>
+                    <p id="hero-org" class="text-sm sm:text-base text-slate-500 font-bold mb-6">提案方：在地綠能中小企業聯盟</p>
+                    <button onclick="showProjectDetails()" class="inline-flex items-center justify-center bg-white border-2 border-emerald-600 text-emerald-600 px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-sm group whitespace-nowrap">
+                        查看專案計畫詳情
                         <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </button>
                 </div>
 
-                <div class="flex-1 w-full bg-slate-50 rounded-3xl p-6 sm:p-8 border border-slate-100">
-                    <div class="flex flex-wrap justify-between items-end gap-4 mb-5 border-b border-slate-200 pb-5">
+                <div class="flex-1 w-full bg-slate-50/50 rounded-3xl p-6 sm:p-8 border border-slate-100">
+                    <div class="flex flex-wrap justify-between items-end gap-4 mb-5 border-b border-slate-200/60 pb-5">
                         <div>
-                            <p class="text-xs text-slate-400 font-bold mb-1">已募資金額</p>
-                            <p class="text-2xl sm:text-3xl font-black text-slate-800 break-words">NT$ <span id="raised-amount">3,450,000</span></p>
+                            <p class="text-xs text-slate-400 font-bold mb-1.5">已募集能源資金</p>
+                            <p class="text-2xl sm:text-3xl font-black text-slate-800 font-num">NT$ <span id="raised-amount">3,450,000</span></p>
                         </div>
                         <div class="text-left sm:text-right">
-                            <p class="text-xs text-slate-400 font-bold mb-1">目標金額</p>
-                            <p id="hero-goal" class="text-base sm:text-lg font-bold text-green-600 break-words">5,000,000</p>
+                            <p class="text-xs text-slate-400 font-bold mb-1.5">階段目標金額</p>
+                            <p id="hero-goal" class="text-base sm:text-lg font-bold text-emerald-600 font-num">5,000,000</p>
                         </div>
                     </div>
-                    <div class="w-full bg-slate-200 rounded-full h-4 overflow-hidden mb-4">
-                        <div id="hero-progress" class="bg-green-500 h-4 rounded-full transition-all duration-1000 relative" style="width: 69%"></div>
+                    <div class="w-full bg-slate-200/70 rounded-full h-4 overflow-hidden mb-4">
+                        <div id="hero-progress" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-4 rounded-full transition-all duration-1000 relative shadow-sm" style="width: 69%"></div>
                     </div>
                     <div class="flex flex-wrap justify-between items-center gap-2 font-bold">
-                        <span class="text-sm text-slate-500 whitespace-nowrap">達成率 <span id="pct-amount" class="text-green-600 text-xl font-black ml-1">69</span>%</span>
-                        <span id="hero-time" class="bg-white px-3 py-1.5 rounded-lg text-slate-600 text-xs shadow-sm border border-slate-100 whitespace-nowrap">剩餘 15 天</span>
+                        <span class="text-sm text-slate-500 whitespace-nowrap">募集進度 <span id="pct-amount" class="text-emerald-600 text-xl font-black ml-1 font-num">69</span>%</span>
+                        <span id="hero-time" class="bg-white px-3 py-1.5 rounded-lg text-slate-600 text-xs shadow-sm border border-slate-100/50 whitespace-nowrap">剩餘 15 天</span>
                     </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                
-                <div class="bg-slate-900 rounded-[2.5rem] p-10 shadow-lg flex flex-col items-center text-center relative overflow-hidden justify-center h-full border border-slate-800" id="interaction-zone">
-                    <div id="baby-glow" class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-500/20 via-slate-900/10 to-transparent opacity-50 transition-opacity duration-300"></div>
+                <div class="bg-white rounded-[2.5rem] p-10 shadow-sm border border-slate-100 flex flex-col items-center text-center relative overflow-hidden justify-center h-full" id="interaction-zone">
+                    <div id="baby-glow" class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-500/10 via-white to-transparent opacity-50 transition-opacity duration-300"></div>
                     
-                    <div id="baby-wrapper" class="relative w-64 h-64 flex items-center justify-center bg-slate-800 rounded-full shadow-[0_0_30px_rgba(34,197,94,0.2)] mb-8 border border-slate-700 z-10 transition-transform duration-300 shrink-0">
-                        <div class="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-white/10 to-transparent"></div>
-                        <img id="baby-img" src="assets/tanjibaby.png" alt="碳吉寶寶" class="w-[85%] h-[85%] object-cover rounded-full z-10 select-none anim-float" draggable="false" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzIyYzU1ZSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
+                    <div id="baby-wrapper" class="relative w-56 h-56 flex items-center justify-center bg-slate-50/50 rounded-full shadow-[0_4px_20px_rgba(16,185,129,0.1)] mb-8 border border-slate-100 z-10 transition-transform duration-300 shrink-0">
+                        <img id="baby-img" src="assets/tanjibaby.png" alt="碳吉寶寶" class="w-[85%] h-[85%] object-cover rounded-full z-10 select-none anim-float" draggable="false" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzEwYjk4MSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
                         <video id="baby-vid" src="assets/tanjibaby_hi.mp4" preload="none" class="absolute inset-0 w-full h-full object-cover rounded-full z-20 hidden pointer-events-none" muted playsinline></video>
                     </div>
 
-                    <button id="dailyCheckInBtn" class="mb-5 bg-green-500 text-white hover:bg-green-400 px-6 py-3 rounded-full font-extrabold text-sm transition-colors shadow-md flex items-center gap-2 group relative z-30 border border-green-400">
-                        <span class="text-lg group-hover:scale-110 transition-transform">🌱</span> 每日永續打卡 (+5 EXP)
+                    <button id="dailyCheckInBtn" class="mb-5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 px-6 py-3 rounded-full font-bold text-sm transition-colors shadow-sm flex items-center gap-2 group relative z-30 border border-emerald-100">
+                        <span class="text-lg group-hover:scale-110 transition-transform">🌱</span> 每日永續打卡簽到 (+5 EXP)
                     </button>
 
-                    <h3 id="status-text" class="text-xl sm:text-2xl font-extrabold text-white z-20 break-words">等待完成日常任務...</h3>
-                    <p id="encouragement-text" class="text-sm sm:text-base text-slate-400 mt-3 font-medium z-20">完成每日打卡，或前往右側「投資試算區」</p>
+                    <h3 id="status-text" class="text-xl sm:text-2xl font-black text-slate-800 z-20 break-words">等待完成日常碳任務...</h3>
+                    <p id="encouragement-text" class="text-sm sm:text-base text-slate-500 mt-2 font-medium z-20">完成每日打卡，或在右側「綠能調度艙」進行試算</p>
                 </div>
 
-                <div class="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-sm border border-slate-200 flex flex-col justify-center relative h-full">
+                <div class="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-sm border border-slate-100 flex flex-col justify-center relative h-full">
                     <div id="login-overlay" class="absolute inset-0 bg-white/95 z-20 flex flex-col items-center justify-center rounded-[2.5rem] transition-opacity">
                         <div class="text-center max-w-sm px-6">
-                            <div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-100">
-                                <span class="text-4xl block">🔒</span>
+                            <div class="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-100">
+                                <span class="text-3xl block">🔒</span>
                             </div>
-                            <h4 class="font-extrabold text-xl mb-3 text-slate-800">請先登入以進行贊助</h4>
-                            <p class="text-sm text-slate-500 mb-6 leading-relaxed">建立您的專屬永續帳戶，紀錄每一筆減碳貢獻並解鎖豐富的綠色回饋獎勵。</p>
-                            <button onclick="document.getElementById('loginModal').classList.remove('hidden')" class="w-full bg-green-600 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-green-700 transition-colors shadow-sm">立即登入 / 註冊</button>
+                            <h4 class="font-bold text-lg mb-2 text-slate-800">請先登入以開啟贊助通道</h4>
+                            <p class="text-xs sm:text-sm text-slate-400 mb-6 leading-relaxed">建立您的專屬低碳帳戶，追蹤累積減碳量並解鎖限量永續禮遇。</p>
+                            <button onclick="openLoginModal()" class="w-full bg-emerald-600 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-sm">立即登入 / 註冊新帳戶</button>
                         </div>
                     </div>
 
-                    <h3 class="text-xl sm:text-2xl font-extrabold mb-8 flex items-center text-slate-800 break-words">
-                        <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center mr-3 text-green-600 border border-green-100 shrink-0">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08-.402-2.599-1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <h3 class="text-lg sm:text-xl font-bold mb-6 flex items-center text-slate-800 break-words">
+                        <div class="w-9 h-9 bg-emerald-50 rounded-full flex items-center justify-center mr-3 text-emerald-600 border border-emerald-100 shrink-0">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08-.402-2.599-1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
-                        微型永續投資試算
+                        微型永續綠能投資試算
                     </h3>
 
-                    <div class="mb-8 p-6 md:p-8 bg-slate-50 border border-slate-100 rounded-3xl relative" id="slider-container">
+                    <div class="mb-8 p-6 bg-slate-50 border border-slate-100/50 rounded-3xl relative" id="slider-container">
                         <div class="flex flex-wrap justify-between items-end gap-4 mb-6">
-                            <span class="text-slate-600 font-bold text-base sm:text-lg whitespace-nowrap">單次贊助金額</span>
-                            <div class="flex items-center bg-white px-4 py-2 rounded-xl border border-slate-200 w-full sm:w-auto justify-end shadow-sm">
-                                <span class="text-lg font-bold text-slate-400 mr-2">NT$</span>
-                                <input type="number" id="investInput" value="500" min="100" max="10000" step="100" class="text-2xl sm:text-3xl font-extrabold text-green-600 bg-transparent w-24 sm:w-28 text-right outline-none focus:text-green-700 transition-colors">
+                            <span class="text-slate-500 font-bold text-sm whitespace-nowrap">單次預估贊助金額</span>
+                            <div class="flex items-center bg-white px-4 py-1.5 rounded-xl border border-slate-200 w-full sm:w-auto justify-end shadow-sm">
+                                <span class="text-sm font-bold text-slate-400 mr-2">NT$</span>
+                                <input type="number" id="investInput" value="500" min="100" max="10000" step="100" class="text-xl sm:text-2xl font-black text-emerald-600 bg-transparent w-24 sm:w-28 text-right outline-none font-num">
                             </div>
                         </div>
-                        
-                        <input type="range" id="investSlider" min="100" max="10000" step="100" value="500" class="w-full mt-4">
-                        
-                        <div class="flex justify-between text-xs sm:text-sm text-slate-400 mt-6 font-bold">
-                            <span class="bg-white border border-slate-200 px-2 py-1 rounded-md">$100</span>
-                            <span class="bg-white border border-slate-200 px-2 py-1 rounded-md">$10,000</span>
+                        <input type="range" id="investSlider" min="100" max="10000" step="100" value="500" class="w-full mt-2">
+                        <div class="flex justify-between text-xs text-slate-400 mt-4 font-bold">
+                            <span class="bg-white border border-slate-100 px-2.5 py-1 rounded-md shadow-sm font-num">$100</span>
+                            <span class="bg-white border border-slate-100 px-2.5 py-1 rounded-md shadow-sm font-num">$10,000</span>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4 md:gap-6 mb-8">
-                        <div class="p-4 sm:p-6 bg-white rounded-3xl border border-slate-100 flex flex-col items-center text-center shadow-sm">
-                            <span class="text-xs sm:text-sm text-slate-500 font-extrabold mb-2 break-words">預期減碳貢獻</span>
-                            <div class="text-2xl sm:text-4xl font-black text-slate-800">
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex flex-col items-center text-center shadow-sm">
+                            <span class="text-xs text-slate-400 font-bold mb-1.5 break-words">預估直接減碳效益</span>
+                            <div class="text-2xl font-black text-slate-800 font-num">
                                 <span id="co2Display">6.0</span>
-                                <span class="text-sm sm:text-base font-bold text-green-600 ml-1">kg</span>
+                                <span class="text-xs font-bold text-emerald-600 ml-1">kg</span>
                             </div>
                         </div>
-                        <div class="p-4 sm:p-6 bg-white rounded-3xl border border-slate-100 flex flex-col items-center text-center shadow-sm">
-                            <span class="text-xs sm:text-sm text-slate-500 font-extrabold mb-2 break-words">獲得經驗值</span>
-                            <div class="text-2xl sm:text-4xl font-black text-slate-800">
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex flex-col items-center text-center shadow-sm">
+                            <span class="text-xs text-slate-400 font-bold mb-1.5 break-words">本期獲得經驗值</span>
+                            <div class="text-2xl font-black text-slate-800 font-num">
                                 <span id="expDisplay">50</span>
-                                <span class="text-sm sm:text-base font-bold text-blue-600 ml-1">EXP</span>
+                                <span class="text-xs font-bold text-blue-600 ml-1">EXP</span>
                             </div>
                         </div>
                     </div>
 
-                    <button id="sponsorBtn" class="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl font-extrabold text-lg sm:text-xl shadow-md transition-colors break-words">
-                        確認贊助並注入能量
+                    <button id="sponsorBtn" class="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl font-bold text-base sm:text-lg shadow-sm transition-all break-words">
+                        確認贊助並注入永續能量
                     </button>
                 </div>
             </div>
@@ -258,166 +292,153 @@
     <section id="projects" class="py-20 bg-white border-t border-slate-100">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex justify-between items-end mb-10 border-b border-slate-100 pb-4">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-800 break-words">探索其他淨零專案</h2>
-                <button class="text-green-600 font-bold hover:text-green-700 text-sm hidden sm:block whitespace-nowrap">查看全部專案 &rarr;</button>
+                <h2 class="text-xl sm:text-2xl font-black text-slate-800 break-words">探索其他淨零專案</h2>
+                <button class="text-emerald-600 font-bold hover:text-emerald-700 text-sm hidden sm:block whitespace-nowrap">查看全部專案 &rarr;</button>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="project-list">
                 <div class="project-card bg-white rounded-[2rem] overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 group" onclick="switchProject(0)">
                     <div class="h-44 bg-slate-50 flex items-center justify-center relative overflow-hidden border-b border-slate-100">
-                        <span class="absolute top-4 left-4 bg-white text-xs font-extrabold px-3 py-1.5 rounded-lg text-green-700 border border-slate-200 z-10">太陽能</span>
-                        <span class="text-7xl group-hover:scale-110 transition-transform duration-500">☀️</span>
+                        <span class="absolute top-4 left-4 bg-white text-xs font-bold px-3 py-1.5 rounded-lg text-emerald-700 border border-slate-200 z-10 shadow-sm">太陽能</span>
+                        <span class="text-6xl group-hover:scale-110 transition-transform duration-500">☀️</span>
                     </div>
                     <div class="p-8">
-                        <h4 class="font-extrabold text-xl mb-2 text-slate-800 line-clamp-1 break-words">廠房屋頂太陽能建置</h4>
-                        <p class="text-sm text-slate-500 mb-6 font-medium break-words">在地綠能中小企業聯盟</p>
-                        <div class="w-full bg-slate-100 rounded-full h-2.5 mb-3"><div class="bg-green-500 h-2.5 rounded-full" style="width: 69%"></div></div>
-                        <div class="flex justify-between text-sm font-bold text-slate-600"><span class="text-green-600">69%</span><span>剩 15 天</span></div>
+                        <h4 class="font-bold text-lg mb-1.5 text-slate-800 line-clamp-1 break-words">廠房屋頂太陽能建置</h4>
+                        <p class="text-xs text-slate-400 mb-6 font-bold break-words">在地綠能中小企業聯盟</p>
+                        <div class="w-full bg-slate-100 rounded-full h-2 mb-3"><div class="bg-emerald-500 h-2 rounded-full" style="width: 69%"></div></div>
+                        <div class="flex justify-between text-xs font-bold text-slate-500 font-num"><span class="text-emerald-600">69%</span><span>剩 15 天</span></div>
                     </div>
                 </div>
                 <div class="project-card bg-white rounded-[2rem] overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 group" onclick="switchProject(1)">
                     <div class="h-44 bg-slate-50 flex items-center justify-center relative overflow-hidden border-b border-slate-100">
-                        <span class="absolute top-4 left-4 bg-white text-xs font-extrabold px-3 py-1.5 rounded-lg text-blue-700 border border-slate-200 z-10">生質能</span>
-                        <span class="text-7xl group-hover:scale-110 transition-transform duration-500">🐖</span>
+                        <span class="absolute top-4 left-4 bg-white text-xs font-bold px-3 py-1.5 rounded-lg text-blue-700 border border-slate-200 z-10 shadow-sm">生質能</span>
+                        <span class="text-6xl group-hover:scale-110 transition-transform duration-500">🐖</span>
                     </div>
                     <div class="p-8">
-                        <h4 class="font-extrabold text-xl mb-2 text-slate-800 line-clamp-1 break-words">屏東養豬場沼氣發電</h4>
-                        <p class="text-sm text-slate-500 mb-6 font-medium break-words">循環農業合作社</p>
-                        <div class="w-full bg-slate-100 rounded-full h-2.5 mb-3"><div class="bg-green-500 h-2.5 rounded-full" style="width: 42%"></div></div>
-                        <div class="flex justify-between text-sm font-bold text-slate-600"><span class="text-green-600">42%</span><span>剩 30 天</span></div>
+                        <h4 class="font-bold text-lg mb-1.5 text-slate-800 line-clamp-1 break-words">屏東養豬場沼氣發電</h4>
+                        <p class="text-xs text-slate-400 mb-6 font-bold break-words">循環農業合作社</p>
+                        <div class="w-full bg-slate-100 rounded-full h-2 mb-3"><div class="bg-emerald-500 h-2 rounded-full" style="width: 42%"></div></div>
+                        <div class="flex justify-between text-xs font-bold text-slate-500 font-num"><span class="text-emerald-600">42%</span><span>剩 30 天</span></div>
                     </div>
                 </div>
                 <div class="project-card bg-white rounded-[2rem] overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 group" onclick="switchProject(2)">
                     <div class="h-44 bg-slate-50 flex items-center justify-center relative overflow-hidden border-b border-slate-100">
-                        <span class="absolute top-4 left-4 bg-white text-xs font-extrabold px-3 py-1.5 rounded-lg text-yellow-700 border border-slate-200 z-10">循環經濟</span>
-                        <span class="text-7xl group-hover:scale-110 transition-transform duration-500">📦</span>
+                        <span class="absolute top-4 left-4 bg-white text-xs font-bold px-3 py-1.5 rounded-lg text-amber-700 border border-slate-200 z-10 shadow-sm">循環經濟</span>
+                        <span class="text-6xl group-hover:scale-110 transition-transform duration-500">📦</span>
                     </div>
                     <div class="p-8">
-                        <h4 class="font-extrabold text-xl mb-2 text-slate-800 line-clamp-1 break-words">電商物流循環包裝導入</h4>
-                        <p class="text-sm text-slate-500 mb-6 font-medium break-words">綠色電商新創團隊</p>
-                        <div class="w-full bg-slate-100 rounded-full h-2.5 mb-3"><div class="bg-green-500 h-2.5 rounded-full" style="width: 88%"></div></div>
-                        <div class="flex justify-between text-sm font-bold text-slate-600"><span class="text-green-600">88%</span><span>剩 5 天</span></div>
+                        <h4 class="font-bold text-lg mb-1.5 text-slate-800 line-clamp-1 break-words">電商物流循環包裝導入</h4>
+                        <p class="text-xs text-slate-400 mb-6 font-bold break-words">綠色電商新創團隊</p>
+                        <div class="w-full bg-slate-100 rounded-full h-2 mb-3"><div class="bg-emerald-500 h-2 rounded-full" style="width: 88%"></div></div>
+                        <div class="flex justify-between text-xs font-bold text-slate-500 font-num"><span class="text-emerald-600">88%</span><span>剩 5 天</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="success-cases" class="py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-500/10 to-transparent -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-        
+    <section id="success-cases" class="py-24 bg-slate-100 border-t border-b border-slate-200/60 relative overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 relative z-10">
-            <div class="flex flex-wrap justify-between items-end gap-4 mb-12 border-b border-slate-800 pb-4">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white break-words">成功案例與影響力</h2>
-                <button onclick="document.getElementById('impactModal').classList.remove('hidden')" class="text-green-400 font-bold hover:text-green-300 text-sm hidden sm:flex items-center transition-colors whitespace-nowrap">
-                    查看影響力報告 
-                    <svg class="w-4 h-4 ml-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+            <div class="flex flex-wrap justify-between items-end gap-4 mb-12 border-b border-slate-200 pb-4">
+                <h2 class="text-xl sm:text-2xl font-black text-slate-800 break-words">成功案例與減碳影響力</h2>
+                <button onclick="openImpactModal()" class="text-emerald-600 font-bold hover:text-emerald-700 text-sm hidden sm:flex items-center transition-colors whitespace-nowrap">
+                    查看總體影響力報告
+                    <svg class="w-4 h-4 ml-1 inline animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                 </button>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-slate-800 rounded-3xl p-8 border border-slate-700 flex flex-col sm:flex-row gap-8 items-center cursor-default">
-                    <div class="w-full sm:w-1/3 h-32 bg-slate-900 rounded-2xl flex items-center justify-center text-5xl border border-slate-700 shrink-0">🏫</div>
+                <div class="bg-white rounded-3xl p-8 border border-slate-200/80 flex flex-col sm:flex-row gap-8 items-center cursor-default">
+                    <div class="w-full sm:w-1/3 h-32 bg-slate-50 rounded-2xl flex items-center justify-center text-5xl border border-slate-100 shrink-0">🏫</div>
                     <div class="flex-1 w-full">
-                        <span class="bg-green-900/50 text-green-400 text-xs font-extrabold px-3 py-1.5 rounded-md mb-3 inline-block border border-green-800 whitespace-nowrap">已完工發電</span>
-                        <h4 class="font-extrabold text-xl text-white mb-2 break-words">花蓮偏鄉國小太陽能專案</h4>
-                        <p class="text-sm text-slate-400 mb-4 line-clamp-2 leading-relaxed">透過 1,250 位永續投資人的支持，成功建置 50kW 屋頂太陽能，目前穩定為校園供電中。</p>
-                        <div class="flex flex-wrap gap-4 text-sm font-bold text-slate-300">
-                            <div class="bg-slate-900 px-3 py-2 rounded-lg border border-slate-700 whitespace-nowrap"><span class="text-green-400">30 噸</span> 年減碳</div>
-                            <div class="bg-slate-900 px-3 py-2 rounded-lg border border-slate-700 whitespace-nowrap"><span class="text-blue-400">12.5萬</span> EXP</div>
+                        <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-md mb-3 inline-block border border-emerald-100 whitespace-nowrap">已完工發電</span>
+                        <h4 class="font-bold text-lg text-slate-800 mb-2 break-words">花蓮偏鄉國小太陽能專案</h4>
+                        <p class="text-xs sm:text-sm text-slate-500 mb-4 leading-relaxed">募得資金成功建置 50kW 屋頂綠能模組，已穩定為偏鄉校園校舍與冷氣供電。</p>
+                        <div class="flex flex-wrap gap-4 text-xs font-bold text-slate-500 font-num">
+                            <div class="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100"><span class="text-emerald-600">30 噸</span> 年減碳</div>
+                            <div class="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100"><span class="text-blue-600">12.5萬</span> EXP</div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-slate-800 rounded-3xl p-8 border border-slate-700 flex flex-col sm:flex-row gap-8 items-center cursor-default">
-                    <div class="w-full sm:w-1/3 h-32 bg-slate-900 rounded-2xl flex items-center justify-center text-5xl border border-slate-700 shrink-0">🛵</div>
+                <div class="bg-white rounded-3xl p-8 border border-slate-200/80 flex flex-col sm:flex-row gap-8 items-center cursor-default">
+                    <div class="w-full sm:w-1/3 h-32 bg-slate-50 rounded-2xl flex items-center justify-center text-5xl border border-slate-100 shrink-0">🛵</div>
                     <div class="flex-1 w-full">
-                        <span class="bg-blue-900/50 text-blue-400 text-xs font-extrabold px-3 py-1.5 rounded-md mb-3 inline-block border border-blue-800 whitespace-nowrap">第一期結案</span>
-                        <h4 class="font-extrabold text-xl text-white mb-2 break-words">社區共享電動機車租賃站</h4>
-                        <p class="text-sm text-slate-400 mb-4 line-clamp-2 leading-relaxed">媒合在地發展協會，建置 3 座太陽能供電之共享機車充電站，有效降低觀光區交通碳排。</p>
-                        <div class="flex flex-wrap gap-4 text-sm font-bold text-slate-300">
-                            <div class="bg-slate-900 px-3 py-2 rounded-lg border border-slate-700 whitespace-nowrap"><span class="text-green-400">15 噸</span> 年減碳</div>
-                            <div class="bg-slate-900 px-3 py-2 rounded-lg border border-slate-700 whitespace-nowrap"><span class="text-blue-400">8.6萬</span> EXP</div>
+                        <span class="bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1 rounded-md mb-3 inline-block border border-blue-100 whitespace-nowrap">第一期結案</span>
+                        <h4 class="font-bold text-lg text-slate-800 mb-2 break-words">社區共享電動機車租賃站</h4>
+                        <p class="text-xs sm:text-sm text-slate-500 mb-4 leading-relaxed">導入綠電充換能站，投放多部共享智慧電動機車，大幅改善低碳觀光動線。</p>
+                        <div class="flex flex-wrap gap-4 text-xs font-bold text-slate-500 font-num">
+                            <div class="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100"><span class="text-emerald-600">15 噸</span> 年減碳</div>
+                            <div class="bg-slate-50 px-3 py-2 rounded-lg border border-slate-100"><span class="text-blue-600">8.6萬</span> EXP</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <button onclick="document.getElementById('impactModal').classList.remove('hidden')" class="w-full mt-8 py-4 bg-slate-800 hover:bg-slate-700 text-green-400 border border-slate-700 rounded-2xl font-bold transition-colors sm:hidden break-words">
-                查看完整影響力報告
-            </button>
         </div>
     </section>
 
-    <section id="rewards" class="py-20 bg-slate-50 border-t border-slate-200">
+    <section id="rewards" class="py-20 bg-white border-b border-slate-200">
         <div class="max-w-6xl mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 bg-white rounded-3xl p-8 md:p-10 border border-slate-200 shadow-sm">
-                    <div class="flex flex-wrap justify-between items-end gap-4 mb-8 pb-4 border-b border-slate-100">
+                <div class="lg:col-span-2 bg-slate-50/50 rounded-3xl p-8 md:p-10 border border-slate-200 shadow-sm">
+                    <div class="flex flex-wrap justify-between items-end gap-4 mb-8 pb-4 border-b border-slate-200/60">
                         <div>
-                            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-800 mb-2 break-words">累積里程碑與回饋</h3>
-                            <p class="text-sm text-slate-500 font-medium">累積經驗值解鎖對應的虛實整合獎勵，讓低碳行動在日常延續。</p>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mb-2 break-words">累積里程碑與回饋</h3>
+                            <p class="text-xs sm:text-sm text-slate-400 font-bold">累積經驗值解鎖多元永續禮遇。</p>
                         </div>
                         <div class="text-left sm:text-right">
-                            <p class="text-xs text-slate-400 font-bold mb-1">我的總經驗值</p>
-                            <p class="font-black text-green-600 text-xl sm:text-2xl bg-slate-50 px-4 py-1 rounded-lg border border-slate-100 whitespace-nowrap"><span id="personal-total-exp">0</span> <span class="text-sm">EXP</span></p>
+                            <p class="text-xs text-slate-400 font-bold mb-1.5">您的總經驗值</p>
+                            <p class="font-black text-emerald-600 text-lg sm:text-xl bg-white px-4 py-1 rounded-lg border border-slate-200 shadow-sm font-num whitespace-nowrap"><span id="personal-total-exp">0</span> <span class="text-xs font-bold">EXP</span></p>
                         </div>
                     </div>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        <div id="reward-1" class="reward-item reward-locked bg-slate-50 border border-slate-200 rounded-3xl p-6 text-center">
-                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-4xl mx-auto mb-4 border border-slate-100">🏅</div>
-                            <h4 class="font-extrabold text-slate-800 mb-2 break-words">淨零新星數位徽章</h4>
-                            <p class="text-xs text-slate-500 font-medium mb-4 line-clamp-2">可展示於個人數位憑證區，彰顯您的永續影響力。</p>
-                            <div class="inline-block bg-slate-200 text-slate-600 text-xs px-3 py-1.5 rounded-full font-bold whitespace-nowrap" id="req-1">需 100 EXP</div>
+                        <div id="reward-1" class="reward-item reward-locked bg-white border border-slate-200 rounded-3xl p-6 text-center">
+                            <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-4xl mx-auto mb-4 border border-slate-100">🏅</div>
+                            <h4 class="font-bold text-sm text-slate-800 mb-2 break-words">淨零新星數位徽章</h4>
+                            <p class="text-[11px] text-slate-400 mb-4 leading-relaxed">可展示於個人數位憑證區，彰顯您的低碳行動實績。</p>
+                            <div class="inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1.5 rounded-full font-bold whitespace-nowrap font-num" id="req-1">需 100 EXP</div>
                         </div>
-                        <div id="reward-2" class="reward-item reward-locked bg-slate-50 border border-slate-200 rounded-3xl p-6 text-center">
-                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-4xl mx-auto mb-4 border border-slate-100">☕</div>
-                            <h4 class="font-extrabold text-slate-800 mb-2 break-words">在地低碳咖啡兌換券</h4>
-                            <p class="text-xs text-slate-500 font-medium mb-4 line-clamp-2">支持地方創生與減碳農業，品嚐永續的好滋味。</p>
-                            <div class="inline-block bg-slate-200 text-slate-600 text-xs px-3 py-1.5 rounded-full font-bold whitespace-nowrap" id="req-2">需 300 EXP</div>
+                        <div id="reward-2" class="reward-item reward-locked bg-white border border-slate-200 rounded-3xl p-6 text-center">
+                            <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-4xl mx-auto mb-4 border border-slate-100">☕</div>
+                            <h4 class="font-bold text-sm text-slate-800 mb-2 break-words">在地低碳咖啡兌換券</h4>
+                            <p class="text-[11px] text-slate-400 mb-4 leading-relaxed">支持地方循環合作，與碳吉聯盟夥伴一起品嚐綠色好滋味。</p>
+                            <div class="inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1.5 rounded-full font-bold whitespace-nowrap font-num" id="req-2">需 300 EXP</div>
                         </div>
-                        <div id="reward-3" class="reward-item reward-locked bg-slate-50 border border-slate-200 rounded-3xl p-6 text-center">
-                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-4xl mx-auto mb-4 border border-slate-100">🌱</div>
-                            <h4 class="font-extrabold text-slate-800 mb-2 break-words">碳吉寶寶專屬環保杯</h4>
-                            <p class="text-xs text-slate-500 font-medium mb-4 line-clamp-2">使用 100% 循環再生材質製作的限量實體紀念品。</p>
-                            <div class="inline-block bg-slate-200 text-slate-600 text-xs px-3 py-1.5 rounded-full font-bold whitespace-nowrap" id="req-3">需 800 EXP</div>
+                        <div id="reward-3" class="reward-item reward-locked bg-white border border-slate-200 rounded-3xl p-6 text-center">
+                            <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-4xl mx-auto mb-4 border border-slate-100">🥤</div>
+                            <h4 class="font-bold text-sm text-slate-800 mb-2 break-words">碳吉寶寶專屬環保杯</h4>
+                            <p class="text-[11px] text-slate-400 mb-4 leading-relaxed">採用環保無毒、安全可回收材料製成的獨家限量實體杯。</p>
+                            <div class="inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1.5 rounded-full font-bold whitespace-nowrap font-num" id="req-3">需 800 EXP</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-slate-900 rounded-3xl p-8 border border-slate-800 text-white relative overflow-hidden">
-                    <h3 class="text-xl sm:text-2xl font-extrabold mb-6 flex items-center border-b border-slate-700 pb-4 break-words">
-                        <div class="w-8 h-8 bg-slate-800 rounded-full flex items-center justify-center mr-3 text-green-400 border border-slate-700 shrink-0">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        </div>
-                        即時贊助動態
-                    </h3>
-                    <div class="feed-container">
-                        <div class="feed-list space-y-4" id="feed-list-container">
-                            <div class="flex items-center text-sm bg-slate-800 p-3 rounded-xl border border-slate-700">
-                                <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center mr-4 font-bold shrink-0">熱</div>
-                                <div class="flex-1">
-                                    <p class="break-words"><span class="font-bold text-green-400">熱心公民</span> 贊助了 <span class="font-bold text-white">廠房屋頂太陽能 5,000 元</span></p>
-                                    <div class="flex justify-between items-center mt-1">
-                                        <span class="text-xs text-blue-300 font-bold bg-slate-900 px-2 py-0.5 rounded whitespace-nowrap">+500 EXP</span>
-                                        <span class="text-[10px] text-slate-500 whitespace-nowrap">剛剛</span>
+                <div class="bg-slate-850 bg-emerald-950 text-white rounded-3xl p-8 border border-emerald-900 relative overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold mb-6 flex items-center border-b border-emerald-900 pb-4 break-words">
+                            <div class="w-8 h-8 bg-emerald-900 rounded-full flex items-center justify-center mr-3 text-emerald-400 border border-emerald-800 shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            即時永續贊助動態
+                        </h3>
+                        <div class="feed-container">
+                            <div class="feed-list space-y-4" id="feed-list-container">
+                                <div class="flex items-center text-xs bg-emerald-900/60 p-3 rounded-xl border border-emerald-800">
+                                    <div class="w-8 h-8 rounded-full bg-emerald-800 flex items-center justify-center mr-3 font-bold shrink-0">熱</div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="break-words"><span class="font-bold text-emerald-300">熱心公民</span> 贊助了 <span class="font-bold text-white">廠房屋頂太陽能 5,000 元</span></p>
+                                        <div class="flex justify-between items-center mt-1 font-num">
+                                            <span class="text-[10px] text-emerald-200 font-bold bg-emerald-950 px-2 py-0.5 rounded whitespace-nowrap">+500 EXP</span>
+                                            <span class="text-[9px] text-emerald-400 whitespace-nowrap">剛剛</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="flex items-center text-sm bg-slate-800 p-3 rounded-xl border border-slate-700">
-                                <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center mr-4 font-bold shrink-0">匿</div>
-                                <div class="flex-1">
-                                    <p class="break-words"><span class="font-bold text-green-400">匿名守護者</span> 贊助了 <span class="font-bold text-white">循環包裝導入 1,200 元</span></p>
-                                    <div class="flex justify-between items-center mt-1">
-                                        <span class="text-xs text-blue-300 font-bold bg-slate-900 px-2 py-0.5 rounded whitespace-nowrap">+120 EXP</span>
-                                        <span class="text-[10px] text-slate-500 whitespace-nowrap">2分鐘前</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex items-center text-sm bg-slate-800 p-3 rounded-xl border border-slate-700">
-                                <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center mr-4 font-bold text-white shrink-0">地</div>
-                                <div class="flex-1">
-                                    <p class="break-words"><span class="font-bold text-green-400">地球好夥伴</span> 贊助了 <span class="font-bold text-white">廠房屋頂太陽能 10,000 元</span></p>
-                                    <div class="flex justify-between items-center mt-1">
-                                        <span class="text-xs text-yellow-300 font-bold bg-slate-900 px-2 py-0.5 rounded whitespace-nowrap">解鎖環保杯</span>
-                                        <span class="text-[10px] text-slate-500 whitespace-nowrap">5分鐘前</span>
+                                <div class="flex items-center text-xs bg-emerald-900/60 p-3 rounded-xl border border-emerald-800">
+                                    <div class="w-8 h-8 rounded-full bg-emerald-800 flex items-center justify-center mr-3 font-bold shrink-0">匿</div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="break-words"><span class="font-bold text-emerald-300">匿名守護者</span> 贊助了 <span class="font-bold text-white">循環包裝導入 1,200 元</span></p>
+                                        <div class="flex justify-between items-center mt-1 font-num">
+                                            <span class="text-[10px] text-emerald-200 font-bold bg-emerald-950 px-2 py-0.5 rounded whitespace-nowrap">+120 EXP</span>
+                                            <span class="text-[9px] text-emerald-400 whitespace-nowrap">2分鐘前</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -428,124 +449,77 @@
         </div>
     </section>
 
-    <section id="payment-flow" class="py-20 bg-white border-t border-slate-200">
+    <section id="payment-flow" class="py-20 bg-slate-50">
         <div class="max-w-6xl mx-auto px-4">
-            <div class="bg-slate-50 rounded-[3rem] p-8 md:p-12 border border-slate-200 relative overflow-hidden">
+            <div class="bg-white rounded-[3rem] p-8 md:p-12 border border-slate-200 relative overflow-hidden">
                 <div class="text-center mb-12 sm:mb-16">
-                    <span class="text-slate-500 font-extrabold tracking-wider text-xs sm:text-sm mb-2 block uppercase">Secure Payment</span>
-                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 break-words">透明安全的金流與支付機制</h2>
-                    <div class="w-20 h-1 bg-slate-300 mx-auto mt-6 rounded-full"></div>
-                    <p class="text-slate-500 mt-6 font-medium max-w-2xl mx-auto text-sm sm:text-lg px-2">為了保障您的微型贊助安全，我們採用最高標準的金融架構，讓每一分錢都能確實轉化為愛地球的力量。</p>
+                    <span class="text-slate-400 font-bold tracking-wider text-xs mb-2 block uppercase font-num">Secure Payment</span>
+                    <h2 class="text-xl sm:text-2xl font-black text-slate-800 break-words">透明安全的金流保管機制</h2>
+                    <div class="w-20 h-1 bg-slate-200 mx-auto mt-6 rounded-full"></div>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                    <div class="bg-white p-8 rounded-3xl border border-slate-200 relative pt-14 hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                        <div class="absolute -top-7 left-1/2 transform -translate-x-1/2 w-14 h-14 sm:w-16 sm:h-16 bg-slate-800 text-white rounded-full flex items-center justify-center text-xl sm:text-2xl font-black border-4 border-white">1</div>
-                        <h4 class="text-lg sm:text-xl font-extrabold text-slate-800 mb-4 text-center break-words">多元微型支付</h4>
-                        <p class="text-slate-600 leading-relaxed text-sm font-medium text-justify mb-6">支援信用卡、行動支付、電子錢包與超商代碼。百元即可輕鬆參與，打破傳統綠色金融的高門檻限制。</p>
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200/60 relative pt-14 hover:-translate-y-1.5 transition-transform duration-300 flex flex-col">
+                        <div class="absolute -top-7 left-1/2 transform -translate-x-1/2 w-14 h-14 bg-emerald-600 text-white rounded-full flex items-center justify-center text-lg font-black border-4 border-white shadow-sm font-num">1</div>
+                        <h4 class="text-base sm:text-lg font-bold text-slate-800 mb-3 text-center break-words">多元微型支付</h4>
+                        <p class="text-slate-500 leading-relaxed text-xs sm:text-sm font-medium text-justify mb-6">支援信用卡、行動支付與超商代碼。投資門檻降至百元級，讓每個人都能無負擔地實踐綠色金融參與。</p>
                         <div class="flex flex-wrap justify-center gap-2 mt-auto">
-                            <span class="bg-slate-50 text-slate-600 px-3 py-1.5 rounded-lg text-xs font-bold border border-slate-200 whitespace-nowrap">信用卡</span>
-                            <span class="bg-slate-50 text-slate-600 px-3 py-1.5 rounded-lg text-xs font-bold border border-slate-200 whitespace-nowrap">行動支付</span>
+                            <span class="bg-white text-slate-500 px-3 py-1.5 rounded-lg text-[10px] font-bold border border-slate-200 whitespace-nowrap">信用卡</span>
+                            <span class="bg-white text-slate-500 px-3 py-1.5 rounded-lg text-[10px] font-bold border border-slate-200 whitespace-nowrap">行動支付</span>
                         </div>
                     </div>
                     
-                    <div class="bg-white p-8 rounded-3xl border border-slate-200 relative pt-14 hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                        <div class="absolute -top-7 left-1/2 transform -translate-x-1/2 w-14 h-14 sm:w-16 sm:h-16 bg-slate-800 text-white rounded-full flex items-center justify-center text-xl sm:text-2xl font-black border-4 border-white">2</div>
-                        <h4 class="text-lg sm:text-xl font-extrabold text-slate-800 mb-4 text-center break-words">銀行信託保管</h4>
-                        <p class="text-slate-600 leading-relaxed text-sm font-medium text-justify mb-6">資金全數匯入合作銀行之「信託專戶」。依據專案設備建置進度，審核通過後始得分批撥款，落實專款專用。</p>
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200/60 relative pt-14 hover:-translate-y-1.5 transition-transform duration-300 flex flex-col">
+                        <div class="absolute -top-7 left-1/2 transform -translate-x-1/2 w-14 h-14 bg-emerald-600 text-white rounded-full flex items-center justify-center text-lg font-black border-4 border-white shadow-sm font-num">2</div>
+                        <h4 class="text-base sm:text-lg font-bold text-slate-800 mb-3 text-center break-words">銀行信託保管</h4>
+                        <p class="text-slate-500 leading-relaxed text-xs sm:text-sm font-medium text-justify mb-6">募集之群募資金全數存入銀行「信託專戶」。嚴格依照專案建置與發電進度，經查核通過後，始分批進行撥款。</p>
                     </div>
                     
-                    <div class="bg-white p-8 rounded-3xl border border-slate-200 relative pt-14 hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                        <div class="absolute -top-7 left-1/2 transform -translate-x-1/2 w-14 h-14 sm:w-16 sm:h-16 bg-slate-800 text-white rounded-full flex items-center justify-center text-xl sm:text-2xl font-black border-4 border-white">3</div>
-                        <h4 class="text-lg sm:text-xl font-extrabold text-slate-800 mb-4 text-center break-words">智能合約分潤</h4>
-                        <p class="text-slate-600 leading-relaxed text-sm font-medium text-justify mb-6">專案達標後，智能合約自動發放對應的 EXP 經驗值至您的帳戶，並提撥 3% 媒合手續費作為平台永續營運基金。</p>
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200/60 relative pt-14 hover:-translate-y-1.5 transition-transform duration-300 flex flex-col">
+                        <div class="absolute -top-7 left-1/2 transform -translate-x-1/2 w-14 h-14 bg-emerald-600 text-white rounded-full flex items-center justify-center text-lg font-black border-4 border-white shadow-sm font-num">3</div>
+                        <h4 class="text-base sm:text-lg font-bold text-slate-800 mb-3 text-center break-words">智能合約分潤</h4>
+                        <p class="text-slate-500 leading-relaxed text-xs sm:text-sm font-medium text-justify mb-6">在台電核准併網發電後，智能合約自動按比例將減碳貢獻轉化為 EXP，並提撥微量比率維持平台永續營運。</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="education" class="py-20 bg-slate-50 border-t border-slate-200">
+    <section id="education" class="py-20 bg-white border-t border-slate-200">
         <div class="max-w-4xl mx-auto px-4">
             <div class="text-center mb-12">
-                <span class="text-green-600 font-extrabold tracking-wider text-xs sm:text-sm mb-2 block uppercase">Sustainability Platform</span>
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 break-words">TanJi 永續小學堂</h2>
-                <div class="w-20 h-1 bg-green-500 mx-auto mt-6 rounded-full"></div>
-                <p class="text-slate-500 mt-6 font-medium text-sm sm:text-lg px-2">建構於嚴謹學理基礎之上的氣候行動，深入了解微型資金如何驅動龐大的環境變革。</p>
+                <span class="text-emerald-600 font-bold tracking-wider text-xs mb-2 block uppercase font-num">Sustainability Academy</span>
+                <h2 class="text-xl sm:text-2xl font-black text-slate-800 break-words">TanJi 永續小學堂</h2>
+                <div class="w-20 h-1 bg-emerald-500 mx-auto mt-6 rounded-full"></div>
             </div>
 
             <div class="space-y-4">
-                <div class="bg-white rounded-2xl border border-slate-200 transition-all duration-300">
-                    <button class="w-full px-4 sm:px-6 py-4 sm:py-5 text-left font-extrabold text-slate-800 text-sm sm:text-lg flex justify-between items-start sm:items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
-                        <span class="group-hover:text-green-600 transition-colors flex items-start text-left pr-4">
-                            <span class="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center mr-3 text-xs sm:text-sm shrink-0 mt-0.5 sm:mt-0">01</span>
-                            <span class="leading-relaxed sm:leading-tight mt-0.5 sm:mt-0 break-words">氣候資金缺口與轉型金融</span>
+                <div class="bg-slate-50 rounded-2xl border border-slate-200 transition-all duration-300">
+                    <button class="w-full px-4 sm:px-6 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-start sm:items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
+                        <span class="group-hover:text-emerald-600 transition-colors flex items-start text-left pr-4">
+                            <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 mt-0.5 sm:mt-0 font-num shadow-sm">01</span>
+                            <span class="leading-relaxed sm:leading-tight break-words">氣候資金缺口與普惠綠色金融</span>
                         </span>
                         <svg class="w-5 h-5 text-slate-400 transform transition-transform duration-300 arrow shrink-0 mt-1 sm:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div class="px-4 sm:px-6 pb-6 hidden">
-                        <div class="pt-4 border-t border-slate-100 text-slate-600 leading-relaxed font-medium text-justify text-xs sm:text-base">
-                            台灣中小企業在面對全球供應鏈的嚴格減碳要求時，往往面臨傳統融資門檻過高及綠色溢價的困境。本平台針對氣候資金缺口提出解方，透過群眾募資引導社會資金，協助高碳排或資源匱乏之企業進行實質的能源轉型，加速產業邁向淨零排放。
+                        <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed font-medium text-justify text-xs sm:text-sm">
+                            傳統大型綠能基礎建設所需資金龐大，往往被財團或機構投資人所壟斷，小額資金極難參與。本平台透過網路微型融資模式，集結社會大眾之微型力量，直接投資於在地中小企業與校園的屋頂型減碳專案，縮短氣候投資缺口。
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl border border-slate-200 transition-all duration-300">
-                    <button class="w-full px-4 sm:px-6 py-4 sm:py-5 text-left font-extrabold text-slate-800 text-sm sm:text-lg flex justify-between items-start sm:items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
-                        <span class="group-hover:text-green-600 transition-colors flex items-start text-left pr-4">
-                            <span class="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center mr-3 text-xs sm:text-sm shrink-0 mt-0.5 sm:mt-0">02</span>
-                            <span class="leading-relaxed sm:leading-tight mt-0.5 sm:mt-0 break-words">減碳效益的科學量化機制</span>
+                <div class="bg-slate-50 rounded-2xl border border-slate-200 transition-all duration-300">
+                    <button class="w-full px-4 sm:px-6 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-start sm:items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
+                        <span class="group-hover:text-emerald-600 transition-colors flex items-start text-left pr-4">
+                            <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 mt-0.5 sm:mt-0 font-num shadow-sm">02</span>
+                            <span class="leading-relaxed sm:leading-tight break-words">發電與減碳效益之學理評估</span>
                         </span>
                         <svg class="w-5 h-5 text-slate-400 transform transition-transform duration-300 arrow shrink-0 mt-1 sm:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div class="px-4 sm:px-6 pb-6 hidden">
-                        <div class="pt-4 border-t border-slate-100 text-slate-600 leading-relaxed font-medium text-justify text-xs sm:text-base">
-                            平台上的減碳量並非憑空估算，而是具備嚴謹的科學與數據基礎。專案效益評估採用經濟部能源署公布之電力排碳係數為計算基準。民眾所投資建置之太陽能或生質能設備，其產生的每一度潔淨綠電，皆可精準換算為替代傳統化石燃料發電所減少的溫室氣體排放量，確保氣候貢獻的透明與可追溯性。
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-slate-200 transition-all duration-300">
-                    <button class="w-full px-4 sm:px-6 py-4 sm:py-5 text-left font-extrabold text-slate-800 text-sm sm:text-lg flex justify-between items-start sm:items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
-                        <span class="group-hover:text-green-600 transition-colors flex items-start text-left pr-4">
-                            <span class="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center mr-3 text-xs sm:text-sm shrink-0 mt-0.5 sm:mt-0">03</span>
-                            <span class="leading-relaxed sm:leading-tight mt-0.5 sm:mt-0 break-words">普惠金融與氣候正義</span>
-                        </span>
-                        <svg class="w-5 h-5 text-slate-400 transform transition-transform duration-300 arrow shrink-0 mt-1 sm:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div class="px-4 sm:px-6 pb-6 hidden">
-                        <div class="pt-4 border-t border-slate-100 text-slate-600 leading-relaxed font-medium text-justify text-xs sm:text-base">
-                            傳統綠色基礎建設的投資門檻極高，往往僅限於大型財團或機構投資人參與，這在無形中造成了氣候行動上的資本不平等。本平台運用數位金融科技，將投資門檻大幅降至百元級別，完美實踐普惠金融的核心價值。我們致力於落實聯合國永續發展目標，讓所有公民都能公平地參與並共享能源轉型帶來的環境與經濟紅利。
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-slate-200 transition-all duration-300">
-                    <button class="w-full px-4 sm:px-6 py-4 sm:py-5 text-left font-extrabold text-slate-800 text-sm sm:text-lg flex justify-between items-start sm:items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
-                        <span class="group-hover:text-green-600 transition-colors flex items-start text-left pr-4">
-                            <span class="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center mr-3 text-xs sm:text-sm shrink-0 mt-0.5 sm:mt-0">04</span>
-                            <span class="leading-relaxed sm:leading-tight mt-0.5 sm:mt-0 break-words">智能合約與透明分潤</span>
-                        </span>
-                        <svg class="w-5 h-5 text-slate-400 transform transition-transform duration-300 arrow shrink-0 mt-1 sm:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div class="px-4 sm:px-6 pb-6 hidden">
-                        <div class="pt-4 border-t border-slate-100 text-slate-600 leading-relaxed font-medium text-justify text-xs sm:text-base">
-                            為了確保回饋機制的公平與不可竄改性，平台計畫導入區塊鏈智能合約技術。當台電或監測設備確認綠電產生後，合約將自動觸發，精準地將減碳貢獻轉化為 EXP 經驗值並發放至投資人的數位帳戶中。此舉不僅消除人為操作的風險，更建立起極高的信任基礎。
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-2xl border border-slate-200 transition-all duration-300">
-                    <button class="w-full px-4 sm:px-6 py-4 sm:py-5 text-left font-extrabold text-slate-800 text-sm sm:text-lg flex justify-between items-start sm:items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
-                        <span class="group-hover:text-green-600 transition-colors flex items-start text-left pr-4">
-                            <span class="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center mr-3 text-xs sm:text-sm shrink-0 mt-0.5 sm:mt-0">05</span>
-                            <span class="leading-relaxed sm:leading-tight mt-0.5 sm:mt-0 break-words">循環經濟的在地實踐</span>
-                        </span>
-                        <svg class="w-5 h-5 text-slate-400 transform transition-transform duration-300 arrow shrink-0 mt-1 sm:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div class="px-4 sm:px-6 pb-6 hidden">
-                        <div class="pt-4 border-t border-slate-100 text-slate-600 leading-relaxed font-medium text-justify text-xs sm:text-base">
-                            減碳不應僅止於工業端，更應落實於生活圈。平台不僅推動能源轉型，更將實體回饋品與地方創生、循環農業及低碳商家結合。透過虛實整合的獎勵機制，引導投資人在日常消費中持續支持綠色產業，打造生生不息的在地永續生態系。
+                        <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed font-medium text-justify text-xs sm:text-sm">
+                            平台專案的減碳成效皆經科學計算。效益評估模型是以經濟部能源署每年公布之台灣「電力排碳係數」為換算公式。每一度併網產生的綠電，都可即時轉化為相對應的溫室氣體（CO2e）減排噸數，確保每一分氣候貢獻皆有數據依據。
                         </div>
                     </div>
                 </div>
@@ -553,39 +527,33 @@
         </div>
     </section>
 
-    <section id="about" class="py-20 bg-white border-t border-slate-200">
+    <section id="about" class="py-20 bg-slate-50 border-t border-slate-200/60">
         <div class="max-w-6xl mx-auto px-4">
-            <div class="bg-slate-50 rounded-[3rem] p-8 md:p-12 border border-slate-200 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-green-500"></div>
+            <div class="bg-white rounded-[3rem] p-8 md:p-12 border border-slate-200 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-emerald-500"></div>
                 <div class="text-center mb-12 sm:mb-16">
-                    <span class="text-green-600 font-extrabold tracking-wider text-xs sm:text-sm mb-2 block uppercase">About TanJi</span>
-                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 break-words">關於 TanJi 平台</h2>
-                    <div class="w-20 h-1 bg-green-500 mx-auto mt-6 rounded-full"></div>
+                    <span class="text-emerald-600 font-bold tracking-wider text-xs mb-2 block uppercase font-num">Our Mission</span>
+                    <h2 class="text-xl sm:text-2xl font-black text-slate-800 break-words">關於 TanJi 淨零平台</h2>
+                    <div class="w-20 h-1 bg-emerald-500 mx-auto mt-6 rounded-full"></div>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-                    <div class="bg-white p-8 rounded-3xl border border-slate-200 text-center transition-transform hover:-translate-y-2 duration-300">
-                        <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-slate-50 text-slate-600 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl mb-6 border border-slate-200">
-                            <svg class="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                        </div>
-                        <h4 class="text-lg sm:text-xl font-extrabold text-slate-800 mb-4 break-words">我們的使命</h4>
-                        <p class="text-slate-500 leading-relaxed text-sm font-medium text-justify">TanJi 致力於打造全台最透明、最低門檻的綠色金融媒合平台。我們相信淨零轉型不該只是大型企業的專利，每一位公民都能透過微型資金，成為推動地球永續的重要力量。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200/50 text-center transition-transform hover:-translate-y-1.5 duration-300">
+                        <div class="w-16 h-16 mx-auto bg-white text-slate-600 rounded-2xl flex items-center justify-center text-xl mb-6 border border-slate-200 shadow-sm">🎯</div>
+                        <h4 class="font-bold text-slate-800 mb-3 break-words text-sm sm:text-base">我們的使命</h4>
+                        <p class="text-slate-500 leading-relaxed text-xs sm:text-sm font-medium text-justify">打造全台最親民、公開透明的微型永續募資樞紐。協助推動公民電廠、智慧低碳校園與綠色農業專案，讓淨零轉型融入日常生活消費。</p>
                     </div>
                     
-                    <div class="bg-white p-8 rounded-3xl border border-slate-200 text-center transition-transform hover:-translate-y-2 duration-300">
-                        <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-slate-50 text-slate-600 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl mb-6 border border-slate-200">
-                            <svg class="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-                        </div>
-                        <h4 class="text-lg sm:text-xl font-extrabold text-slate-800 mb-4 break-words">運作方式</h4>
-                        <p class="text-slate-500 leading-relaxed text-sm font-medium text-justify">平台嚴選具備潛力的在地綠能專案，並導入最高規格的信託專戶管理。透過視覺化數據追蹤資金流向，將每一度綠電轉化為實質的回饋。</p>
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200/50 text-center transition-transform hover:-translate-y-1.5 duration-300">
+                        <div class="w-16 h-16 mx-auto bg-white text-slate-600 rounded-2xl flex items-center justify-center text-xl mb-6 border border-slate-200 shadow-sm">💡</div>
+                        <h4 class="font-bold text-slate-800 mb-3 break-words text-sm sm:text-base">運作理念</h4>
+                        <p class="text-slate-500 leading-relaxed text-xs sm:text-sm font-medium text-justify">所有提案專案皆經過嚴格資格與可行性審查。藉由即時發電數據回傳，大眾可以即時掌握發電效益，讓減碳貢獻看得見、摸得著。</p>
                     </div>
                     
-                    <div class="bg-white p-8 rounded-3xl border border-slate-200 text-center transition-transform hover:-translate-y-2 duration-300">
-                        <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto bg-slate-50 text-slate-600 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl mb-6 border border-slate-200">
-                            <svg class="w-8 h-8 sm:w-10 sm:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        <h4 class="text-lg sm:text-xl font-extrabold text-slate-800 mb-4 break-words">平台承諾</h4>
-                        <p class="text-slate-500 leading-relaxed text-sm font-medium text-justify">我們承諾提供 100% 專款專用的資金安全保障。透過智能合約技術與即時發電數據串接，確保每一筆微型投資都能產生真實、可被驗證的氣候影響力。</p>
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200/50 text-center transition-transform hover:-translate-y-1.5 duration-300">
+                        <div class="w-16 h-16 mx-auto bg-white text-slate-600 rounded-2xl flex items-center justify-center text-xl mb-6 border border-slate-200 shadow-sm">⚖️</div>
+                        <h4 class="font-bold text-slate-800 mb-3 break-words text-sm sm:text-base">誠信承諾</h4>
+                        <p class="text-slate-500 leading-relaxed text-xs sm:text-sm font-medium text-justify">我們承諾提供最安全的信託控管機制。透過多節點與透明的資金流向揭露，全面防範假專案等道德風險，保護每一位綠色支持者。</p>
                     </div>
                 </div>
             </div>
@@ -594,106 +562,107 @@
 
     <footer class="bg-slate-900 py-12 text-center mt-auto">
         <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center justify-center gap-3">
-                <span class="text-white font-cute font-extrabold text-lg sm:text-xl tracking-wide break-words">TanJi 淨零群募平台</span>
+            <div class="flex items-center justify-center gap-2">
+                <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <span class="text-white font-bold text-lg tracking-wide break-words">TanJi 淨零群募平台</span>
             </div>
-            <div class="font-medium text-xs sm:text-sm text-center md:text-right text-slate-400 leading-relaxed">
-                <p class="text-slate-300 mb-1 break-words">臺灣『能』永續能源創意實作競賽參賽隊伍｜作品受著作權法保護，未經授權請勿複製轉載</p>
+            <div class="font-bold text-slate-400 leading-relaxed flex flex-col items-center md:items-end gap-1" style="font-size: 10px;">
+                <p class="text-slate-300 break-words text-center">臺灣『能』永續能源創意實作競賽參賽隊伍｜作品受著作權法保護，未經授權請勿複製轉載</p>
                 <p class="break-words">歡迎聯絡我們：tanji2026@gmail.com</p>
             </div>
         </div>
     </footer>
 
-    <div id="impactModal" class="fixed inset-0 bg-slate-900 bg-opacity-80 z-50 hidden flex items-center justify-center transition-opacity p-4">
-        <div class="bg-white rounded-[2rem] p-6 sm:p-8 max-w-3xl w-full relative max-h-[90vh] overflow-y-auto border border-slate-200">
-            <button onclick="document.getElementById('impactModal').classList.add('hidden')" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-slate-400 hover:text-slate-600 transition-colors bg-slate-100 p-2 rounded-full">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <div id="impactModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-[2rem] p-6 sm:p-8 max-w-3xl w-full relative max-h-[90vh] overflow-y-auto border border-slate-200 shadow-2xl">
+            <button onclick="closeImpactModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1.5 bg-slate-50 rounded-full">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="text-center mb-8 border-b border-slate-100 pb-6 mt-4 sm:mt-0">
-                <span class="bg-green-100 text-green-700 text-[10px] sm:text-xs font-extrabold px-4 py-1.5 rounded-full mb-3 inline-block uppercase tracking-wider whitespace-nowrap">Impact Report</span>
-                <h2 class="text-2xl sm:text-3xl font-black text-slate-800 break-words">平台總體影響力報告</h2>
-                <p class="text-slate-500 mt-2 font-medium text-sm sm:text-base">數據更新時間：即時更新</p>
+                <span class="bg-emerald-50 text-emerald-700 text-[10px] sm:text-xs font-bold px-4 py-1.5 rounded-full mb-3 inline-block uppercase tracking-wider whitespace-nowrap border border-emerald-100">Impact Report</span>
+                <h2 class="text-xl sm:text-2xl font-black text-slate-800 break-words">平台總體影響力報告</h2>
+                <p class="text-slate-400 mt-2 font-bold text-xs sm:text-sm">數據更新時間：即時同步</p>
             </div>
             
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10 font-num">
                 <div class="bg-slate-50 rounded-2xl p-4 sm:p-6 text-center border border-slate-100">
-                    <p class="text-[10px] sm:text-xs text-slate-500 font-extrabold mb-2 uppercase break-words">總募集綠色資金</p>
-                    <p class="text-xl sm:text-2xl font-black text-slate-800 whitespace-nowrap">NT$ 1.25 <span class="text-sm sm:text-base text-slate-500 font-bold">億</span></p>
+                    <p class="text-[10px] text-slate-400 font-bold mb-2 uppercase break-words">總募集綠色資金</p>
+                    <p class="text-xl font-black text-slate-800 whitespace-nowrap">NT$ 1.25 <span class="text-xs text-slate-500 font-bold">億</span></p>
                 </div>
                 <div class="bg-slate-50 rounded-2xl p-4 sm:p-6 text-center border border-slate-100">
-                    <p class="text-[10px] sm:text-xs text-slate-500 font-extrabold mb-2 uppercase break-words">參與永續投資人數</p>
-                    <p class="text-xl sm:text-2xl font-black text-slate-800 whitespace-nowrap">12,450 <span class="text-sm sm:text-base text-slate-500 font-bold">人</span></p>
+                    <p class="text-[10px] text-slate-400 font-bold mb-2 uppercase break-words">參與永續投資人數</p>
+                    <p class="text-xl font-black text-slate-800 whitespace-nowrap">12,450 <span class="text-xs text-slate-500 font-bold">人</span></p>
                 </div>
-                <div class="bg-green-50 rounded-2xl p-4 sm:p-6 text-center border border-green-100">
-                    <p class="text-[10px] sm:text-xs text-green-600 font-extrabold mb-2 uppercase break-words">總累積減碳量</p>
-                    <p class="text-xl sm:text-2xl font-black text-green-700 whitespace-nowrap">124.5 <span class="text-sm sm:text-base font-bold">噸</span></p>
+                <div class="bg-emerald-50 rounded-2xl p-4 sm:p-6 text-center border border-emerald-100">
+                    <p class="text-[10px] text-emerald-600 font-bold mb-2 uppercase break-words">總累積減碳量</p>
+                    <p class="text-xl font-black text-emerald-700 whitespace-nowrap">124.5 <span class="text-xs font-bold">噸</span></p>
                 </div>
             </div>
 
-            <div class="space-y-6 sm:space-y-8">
+            <div class="space-y-6">
                 <div>
-                    <div class="flex flex-wrap justify-between items-end gap-2 mb-2">
-                        <span class="font-bold text-slate-700 text-sm sm:text-base break-words">年度減碳目標達成率</span>
-                        <span class="font-black text-green-600 text-base sm:text-lg whitespace-nowrap">85%</span>
+                    <div class="flex flex-wrap justify-between items-end gap-2 mb-2 font-bold">
+                        <span class="text-slate-700 text-xs sm:text-sm break-words">年度減碳目標達成率</span>
+                        <span class="text-emerald-600 text-sm font-num">85%</span>
                     </div>
-                    <div class="w-full bg-slate-100 rounded-full h-3 sm:h-4 overflow-hidden">
-                        <div class="bg-green-500 h-full rounded-full" style="width: 85%"></div>
+                    <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                        <div class="bg-emerald-500 h-full rounded-full" style="width: 85%"></div>
                     </div>
                 </div>
                 <div>
-                    <div class="flex flex-wrap justify-between items-end gap-2 mb-2">
-                        <span class="font-bold text-slate-700 text-sm sm:text-base break-words">協助中小企業轉型家數</span>
-                        <span class="font-black text-blue-600 text-base sm:text-lg whitespace-nowrap">15 / 20 家</span>
+                    <div class="flex flex-wrap justify-between items-end gap-2 mb-2 font-bold">
+                        <span class="text-slate-700 text-xs sm:text-sm break-words">協助中小企業轉型家數</span>
+                        <span class="text-blue-600 text-sm font-num">15 / 20 家</span>
                     </div>
-                    <div class="w-full bg-slate-100 rounded-full h-3 sm:h-4 overflow-hidden">
+                    <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
                         <div class="bg-blue-500 h-full rounded-full" style="width: 75%"></div>
                     </div>
                 </div>
                 <div>
-                    <div class="flex flex-wrap justify-between items-end gap-2 mb-2">
-                        <span class="font-bold text-slate-700 text-sm sm:text-base break-words">碳吉寶寶獎勵發放總數</span>
-                        <span class="font-black text-yellow-600 text-base sm:text-lg whitespace-nowrap">8,240 份</span>
+                    <div class="flex flex-wrap justify-between items-end gap-2 mb-2 font-bold">
+                        <span class="text-slate-700 text-xs sm:text-sm break-words">碳吉寶寶獎勵發放總數</span>
+                        <span class="text-amber-600 text-sm font-num">8,240 份</span>
                     </div>
-                    <div class="w-full bg-slate-100 rounded-full h-3 sm:h-4 overflow-hidden">
-                        <div class="bg-yellow-500 h-full rounded-full" style="width: 60%"></div>
+                    <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                        <div class="bg-amber-500 h-full rounded-full" style="width: 60%"></div>
                     </div>
                 </div>
             </div>
             
-            <div class="mt-8 sm:mt-10 pt-6 border-t border-slate-100 text-center">
-                <button onclick="document.getElementById('impactModal').classList.add('hidden')" class="w-full sm:w-auto bg-slate-800 text-white px-8 py-3.5 rounded-xl font-bold hover:bg-slate-700 transition-colors break-words">關閉報告</button>
+            <div class="mt-8 pt-6 border-t border-slate-100 text-center">
+                <button onclick="closeImpactModal()" class="w-full sm:w-auto bg-slate-800 text-white px-8 py-3 rounded-xl font-bold hover:bg-slate-700 transition-colors break-words">關閉報告</button>
             </div>
         </div>
     </div>
 
-    <div id="projectDetailsModal" class="fixed inset-0 bg-slate-900 bg-opacity-80 z-50 hidden flex items-center justify-center transition-opacity p-4">
-        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-2xl w-full relative max-h-[90vh] overflow-y-auto border border-slate-200">
-            <button onclick="document.getElementById('projectDetailsModal').classList.add('hidden')" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-slate-400 hover:text-slate-600 transition-colors bg-slate-100 p-2 rounded-full">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <div id="projectDetailsModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-2xl w-full relative max-h-[90vh] overflow-y-auto border border-slate-200 shadow-2xl">
+            <button onclick="document.getElementById('projectDetailsModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1.5 bg-slate-50 rounded-full">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="mb-6 border-b border-slate-100 pb-4 mt-4 sm:mt-0">
-                <span class="bg-green-100 text-green-700 text-[10px] sm:text-xs font-extrabold px-3 py-1 rounded-full mb-3 inline-block whitespace-nowrap">專案詳情</span>
-                <h2 class="text-xl sm:text-2xl font-black text-slate-800 break-words" id="modal-project-title">100kW 廠房屋頂太陽能建置專案</h2>
-                <p class="text-slate-500 mt-2 font-medium text-sm sm:text-base break-words" id="modal-project-org">提案方：在地綠能中小企業聯盟</p>
+                <span class="bg-emerald-50 text-emerald-700 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full mb-3 inline-block whitespace-nowrap border border-emerald-100">專案詳情</span>
+                <h2 class="text-lg sm:text-xl font-black text-slate-800 break-words" id="modal-project-title">100kW 廠房屋頂太陽能建置專案</h2>
+                <p class="text-slate-500 mt-2 font-bold text-xs sm:text-sm break-words" id="modal-project-org">提案方：在地綠能中小企業聯盟</p>
             </div>
             
-            <div class="space-y-6 text-slate-700 font-medium">
+            <div class="space-y-6 text-slate-600 font-bold">
                 <div>
-                    <h3 class="text-base sm:text-lg font-bold text-green-700 mb-2 flex items-center break-words"><span class="text-xl mr-2 shrink-0">🎯</span> 專案目標與資金用途</h3>
-                    <p class="text-sm leading-relaxed text-justify">本專案旨在協助三家在地傳產工廠進行能源轉型。募集資金將 100% 用於採購高效能單晶矽太陽能模組、逆變器及相關併網工程。透過信託專戶管理，確保資金專款專用，於設備建置達特定里程碑後始得撥款。</p>
+                    <h3 class="text-sm sm:text-base font-black text-emerald-800 mb-2 flex items-center break-words"><span class="text-xl mr-2 shrink-0">🎯</span> 專案目標與資金用途</h3>
+                    <p class="text-xs sm:text-sm leading-relaxed text-justify">本專案旨在協助三家在地傳產工廠進行能源轉型。募集資金將 100% 用於採購高效能單晶矽太陽能模組、逆變器及相關併網工程。透過信託專戶管理，確保資金專款專用，於設備建置達特定里程碑後始得撥款。</p>
                 </div>
-                <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-100">
-                    <h3 class="text-base sm:text-lg font-bold text-green-700 mb-3 flex items-center break-words"><span class="text-xl mr-2 shrink-0">🌍</span> 預期永續效益</h3>
-                    <ul class="list-disc list-inside text-sm space-y-2 ml-1 sm:ml-2">
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <h3 class="text-sm sm:text-base font-black text-emerald-800 mb-3 flex items-center break-words"><span class="text-xl mr-2 shrink-0">🌍</span> 預期永續效益</h3>
+                    <ul class="list-disc list-inside text-xs space-y-2 ml-1 text-slate-500">
                         <li class="break-words">預估首年發電量：<span class="font-bold text-slate-800">120,000 度綠電</span></li>
                         <li class="break-words">年減少溫室氣體：約 <span class="font-bold text-slate-800">59.4 噸 CO2e</span></li>
                         <li class="break-words">相當於種植了 <span class="font-bold text-slate-800">5,000 棵樹</span> 的年吸碳量</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-base sm:text-lg font-bold text-green-700 mb-2 flex items-center break-words"><span class="text-xl mr-2 shrink-0">🎁</span> 贊助者專屬權益</h3>
-                    <p class="text-sm leading-relaxed mb-2 text-justify">除了獲得對應的碳吉寶寶 EXP 經驗值以解鎖全站回饋品外，本專案將於完工後提供：</p>
-                    <ul class="list-disc list-inside text-sm space-y-1 sm:space-y-2 ml-1 sm:ml-2 text-slate-600">
+                    <h3 class="text-sm sm:text-base font-black text-emerald-800 mb-2 flex items-center break-words"><span class="text-xl mr-2 shrink-0">🎁</span> 贊助者專屬權益</h3>
+                    <p class="text-xs sm:text-sm leading-relaxed mb-2 text-justify">除了獲得對應的碳吉寶寶 EXP 經驗值以解鎖全站回饋品外，本專案將於完工後提供：</p>
+                    <ul class="list-disc list-inside text-xs space-y-1.5 ml-1 text-slate-500">
                         <li class="break-words">個人專屬「淨零貢獻數位證書」</li>
                         <li class="break-words">建置進度與發電報表每季電子報更新</li>
                         <li class="break-words">優先參訪綠能示範廠區資格（限額）</li>
@@ -701,169 +670,169 @@
                 </div>
             </div>
             <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end">
-                <button onclick="document.getElementById('projectDetailsModal').classList.add('hidden')" class="w-full sm:w-auto bg-slate-800 text-white px-6 py-3 rounded-xl font-bold hover:bg-slate-700 transition-colors break-words">我了解了，前往贊助</button>
+                <button onclick="document.getElementById('projectDetailsModal').classList.add('hidden')" class="w-full sm:w-auto bg-slate-800 text-white px-6 py-3 rounded-xl font-bold hover:bg-slate-700 transition-colors break-words text-sm">我了解了，前往贊助</button>
             </div>
         </div>
     </div>
 
-    <div id="loginModal" class="fixed inset-0 bg-slate-900 bg-opacity-80 z-50 hidden flex items-center justify-center transition-opacity p-4">
-        <div class="bg-white rounded-3xl p-8 sm:p-10 max-w-sm w-full relative max-h-[90vh] overflow-y-auto border border-slate-200">
-            <button onclick="document.getElementById('loginModal').classList.add('hidden')" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-1.5 rounded-full">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <div id="loginModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 sm:p-10 max-w-sm w-full relative border border-slate-200 shadow-2xl">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1.5 bg-slate-50 rounded-full">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="text-center mb-6 sm:mb-8 mt-2 sm:mt-0">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-slate-50 rounded-full mx-auto flex items-center justify-center text-3xl sm:text-4xl mb-4 border border-slate-100 overflow-hidden">
-                    <img src="assets/tanjibaby.png" class="w-full h-full object-cover rounded-full" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzIyYzU1ZSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
+                <div class="w-16 h-16 bg-slate-50 rounded-full mx-auto flex items-center justify-center text-3xl mb-4 border border-slate-100 overflow-hidden shadow-inner">
+                    <img src="assets/tanjibaby.png" class="w-full h-full object-cover rounded-full" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iI2E4NTVmNyIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+6YCaPC90ZXh0Pjwvc3ZnPg=='">
                 </div>
-                <h2 class="text-xl sm:text-2xl font-black text-slate-800 tracking-wide break-words">登入專屬永續帳戶</h2>
-                <p class="text-xs sm:text-sm text-slate-500 mt-2 font-medium break-words">即刻展開您的淨零行動</p>
+                <h2 class="text-xl font-black text-slate-800 tracking-wide break-words">登入專屬永續帳戶</h2>
+                <p class="text-xs text-slate-400 mt-2 font-bold break-words">即刻展開您的淨零低碳任務</p>
             </div>
             
-            <form id="loginForm" class="space-y-4 sm:space-y-5">
-                <div id="auth-error" class="hidden bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-xs sm:text-sm text-center font-bold break-words"></div>
+            <form id="loginForm" class="space-y-4">
+                <div id="auth-error" class="hidden bg-rose-50 border border-rose-100 text-rose-600 px-4 py-3 rounded-xl text-xs text-center font-bold break-words"></div>
                 <div>
-                    <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5 sm:mb-2 break-words">電子郵件</label>
-                    <input type="email" id="emailInput" class="w-full px-4 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all font-medium text-slate-800 text-sm" required>
+                    <label class="block text-xs font-bold text-slate-500 mb-2 break-words">電子郵件信箱</label>
+                    <input type="email" id="emailInput" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none font-bold text-slate-700 text-sm" required>
                 </div>
                 <div>
-                    <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5 sm:mb-2 break-words">密碼</label>
-                    <input type="password" id="passwordInput" class="w-full px-4 py-2.5 sm:py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all font-medium text-slate-800 text-sm" required>
+                    <label class="block text-xs font-bold text-slate-500 mb-2 break-words">密碼</label>
+                    <input type="password" id="passwordInput" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none font-bold text-slate-700 text-sm" required>
                 </div>
-                <div class="pt-2 sm:pt-4">
-                    <button type="submit" id="signInBtn" class="w-full bg-green-600 text-white rounded-xl py-3 sm:py-3.5 font-bold hover:bg-green-700 transition-colors mb-3 text-sm sm:text-base break-words">登入</button>
-                    <button type="button" id="signUpBtn" class="w-full bg-white border border-slate-200 text-slate-700 rounded-xl py-3 sm:py-3.5 font-bold hover:bg-slate-50 transition-colors mb-4 sm:mb-5 text-sm sm:text-base break-words">註冊新帳號</button>
+                <div class="pt-2">
+                    <button type="submit" id="signInBtn" class="w-full bg-emerald-600 text-white rounded-xl py-3 font-bold hover:bg-emerald-700 transition-colors mb-3 text-sm break-words">帳戶登入</button>
+                    <button type="button" id="signUpBtn" class="w-full bg-white border border-slate-200 text-slate-600 rounded-xl py-3 font-bold hover:bg-slate-50 transition-colors mb-4 text-sm break-words">註冊新帳戶</button>
                     
-                    <div class="relative flex items-center justify-center w-full mb-4 sm:mb-5">
+                    <div class="relative flex items-center justify-center w-full mb-4">
                         <div class="border-t border-slate-200 w-full"></div>
-                        <span class="bg-white px-3 sm:px-4 text-[10px] sm:text-xs font-bold text-slate-400 absolute whitespace-nowrap">或者</span>
+                        <span class="bg-white px-3 text-[10px] font-bold text-slate-400 absolute whitespace-nowrap">或者</span>
                     </div>
                     
-                    <button type="button" id="anonLoginBtn" class="w-full bg-slate-800 text-white rounded-xl py-3 sm:py-3.5 font-bold hover:bg-slate-700 transition-colors flex items-center justify-center text-sm sm:text-base break-words">
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                        先以訪客身分體驗
+                    <button type="button" id="anonLoginBtn" class="w-full bg-slate-800 text-white rounded-xl py-3 font-bold hover:bg-slate-700 transition-colors flex items-center justify-center text-sm break-words">
+                        <svg class="w-4 h-4 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        以訪客身分匿名登入
                     </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div id="paymentModal" class="fixed inset-0 bg-slate-900 bg-opacity-80 z-50 hidden flex items-center justify-center transition-opacity p-4">
-        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full relative max-h-[90vh] overflow-y-auto border border-slate-200">
-            <button onclick="document.getElementById('paymentModal').classList.add('hidden')" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-slate-400 hover:text-slate-600 transition-colors bg-slate-100 p-2 rounded-full">
-                <svg class="w-5 h-5 sm:w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <div id="paymentModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full relative border border-slate-200 shadow-2xl">
+            <button onclick="document.getElementById('paymentModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1.5 bg-slate-50 rounded-full">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="text-center mb-6 border-b border-slate-100 pb-4 mt-2 sm:mt-0">
-                <h2 class="text-xl sm:text-2xl font-black text-slate-800 break-words">選擇支付方式</h2>
-                <p class="text-sm sm:text-base text-slate-500 mt-2 font-medium break-words">本次贊助金額：<span id="payment-amount" class="text-green-600 font-bold text-lg sm:text-xl ml-1 whitespace-nowrap"></span> 元</p>
+                <h2 class="text-xl font-bold text-slate-800 break-words">選擇安全支付通道</h2>
+                <p class="text-xs sm:text-sm text-slate-400 mt-2 font-bold break-words">本次贊助金額：<span id="payment-amount" class="text-emerald-600 font-bold text-base sm:text-lg ml-1 font-num"></span> 元</p>
             </div>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <button class="payment-method-btn bg-slate-50 hover:bg-green-50 border-2 border-slate-100 hover:border-green-400 p-4 sm:p-5 rounded-2xl flex flex-row sm:flex-col items-center gap-3 transition-all hover:-translate-y-1">
-                    <span class="text-2xl sm:text-4xl shrink-0">💳</span>
-                    <span class="font-bold text-slate-700 text-sm sm:text-base break-words">信用卡/金融卡</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 font-bold">
+                <button class="payment-method-btn bg-slate-50 hover:bg-emerald-50 border-2 border-slate-100 hover:border-emerald-400 p-4 rounded-2xl flex flex-row sm:flex-col items-center gap-3 transition-all">
+                    <span class="text-2xl shrink-0">💳</span>
+                    <span class="text-slate-700 text-xs sm:text-sm break-words">信用卡/金融卡</span>
                 </button>
-                <button class="payment-method-btn bg-slate-50 hover:bg-green-50 border-2 border-slate-100 hover:border-green-400 p-4 sm:p-5 rounded-2xl flex flex-row sm:flex-col items-center gap-3 transition-all hover:-translate-y-1">
-                    <span class="text-2xl sm:text-4xl text-blue-500 font-black shrink-0">📱</span>
-                    <span class="font-bold text-slate-700 text-sm sm:text-base break-words">行動支付</span>
+                <button class="payment-method-btn bg-slate-50 hover:bg-emerald-50 border-2 border-slate-100 hover:border-emerald-400 p-4 rounded-2xl flex flex-row sm:flex-col items-center gap-3 transition-all">
+                    <span class="text-2xl shrink-0">📱</span>
+                    <span class="text-slate-700 text-xs sm:text-sm break-words">行動支付</span>
                 </button>
-                <button class="payment-method-btn bg-slate-50 hover:bg-green-50 border-2 border-slate-100 hover:border-green-400 p-4 sm:p-5 rounded-2xl flex flex-row sm:flex-col items-center gap-3 transition-all hover:-translate-y-1">
-                    <span class="text-2xl sm:text-4xl shrink-0">🏪</span>
-                    <span class="font-bold text-slate-700 text-sm sm:text-base break-words">超商代碼繳費</span>
+                <button class="payment-method-btn bg-slate-50 hover:bg-emerald-50 border-2 border-slate-100 hover:border-emerald-400 p-4 rounded-2xl flex flex-row sm:flex-col items-center gap-3 transition-all">
+                    <span class="text-2xl shrink-0">🏪</span>
+                    <span class="text-slate-700 text-xs sm:text-sm break-words">超商代碼繳費</span>
                 </button>
-                <button class="payment-method-btn bg-slate-50 hover:bg-green-50 border-2 border-slate-100 hover:border-green-400 p-4 sm:p-5 rounded-2xl flex flex-row sm:flex-col items-center gap-3 transition-all hover:-translate-y-1">
-                    <span class="text-2xl sm:text-4xl text-orange-500 font-black shrink-0">👛</span>
-                    <span class="font-bold text-slate-700 text-sm sm:text-base break-words">電子錢包</span>
+                <button class="payment-method-btn bg-slate-50 hover:bg-emerald-50 border-2 border-slate-100 hover:border-emerald-400 p-4 rounded-2xl flex flex-row sm:flex-col items-center gap-3 transition-all">
+                    <span class="text-2xl shrink-0">👛</span>
+                    <span class="text-slate-700 text-xs sm:text-sm break-words">電子錢包</span>
                 </button>
             </div>
-            <p class="text-[10px] sm:text-xs text-center text-slate-400 mt-5 sm:mt-6 font-medium break-words">本平台採用銀行信託專戶管理，確保資金安全</p>
+            <p class="text-[10px] text-center text-slate-400 mt-5 font-bold break-words">資金進入銀行信託專戶保管，守護普惠誠信</p>
         </div>
     </div>
 
     <div class="fixed bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end">
-        <div id="helpModal" class="hidden bg-white w-[90vw] sm:w-80 max-w-[320px] rounded-3xl border border-slate-200 mb-4 flex flex-col overflow-hidden transform transition-all" style="height: 400px; sm:height: 450px;">
-            <div class="bg-slate-800 p-3 sm:p-4 text-white flex justify-between items-center z-10 shrink-0">
+        <div id="helpModal" class="hidden bg-white w-[90vw] sm:w-80 max-w-[320px] rounded-3xl border border-slate-200 mb-4 flex flex-col overflow-hidden transform transition-all shadow-xl" style="height: 400px;">
+            <div class="bg-slate-800 p-3 text-white flex justify-between items-center z-10 shrink-0">
                 <div class="flex items-center">
-                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center mr-2 sm:mr-3 border-2 border-white/50 p-0.5 overflow-hidden shrink-0">
-                        <img src="assets/tanjibaby.png" class="w-full h-full object-cover rounded-full" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzIyYzU1ZSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
+                    <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-2 border-2 border-white/50 p-0.5 overflow-hidden shrink-0">
+                        <img src="assets/tanjibaby.png" class="w-full h-full object-cover rounded-full" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzEwYjk4MSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
                     </div>
                     <div>
-                        <h4 class="font-extrabold text-xs sm:text-sm tracking-wide break-words">碳吉寶寶智能助手</h4>
+                        <h4 class="font-bold text-xs tracking-wide break-words">碳吉寶寶智能助手</h4>
                         <div class="flex items-center mt-0.5">
-                            <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-pulse mr-1 sm:mr-1.5 shrink-0"></span>
-                            <p class="text-[9px] sm:text-[10px] font-medium text-slate-300 whitespace-nowrap">線上服務中</p>
+                            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse mr-1 shrink-0"></span>
+                            <p class="text-[9px] font-bold text-slate-300 whitespace-nowrap">綠色客服在線中</p>
                         </div>
                     </div>
                 </div>
-                <button id="closeHelpBtn" class="text-white/80 hover:text-white transition-colors p-1 sm:p-1.5 bg-white/10 rounded-full shrink-0">
-                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <button id="closeHelpBtn" class="text-white/80 hover:text-white transition-colors p-1 bg-white/10 rounded-full shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
             
-            <div id="chatMessages" class="flex-1 bg-slate-50 p-4 sm:p-5 overflow-y-auto flex flex-col gap-3 sm:gap-4 text-xs sm:text-sm scroll-smooth">
-                <div class="self-start bg-white p-3 sm:p-4 rounded-2xl rounded-tl-sm border border-slate-100 max-w-[90%] text-slate-700 leading-relaxed font-medium break-words">
-                    嗨！我是碳吉寶寶 🍃<br><br>你可以拖拉「投資試算區」的滑桿來試算減碳量，或是問我任何關於「手續費」、「回饋獎勵」或「如何贊助」的問題喔！
+            <div id="chatMessages" class="flex-1 bg-slate-50 p-4 overflow-y-auto flex flex-col gap-3 text-xs scroll-smooth">
+                <div class="self-start bg-white p-3 rounded-2xl rounded-tl-sm border border-slate-100 max-w-[90%] text-slate-600 leading-relaxed font-bold break-words">
+                    嗨！我是碳吉寶寶 🍃<br><br>拖拉「投資試算區」的滑桿來模擬預期減碳量，或是向我提問關於「手續費」、「回饋品」或「如何贊助」的問題！
                 </div>
             </div>
 
-            <div class="p-2 sm:p-3 bg-white border-t border-slate-100 flex items-center gap-2 relative z-10 shrink-0">
-                <input type="text" id="chatInput" placeholder="輸入你想問的問題..." class="flex-1 bg-slate-100 border border-transparent rounded-full px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:bg-white transition-all font-medium text-slate-700 min-w-0">
-                <button id="sendChatBtn" class="bg-green-500 text-white rounded-full w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center hover:bg-green-600 transition-colors transform hover:scale-105 shrink-0">
-                    <svg class="w-4 h-4 sm:w-5 sm:h-5 translate-x-px translate-y-px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+            <div class="p-2 bg-white border-t border-slate-100 flex items-center gap-2 relative z-10 shrink-0">
+                <input type="text" id="chatInput" placeholder="輸入你想提問的問題..." class="flex-1 bg-slate-100 border border-transparent rounded-full px-4 py-2 text-xs outline-none focus:ring-2 focus:ring-emerald-400 focus:bg-white transition-all font-bold text-slate-700 min-w-0">
+                <button id="sendChatBtn" class="bg-emerald-500 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-emerald-600 transition-colors shrink-0">
+                    <svg class="w-4 h-4 translate-x-px translate-y-px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                 </button>
             </div>
         </div>
 
-        <button id="helpToggleBtn" class="bg-slate-800 hover:bg-slate-700 text-white rounded-full p-3 sm:p-4 transition-all duration-300 transform hover:-translate-y-1.5 focus:outline-none flex items-center justify-center relative group">
-            <span class="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-3 h-3 sm:w-3.5 sm:h-3.5 bg-red-500 rounded-full border-2 border-white animate-bounce"></span>
-            <svg class="w-6 h-6 sm:w-7 sm:h-7 transform group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+        <button id="helpToggleBtn" class="bg-slate-800 hover:bg-slate-700 text-white rounded-full p-3 transition-all duration-300 transform hover:-translate-y-1 focus:outline-none flex items-center justify-center relative group">
+            <span class="absolute -top-0.5 -right-0.5 w-3 h-3 bg-rose-500 rounded-full border-2 border-white animate-bounce"></span>
+            <svg class="w-6 h-6 transform group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
         </button>
     </div>
 
-    <div id="successModal" class="fixed inset-0 bg-slate-900 bg-opacity-80 z-50 hidden flex items-center justify-center transition-opacity p-4">
-        <div class="bg-white rounded-[2rem] p-8 sm:p-10 max-w-sm w-full text-center border border-slate-200 transform scale-95 transition-transform max-h-[90vh] overflow-y-auto" id="successModalContent">
-            <div class="w-24 h-24 sm:w-28 sm:h-28 bg-green-50 rounded-full mx-auto flex items-center justify-center mb-5 sm:mb-6 border border-green-100 overflow-hidden shrink-0 mt-2 sm:mt-0">
-                <span class="text-5xl sm:text-6xl drop-shadow-md">🎉</span>
+    <div id="successModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-[2rem] p-8 max-w-sm w-full text-center border border-slate-200 transform scale-95 transition-transform max-h-[90vh] overflow-y-auto shadow-2xl" id="successModalContent">
+            <div class="w-20 h-20 bg-emerald-50 rounded-full mx-auto flex items-center justify-center mb-5 border border-emerald-100 overflow-hidden shrink-0 mt-2">
+                <span class="text-4xl">🎉</span>
             </div>
-            <h2 class="text-2xl sm:text-3xl font-black text-slate-800 mb-2 sm:mb-3 tracking-tight break-words">感謝您的贊助</h2>
-            <p class="text-sm sm:text-base text-slate-600 mb-6 sm:mb-8 font-medium leading-relaxed break-words">本次成功為地球減少了 <span id="modal-co2" class="font-extrabold text-green-600 text-base sm:text-lg whitespace-nowrap"></span> kg 的碳排，帳戶已獲得 <span id="modal-exp" class="font-extrabold text-blue-600 text-base sm:text-lg whitespace-nowrap"></span> EXP。</p>
-            <button id="closeSuccessBtn" class="w-full bg-slate-800 hover:bg-slate-700 text-white rounded-2xl py-3.5 sm:py-4 font-extrabold text-base sm:text-lg transition-colors break-words">
-                繼續探索專案
+            <h2 class="text-xl sm:text-2xl font-black text-slate-800 mb-2 tracking-tight break-words">感謝您的群募贊助</h2>
+            <p class="text-xs sm:text-sm text-slate-500 mb-6 font-bold leading-relaxed break-words">本次成功為專案注入能量，預估年減碳 <span id="modal-co2" class="font-black text-emerald-600 text-sm sm:text-base font-num whitespace-nowrap"></span> kg CO2e，帳戶獲得 <span id="modal-exp" class="font-black text-blue-600 text-sm sm:text-base font-num whitespace-nowrap"></span> EXP 經驗值。</p>
+            <button id="closeSuccessBtn" class="w-full bg-slate-800 hover:bg-slate-700 text-white rounded-2xl py-3 font-bold transition-colors text-sm break-words">
+                繼續探索平台專案
             </button>
         </div>
     </div>
 
-    <div id="accountModal" class="fixed inset-0 bg-slate-900 bg-opacity-80 z-50 hidden flex items-center justify-center transition-opacity p-4">
-        <div class="bg-white rounded-[2rem] p-6 sm:p-10 max-w-md w-full transform scale-95 transition-transform max-h-[90vh] overflow-y-auto border border-slate-200" id="accountModalContent">
-            <div class="flex justify-between items-center mb-6 sm:mb-8 mt-2 sm:mt-0">
-                <h2 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight break-words">我的永續帳戶</h2>
-                <button id="closeAccountBtn" class="text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 p-1.5 sm:p-2 rounded-full transition-colors shrink-0">
-                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <div id="accountModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-[2rem] p-6 sm:p-10 max-w-md w-full transform scale-95 transition-transform max-h-[90vh] overflow-y-auto border border-slate-200 shadow-2xl" id="accountModalContent">
+            <div class="flex justify-between items-center mb-6 sm:mb-8 mt-2">
+                <h2 class="text-xl sm:text-2xl font-black text-slate-800 tracking-tight break-words">我的永續碳帳戶</h2>
+                <button id="closeAccountBtn" class="text-slate-400 hover:text-slate-700 bg-slate-50 hover:bg-slate-100 p-1.5 rounded-full transition-colors shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
-            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 mb-6 sm:mb-8 p-4 sm:p-5 bg-slate-50 rounded-3xl border border-slate-100">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full overflow-hidden border-4 border-white relative shrink-0">
-                    <img src="assets/tanjibaby2.jpg" class="w-full h-full object-cover rounded-full" onerror="this.src='assets/tanjibaby.png'">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 mb-6 sm:mb-8 p-4 bg-slate-50 rounded-3xl border border-slate-100">
+                <div class="w-16 h-16 bg-white rounded-full overflow-hidden border-4 border-white relative shrink-0 shadow-sm">
+                    <img src="assets/tanjibaby.png" class="w-full h-full object-cover rounded-full" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzEwYjk4MSIvPjwvc3ZnPg=='">
                 </div>
                 <div class="text-center sm:text-left flex-1 min-w-0">
-                    <h3 class="font-black text-lg sm:text-xl text-slate-800 mb-1 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-2 break-words">
-                        <span>碳吉寶寶</span>
-                        <span class="text-[10px] sm:text-xs bg-slate-800 text-white px-2.5 py-1 rounded-full font-bold whitespace-nowrap" id="acc-level">Lv.1</span>
+                    <h3 class="font-bold text-base text-slate-800 mb-1 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-2 break-words">
+                        <span id="account-email-label">碳吉護照會員</span>
+                        <span class="text-[10px] bg-slate-800 text-white px-2.5 py-0.5 rounded-full font-bold whitespace-nowrap" id="acc-level">Lv.1</span>
                     </h3>
-                    <p class="text-xs sm:text-sm text-green-700 font-extrabold break-words">總經驗值：<span id="acc-exp" class="text-base sm:text-lg whitespace-nowrap">0</span> EXP</p>
+                    <p class="text-xs text-emerald-700 font-bold break-words">永續經驗值：<span id="acc-exp" class="text-sm font-black font-num whitespace-nowrap">0</span> EXP</p>
                 </div>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-6 sm:mb-8">
-                <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 text-center">
-                    <p class="text-[10px] sm:text-xs text-slate-400 font-extrabold mb-1.5 sm:mb-2 uppercase tracking-wider break-words">累積贊助總額</p>
-                    <p class="text-xl sm:text-2xl font-black text-slate-800 break-words">NT$ <span id="acc-invested">0</span></p>
+            <div class="grid grid-cols-2 gap-4 mb-6 sm:mb-8 font-num">
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
+                    <p class="text-[10px] text-slate-400 font-bold mb-1.5 uppercase tracking-wider break-words">累計贊助金額</p>
+                    <p class="text-base sm:text-lg font-black text-slate-800 break-words">NT$ <span id="acc-invested">0</span></p>
                 </div>
-                <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 text-center">
-                    <p class="text-[10px] sm:text-xs text-slate-400 font-extrabold mb-1.5 sm:mb-2 uppercase tracking-wider break-words">總減碳貢獻</p>
-                    <p class="text-xl sm:text-2xl font-black text-green-600 break-words"><span id="acc-co2">0.0</span> <span class="text-xs sm:text-sm font-bold text-green-500 whitespace-nowrap">kg</span></p>
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
+                    <p class="text-[10px] text-slate-400 font-bold mb-1.5 uppercase tracking-wider break-words">累計減碳貢獻</p>
+                    <p class="text-base sm:text-lg font-black text-emerald-600 break-words"><span id="acc-co2">0.0</span> <span class="text-[10px] font-bold text-emerald-500 whitespace-nowrap">kg</span></p>
                 </div>
             </div>
-            <button class="w-full bg-slate-800 hover:bg-slate-700 text-white rounded-2xl py-3.5 sm:py-4 font-extrabold text-base sm:text-lg transition-colors break-words">
-                查看數位憑證與回饋
+            <button class="w-full bg-slate-800 hover:bg-slate-700 text-white rounded-2xl py-3.5 font-bold transition-all break-words text-sm">
+                查看減碳數位憑證
             </button>
         </div>
     </div>
@@ -889,9 +858,10 @@
         const db = getFirestore(app);
 
         let currentUser = null;
+        let isAdmin = false;
 
         const loginShowBtn = document.getElementById('loginShowBtn');
-        const userControls = document.getElementById('userControls');
+        const userControls = document.getElementById('user-controls');
         const loginModal = document.getElementById('loginModal');
         const loginForm = document.getElementById('loginForm');
         const emailInput = document.getElementById('emailInput');
@@ -900,9 +870,10 @@
         const signUpBtn = document.getElementById('signUpBtn');
         const anonLoginBtn = document.getElementById('anonLoginBtn');
         const logoutBtn = document.getElementById('logoutBtn');
-        const userEmailDisplay = document.getElementById('user-email-display');
+        const userEmailDisplay = document.getElementById('account-email-label');
         const authError = document.getElementById('auth-error');
         const loginOverlay = document.getElementById('login-overlay');
+        const navAdminBtn = document.getElementById('navAdminBtn');
 
         const paymentModal = document.getElementById('paymentModal');
         const paymentAmountDisplay = document.getElementById('payment-amount');
@@ -911,12 +882,13 @@
             invested: 0,
             co2: 0,
             exp: 0,
-            level: 1
+            level: 1,
+            role: 'user'
         };
 
         function simulateLocalLogin(emailText) {
             currentUser = { uid: 'local-' + Date.now(), email: emailText, isAnonymous: emailText.includes('訪客') };
-            document.getElementById('user-controls').classList.remove('auth-hidden');
+            userControls.classList.remove('auth-hidden');
             loginShowBtn.classList.add('auth-hidden');
             loginOverlay.classList.add('opacity-0', 'pointer-events-none');
             setTimeout(() => loginOverlay.classList.add('hidden'), 300);
@@ -928,7 +900,7 @@
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUser = user;
-                document.getElementById('user-controls').classList.remove('auth-hidden');
+                userControls.classList.remove('auth-hidden');
                 loginShowBtn.classList.add('auth-hidden');
                 loginOverlay.classList.add('opacity-0', 'pointer-events-none');
                 setTimeout(() => loginOverlay.classList.add('hidden'), 300);
@@ -942,6 +914,12 @@
                     const docSnap = await getDoc(userDocRef);
                     if (!docSnap.exists()) {
                         await setDoc(userDocRef, initialUserData);
+                    } else {
+                        const data = docSnap.data();
+                        if (data.role === 'admin') {
+                            isAdmin = true;
+                            navAdminBtn.classList.remove('hidden');
+                        }
                     }
                 } catch(e) {
                     Object.assign(personalData, initialUserData);
@@ -953,13 +931,22 @@
                         const data = doc.data();
                         Object.assign(personalData, data);
                         updateUIFromData(personalData);
+                        if (data.role === 'admin') {
+                            isAdmin = true;
+                            navAdminBtn.classList.remove('hidden');
+                        } else {
+                            isAdmin = false;
+                            navAdminBtn.classList.add('hidden');
+                        }
                     }
                 }, (error) => {});
 
             } else {
                 if(!currentUser || !currentUser.uid.startsWith('local-')) {
                     currentUser = null;
-                    document.getElementById('user-controls').classList.add('auth-hidden');
+                    isAdmin = false;
+                    navAdminBtn.classList.add('hidden');
+                    userControls.classList.add('auth-hidden');
                     loginShowBtn.classList.remove('auth-hidden');
                     loginOverlay.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
                     
@@ -975,9 +962,13 @@
             setTimeout(() => authError.classList.add('hidden'), 3000);
         };
 
-        loginShowBtn.addEventListener('click', () => {
+        window.openLoginModal = () => {
             loginModal.classList.remove('hidden');
-        });
+        };
+
+        window.closeLoginModal = () => {
+            loginModal.classList.add('hidden');
+        };
 
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -1017,7 +1008,9 @@
         logoutBtn.addEventListener('click', () => {
             if(currentUser && currentUser.uid.startsWith('local-')) {
                 currentUser = null;
-                document.getElementById('user-controls').classList.add('auth-hidden');
+                isAdmin = false;
+                navAdminBtn.classList.add('hidden');
+                userControls.classList.add('auth-hidden');
                 loginShowBtn.classList.remove('auth-hidden');
                 loginOverlay.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
                 Object.assign(personalData, initialUserData);
@@ -1026,6 +1019,47 @@
                 signOut(auth);
             }
         });
+
+        window.openAdminModal = () => {
+            document.getElementById('adminModal').classList.remove('hidden');
+        };
+
+        window.closeAdminModal = () => {
+            document.getElementById('adminModal').classList.add('hidden');
+        };
+
+        window.applyAdminChanges = async () => {
+            const pIndex = parseInt(document.getElementById('adminProjectSelect').value);
+            const raisedVal = parseInt(document.getElementById('adminRaisedInput').value);
+            const announceText = document.getElementById('adminAnnounceInput').value.trim();
+
+            if (!isNaN(raisedVal)) {
+                projects[pIndex].raised = raisedVal;
+                if (pIndex === currentProjectIndex) {
+                    switchProject(pIndex);
+                }
+            }
+
+            if (announceText) {
+                const div = document.createElement('div');
+                div.className = 'flex items-center text-xs bg-rose-950/60 p-3 rounded-xl border border-rose-900 mb-4 transform transition-all';
+                div.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-rose-800 flex items-center justify-center mr-3 font-bold text-white shrink-0">官</div>
+                    <div class="flex-1 min-w-0">
+                        <p class="break-words"><span class="font-bold text-rose-300">平台公告</span>：${announceText}</p>
+                        <div class="flex justify-between items-center mt-1 font-num">
+                            <span class="text-[10px] text-rose-200 font-bold bg-rose-950 px-2 py-0.5 rounded whitespace-nowrap">官方插播</span>
+                            <span class="text-[9px] text-rose-400 whitespace-nowrap">剛剛</span>
+                        </div>
+                    </div>
+                `;
+                feedListContainer.insertBefore(div, feedListContainer.firstChild);
+            }
+
+            closeAdminModal();
+            document.getElementById('adminRaisedInput').value = '';
+            document.getElementById('adminAnnounceInput').value = '';
+        };
 
         function updateUIFromData(data) {
             personalTotalExpEl.innerText = data.exp;
@@ -1051,8 +1085,8 @@
         const sponsorBtn = document.getElementById('sponsorBtn');
         const successModal = document.getElementById('successModal');
         const closeSuccessBtn = document.getElementById('closeSuccessBtn');
-        const modalCo2 = document.getElementById('modalCo2');
-        const modalExp = document.getElementById('modalExp');
+        const modalCo2 = document.getElementById('modal-co2');
+        const modalExp = document.getElementById('modal-exp');
         const successModalContent = document.getElementById('successModalContent');
 
         const accountBtn = document.getElementById('accountBtn');
@@ -1102,7 +1136,8 @@
             invested: 0,
             co2: 0,
             exp: 0,
-            level: 1
+            level: 1,
+            role: 'user'
         };
 
         let confettiParticles = [];
@@ -1120,18 +1155,18 @@
 
         dailyCheckInBtn.addEventListener('click', async (e) => {
             if (!currentUser) {
-                loginModal.classList.remove('hidden');
+                openLoginModal();
                 return;
             }
             if (hasCheckedInToday) return;
 
             hasCheckedInToday = true;
             
-            dailyCheckInBtn.innerHTML = '<span class="text-lg">✅</span> 今日已打卡';
-            dailyCheckInBtn.classList.replace('bg-green-500', 'bg-slate-700');
-            dailyCheckInBtn.classList.replace('text-white', 'text-slate-400');
-            dailyCheckInBtn.classList.replace('border-green-400', 'border-slate-600');
-            dailyCheckInBtn.classList.remove('hover:bg-green-400', 'cursor-pointer');
+            dailyCheckInBtn.innerHTML = '<span class="text-lg">✅</span> 今日已完成簽到';
+            dailyCheckInBtn.classList.replace('bg-emerald-50', 'bg-slate-700');
+            dailyCheckInBtn.classList.replace('text-emerald-700', 'text-slate-400');
+            dailyCheckInBtn.classList.replace('border-emerald-100', 'border-slate-600');
+            dailyCheckInBtn.classList.remove('hover:bg-emerald-100', 'cursor-pointer');
             dailyCheckInBtn.classList.add('cursor-not-allowed');
 
             babyImg.classList.add('hidden');
@@ -1139,9 +1174,9 @@
             babyVid.currentTime = 0;
             babyVid.play().catch(err => {});
 
-            statusText.innerText = '寶寶覺得充滿能量！';
-            statusText.className = 'text-xl sm:text-2xl font-extrabold text-green-400 z-20 break-words';
-            encouragementText.innerText = '感謝你今天的日常減碳行動！';
+            statusText.innerText = '碳吉寶寶覺得充滿能量！';
+            statusText.className = 'text-xl sm:text-2xl font-extrabold text-emerald-600 z-20 break-words';
+            encouragementText.innerText = '感謝您今日完成了低碳行為打卡！';
 
             const btnRect = dailyCheckInBtn.getBoundingClientRect();
             createFloatingElement(btnRect.left + btnRect.width / 2, btnRect.top, '✨');
@@ -1163,17 +1198,17 @@
             babyVid.classList.add('hidden');
             babyImg.classList.remove('hidden');
             
-            statusText.innerText = '今日打卡任務完成！';
-            statusText.className = 'text-xl sm:text-2xl font-extrabold text-slate-300 z-20 break-words';
-            encouragementText.innerText = '前往右側「投資試算區」探索更多計畫';
+            statusText.innerText = '今日打卡任務已達成！';
+            statusText.className = 'text-xl sm:text-2xl font-extrabold text-slate-800 z-20 break-words';
+            encouragementText.innerText = '前往右側「投資試算區」進行模擬與贊助';
         });
 
-        window.showProjectDetails = function() {
-            const modal = document.getElementById('projectDetailsModal');
-            const p = projects[currentProjectIndex];
-            document.getElementById('modal-project-title').innerText = p.title;
-            document.getElementById('modal-project-org').innerText = p.org;
-            modal.classList.remove('hidden');
+        window.openImpactModal = () => {
+            document.getElementById('impactModal').classList.remove('hidden');
+        };
+
+        window.closeImpactModal = () => {
+            document.getElementById('impactModal').classList.add('hidden');
         };
 
         function switchProject(index) {
@@ -1207,44 +1242,44 @@
 
             if(totalExp >= 100) { 
                 r1.classList.replace('reward-locked', 'reward-unlocked'); 
-                r1.classList.add('border-green-400');
+                r1.classList.add('border-emerald-400');
                 req1.innerText = '已解鎖';
-                req1.classList.replace('bg-slate-200', 'bg-green-100');
-                req1.classList.replace('text-slate-600', 'text-green-700');
+                req1.classList.replace('bg-slate-100', 'bg-emerald-50');
+                req1.classList.replace('text-slate-500', 'text-emerald-700');
             } else {
                 r1.classList.replace('reward-unlocked', 'reward-locked'); 
-                r1.classList.remove('border-green-400');
+                r1.classList.remove('border-emerald-400');
                 req1.innerText = '需 100 EXP';
-                req1.classList.replace('bg-green-100', 'bg-slate-200');
-                req1.classList.replace('text-green-700', 'text-slate-600');
+                req1.classList.replace('bg-emerald-50', 'bg-slate-100');
+                req1.classList.replace('text-emerald-700', 'text-slate-500');
             }
             
             if(totalExp >= 300) { 
                 r2.classList.replace('reward-locked', 'reward-unlocked'); 
-                r2.classList.add('border-green-400');
+                r2.classList.add('border-emerald-400');
                 req2.innerText = '已解鎖';
-                req2.classList.replace('bg-slate-200', 'bg-green-100');
-                req2.classList.replace('text-slate-600', 'text-green-700');
-            }else {
+                req2.classList.replace('bg-slate-100', 'bg-emerald-50');
+                req2.classList.replace('text-slate-500', 'text-emerald-700');
+            } else {
                 r2.classList.replace('reward-unlocked', 'reward-locked'); 
-                r2.classList.remove('border-green-400');
+                r2.classList.remove('border-emerald-400');
                 req2.innerText = '需 300 EXP';
-                req2.classList.replace('bg-green-100', 'bg-slate-200');
-                req2.classList.replace('text-green-700', 'text-slate-600');
+                req2.classList.replace('bg-emerald-50', 'bg-slate-100');
+                req2.classList.replace('text-emerald-700', 'text-slate-500');
             }
 
             if(totalExp >= 800) { 
                 r3.classList.replace('reward-locked', 'reward-unlocked'); 
-                r3.classList.add('border-green-400');
+                r3.classList.add('border-emerald-400');
                 req3.innerText = '已解鎖';
-                req3.classList.replace('bg-slate-200', 'bg-green-100');
-                req3.classList.replace('text-slate-600', 'text-green-700');
-            }else {
+                req3.classList.replace('bg-slate-100', 'bg-emerald-50');
+                req3.classList.replace('text-slate-500', 'text-emerald-700');
+            } else {
                 r3.classList.replace('reward-unlocked', 'reward-locked'); 
-                r3.classList.remove('border-green-400');
+                r3.classList.remove('border-emerald-400');
                 req3.innerText = '需 800 EXP';
-                req3.classList.replace('bg-green-100', 'bg-slate-200');
-                req3.classList.replace('text-green-700', 'text-slate-600');
+                req3.classList.replace('bg-emerald-50', 'bg-slate-100');
+                req3.classList.replace('text-emerald-700', 'text-slate-500');
             }
         }
 
@@ -1289,7 +1324,7 @@
         });
 
         function createConfetti() {
-            const colors = ['#22c55e', '#3b82f6', '#eab308', '#ec4899', '#a855f7'];
+            const colors = ['#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6'];
             for (let i = 0; i < 150; i++) {
                 confettiParticles.push({
                     x: canvas.width / 2,
@@ -1335,19 +1370,19 @@
 
         function addFeedItem(money, exp, projectName) {
             const div = document.createElement('div');
-            div.className = 'flex items-center text-sm bg-slate-800 p-3 rounded-xl border border-slate-700 mb-4 transform transition-all';
+            div.className = 'flex items-center text-xs bg-emerald-900/60 p-3 rounded-xl border border-emerald-800 mb-4 transform transition-all';
             
             let actionText = money > 0 
                 ? `贊助了 <span class="font-bold text-white">${projectName} ${money.toLocaleString()} 元</span>` 
                 : `完成了 <span class="font-bold text-white">${projectName}</span>`;
                 
             div.innerHTML = `
-                <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center mr-4 font-bold text-white shrink-0">您</div>
+                <div class="w-8 h-8 rounded-full bg-emerald-800 flex items-center justify-center mr-3 font-bold text-white shrink-0">您</div>
                 <div class="flex-1 min-w-0">
-                    <p class="break-words"><span class="font-bold text-green-300">您</span> 剛剛${actionText}</p>
-                    <div class="flex flex-wrap justify-between items-center mt-1 gap-2">
-                        <span class="text-xs text-green-200 font-bold bg-slate-900 px-2 py-0.5 rounded whitespace-nowrap">+${exp} EXP</span>
-                        <span class="text-[10px] text-slate-400 whitespace-nowrap">剛剛</span>
+                    <p class="break-words"><span class="font-bold text-emerald-300">您</span> 剛剛${actionText}</p>
+                    <div class="flex justify-between items-center mt-1 font-num">
+                        <span class="text-[10px] text-emerald-200 font-bold bg-emerald-950 px-2 py-0.5 rounded whitespace-nowrap">+${exp} EXP</span>
+                        <span class="text-[9px] text-emerald-400 whitespace-nowrap">剛剛</span>
                     </div>
                 </div>
             `;
@@ -1356,7 +1391,7 @@
 
         sponsorBtn.addEventListener('click', async () => {
             if (!currentUser) {
-                loginModal.classList.remove('hidden');
+                openLoginModal();
                 return;
             }
 
@@ -1456,9 +1491,9 @@
         function addMessage(text, isUser) {
             const div = document.createElement('div');
             if(isUser) {
-                div.className = 'self-end bg-green-500 text-white p-3 sm:p-3.5 rounded-2xl rounded-tr-sm max-w-[90%] font-medium break-words';
+                div.className = 'self-end bg-emerald-600 text-white p-3 rounded-2xl rounded-tr-sm max-w-[90%] font-bold break-words';
             } else {
-                div.className = 'self-start bg-white p-3 sm:p-3.5 rounded-2xl rounded-tl-sm border border-slate-100 max-w-[90%] text-slate-700 font-medium leading-relaxed break-words';
+                div.className = 'self-start bg-white p-3 rounded-2xl rounded-tl-sm border border-slate-100 max-w-[90%] text-slate-600 font-bold leading-relaxed break-words';
             }
             div.innerText = text;
             chatMessages.appendChild(div);
@@ -1474,8 +1509,8 @@
             const loadingId = 'loading-' + Date.now();
             const loadingDiv = document.createElement('div');
             loadingDiv.id = loadingId;
-            loadingDiv.className = 'self-start bg-white p-3 rounded-2xl rounded-tl-sm border border-slate-100 max-w-[90%] text-slate-400 text-xs font-bold flex items-center shrink-0';
-            loadingDiv.innerHTML = '<span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-bounce mr-1"></span><span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-bounce mr-1" style="animation-delay: 0.1s"></span><span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-bounce mr-2" style="animation-delay: 0.2s"></span> 碳吉寶寶思考中...';
+            loadingDiv.className = 'self-start bg-white p-3 rounded-2xl rounded-tl-sm border border-slate-100 max-w-[90%] text-slate-400 text-[10px] font-bold flex items-center shrink-0';
+            loadingDiv.innerHTML = '<span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-bounce mr-1"></span><span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-bounce mr-1" style="animation-delay: 0.1s"></span><span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-bounce mr-2" style="animation-delay: 0.2s"></span> 碳吉寶寶思考中...';
             chatMessages.appendChild(loadingDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
@@ -1483,17 +1518,17 @@
                 const loadEl = document.getElementById(loadingId);
                 if(loadEl) loadEl.remove();
 
-                let reply = "抱歉，我不太懂你的意思。你可以問我關於「手續費」、「回饋品」或「如何贊助」的問題喔！";
+                let reply = "抱歉，我不太明白您的意思。您可以詢問我關於「手續費」、「回饋獎勵」或「如何贊助」的問題喔！";
                 if(text.includes('錢') || text.includes('手續費') || text.includes('抽成') || text.includes('費用')) {
-                    reply = "平台目前只收取 3% 的專案媒合手續費，大部分資金都會直接運用在幫助中小企業的綠能建設上喔！";
+                    reply = "本平台僅收取微量 3% 的專案媒合手續費，其餘募集資金皆採專款專用，直接撥入銀行信託帳戶中。";
                 } else if(text.includes('回饋') || text.includes('獎勵') || text.includes('禮物') || text.includes('徽章') || text.includes('杯')) {
-                    reply = "只要達到指定的 EXP 經驗值，就能解鎖數位徽章(100 EXP)、咖啡券(300 EXP)或實體環保杯(800 EXP)喔！";
+                    reply = "累積經驗值達標即可解鎖相對應的永續禮遇！例如：數位認證徽章(100 EXP)、低碳咖啡券(300 EXP)與限量實體環保杯(800 EXP)。";
                 } else if(text.includes('你好') || text.includes('嗨') || text.includes('哈囉')) {
-                    reply = "你好呀！我是碳吉寶寶 🍃 很高興為你服務！";
+                    reply = "哈囉！我是您的智能綠能客服助理碳吉寶寶 🍃 很高興為您解答淨零群募與綠電金融的問題！";
                 } else if(text.includes('贊助') || text.includes('怎麼用') || text.includes('教學')) {
-                    reply = "很簡單！只要拖拉「投資試算區」的滑桿，選擇你想贊助的金額，再按下確認按鈕就可以囉！1000元就可以減少12kg碳排喔！";
+                    reply = "非常簡單！在試算區拖拉滑桿選定您想贊助的金額，系統會為您顯示預期減碳量。點擊確認贊助並選擇支付方式即可！1,000元約可減少12kg的碳排放喔！";
                 } else if(text.includes('碳吉') || text.includes('寶寶') || text.includes('名字')) {
-                    reply = "叫我嗎？我會一直陪著你完成淨零任務喔！記得每天來找我點擊「每日永續打卡」喔！";
+                    reply = "沒錯！我是碳吉寶寶 🍃 您隨時可以點擊「每日永續打卡」為我補充永續潔淨能量喔！";
                 }
 
                 addMessage(reply, false);
