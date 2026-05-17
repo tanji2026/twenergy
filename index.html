@@ -132,7 +132,7 @@
                     <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">全站累積減碳</div>
                     <div class="text-sm font-black text-emerald-600 font-num"><span id="global-co2">124.5</span> kg CO2e</div>
                 </div>
-                <button id="navAdminBtn" onclick="openAdminModal()" class="hidden bg-rose-50 text-rose-600 px-4 py-2 rounded-full text-xs font-bold border border-rose-100 hover:bg-rose-100 transition-colors flex items-center gap-1.5">
+                <button id="navAdminBtn" onclick="window.openAdminModal()" class="hidden bg-rose-50 text-rose-600 px-4 py-2 rounded-full text-xs font-bold border border-rose-100 hover:bg-rose-100 transition-colors flex items-center gap-1.5">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                     管理員工具箱
                 </button>
@@ -147,7 +147,7 @@
 
     <div id="adminModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full relative border border-slate-200 shadow-2xl">
-            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1 bg-slate-100 rounded-full">
+            <button onclick="window.closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1 bg-slate-100 rounded-full">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <h3 class="text-lg font-black text-rose-600 mb-6 flex items-center gap-2">
@@ -171,7 +171,7 @@
                     <label class="block text-xs font-bold text-slate-500 mb-2">插播綠色調度跑馬燈公告</label>
                     <input type="text" id="adminAnnounceInput" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium outline-none" placeholder="例如：台南科學園區加入本次屋頂合作綠能計劃！">
                 </div>
-                <button onclick="applyAdminChanges()" class="w-full bg-rose-600 hover:bg-rose-700 text-white rounded-xl py-3 font-bold transition-all text-sm mt-4">
+                <button onclick="window.applyAdminChanges()" class="w-full bg-rose-600 hover:bg-rose-700 text-white rounded-xl py-3 font-bold transition-all text-sm mt-4">
                     確認送出並部署至主網
                 </button>
             </div>
@@ -186,7 +186,7 @@
                     <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block tracking-wide border border-emerald-100">綠色低碳專案進行中</span>
                     <h1 id="hero-title" class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 leading-tight mb-3 break-words">100kW 廠房屋頂太陽能建置專案</h1>
                     <p id="hero-org" class="text-sm sm:text-base text-slate-500 font-bold mb-6">提案方：在地綠能中小企業聯盟</p>
-                    <button onclick="showProjectDetails()" class="inline-flex items-center justify-center bg-white border-2 border-emerald-600 text-emerald-600 px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-sm group whitespace-nowrap">
+                    <button onclick="window.showProjectDetails()" class="inline-flex items-center justify-center bg-white border-2 border-emerald-600 text-emerald-600 px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-sm group whitespace-nowrap">
                         查看專案計畫詳情
                         <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </button>
@@ -218,8 +218,7 @@
                     <div id="baby-glow" class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-500/10 via-white to-transparent opacity-50 transition-opacity duration-300"></div>
                     
                     <div id="baby-wrapper" class="relative w-56 h-56 flex items-center justify-center bg-slate-50/50 rounded-full shadow-[0_4px_20px_rgba(16,185,129,0.1)] mb-8 border border-slate-100 z-10 transition-transform duration-300 shrink-0">
-                        <img id="baby-img" src="assets/tanjibaby.png" alt="碳吉寶寶" class="w-[85%] h-[85%] object-cover rounded-full z-10 select-none anim-float" draggable="false" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzEwYjk4MSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
-                        <video id="baby-vid" src="assets/tanjibaby_hi.mp4" preload="none" class="absolute inset-0 w-full h-full object-cover rounded-full z-20 hidden pointer-events-none" muted playsinline></video>
+                        <video id="baby-vid" src="assets/tanjibaby_hi.mp4" className="w-full h-full object-cover rounded-full shadow-2xl border-[6px] border-white transition-transform duration-500 group-hover:scale-105" muted playsinline poster="assets/tanjibaby.png" loop={false} style="width:100%; height:100%; object-fit:cover; border-radius:9999px;"></video>
                     </div>
 
                     <button id="dailyCheckInBtn" class="mb-5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 px-6 py-3 rounded-full font-bold text-sm transition-colors shadow-sm flex items-center gap-2 group relative z-30 border border-emerald-100">
@@ -238,7 +237,7 @@
                             </div>
                             <h4 class="font-bold text-lg mb-2 text-slate-800">請先登入以開啟贊助通道</h4>
                             <p class="text-xs sm:text-sm text-slate-400 mb-6 leading-relaxed">建立您的專屬低碳帳戶，追蹤累積減碳量並解鎖限量永續禮遇。</p>
-                            <button onclick="openLoginModal()" class="w-full bg-emerald-600 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-sm">立即登入 / 註冊新帳戶</button>
+                            <button onclick="window.openLoginModal()" class="w-full bg-emerald-600 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-emerald-700 transition-all shadow-sm">立即登入 / 註冊新帳戶</button>
                         </div>
                     </div>
 
@@ -340,7 +339,7 @@
         <div class="max-w-6xl mx-auto px-4 relative z-10">
             <div class="flex flex-wrap justify-between items-end gap-4 mb-12 border-b border-slate-200 pb-4">
                 <h2 class="text-xl sm:text-2xl font-black text-slate-800 break-words">成功案例與減碳影響力</h2>
-                <button onclick="openImpactModal()" class="text-emerald-600 font-bold hover:text-emerald-700 text-sm hidden sm:flex items-center transition-colors whitespace-nowrap">
+                <button onclick="window.openImpactModal()" class="text-emerald-600 font-bold hover:text-emerald-700 text-sm hidden sm:flex items-center transition-colors whitespace-nowrap">
                     查看總體影響力報告
                     <svg class="w-4 h-4 ml-1 inline animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                 </button>
@@ -523,6 +522,51 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="bg-slate-50 rounded-2xl border border-slate-200 transition-all duration-300">
+                    <button class="w-full px-4 sm:px-6 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-start sm:items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
+                        <span class="group-hover:text-emerald-600 transition-colors flex items-start text-left pr-4">
+                            <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 mt-0.5 sm:mt-0 font-num shadow-sm">03</span>
+                            <span class="leading-relaxed sm:leading-tight break-words">普惠金融與氣候正義</span>
+                        </span>
+                        <svg class="w-5 h-5 text-slate-400 transform transition-transform duration-300 arrow shrink-0 mt-1 sm:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="px-4 sm:px-6 pb-6 hidden">
+                        <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed font-medium text-justify text-xs sm:text-sm">
+                            傳統綠能基礎建設的投資門檻極高，往往僅限於大型財團或機構投資人參與。本平台運用數位金融科技，將投資門檻大幅降至百元級別，完美實踐普惠金融的核心價值。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 rounded-2xl border border-slate-200 transition-all duration-300">
+                    <button class="w-full px-4 sm:px-6 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-start sm:items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
+                        <span class="group-hover:text-emerald-600 transition-colors flex items-start text-left pr-4">
+                            <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 mt-0.5 sm:mt-0 font-num shadow-sm">04</span>
+                            <span class="leading-relaxed sm:leading-tight break-words">智能合約與透明分潤</span>
+                        </span>
+                        <svg class="w-5 h-5 text-slate-400 transform transition-transform duration-300 arrow shrink-0 mt-1 sm:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="px-4 sm:px-6 pb-6 hidden">
+                        <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed font-medium text-justify text-xs sm:text-sm">
+                            為了確保回饋機制的公平與不可竄改性，平台計畫導入區塊鏈智能合約技術。當台電或監測設備確認綠電產生後，合約將自動將減碳貢獻轉化為 EXP 經驗值發送。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 rounded-2xl border border-slate-200 transition-all duration-300">
+                    <button class="w-full px-4 sm:px-6 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-start sm:items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
+                        <span class="group-hover:text-emerald-600 transition-colors flex items-start text-left pr-4">
+                            <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 mt-0.5 sm:mt-0 font-num shadow-sm">05</span>
+                            <span class="leading-relaxed sm:leading-tight break-words">循環經濟的在地實踐</span>
+                        </span>
+                        <svg class="w-5 h-5 text-slate-400 transform transition-transform duration-300 arrow shrink-0 mt-1 sm:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="px-4 sm:px-6 pb-6 hidden">
+                        <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed font-medium text-justify text-xs sm:text-sm">
+                            平台將實體回饋品與地方創生、循環農業及低碳商家結合。透過虛實整合的獎勵機制，引導投資人在日常消費中持續支持綠色產業，打造在地永續生態。
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -575,7 +619,7 @@
 
     <div id="impactModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-[2rem] p-6 sm:p-8 max-w-3xl w-full relative max-h-[90vh] overflow-y-auto border border-slate-200 shadow-2xl">
-            <button onclick="closeImpactModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1.5 bg-slate-50 rounded-full">
+            <button onclick="window.closeImpactModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1.5 bg-slate-50 rounded-full">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="text-center mb-8 border-b border-slate-100 pb-6 mt-4 sm:mt-0">
@@ -630,7 +674,7 @@
             </div>
             
             <div class="mt-8 pt-6 border-t border-slate-100 text-center">
-                <button onclick="closeImpactModal()" class="w-full sm:w-auto bg-slate-800 text-white px-8 py-3 rounded-xl font-bold hover:bg-slate-700 transition-colors break-words">關閉報告</button>
+                <button onclick="window.closeImpactModal()" class="w-full sm:w-auto bg-slate-800 text-white px-8 py-3 rounded-xl font-bold hover:bg-slate-700 transition-colors break-words">關閉報告</button>
             </div>
         </div>
     </div>
@@ -677,7 +721,7 @@
 
     <div id="loginModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-8 sm:p-10 max-w-sm w-full relative border border-slate-200 shadow-2xl">
-            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1.5 bg-slate-50 rounded-full">
+            <button onclick="window.closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 p-1.5 bg-slate-50 rounded-full">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="text-center mb-6 sm:mb-8 mt-2 sm:mt-0">
@@ -753,7 +797,7 @@
             <div class="bg-slate-800 p-3 text-white flex justify-between items-center z-10 shrink-0">
                 <div class="flex items-center">
                     <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-2 border-2 border-white/50 p-0.5 overflow-hidden shrink-0">
-                        <img src="assets/tanjibaby.png" class="w-full h-full object-cover rounded-full" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzEwYjk4MSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
+                        <img src="assets/tanjibaby.png" class="w-full h-full object-cover rounded-full" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzEwYjk4MSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9ud-zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
                     </div>
                     <div>
                         <h4 class="font-bold text-xs tracking-wide break-words">碳吉寶寶智能助手</h4>
@@ -827,7 +871,7 @@
                     <p class="text-base sm:text-lg font-black text-slate-800 break-words">NT$ <span id="acc-invested">0</span></p>
                 </div>
                 <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
-                    <p class="text-[10px] text-slate-400 font-bold mb-1.5 uppercase tracking-wider break-words">累計減碳貢獻</p>
+                    <p class="text-[10px] text-slate-400 font-bold mb-1.5 uppercase tracking-wider break-words">累積減碳貢獻</p>
                     <p class="text-base sm:text-lg font-black text-emerald-600 break-words"><span id="acc-co2">0.0</span> <span class="text-[10px] font-bold text-emerald-500 whitespace-nowrap">kg</span></p>
                 </div>
             </div>
@@ -1209,6 +1253,14 @@
 
         window.closeImpactModal = () => {
             document.getElementById('impactModal').classList.add('hidden');
+        };
+
+        window.showProjectDetails = function() {
+            const modal = document.getElementById('projectDetailsModal');
+            const p = projects[currentProjectIndex];
+            document.getElementById('modal-project-title').innerText = p.title;
+            document.getElementById('modal-project-org').innerText = p.org;
+            modal.classList.remove('hidden');
         };
 
         function switchProject(index) {
