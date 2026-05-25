@@ -43,7 +43,6 @@
         .reward-locked { filter: grayscale(100%); opacity: 0.4; }
         .reward-unlocked { filter: grayscale(0%); opacity: 1; transform: translateY(-4px); border-color: #3cc4b2; box-shadow: 0 12px 20px -8px rgba(0, 125, 138, 0.15); }
         .project-card { cursor: pointer; }
-        .feed-container { height: 320px; overflow: hidden; position: relative; }
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0px); } }
         @keyframes floatUpLeaf { 0% { opacity: 1; transform: translateY(0) scale(0.6) rotate(0deg); } 100% { opacity: 0; transform: translateY(-60px) scale(1.2) rotate(30deg); } }
         .anim-float { animation: float 5s ease-in-out infinite; }
@@ -56,6 +55,7 @@
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .feed-card-transition { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
 <body class="text-slate-700 min-h-screen relative overflow-x-hidden bg-white">
@@ -67,7 +67,7 @@
     <nav class="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-40">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center gap-4">
             <div class="flex items-center shrink-0 gap-3 min-w-0">
-                <span class="text-xl md:text-2xl font-black tracking-tight text-navy-800 truncate">TanJi</span>
+                <span class="text-xl md:text-2xl font-black tracking-tight text-navy-800 truncate">TanJi 淨零群募平台</span>
             </div>
             
             <div class="flex-1 flex items-center gap-5 md:gap-8 font-semibold text-slate-500 text-sm md:text-base whitespace-nowrap overflow-x-auto no-scrollbar py-2 px-4 max-w-full justify-start md:justify-center">
@@ -97,114 +97,139 @@
 
     <section class="py-12 bg-slate-50 border-b border-slate-100">
         <div class="max-w-6xl mx-auto px-6 space-y-8">
-            <div class="bg-white rounded-3xl p-6 md:p-10 shadow-sm border border-slate-200/60 flex flex-col lg:flex-row gap-8 items-center relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-1.5 h-full bg-brand-500"></div>
-                <div class="flex-1 w-full self-start">
-                    <span class="bg-brand-50 text-brand-600 text-xs font-bold px-3 py-1.5 rounded-md mb-4 inline-block tracking-wider uppercase border border-brand-100">現正募資中</span>
-                    <h1 id="hero-title" class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-navy-800 leading-snug mb-4 break-words tracking-tight">100kW 廠房屋頂太陽能建置專案</h1>
-                    <p id="hero-org" class="text-sm md:text-base text-slate-400 font-medium mb-8">提案方：在地綠能中小企業聯盟</p>
-                    <button id="viewDetailBtn" class="inline-flex items-center justify-center bg-white border border-slate-200 text-slate-700 px-6 py-3.5 rounded-xl text-xs font-bold hover:bg-slate-50 transition-all duration-300 shadow-sm group whitespace-nowrap w-full sm:w-auto">
-                        查看專案詳情 
-                        <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </button>
-                </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                
+                <div class="lg:col-span-2 flex flex-col gap-8 justify-between">
+                    <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200/60 flex flex-col md:flex-row gap-6 items-center relative overflow-hidden flex-1">
+                        <div class="absolute top-0 left-0 w-1.5 h-full bg-brand-500"></div>
+                        <div class="flex-1 w-full self-start">
+                            <span class="bg-brand-50 text-brand-600 text-xs font-bold px-3 py-1.5 rounded-md mb-3 inline-block tracking-wider uppercase border border-brand-100">現正募資中</span>
+                            <h1 id="hero-title" class="text-xl sm:text-2xl md:text-3xl font-black text-navy-800 leading-snug mb-3 break-words tracking-tight">100kW 廠房屋頂太陽能建置專案</h1>
+                            <p id="hero-org" class="text-xs md:text-sm text-slate-400 font-medium mb-6">提案方：在地綠能中小企業聯盟</p>
+                            <button id="viewDetailBtn" class="inline-flex items-center justify-center bg-white border border-slate-200 text-slate-700 px-5 py-3 rounded-xl text-xs font-bold hover:bg-slate-50 transition-all duration-300 shadow-sm group whitespace-nowrap w-full sm:w-auto">
+                                查看專案詳情 
+                                <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </button>
+                        </div>
 
-                <div class="flex-1 w-full bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-200/60">
-                    <div class="flex flex-wrap justify-between items-end gap-4 mb-6 border-b border-slate-200/60 pb-6">
-                        <div>
-                            <p class="text-[9px] text-slate-400 font-bold mb-1 tracking-wider uppercase">已募資金額</p>
-                            <p class="text-2xl sm:text-3xl font-black text-slate-800 font-mono break-words">NT$ <span id="raised-amount" class="text-navy-800">3,450,000</span></p>
+                        <div class="w-full md:w-80 bg-slate-50 rounded-2xl p-5 border border-slate-200/60 self-stretch flex flex-col justify-center">
+                            <div class="flex flex-wrap justify-between items-end gap-2 mb-4 border-b border-slate-200/60 pb-4">
+                                <div>
+                                    <p class="text-[9px] text-slate-400 font-bold mb-1 tracking-wider uppercase">已募資金額</p>
+                                    <p class="text-xl sm:text-2xl font-black text-slate-800 font-mono break-words">NT$ <span id="raised-amount" class="text-navy-800">3,450,000</span></p>
+                                </div>
+                                <div class="text-left sm:text-right">
+                                    <p class="text-[9px] text-slate-400 font-bold mb-1 tracking-wider uppercase">目標金額</p>
+                                    <p id="hero-goal" class="text-sm font-bold text-brand-500 font-mono break-words">5,000,000</p>
+                                </div>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden mb-3">
+                                <div id="hero-progress" class="bg-brand-500 h-2 rounded-full transition-all duration-1000 relative" style="width: 0%"></div>
+                            </div>
+                            <div class="flex flex-wrap justify-between items-center gap-2 font-medium">
+                                <span class="text-xs text-slate-400">達成率 <span id="pct-amount" class="text-brand-500 text-base font-black font-mono ml-1">0</span>%</span>
+                                <span id="hero-time" class="bg-white px-2.5 py-1 rounded-lg text-slate-500 text-[11px] shadow-sm border border-slate-200/60 whitespace-nowrap font-mono">剩餘 15 天</span>
+                            </div>
                         </div>
-                        <div class="text-left sm:text-right">
-                            <p class="text-[9px] text-slate-400 font-bold mb-1 tracking-wider uppercase">目標金額</p>
-                            <p id="hero-goal" class="text-base sm:text-lg font-bold text-brand-500 font-mono break-words">5,000,000</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 flex-1">
+                        <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200/60 shadow-sm flex flex-col items-center text-center relative overflow-hidden justify-center min-h-[300px]" id="interaction-zone">
+                            <div id="baby-glow" class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-500/5 via-white to-transparent opacity-50 transition-opacity duration-300"></div>
+                            <div id="baby-wrapper" class="relative w-36 h-36 flex items-center justify-center bg-gradient-to-tr from-brand-50 to-white rounded-full shadow-sm mb-5 border border-slate-100 z-10 transition-transform duration-300 shrink-0">
+                                <img id="baby-img" src="assets/tanjibaby/tanjibaby9.png" alt="碳吉寶寶" class="w-[80%] h-[80%] object-cover rounded-full z-10 select-none anim-float" draggable="false" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzAwN2Q4YSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
+                                <video id="baby-vid" src="assets/tanjibaby/tanjibaby_hi.mp4" preload="none" class="absolute inset-0 w-full h-full object-cover rounded-full z-20 hidden pointer-events-none" muted playsinline></video>
+                            </div>
+                            <button id="dailyCheckInBtn" class="mb-3 bg-brand-500 text-white hover:bg-brand-600 px-5 py-2.5 rounded-full font-bold text-xs transition-colors shadow-sm flex items-center gap-2 group relative z-30 border border-brand-600">
+                                <span class="text-xs group-hover:scale-110 transition-transform shrink-0">🌱</span> <span class="truncate">每日永續打卡 (+5 EXP)</span>
+                            </button>
+                            <h3 id="status-text" class="text-base font-bold text-slate-800 z-20 break-words">等待完成日常任務...</h3>
+                            <p id="encouragement-text" class="text-[11px] text-slate-400 mt-1 font-medium z-20">完成每日打卡，或前往右側「投資試算區」</p>
                         </div>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden mb-4">
-                        <div id="hero-progress" class="bg-brand-500 h-2 rounded-full transition-all duration-1000 relative animate-pulse" style="width: 0%"></div>
-                    </div>
-                    <div class="flex flex-wrap justify-between items-center gap-2 font-medium">
-                        <span class="text-xs text-slate-400">達成率 <span id="pct-amount" class="text-brand-500 text-lg font-black font-mono ml-1">0</span>%</span>
-                        <span id="hero-time" class="bg-white px-3 py-1.5 rounded-lg text-slate-500 text-xs shadow-sm border border-slate-200/60 whitespace-nowrap font-mono">剩餘 15 天</span>
-                    </div>
+
+                        <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200/60 flex flex-col justify-center relative min-h-[300px]">
+                            <div id="login-overlay" class="absolute inset-0 bg-white/95 z-20 flex flex-col items-center justify-center rounded-3xl transition-opacity">
+                                <div class="text-center max-w-sm px-4 w-full">
+                                    <div class="w-10 h-10 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-3 border border-brand-100 shrink-0">
+                                        <span class="text-xl block">🔒</span>
+                                    </div>
+                                    <h4 class="font-black text-base mb-1 text-navy-800">請先登入以進行贊助</h4>
+                                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">建立您的專屬永續帳戶，紀錄減碳貢獻並解鎖綠色回饋。</p>
+                                    <button onclick="document.getElementById('loginModal').classList.remove('hidden')" class="w-full bg-brand-500 text-white px-4 py-2.5 rounded-xl font-bold hover:bg-brand-600 transition-colors shadow-sm truncate text-xs uppercase tracking-wider">立即登入 / 註冊</button>
+                                </div>
+                            </div>
+
+                            <h3 class="text-base font-bold mb-4 flex items-center text-slate-800 break-words border-b border-slate-100 pb-3">
+                                <div class="w-7 h-7 bg-brand-50 rounded-full flex items-center justify-center mr-2 text-brand-500 border border-brand-100 shrink-0">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08-.402-2.599-1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                微型永續投資試算
+                            </h3>
+
+                            <div class="mb-4 p-4 bg-slate-50 border border-slate-200/60 rounded-xl relative">
+                                <div class="flex justify-between items-center gap-2 mb-2">
+                                    <span class="text-slate-600 font-bold text-xs">單次贊助金額</span>
+                                    <div class="flex items-center bg-white px-2.5 py-1 rounded-lg border border-slate-200 justify-end shadow-sm">
+                                        <span class="text-[10px] font-bold text-slate-400 mr-1 shrink-0">NT$</span>
+                                        <input type="number" id="investInput" value="500" min="100" max="10000" step="100" class="text-xl font-black text-brand-500 bg-transparent w-20 text-right outline-none font-mono">
+                                    </div>
+                                </div>
+                                <input type="range" id="investSlider" min="100" max="10000" step="100" value="500" class="w-full mt-2">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/60 flex flex-col items-center text-center shadow-sm overflow-hidden">
+                                    <span class="text-[10px] text-slate-400 font-bold mb-0.5 truncate w-full">預期減碳貢獻</span>
+                                    <div class="text-xl font-black text-slate-800 flex items-baseline truncate w-full justify-center">
+                                        <span id="co2Display" class="font-mono truncate">0.6</span>
+                                        <span class="text-xs font-bold text-brand-500 ml-0.5 font-mono">kg</span>
+                                    </div>
+                                </div>
+                                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/60 flex flex-col items-center text-center shadow-sm overflow-hidden">
+                                    <span class="text-[10px] text-slate-400 font-bold mb-0.5 truncate w-full">獲得經驗值</span>
+                                    <div class="text-xl font-black text-slate-800 flex items-baseline truncate w-full justify-center">
+                                        <span id="expDisplay" class="font-mono truncate">50</span>
+                                        <span class="text-xs font-bold text-slate-500 ml-0.5 font-mono">EXP</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button id="sponsorBtn" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold text-xs shadow-sm transition-colors truncate">
+                                確認贊助並注入能量
+                    </button>
                 </div>
             </div>
+        </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-white rounded-3xl p-6 md:p-10 border border-slate-200/60 shadow-sm flex flex-col items-center text-center relative overflow-hidden justify-center h-full min-h-[400px]" id="interaction-zone">
-                    <div id="baby-glow" class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-500/5 via-white to-transparent opacity-50 transition-opacity duration-300"></div>
-                    
-                    <div id="baby-wrapper" class="relative w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center bg-gradient-to-tr from-brand-50 to-white rounded-full shadow-sm mb-8 border border-slate-100 z-10 transition-transform duration-300 shrink-0">
-                        <div class="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-white/40 to-transparent"></div>
-                        <img id="baby-img" src="assets/tanjibaby/tanjibaby9.png" alt="碳吉寶寶" class="w-[80%] h-[80%] object-cover rounded-full z-10 select-none anim-float" draggable="false" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzAwN2Q4YSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
-                        <video id="baby-vid" src="assets/tanjibaby/tanjibaby_hi.mp4" preload="none" class="absolute inset-0 w-full h-full object-cover rounded-full z-20 hidden pointer-events-none" muted playsinline></video>
-                    </div>
-
-                    <button id="dailyCheckInBtn" class="mb-5 bg-brand-500 text-white hover:bg-brand-600 px-6 py-3 rounded-full font-bold text-sm transition-colors shadow-sm flex items-center gap-2 group relative z-30 border border-brand-600">
-                        <span class="text-sm group-hover:scale-110 transition-transform shrink-0">🌱</span> <span class="truncate">每日永續打卡 (+5 EXP)</span>
-                    </button>
-
-                    <h3 id="status-text" class="text-xl font-bold text-slate-800 z-20 break-words">等待完成日常任務...</h3>
-                    <p id="encouragement-text" class="text-xs sm:text-sm text-slate-400 mt-2 font-medium z-20">完成每日打卡，或前往右側「投資試算區」</p>
-                </div>
-
-                <div class="bg-white rounded-3xl p-6 md:p-10 shadow-sm border border-slate-200/60 flex flex-col justify-center relative h-full">
-                    <div id="login-overlay" class="absolute inset-0 bg-white/95 z-20 flex flex-col items-center justify-center rounded-3xl transition-opacity">
-                        <div class="text-center max-w-sm px-6 w-full">
-                            <div class="w-14 h-14 bg-brand-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand-100 shrink-0">
-                                <span class="text-2xl block">🔒</span>
-                            </div>
-                            <h4 class="font-black text-xl mb-2 text-navy-800">請先登入以進行贊助</h4>
-                            <p class="text-sm text-slate-400 mb-6 leading-relaxed">建立您的專屬永續帳戶，紀錄每一筆減碳貢獻並解鎖豐富的綠色回饋獎勵。</p>
-                            <button onclick="document.getElementById('loginModal').classList.remove('hidden')" class="w-full bg-brand-500 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-brand-600 transition-colors shadow-sm truncate text-xs uppercase tracking-wider">立即登入 / 註冊</button>
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between self-stretch h-full min-h-[450px]" id="feed-outer-wrapper">
+                    <h3 class="text-base font-bold mb-4 flex items-center border-b border-slate-200 pb-3 break-words text-slate-800 shrink-0">
+                        <div class="w-7 h-7 bg-brand-50 rounded-full flex items-center justify-center mr-3 text-brand-500 border border-brand-100 shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
-                    </div>
-
-                    <h3 class="text-xl font-bold mb-6 flex items-center text-slate-800 break-words border-b border-slate-100 pb-4">
-                        <div class="w-8 h-8 bg-brand-50 rounded-full flex items-center justify-center mr-3 text-brand-500 border border-brand-100 shrink-0">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08-.402-2.599-1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        微型永續投資試算
+                        即時贊助動態
                     </h3>
-
-                    <div class="mb-6 p-5 bg-slate-50 border border-slate-200/60 rounded-2xl relative" id="slider-container">
-                        <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
-                            <span class="text-slate-600 font-bold text-base">單次贊助金額</span>
-                            <div class="flex items-center bg-white px-3 py-1.5 rounded-lg border border-slate-200 w-full sm:w-auto justify-end shadow-sm">
-                                <span class="text-xs font-bold text-slate-400 mr-2 shrink-0">NT$</span>
-                                <input type="number" id="investInput" value="500" min="100" max="10000" step="100" class="text-2xl font-black text-brand-500 bg-transparent w-24 text-right outline-none focus:text-brand-600 transition-colors shrink-0 font-mono">
+                    <div class="flex-1 flex flex-col gap-4 justify-around xl:justify-between lg:grid lg:grid-cols-3 xl:flex lg:gap-4" id="feed-list-container">
+                        <div class="flex items-center text-xs bg-slate-50 p-4 rounded-xl border border-slate-200/80 h-24 shadow-sm feed-card-transition">
+                            <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center mr-3 font-bold text-slate-600 shrink-0">載</div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-slate-400 font-medium">連線同步中...</p>
                             </div>
                         </div>
-                        
-                        <input type="range" id="investSlider" min="100" max="10000" step="100" value="500" class="w-full mt-4">
-                        
-                        <div class="flex justify-between text-xs text-slate-400 mt-4 font-bold">
-                            <span class="bg-white border border-slate-200/60 px-2 py-1 rounded font-mono">$100</span>
-                            <span class="bg-white border border-slate-200/60 px-2 py-1 rounded font-mono">$10,000</span>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-4 mb-6">
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200/60 flex flex-col items-center text-center shadow-sm overflow-hidden">
-                            <span class="text-xs text-slate-400 font-bold mb-1 truncate w-full">預期減碳貢獻</span>
-                            <div class="text-2xl font-black text-slate-800 flex items-baseline truncate w-full justify-center">
-                                <span id="co2Display" class="font-mono truncate">0.6</span>
-                                <span class="text-sm font-bold text-brand-500 ml-1 shrink-0 font-mono">kg</span>
+                        <div class="flex items-center text-xs bg-slate-50 p-4 rounded-xl border border-slate-200/80 h-24 shadow-sm feed-card-transition">
+                            <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center mr-3 font-bold text-slate-600 shrink-0">載</div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-slate-400 font-medium">連線同步中...</p>
                             </div>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200/60 flex flex-col items-center text-center shadow-sm overflow-hidden">
-                            <span class="text-xs text-slate-400 font-bold mb-1 truncate w-full">獲得經驗值</span>
-                            <div class="text-2xl font-black text-slate-800 flex items-baseline truncate w-full justify-center">
-                                <span id="expDisplay" class="font-mono truncate font-mono">50</span>
-                                <span class="text-sm font-bold text-slate-500 ml-1 shrink-0 font-mono">EXP</span>
+                        <div class="flex items-center text-xs bg-slate-50 p-4 rounded-xl border border-slate-200/80 h-24 shadow-sm feed-card-transition">
+                            <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center mr-3 font-bold text-slate-600 shrink-0">載</div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-slate-400 font-medium">連線同步中...</p>
                             </div>
                         </div>
                     </div>
-
-                    <button id="sponsorBtn" class="w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold text-sm shadow-sm transition-colors truncate mt-auto">
-                        確認贊助並注入能量
-                    </button>
                 </div>
+
             </div>
         </div>
     </section>
@@ -306,17 +331,10 @@
                     </div>
                 </div>
 
-                <div class="bg-slate-50 rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm flex flex-col h-full min-h-[400px]">
-                    <h3 class="text-base font-bold mb-6 flex items-center border-b border-slate-200 pb-4 break-words text-slate-800 shrink-0">
-                        <div class="w-7 h-7 bg-brand-50 rounded-full flex items-center justify-center mr-3 text-brand-500 border border-brand-100 shrink-0">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        </div>
-                        即時贊助動態
-                    </h3>
-                    <div class="feed-container flex-1 relative overflow-hidden" id="feed-outer-box">
-                        <div class="feed-list space-y-4 py-2" id="feed-list-container"></div>
-                        <div class="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-slate-50 to-transparent pointer-events-none z-10"></div>
-                    </div>
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-center items-center text-center">
+                    <span class="text-4xl mb-3">🍃</span>
+                    <h4 class="font-bold text-slate-800 mb-1">永續行動，即刻出發</h4>
+                    <p class="text-xs text-slate-400 max-w-[200px] leading-relaxed">您的每一筆支持，都將實時反映在系統動態與碳吉寶寶的成長軌跡中。</p>
                 </div>
             </div>
         </div>
@@ -600,7 +618,7 @@
                 </div>
             </div>
             <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end">
-                <button onclick="document.getElementById('projectDetailsModal').classList.add('hidden')" class="w-full sm:w-auto bg-slate-800 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-slate-700 transition-colors text-sm truncate">我了解了，前往參與</button>
+                <button onclick="document.getElementById('projectDetailsModal').classList.add('hidden')" class="w-full sm:w-auto bg-slate-800 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-slate-700 transition-colors text-sm truncate">我瞭解了，前往參與</button>
             </div>
         </div>
     </div>
@@ -856,7 +874,7 @@
                         </div>
                     </div>
                 </div>
-                <button onclick="window.showToast('憑證金鑰已複製，可離線存取')" class="w-full bg-slate-800 hover:bg-slate-700 text-white rounded-xl py-3 font-bold text-xs transition-colors">
+                <button id="downloadCertBtn" class="w-full bg-slate-800 hover:bg-slate-700 text-white rounded-xl py-3 font-bold text-xs transition-colors flex items-center justify-center gap-1">
                     下載數位憑證
                 </button>
             </div>
@@ -925,6 +943,12 @@
             level: 1,
             role: "user"
         };
+
+        const activeFeedsCache = [
+            { name: '台中王先生', action: '贊助了 漁電共生智慧養殖 3,000 元', exp: 300, timeStr: '1分鐘前' },
+            { name: '彰化林小姐', action: '贊助了 屏東養豬場沼氣發電 5,000 元', exp: 500, timeStr: '3分鐘前' },
+            { name: '高雄劉先生', action: '贊助了 100kW 廠房屋頂太陽能 10,000 元', exp: 1000, timeStr: '5分鐘前' }
+        ];
 
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
@@ -1483,7 +1507,7 @@
                 unlockedCount++;
             } else {
                 r1.classList.replace('reward-unlocked', 'reward-locked'); 
-                req1.innerText = '需 100 EXP';
+                req1.innerText = 'Ref. 100 EXP';
                 req1.className = 'inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono';
             }
             
@@ -1494,7 +1518,7 @@
                 unlockedCount++;
             } else {
                 r2.classList.replace('reward-unlocked', 'reward-locked'); 
-                req2.innerText = '需 300 EXP';
+                req2.innerText = 'Ref. 300 EXP';
                 req2.className = 'inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono';
             }
 
@@ -1505,7 +1529,7 @@
                 unlockedCount++;
             } else {
                 r3.classList.replace('reward-unlocked', 'reward-locked'); 
-                req3.innerText = '需 800 EXP';
+                req3.innerText = 'Ref. 800 EXP';
                 req3.className = 'inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono';
             }
 
@@ -1627,32 +1651,38 @@
                     });
                 } catch(e) {}
             } else {
-                appendFeedDOM(name, action, exp, '剛剛');
+                pushNewFeed(name, action, exp, '剛剛');
             }
         }
 
-        function appendFeedDOM(name, action, exp, timeStr) {
-            const div = document.createElement('div');
-            div.className = 'flex items-center text-xs bg-white p-3 rounded-xl border border-slate-200/80 shrink-0 shadow-sm transform transition-all duration-300 scale-95 opacity-0';
-            div.innerHTML = `
-                <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center mr-3 font-bold text-slate-500 shrink-0">${name.substring(0,1)}</div>
-                <div class="flex-1 min-w-0">
-                    <p class="break-words text-slate-600 leading-tight font-semibold"><span class="font-bold text-brand-500 whitespace-nowrap">${name}</span> ${action}</p>
-                    <div class="flex justify-between items-center mt-1.5">
-                        <span class="text-[10px] text-brand-500 bg-brand-50 px-2 py-0.5 rounded font-bold shrink-0 font-mono">+${exp} EXP</span>
-                        <span class="text-[10px] text-slate-300 font-bold shrink-0 font-mono">${timeStr}</span>
-                    </div>
-                </div>
-            `;
-            feedListContainer.insertBefore(div, feedListContainer.firstChild);
-            setTimeout(() => {
-                div.classList.remove('scale-95', 'opacity-0');
-                div.classList.add('scale-100', 'opacity-100');
-            }, 50);
-
-            if (feedListContainer.children.length > 25) {
-                feedListContainer.lastChild.remove();
+        function pushNewFeed(name, action, exp, timeStr) {
+            activeFeedsCache.unshift({ name, action, exp, timeStr });
+            if (activeFeedsCache.length > 3) {
+                activeFeedsCache.pop();
             }
+            renderFeedsCache();
+        }
+
+        function renderFeedsCache() {
+            feedListContainer.innerHTML = '';
+            activeFeedsCache.forEach((data, index) => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center text-xs bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm flex-1 h-24 feed-card-transition opacity-0 transform translate-y-2';
+                div.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center mr-3 font-bold text-slate-500 shrink-0">${data.name.substring(0,1)}</div>
+                    <div class="flex-1 min-w-0">
+                        <p class="break-words text-slate-600 leading-tight font-semibold"><span class="font-bold text-brand-500 whitespace-nowrap">${data.name}</span> ${data.action}</p>
+                        <div class="flex justify-between items-center mt-1.5">
+                            <span class="text-[10px] text-brand-500 font-bold bg-brand-50 px-2 py-0.5 rounded whitespace-nowrap shrink-0 font-mono">+${data.exp} EXP</span>
+                            <span class="text-[10px] text-slate-300 font-bold shrink-0 font-mono">${data.timeStr}</span>
+                        </div>
+                    </div>
+                `;
+                feedListContainer.appendChild(div);
+                setTimeout(() => {
+                    div.classList.remove('opacity-0', 'translate-y-2');
+                }, index * 80);
+            });
         }
 
         sponsorBtn.addEventListener('click', async () => {
@@ -1768,6 +1798,24 @@
         document.getElementById('backToProfileBtn').addEventListener('click', () => {
             document.getElementById('account-certificate-view').classList.add('hidden');
             document.getElementById('account-profile-view').classList.remove('hidden');
+        });
+
+        document.getElementById('downloadCertBtn').addEventListener('click', function() {
+            const btn = this;
+            btn.disabled = true;
+            btn.innerText = "安全金鑰傳輸中...";
+            btn.classList.add('animate-pulse', 'bg-brand-600');
+            
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerText = "下載數位憑證";
+                btn.classList.remove('animate-pulse', 'bg-brand-600');
+                window.showToast("憑證檔案已安全同步至個人數位錢包！");
+            }, 2000);
+        });
+
+        document.getElementById('viewDetailBtn').addEventListener('click', () => {
+            window.showProjectDetails();
         });
 
         helpToggleBtn.addEventListener('click', () => {
@@ -1897,7 +1945,7 @@
                     showToast("發布失敗，請重試", "error");
                 }
             } else {
-                appendFeedDOM('【平台公告】', msg, 100, '即時');
+                pushNewFeed('【平台公告】', msg, 100, '即時');
                 document.getElementById('adminAnnounceText').value = '';
                 document.getElementById('adminModal').classList.add('hidden');
                 showToast("本地公告插播成功！");
@@ -1945,60 +1993,27 @@
                     feeds.push({ id: doc.id, ...doc.data() });
                 });
                 feeds.sort((a, b) => b.timestamp - a.timestamp);
-                feeds = feeds.slice(0, 10);
                 
-                feedListContainer.innerHTML = '';
-                if (feeds.length === 0) {
-                    loadInitialMockFeeds();
-                    return;
+                if (feeds.length > 0) {
+                    activeFeedsCache.length = 0;
+                    feeds.slice(0, 3).forEach(f => {
+                        activeFeedsCache.push({
+                            name: f.name || '熱心公民',
+                            action: f.action || '',
+                            exp: f.exp || 0,
+                            timeStr: f.timeStr || '剛剛'
+                        });
+                    });
+                    renderFeedsCache();
+                } else {
+                    renderFeedsCache();
                 }
-                feeds.forEach(data => {
-                    const div = document.createElement('div');
-                    div.className = 'flex items-center text-xs bg-white p-3 rounded-xl border border-slate-200/80 shadow-sm shrink-0';
-                    div.innerHTML = `
-                        <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center mr-3 font-bold text-slate-500 shrink-0">${data.name ? data.name.substring(0,1) : '匿'}</div>
-                        <div class="flex-1 min-w-0">
-                            <p class="break-words text-slate-600 font-semibold leading-tight"><span class="font-bold text-brand-500 whitespace-nowrap">${data.name || '熱心公民'}</span> ${data.action}</p>
-                            <div class="flex justify-between items-center mt-1.5">
-                                <span class="text-[10px] text-brand-500 font-bold bg-brand-50 px-2 py-0.5 rounded whitespace-nowrap shrink-0 font-mono">+${data.exp} EXP</span>
-                                <span class="text-[10px] text-slate-300 font-semibold whitespace-nowrap shrink-0 font-mono">${data.timeStr || '剛剛'}</span>
-                            </div>
-                        </div>
-                    `;
-                    feedListContainer.appendChild(div);
-                });
             }, (error) => {
                 console.warn(error);
-                loadInitialMockFeeds();
+                renderFeedsCache();
             });
         } catch (e) {
-            loadInitialMockFeeds();
-        }
-
-        function loadInitialMockFeeds() {
-            feedListContainer.innerHTML = '';
-            const mocks = [
-                { name: '台中王先生', action: '贊助了 漁電共生智慧養殖 3,000 元', exp: 300, timeStr: '1分鐘前' },
-                { name: '彰化林小姐', action: '贊助了 屏東養豬場沼氣發電 5,000 元', exp: 500, timeStr: '3分鐘前' },
-                { name: '高雄劉先生', action: '贊助了 100kW 廠房屋頂太陽能 10,000 元', exp: 1000, timeStr: '5分鐘前' },
-                { name: '台北陳小姐', action: '完成了 每日永續打卡', exp: 5, timeStr: '10分鐘前' },
-                { name: '花蓮曾先生', action: '贊助了 偏鄉 LED 節能照明 1,500 元', exp: 150, timeStr: '12分鐘前' }
-            ];
-            mocks.forEach(m => {
-                const div = document.createElement('div');
-                div.className = 'flex items-center text-xs bg-white p-3 rounded-xl border border-slate-200/80 shadow-sm shrink-0';
-                div.innerHTML = `
-                    <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center mr-3 font-bold text-slate-500 shrink-0">${m.name.substring(0,1)}</div>
-                    <div class="flex-1 min-w-0">
-                        <p class="break-words text-slate-600 leading-tight font-semibold"><span class="font-bold text-brand-500 whitespace-nowrap">${m.name}</span> ${m.action}</p>
-                        <div class="flex justify-between items-center mt-1.5">
-                            <span class="text-[10px] text-brand-500 font-bold bg-brand-50 px-2 py-0.5 rounded whitespace-nowrap shrink-0 font-mono">+${m.exp} EXP</span>
-                            <span class="text-[10px] text-slate-300 font-bold shrink-0 font-mono">${m.timeStr}</span>
-                        </div>
-                    </div>
-                `;
-                feedListContainer.appendChild(div);
-            });
+            renderFeedsCache();
         }
 
         function startMockFeedsSimulation() {
@@ -2012,28 +2027,10 @@
                 const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
                 const exp = Math.floor(randomAmount / 10);
                 
-                appendFeedDOM(randomName, `贊助了 ${randomProj.title} ${randomAmount.toLocaleString()} 元`, exp, '剛剛');
-            }, 8000);
+                pushNewFeed(randomName, `贊助了 ${randomProj.title} ${randomAmount.toLocaleString()} 元`, exp, '剛剛');
+            }, 7000);
         }
         startMockFeedsSimulation();
-
-        function runDynamicRollingFeeds() {
-            let step = 0.5;
-            let container = document.getElementById('feed-outer-box');
-            let isHovered = false;
-
-            container.addEventListener('mouseenter', () => isHovered = true);
-            container.addEventListener('mouseleave', () => isHovered = false);
-
-            setInterval(() => {
-                if (isHovered) return;
-                container.scrollTop += step;
-                if (container.scrollTop >= (container.scrollHeight - container.clientHeight)) {
-                    container.scrollTop = 0;
-                }
-            }, 30);
-        }
-        runDynamicRollingFeeds();
 
         window.switchProject = switchProject;
 
