@@ -8,11 +8,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&family=Zen+Dots&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&family=Noto+Sans+TC:wght@300;400;700;900&family=Zen+Dots&display=swap" rel="stylesheet">
     
     <style>
         body { 
-            font-family: 'Noto Sans TC', sans-serif; 
+            font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif; 
             background: #94a3b8; 
             display: flex; 
             flex-direction: column;
@@ -38,7 +38,8 @@
             transform-origin: top center;
         }
 
-        .font-tech { font-family: 'Zen Dots', cursive; }
+        .font-tech { font-family: 'Zen Dots', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
         
         .bg-grid {
             background-size: 100px 100px;
@@ -110,7 +111,7 @@
                 <span class="text-sm text-slate-400">點擊右側按鈕，直接將下方海報輸出為原始尺寸 (A1) 的 PNG 高畫質圖片。</span>
             </div>
         </div>
-        <button onclick="downloadPoster()" id="downloadBtn" class="bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold px-6 py-3 rounded-xl transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] flex items-center gap-2 whitespace-nowrap">
+        <button id="downloadBtn" class="bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold px-6 py-3 rounded-xl transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] flex items-center gap-2 whitespace-nowrap">
             <i data-lucide="download" class="w-5 h-5"></i>
             <span>下載高畫質 PNG</span>
         </button>
@@ -122,7 +123,7 @@
         <header class="relative z-10 p-[80px] pb-[40px] border-b-[3px] border-slate-800 flex justify-between items-start">
             <div>
                 <div class="inline-block px-[32px] py-[12px] bg-emerald-500/20 border-[3px] border-emerald-500/50 rounded-full text-emerald-400 text-[36px] font-bold mb-[40px] tracking-wider">
-                    115年度 氣候變遷創意實作競賽
+                    臺灣『能』永續能源創意實作競賽
                 </div>
                 <h1 class="text-[200px] font-black leading-none tracking-tight mb-[20px]">
                     碳吉 <span class="font-tech text-emerald-400 neon-text">TanJi</span>
@@ -194,7 +195,7 @@
                     </svg>
 
                     <div class="absolute top-[380px] w-full text-center z-10">
-                        <div class="text-[180px] font-black text-white leading-none tracking-tight">124.5</div>
+                        <div class="text-[180px] font-black text-white leading-none tracking-tight font-mono">124.5</div>
                         <div class="text-[36px] text-slate-400 uppercase tracking-widest mt-[20px] font-bold">Tons CO2e Reduced</div>
                     </div>
                 </div>
@@ -202,15 +203,15 @@
                 <div class="w-[900px] flex justify-between gap-[32px] mt-[60px]">
                     <div class="bg-slate-800/80 backdrop-blur-lg rounded-[40px] p-[40px] border-[3px] border-slate-700 flex-1 text-center shadow-xl">
                         <div class="text-[32px] text-slate-400 mb-[16px] font-bold">微型贊助</div>
-                        <div class="text-[72px] font-black text-white">$100</div>
+                        <div class="text-[72px] font-black text-white font-mono">$100</div>
                     </div>
                     <div class="bg-slate-800/80 backdrop-blur-lg rounded-[40px] p-[40px] border-[3px] border-slate-700 flex-1 text-center shadow-xl">
                         <div class="text-[32px] text-slate-400 mb-[16px] font-bold">專款專用</div>
-                        <div class="text-[72px] font-black text-white">100%</div>
+                        <div class="text-[72px] font-black text-white font-mono">100%</div>
                     </div>
                     <div class="bg-slate-800/80 backdrop-blur-lg rounded-[40px] p-[40px] border-[3px] border-emerald-500/50 flex-1 text-center shadow-[0_0_30px_rgba(16,185,129,0.2)]">
                         <div class="text-[32px] text-slate-400 mb-[16px] font-bold">虛實回饋</div>
-                        <div class="text-[72px] font-black text-emerald-400">EXP</div>
+                        <div class="text-[72px] font-black text-emerald-400 font-mono">EXP</div>
                     </div>
                 </div>
             </div>
@@ -224,7 +225,7 @@
                 </div>
                 <h3 class="text-[56px] font-bold text-white mb-[32px]">透明微型金流</h3>
                 <p class="text-[36px] text-slate-400 leading-[1.6]">
-                    支援多元支付與銀行信託專戶，大幅降低參與門檻，讓綠色金融不再只是大型企業專利。
+                    支援多元支付與銀行信託專戶進度撥款，大幅降低參與門檻，實踐綠色普惠金融。
                 </p>
             </div>
 
@@ -234,7 +235,7 @@
                 </div>
                 <h3 class="text-[56px] font-bold text-white mb-[32px]">科學減碳量化</h3>
                 <p class="text-[36px] text-slate-400 leading-[1.6]">
-                    依據氣象署與能源署標準，精準換算每一筆資金所促成的綠電發電量與溫室氣體減量。
+                    依據經濟部能源署發電排碳係數，精準量化每一筆微型資金產生的潔淨綠電與實質減碳效益。
                 </p>
             </div>
 
@@ -242,9 +243,9 @@
                 <div class="w-[140px] h-[140px] bg-slate-900 border-[3px] border-amber-500 rounded-[40px] flex items-center justify-center mb-[40px] shadow-[0_10px_30px_rgba(245,158,11,0.3)]">
                     <i data-lucide="award" style="width: 72px; height: 72px;" class="text-amber-400"></i>
                 </div>
-                <h3 class="text-[56px] font-bold text-white mb-[32px]">碳吉寶寶陪伴</h3>
+                <h3 class="text-[56px] font-bold text-white mb-[32px]">遊戲化永續日常</h3>
                 <p class="text-[36px] text-slate-400 leading-[1.6]">
-                    透過每日打卡與贊助累積經驗值，解鎖數位憑證、低碳商家兌換券與限量實體環保杯。
+                    透過每日打卡與贊助累積經驗值，動態解鎖專屬數位碳金憑證與在地循環經濟實體回饋。
                 </p>
             </div>
 
@@ -252,9 +253,9 @@
 
         <footer class="relative z-10 bg-slate-900 border-t-[4px] border-slate-800 p-[80px] flex items-center justify-between">
             <div>
-                <p class="text-[36px] text-slate-400 font-bold mb-[16px] tracking-widest">適用對象</p>
-                <p class="text-[64px] font-black text-white mb-[16px]">全民參與、中小企業、在地創生</p>
-                <p class="text-[36px] text-slate-500">零碳未來，從你的百元行動開始</p>
+                <p class="text-[36px] text-slate-400 font-bold mb-[16px] tracking-widest font-mono">CORE TARGETS</p>
+                <p class="text-[64px] font-black text-white mb-[16px]">全民參與 ✕ 傳產轉型 ✕ 地方創生</p>
+                <p class="text-[36px] text-slate-500">零碳未來，從你的百元微型投資開始</p>
             </div>
             
             <div class="flex items-center gap-[40px]">
@@ -324,8 +325,7 @@
                 link.click();
                 
             } catch (error) {
-                console.error("輸出圖片失敗:", error);
-                alert("輸出圖片時發生錯誤，請確認是否有跨域資源 (CORS) 擋住。");
+                console.error(error);
                 
                 poster.style.transform = `scale(${Math.min(window.innerWidth/2245, (window.innerHeight-150)/3179) * 0.95})`;
                 poster.classList.remove('export-mode');
@@ -336,6 +336,7 @@
             }
         }
 
+        document.getElementById('downloadBtn').addEventListener('click', downloadPoster);
         window.addEventListener('resize', scalePoster);
         scalePoster();
     </script>
