@@ -2265,7 +2265,7 @@
         async function handleChat() {
             const text = chatInput.value.trim();
             if(!text) return;
-            addMessage(text, true);
+            appendMessage(text, true);
             chatInput.value = '';
             
             const loadingId = 'loading-' + Date.now();
@@ -2298,7 +2298,7 @@
                 const data = await response.json();
                 const reply = data.reply;
 
-                addMessage(reply, false);
+                appendMessage(reply, false);
 
                 chatHistory.push({ role: "user", parts: [{ text: text }] });
                 chatHistory.push({ role: "model", parts: [{ text: reply }] });
@@ -2306,7 +2306,7 @@
             } catch (error) {
                 const loadEl = document.getElementById(loadingId);
                 if(loadEl) loadEl.remove();
-                addMessage("碳吉寶寶正在睡覺，請稍後再試試看喔！🍃", false);
+                appendMessage("碳吉寶寶正在睡覺，請稍後再試試看喔！🍃", false);
             }
         }
 
