@@ -2248,18 +2248,6 @@
         
         closeHelpBtn.addEventListener('click', () => { helpModal.classList.add('hidden'); });
 
-        function addMessage(text, isUser) {
-            const div = document.createElement('div');
-            if(isUser) {
-                div.className = 'self-end bg-brand-500 text-white p-3 rounded-2xl rounded-tr-sm max-w-[90%] font-semibold break-words shadow-sm';
-            } else {
-                div.className = 'self-start bg-white p-3 rounded-2xl rounded-tl-sm border border-slate-100 max-w-[90%] text-slate-600 font-semibold leading-relaxed break-words shadow-sm';
-            }
-            div.innerText = text;
-            chatMessages.appendChild(div);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
         let chatHistory = [];
 
         function addMessage(text, isUser) {
