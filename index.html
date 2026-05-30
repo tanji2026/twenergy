@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex,nofollow">
     <title>TanJi 淨零群募平台</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -32,8 +29,8 @@
         }
     </script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        * { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif !important; }
+        .font-mono, input, .font-mono *, [class*="font-mono"] { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important; }
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: #007d8a; cursor: pointer; margin-top: -8px; border: 3px solid #fff; box-shadow: 0 4px 10px rgba(0, 125, 138, 0.3); transition: transform 0.1s; position: relative; z-index: 10; }
         input[type=range]::-webkit-slider-thumb:hover, input[type=range]:active::-webkit-slider-thumb { transform: scale(1.15); }
@@ -70,16 +67,17 @@
                 <span class="text-xl md:text-2xl font-black tracking-tight text-navy-800 truncate">TanJi</span>
             </div>
             
-            <div class="flex-1 flex items-center gap-5 md:gap-8 font-semibold text-slate-500 text-sm md:text-base whitespace-nowrap overflow-x-auto no-scrollbar py-2 px-4 max-w-full justify-start md:justify-center">
+            <div class="hidden md:flex flex-1 items-center gap-6 lg:gap-8 font-semibold text-slate-500 text-sm lg:text-base whitespace-nowrap overflow-x-auto no-scrollbar py-2 px-4 max-w-full justify-center">
                 <a href="#projects" class="hover:text-brand-500 transition-colors shrink-0">探索專案</a>
                 <a href="#success-cases" class="hover:text-brand-500 transition-colors shrink-0">成功案例</a>
                 <a href="#rewards" class="hover:text-brand-500 transition-colors shrink-0">永續回饋</a>
                 <a href="#payment-flow" class="hover:text-brand-500 transition-colors shrink-0">金流安全</a>
                 <a href="#education" class="hover:text-brand-500 transition-colors shrink-0">永續小學堂</a>
+                <a href="#regulatory-compliance" class="hover:text-brand-500 transition-colors shrink-0">永續合規</a>
                 <a href="#about" class="hover:text-brand-500 transition-colors shrink-0">關於平台</a>
             </div>
 
-            <div class="flex items-center gap-2 sm:gap-4 overflow-x-auto no-scrollbar whitespace-nowrap shrink-0 min-w-0 max-w-full">
+            <div class="flex items-center gap-2 sm:gap-4 shrink-0 min-w-0 max-w-full">
                 <button id="adminBtn" class="hidden bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-full text-xs font-bold border border-red-100 transition-colors shadow-sm whitespace-nowrap shrink-0">管理工具</button>
                 <div class="text-right hidden md:block shrink-0 border-r border-slate-200 pr-4">
                     <div class="text-[9px] text-slate-400 font-bold tracking-wider uppercase">全站累計減碳量</div>
@@ -91,9 +89,38 @@
                     <button id="logoutBtn" class="text-slate-400 hover:text-slate-600 px-1 font-bold text-xs whitespace-nowrap shrink-0">登出</button>
                 </div>
                 <button id="loginShowBtn" class="bg-brand-500 text-white px-5 py-2.5 rounded-full text-xs font-bold hover:bg-brand-600 transition-colors shadow-sm whitespace-nowrap shrink-0">登入/註冊</button>
+                <button id="mobileMenuToggleBtn" class="md:hidden text-slate-500 hover:text-slate-800 focus:outline-none p-2 rounded-lg shrink-0">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
             </div>
         </div>
     </nav>
+
+    <div id="mobileMenu" class="hidden fixed inset-0 z-50 bg-white/95 backdrop-blur-md p-6 flex flex-col justify-between md:hidden">
+        <div>
+            <div class="flex justify-between items-center pb-6 border-b border-slate-100">
+                <span class="text-xl font-black text-navy-800">選單</span>
+                <button id="closeMobileMenuBtn" class="text-slate-500 hover:text-slate-800 focus:outline-none p-2 rounded-lg">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="flex flex-col gap-6 pt-8 font-semibold text-slate-600 text-lg">
+                <a href="#projects" class="hover:text-brand-500 transition-colors">探索專案</a>
+                <a href="#success-cases" class="hover:text-brand-500 transition-colors">成功案例</a>
+                <a href="#rewards" class="hover:text-brand-500 transition-colors">永續回饋</a>
+                <a href="#payment-flow" class="hover:text-brand-500 transition-colors">金流安全</a>
+                <a href="#education" class="hover:text-brand-500 transition-colors">永續小學堂</a>
+                <a href="#regulatory-compliance" class="hover:text-brand-500 transition-colors">永續合規</a>
+                <a href="#about" class="hover:text-brand-500 transition-colors">關於平台</a>
+            </div>
+        </div>
+        <div class="pt-6 border-t border-slate-100">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-xs text-slate-400 font-bold uppercase">全站累計減碳量</span>
+                <span class="text-base font-black text-brand-500 font-mono"><span class="global-co2-mobile">124.5</span> kg</span>
+            </div>
+        </div>
+    </div>
 
     <section class="py-12 bg-slate-50 border-b border-slate-100">
         <div class="max-w-6xl mx-auto px-6 space-y-8">
@@ -137,14 +164,14 @@
                         <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200/60 shadow-sm flex flex-col items-center text-center relative overflow-hidden justify-center min-h-[300px]" id="interaction-zone">
                             <div id="baby-glow" class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-500/5 via-white to-transparent opacity-50 transition-opacity duration-300"></div>
                             <div id="baby-wrapper" class="relative w-36 h-36 flex items-center justify-center bg-gradient-to-tr from-brand-50 to-white rounded-full shadow-sm mb-5 border border-slate-100 z-10 transition-transform duration-300 shrink-0">
-                                <img id="baby-img" src="assets/tanjibaby/tanjibaby9.png" alt="碳吉寶寶" class="w-[80%] h-[80%] object-cover rounded-full z-10 select-none anim-float" draggable="false" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzAwN2Q4YSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
+                                <img id="baby-img" src="assets/tanjibaby/tanjibaby9.png" alt="碳吉寶寶" class="w-[80%] h-[80%] object-cover rounded-full z-10 select-none anim-float" draggable="false">
                                 <video id="baby-vid" src="assets/tanjibaby/tanjibaby_hi.mp4" preload="none" class="absolute inset-0 w-full h-full object-cover rounded-full z-20 hidden pointer-events-none" muted playsinline></video>
                             </div>
                             <button id="dailyCheckInBtn" class="mb-3 bg-brand-500 text-white hover:bg-brand-600 px-5 py-2.5 rounded-full font-bold text-xs transition-colors shadow-sm flex items-center gap-2 group relative z-30 border border-brand-600">
-                                <span class="text-xs group-hover:scale-110 transition-transform shrink-0">🌱</span> <span class="truncate">每日永續打卡 (+5 EXP)</span>
+                                <span class="text-xs group-hover:scale-110 transition-transform shrink-0">🌱</span> <span class="truncate">每日永續打卡 (+5 經驗值)</span>
                             </button>
                             <h3 id="status-text" class="text-base font-bold text-slate-800 z-20 break-words">等待完成日常任務...</h3>
-                            <p id="encouragement-text" class="text-[11px] text-slate-400 mt-1 font-medium z-20">完成每日打卡，或前往右側「投資試算區」</p>
+                            <p id="encouragement-text" class="text-[11px] text-slate-400 mt-1 font-medium z-20">完成每日打卡，或前往右側微型永續投資試算</p>
                         </div>
 
                         <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200/60 flex flex-col justify-center relative min-h-[300px]">
@@ -179,8 +206,11 @@
 
                             <div class="grid grid-cols-2 gap-3 mb-4">
                                 <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/60 flex flex-col items-center text-center shadow-sm overflow-hidden">
-                                    <span class="text-[10px] text-slate-400 font-bold mb-0.5 truncate w-full">預期減碳貢獻</span>
-                                    <div class="text-xl font-black text-slate-800 flex items-baseline truncate w-full justify-center">
+                                    <div class="flex items-center justify-center gap-1 w-full">
+                                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider truncate">預期減碳貢獻</span>
+                                        <button type="button" onclick="window.showMethodologyModal()" title="點擊查看減碳計算方法學" class="text-base font-bold text-slate-400 hover:text-brand-500 transition-colors leading-none focus:outline-none px-0.5">ⓘ</button>
+                                    </div>
+                                    <div class="text-xl font-black text-slate-800 flex items-baseline truncate w-full justify-center mt-0.5">
                                         <span id="co2Display" class="font-mono truncate">0.6</span>
                                         <span class="text-xs font-bold text-brand-500 ml-0.5 font-mono">kg</span>
                                     </div>
@@ -196,10 +226,10 @@
 
                             <button id="sponsorBtn" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-bold text-xs shadow-sm transition-colors truncate">
                                 確認贊助並注入能量
-                    </button>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
                 <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between self-stretch h-full min-h-[450px]" id="feed-outer-wrapper">
                     <h3 class="text-base font-bold mb-4 flex items-center border-b border-slate-200 pb-3 break-words text-slate-800 shrink-0">
@@ -234,12 +264,12 @@
         </div>
     </section>
 
-    <section id="projects" class="py-20 bg-white border-t border-slate-100">
+    <section id="projects" class="py-20 bg-white">
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex justify-between items-end mb-10 border-b border-slate-100 pb-4">
                 <h2 class="text-2xl font-black text-slate-800 break-words">探索其他淨零專案</h2>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" id="project-list"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="project-list"></div>
         </div>
     </section>
 
@@ -252,7 +282,7 @@
                     <svg class="w-4 h-4 ml-1 inline shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                 </button>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 flex flex-col sm:flex-row gap-6 sm:gap-8 items-center cursor-pointer hover:border-brand-500 hover:shadow-md transition-all duration-300" onclick="showSuccessCaseDetails(0)">
                     <div class="w-full sm:w-1/3 h-32 bg-slate-50 rounded-xl flex items-center justify-center relative overflow-hidden border border-slate-200/60 shrink-0">
                         <img src="assets/projects/success_hualien.png" alt="花蓮光復國小專案" class="absolute inset-0 w-full h-full object-cover" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23ecfdf5\'/><text x=\'50\' y=\'60\' font-size=\'40\' text-anchor=\'middle\'>🏫</text></svg>'">
@@ -263,7 +293,7 @@
                         <p class="text-sm text-slate-400 mb-4 line-clamp-2 leading-relaxed">號召 1,250 位永續投資人共同支持，成功建置 50kW 屋頂型太陽能系統...</p>
                         <div class="flex flex-wrap gap-2 text-xs font-bold text-slate-500">
                             <div class="bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200/60 whitespace-nowrap flex-1 text-center sm:flex-none"><span class="text-brand-500 font-mono">30 噸</span> 年減碳</div>
-                            <div class="bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200/60 whitespace-nowrap flex-1 text-center sm:flex-none"><span class="text-blue-500 font-mono">12.5萬</span> EXP</div>
+                            <div class="bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200/60 whitespace-nowrap flex-1 text-center sm:flex-none"><span class="text-blue-500 font-mono">12.5萬</span> 經驗值</div>
                         </div>
                     </div>
                 </div>
@@ -277,7 +307,7 @@
                         <p class="text-sm text-slate-400 mb-4 line-clamp-2 leading-relaxed">結合當地發展協會與旅宿業者，建置 3 座完全由太陽能供電之共享機車...</p>
                         <div class="flex flex-wrap gap-2 text-xs font-bold text-slate-500">
                             <div class="bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200/60 whitespace-nowrap flex-1 text-center sm:flex-none"><span class="text-brand-500 font-mono">15 噸</span> 年減碳</div>
-                            <div class="bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200/60 whitespace-nowrap flex-1 text-center sm:flex-none"><span class="text-blue-500 font-mono">8.6萬</span> EXP</div>
+                            <div class="bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200/60 whitespace-nowrap flex-1 text-center sm:flex-none"><span class="text-blue-500 font-mono">8.6萬</span> 經驗值</div>
                         </div>
                     </div>
                 </div>
@@ -304,37 +334,46 @@
                     </div>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 flex-1">
-                        <div id="reward-1" class="reward-item reward-locked bg-white border border-slate-200 rounded-2xl p-5 text-center flex flex-col h-full">
+                        <div id="reward-1" class="reward-item reward-locked bg-white border border-slate-200 rounded-2xl p-5 text-center flex flex-col h-full justify-between">
                             <div class="w-14 h-14 bg-slate-50 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 border border-slate-100 shrink-0">🏅</div>
                             <h4 class="font-bold text-slate-800 mb-2 break-words text-sm">數位徽章</h4>
                             <p class="text-xs text-slate-400 mb-4 line-clamp-2 flex-1">可展示於個人數位憑證區，彰顯您的永續影響力。</p>
                             <div class="mt-auto">
-                                <div class="inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono" id="req-1">需 100 EXP</div>
+                                <div class="inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono" id="req-1">需 100 經驗值</div>
                             </div>
                         </div>
-                        <div id="reward-2" class="reward-item reward-locked bg-white border border-slate-200 rounded-2xl p-5 text-center flex flex-col h-full">
+                        <div id="reward-2" class="reward-item reward-locked bg-white border border-slate-200 rounded-2xl p-5 text-center flex flex-col h-full justify-between">
                             <div class="w-14 h-14 bg-slate-50 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 border border-slate-100 shrink-0">☕</div>
                             <h4 class="font-bold text-slate-800 mb-2 break-words text-sm">低碳咖啡兌換券</h4>
                             <p class="text-xs text-slate-400 mb-4 line-clamp-2 flex-1">支持地方創生與減碳農業，品嚐永續的好滋味。</p>
                             <div class="mt-auto">
-                                <div class="inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono" id="req-2">需 300 EXP</div>
+                                <div class="inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono" id="req-2">需 300 經驗值</div>
                             </div>
                         </div>
-                        <div id="reward-3" class="reward-item reward-locked bg-white border border-slate-200 rounded-2xl p-5 text-center flex flex-col h-full">
+                        <div id="reward-3" class="reward-item reward-locked bg-white border border-slate-200 rounded-2xl p-5 text-center flex flex-col h-full justify-between">
                             <div class="w-14 h-14 bg-slate-50 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 border border-slate-100 shrink-0">🌱</div>
                             <h4 class="font-bold text-slate-800 mb-2 break-words text-sm">碳吉寶寶環保杯</h4>
                             <p class="text-xs text-slate-400 mb-4 line-clamp-2 flex-1">使用 100% 循環再生材質製作的限量實體紀念品。</p>
                             <div class="mt-auto">
-                                <div class="inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono" id="req-3">需 800 EXP</div>
+                                <div class="inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono" id="req-3">需 800 經驗值</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-center items-center text-center">
-                    <span class="text-4xl mb-3">🍃</span>
-                    <h4 class="font-bold text-slate-800 mb-1">永續行動，即刻出發</h4>
-                    <p class="text-xs text-slate-400 max-w-[200px] leading-relaxed">您的每一筆支持，都將實時反映在系統動態與碳吉寶寶的成長軌跡中。</p>
+                <div id="sustainability-cta-card" class="bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between items-center text-center cursor-pointer hover:border-brand-500 hover:scale-[1.02] transition-all duration-300 group w-full">
+                    <div class="flex flex-col items-center">
+                        <span id="cta-baby-emoji" class="text-4xl mb-3 group-hover:animate-bounce">🌱</span>
+                        <h4 id="cta-baby-title" class="font-black text-slate-800 mb-1">碳吉寶寶 成長監控</h4>
+                        <p id="sustainability-cta-desc" class="text-xs text-slate-400 max-w-[200px] leading-relaxed mb-4">您的每一筆支持，都將實時反映在系統動態與碳吉寶寶的成長軌跡中。點擊試算注入能量！</p>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2.5 mb-2 relative overflow-hidden">
+                        <div id="cta-progress-bar" class="bg-brand-500 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                    <div class="flex justify-between w-full text-[10px] text-slate-400 font-bold font-mono px-1">
+                        <span>等級進化度</span>
+                        <span id="cta-progress-text" class="font-mono">0 / 100</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -360,21 +399,63 @@
                     <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 relative pt-12 hover:-translate-y-1 transition-transform duration-300 flex flex-col">
                         <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-slate-800 text-white rounded-full flex items-center justify-center text-sm font-black border-4 border-white shrink-0 font-mono">2</div>
                         <h4 class="text-base font-bold text-slate-800 mb-3 text-center break-words">銀行信託保管</h4>
-                        <p class="text-slate-500 leading-relaxed text-sm text-justify mb-6 flex-1">資金全數匯入合作銀行之「信託專戶」。依據專案設備建置進度，審核通過後始得分批撥款，落實專款專用。</p>
+                        <p class="text-slate-500 leading-relaxed text-sm text-justify mb-6 flex-1">資金全數匯入合作銀行之信託專戶。依據專案設備建置進度，審核通過後始得分批撥款，落實專款專用。</p>
                     </div>
                     
                     <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 relative pt-12 hover:-translate-y-1 transition-transform duration-300 flex flex-col">
                         <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-slate-800 text-white rounded-full flex items-center justify-center text-sm font-black border-4 border-white shrink-0 font-mono">3</div>
                         <h4 class="text-base font-bold text-slate-800 mb-3 text-center break-words">智能補貼分潤</h4>
-                        <p class="text-slate-500 leading-relaxed text-sm text-justify mb-6 flex-1">專案達標後，智能合約自動發放對應的 EXP 經驗值至您的帳戶，並提撥 3% 媒合服務費作為平台永續營運基金。</p>
+                        <p class="text-slate-500 leading-relaxed text-sm text-justify mb-6 flex-1">專案達標後，自動發放對應的經驗值至您的帳戶，並提撥 3% 媒合服務費作為平台永續營運基金。</p>
                     </div>
+                </div>
+
+                <div class="mt-12 bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-8">
+                    <h3 class="text-base font-bold text-slate-800 mb-6 flex items-center">
+                        <span class="mr-2">🏦</span> 信託專戶資金撥款進度牆
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+                        <div id="escrow-card-1" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between">
+                            <div class="absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg" id="escrow-badge-1">鎖定中</div>
+                            <div>
+                                <p class="text-xs font-bold mb-1 text-slate-700" id="escrow-title-1">第一階段：結構安全檢測</p>
+                                <p class="text-[11px] text-slate-400">工廠屋頂結構評估安全，防漏與防風測試複檢通過。</p>
+                            </div>
+                            <div class="mt-4 flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold" id="escrow-status-icon-1">🔒</span>
+                                <span class="text-[10px] text-slate-400 font-semibold" id="escrow-status-text-1">待計畫方正式提交技師簽證報告核收</span>
+                            </div>
+                        </div>
+                        <div id="escrow-card-2" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between">
+                            <div class="absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg" id="escrow-badge-2">鎖定中</div>
+                            <div>
+                                <p class="text-xs font-bold mb-1 text-slate-700" id="escrow-title-2">第二階段：設備進場簽收</p>
+                                <p class="text-[11px] text-slate-400">高效能太陽能板、逆變器與機組結構經監造簽章確認。</p>
+                            </div>
+                            <div class="mt-4 flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold" id="escrow-status-icon-2">🔒</span>
+                                <span class="text-[10px] text-slate-400 font-semibold" id="escrow-status-text-2">待材料進場並提交核實清冊解鎖</span>
+                            </div>
+                        </div>
+                        <div id="escrow-card-3" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between">
+                            <div class="absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg" id="escrow-badge-3">鎖定中</div>
+                            <div>
+                                <p class="text-xs font-bold mb-1 text-slate-700" id="escrow-title-3">第三階段：併網完工發電</p>
+                                <p class="text-[11px] text-slate-400">台電與市電併網工程驗收合格，正式啟動綠電生產運作。</p>
+                            </div>
+                            <div class="mt-4 flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold" id="escrow-status-icon-3">🔒</span>
+                                <span class="text-[10px] text-slate-400 font-semibold" id="escrow-status-text-3">待正式發電公文與監測對接解鎖</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-400 text-center mt-6">※ 預算撥付循信託保管流程，工程款隨進度經真人窗口核實分批解鎖，100%落實專款專用</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="education" class="py-20 bg-white">
-        <div class="max-w-3xl mx-auto px-6">
+        <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-12">
                 <span class="text-brand-500 font-bold tracking-wider text-xs mb-2 block uppercase">Sustainability Platform</span>
                 <h2 class="text-2xl sm:text-3xl font-black text-slate-800 break-words">TanJi 永續小學堂</h2>
@@ -382,78 +463,82 @@
                 <p class="text-slate-400 mt-4 font-semibold text-sm sm:text-base px-2 break-words">建構於嚴謹學理基礎之上的氣候行動，深入了解微型資金如何驅動龐大的環境變革。</p>
             </div>
 
-            <div class="space-y-4">
-                <div class="bg-slate-50 rounded-2xl border border-slate-200/80 transition-all duration-300">
-                    <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
-                        <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
-                            <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">01</span>
-                            <span class="truncate break-words">氣候資金缺口與轉型金融</span>
-                        </span>
-                        <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div class="px-5 pb-5 hidden">
-                        <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
-                            台灣中小企業在面對全球供應鏈的嚴格減碳要求時，往往面臨傳統融資門檻過高及綠色溢價的困境。本平台針對氣候資金缺口提出解方，透過群眾募資引導社會資金，協助高碳排或資源匱乏之企業進行實質的能源轉型，加速產業邁向淨零排放。
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                <div class="space-y-4">
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200/80 transition-all duration-300">
+                        <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
+                            <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
+                                <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">01</span>
+                                <span class="truncate break-words">氣候資金缺口與轉型金融</span>
+                            </span>
+                            <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="px-5 pb-5 hidden">
+                            <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
+                                臺灣中小企業在面對全球供應鏈的嚴格減碳要求時，往往面臨傳統融資門檻過高及綠色溢價的困境。本平台針對氣候資金缺口提出解方，透過群眾募資引導社會資金，協助高碳排或資源匱乏之企業進行實質的能源轉型，加速產業邁向淨零排放。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200/80 transition-all duration-300">
+                        <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
+                            <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
+                                <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">02</span>
+                                <span class="truncate break-words">減碳效益的科學量化機制</span>
+                            </span>
+                            <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="px-5 pb-5 hidden">
+                            <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
+                                平台上的減碳量並非憑空估算，而是具備嚴謹的科學與數據基礎。專案效益評估採用經濟部能源署公布之最新電力排碳係數為計算基準。民眾所投資建置之再生能源設備，其產生的每一度潔淨綠電，皆可精準換算為替代傳統化石燃料發電所減少的溫室氣體排放量，確保氣候貢獻的透明與可追溯性。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200/80 transition-all duration-300">
+                        <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
+                            <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
+                                <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">03</span>
+                                <span class="truncate break-words">普惠金融與氣候正義</span>
+                            </span>
+                            <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="px-5 pb-5 hidden">
+                            <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
+                                傳統綠色基礎建設的投資門檻極高，往往僅限於大型財團與機構投資人參與，這在無形中造成了氣候行動上的資本不平等。本平台運用數位金融科技，將投資門檻大幅降至百元級別，完美實踐普惠金融的核心價值。我們致力於落實聯合國永續發展目標，讓所有公民都能公平地參與並共享能源轉型帶來的環境與經濟紅利。
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-slate-50 rounded-2xl border border-slate-200/80 transition-all duration-300">
-                    <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
-                        <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
-                            <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">02</span>
-                            <span class="truncate break-words">減碳效益的科學量化機制</span>
-                        </span>
-                        <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div class="px-5 pb-5 hidden">
-                        <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
-                            平台上的減碳量並非憑空估算，而是具備嚴謹的科學與數據基礎。專案效益評估採用經濟部能源署公布之電力排碳係數為計算基準。民眾所投資建置之太陽能或生質能設備，其產生的每一度潔淨綠電，皆可精準換算為替代傳統化石燃料發電所減少的溫室氣體排放量，確保氣候貢獻的透明與可追溯性。
+                <div class="space-y-4">
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200/80 transition-all duration-300">
+                        <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
+                            <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
+                                <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">04</span>
+                                <span class="truncate break-words">智能合約與透明分潤</span>
+                            </span>
+                            <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="px-5 pb-5 hidden">
+                            <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
+                                為了確保回饋機制的公平與不可篡改性，平台計畫導入區塊鏈智能合約技術。當台電或監測設備確認綠電產生後，合約將自動觸發，精準地將減碳貢獻轉化為經驗值並發放至投資人的數位帳戶中。此舉不僅消除人為操作的風險，更建立起極高的信任基礎。
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="bg-slate-50 rounded-2xl border border-slate-200/80 transition-all duration-300">
-                    <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
-                        <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
-                            <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">03</span>
-                            <span class="truncate break-words">普惠金融與氣候正義</span>
-                        </span>
-                        <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div class="px-5 pb-5 hidden">
-                        <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
-                            傳統綠色基礎建設的投資門檻極高，往往僅限於大型財團與機構投資人參與，這在無形中造成了氣候行動上的資本不平等。本平台運用數位金融科技，將投資門檻大幅降至百元級別，完美實踐普惠金融的核心價值。我們致力於落實聯合國永續發展目標，讓所有公民都能公平地參與並共享能源轉型帶來的環境與經濟紅利。
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-slate-50 rounded-2xl border border-slate-200/80 transition-all duration-300">
-                    <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
-                        <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
-                            <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">04</span>
-                            <span class="truncate break-words">智能合約與透明分潤</span>
-                        </span>
-                        <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div class="px-5 pb-5 hidden">
-                        <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
-                            為了確保回饋機制的公平與不可篡改性，平台計畫導入區塊鏈智能合約技術。當台電或監測設備確認綠電產生後，合約將自動觸發，精準地將減碳貢獻轉化為 EXP 經驗值並發放至投資人的數位帳戶中。此舉不僅消除人為操作的風險，更建立起極高的信任基礎。
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-slate-50 rounded-2xl border border-slate-200/80 transition-all duration-300">
-                    <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
-                        <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
-                            <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">05</span>
-                            <span class="truncate break-words">循環經濟的在地實踐</span>
-                        </span>
-                        <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div class="px-5 pb-5 hidden">
-                        <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
-                            減碳不應僅止於工業端，更應落實於生活圈。平台不僅推動能源轉型，更將實體回饋品與地方創生、循環農業及低碳商家結合。透過虛實整合的獎勵機制，引導投資人在日常消費中持續支持綠色產業，打造生生不息的在地永續生態系。
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200/80 transition-all duration-300">
+                        <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
+                            <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
+                                <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">05</span>
+                                <span class="truncate break-words">循環經濟的在地實踐</span>
+                            </span>
+                            <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="px-5 pb-5 hidden">
+                            <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
+                                減碳不應僅止於工業端，更應落實於生活圈。平台推動能源轉型，更將實體回饋品與地方創生、循環農業及低碳商家結合。透過虛實整合的獎勵機制，引導投資人在日常消費中持續支持綠色產業，打造生生不息的在地永續生態系。
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -461,7 +546,44 @@
         </div>
     </section>
 
-    <section id="about" class="py-20 bg-slate-50 border-t border-slate-200">
+    <section id="regulatory-compliance" class="py-20 bg-slate-50 border-t border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <span class="text-brand-500 font-bold tracking-wider text-xs mb-2 block uppercase">Regulatory & Compliance</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-800 break-words">永續合規與信託公告專區</h2>
+                <div class="w-12 h-1 bg-brand-500 mx-auto mt-4 rounded-full"></div>
+                <p class="text-slate-400 mt-4 text-sm leading-relaxed text-center">
+                    本平台非金融機構，所有募資專案款項均遵循中華民國法規，全數匯入合作商業銀行信託部進行代收代付專戶保管。提案廠商必須依工程進度，正式檢具第三方專業查證報告送交銀行與平台法務官方處理窗口核收審查，經人工審核無誤後始得分批解鎖撥款。
+                </p>
+            </div>
+            
+            <div class="space-y-4">
+                <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 text-center md:text-left">官方合規文件下載</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <a href="docs/tanji_terms_privacy.pdf" target="_blank" class="flex items-center gap-3 bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-500 p-4 rounded-xl transition-all duration-300 group h-full shadow-sm">
+                        <span class="text-2xl shrink-0 group-hover:scale-110 transition-transform">📄</span>
+                        <span class="font-bold text-slate-700 text-xs line-clamp-2">TanJi 平台服務條款與隱私權政策</span>
+                    </a>
+                    <a href="docs/tanji_methodology.pdf" target="_blank" class="flex items-center gap-3 bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-500 p-4 rounded-xl transition-all duration-300 group h-full shadow-sm">
+                        <span class="text-2xl shrink-0 group-hover:scale-110 transition-transform">📄</span>
+                        <span class="font-bold text-slate-700 text-xs line-clamp-2">TanJi 淨零專案減碳效益計算方法學說明書</span>
+                    </a>
+                    <a href="docs/tanji_trust_agreement.pdf" target="_blank" class="flex items-center gap-3 bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-500 p-4 rounded-xl transition-all duration-300 group h-full shadow-sm">
+                        <span class="text-2xl shrink-0 group-hover:scale-110 transition-transform">📄</span>
+                        <span class="font-bold text-slate-700 text-xs line-clamp-2">綠能專案專款專用信託契約三方範本</span>
+                    </a>
+                    <a href="docs/tanji_milestone_form.pdf" target="_blank" class="flex items-center gap-3 bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-500 p-4 rounded-xl transition-all duration-300 group h-full shadow-sm">
+                        <span class="text-2xl shrink-0 group-hover:scale-110 transition-transform">📄</span>
+                        <span class="font-bold text-slate-700 text-xs line-clamp-2">工程階段驗證暨銀行撥款申請書表</span>
+                    </a>
+                </div>
+            </div>
+            
+            <p class="text-[11px] text-slate-400 font-semibold text-center font-mono mt-8">法律合規與申訴查核官方窗口：tanji2026@gmail.com</p>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-white">
         <div class="max-w-6xl mx-auto px-6">
             <div class="bg-white rounded-3xl p-6 sm:p-12 border border-slate-200 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-1 bg-brand-500"></div>
@@ -511,6 +633,28 @@
             </div>
         </div>
     </footer>
+
+    <div id="methodologyModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center transition-opacity p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-xl w-full relative max-h-[85dvh] overflow-y-auto border border-slate-200">
+            <button onclick="document.getElementById('methodologyModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-2 rounded-full shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="mb-4 border-b border-slate-100 pb-4 mt-2">
+                <h3 class="text-xl font-black text-slate-800">減碳效益計算方法學</h3>
+                <p class="text-xs text-brand-500 font-bold mt-1">依據經濟部能源署最新售電電力排碳係數驅動</p>
+            </div>
+            <div class="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed text-justify font-medium">
+                <p>本平台之減碳效益具備嚴謹的科學數據基礎，全面排除憑空估算之漂綠風險。環境效益公式如下：</p>
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-center font-bold text-slate-800 text-[11px] sm:text-xs">
+                    個人減碳量 = (個人贊助額 / 專案總目標) × 首年預估總效益 × 0.474
+                </div>
+                <p>其中，<span class="text-brand-600 font-bold">0.474 公斤 / 度</span> 為經濟部能源署最新公告之臺灣售電電力排碳係數基準。針對循環快遞包裝等直接減量類專案，則依據專案原廠盤查之直接減量總量按出資比例分配。每單次投資 10 元新台幣，另可獲得 1 經驗值注入碳吉寶寶成長系統中。</p>
+            </div>
+            <div class="mt-6 text-center">
+                <button onclick="document.getElementById('methodologyModal').classList.add('hidden')" class="w-full sm:w-auto bg-slate-800 text-white px-6 py-2.5 rounded-xl font-bold text-xs hover:bg-slate-700 transition-colors">我明瞭了</button>
+            </div>
+        </div>
+    </div>
 
     <div id="impactModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center transition-opacity p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-3xl w-full relative max-h-[90dvh] overflow-y-auto border border-slate-200">
@@ -609,16 +753,16 @@
                 </div>
                 <div>
                     <h3 class="text-base font-bold text-brand-600 mb-2 flex items-center break-words"><span class="text-lg mr-2 shrink-0">🎁</span> 贊助者專屬權益</h3>
-                    <p class="text-sm leading-relaxed mb-2 text-justify">除了獲得對應的碳吉寶寶 EXP 經驗值以解鎖全站回饋品外，本專案將於完工後提供：</p>
+                    <p class="text-sm leading-relaxed mb-2 text-justify">除了獲得對應的經驗值以解鎖全站回饋品外，本專案將於完工後提供：</p>
                     <ul id="modal-project-perks" class="list-disc list-inside text-sm space-y-1.5 ml-1 text-slate-500">
-                        <li class="break-words">個人專屬「淨零貢獻數位證書」</li>
+                        <li class="break-words">個人專屬「淨零貢獻數位電子證書」</li>
                         <li class="break-words">建置進度與發電報表每季電子報更新</li>
                         <li class="break-words">優先參訪綠能示範廠區資格（限額）</li>
                     </ul>
                 </div>
             </div>
             <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end">
-                <button onclick="document.getElementById('projectDetailsModal').classList.add('hidden')" class="w-full sm:w-auto bg-slate-800 text-white px-6 py-3.5 rounded-xl font-bold hover:bg-slate-700 transition-colors text-sm truncate">我瞭解了，前往參與</button>
+                <button onclick="document.getElementById('projectDetailsModal').classList.add('hidden')" class="w-full sm:w-auto bg-slate-800 text-white px-6 py-3.5 rounded-xl font-bold text-xs hover:bg-slate-700 transition-colors truncate">我瞭解了，前往參與</button>
             </div>
         </div>
     </div>
@@ -669,9 +813,16 @@
             <button onclick="document.getElementById('paymentModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-2 rounded-full z-10 shrink-0">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <div class="text-center mb-6 border-b border-slate-100 pb-4 mt-2 pr-8 sm:pr-0">
-                <h2 class="text-xl font-black text-slate-800 break-words">選擇支付方式</h2>
-                <p class="text-sm text-slate-400 mt-2 font-semibold">本次贊助金額：<span id="payment-amount" class="text-brand-500 font-bold text-lg font-mono ml-1"></span> 元</p>
+            <div class="text-center mb-5 border-b border-slate-100 pb-4 mt-2">
+                <h2 class="text-xl font-black text-navy-800 break-words">贊助專案確認</h2>
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-left mt-3 space-y-1">
+                    <p class="text-[11px] text-slate-400 font-bold">專案目標：<span id="payment-target-project" class="text-slate-700"></span></p>
+                    <p class="text-[11px] text-slate-400 font-bold">本次贊助：<span class="text-brand-500 font-mono font-black text-sm">NT$ <span id="payment-amount"></span></span> 元</p>
+                    <p class="text-[11px] text-slate-400 font-bold">減碳效益：<span id="payment-co2-val" class="text-emerald-600 font-mono font-bold"></span> kg</p>
+                </div>
+                <div class="mt-3 p-3 bg-brand-50 rounded-xl border border-brand-100 text-left text-xs font-semibold text-brand-700 leading-tight">
+                    🎁 專屬回饋：<span id="payment-project-perk"></span>
+                </div>
             </div>
             
             <div class="grid grid-cols-1 gap-3">
@@ -687,12 +838,8 @@
                     <span class="text-2xl shrink-0">🏪</span>
                     <span class="font-bold text-slate-700 text-sm truncate">超商代碼繳費</span>
                 </button>
-                <button class="payment-method-btn bg-slate-50 hover:bg-brand-50 border border-slate-200 hover:border-brand-500 p-4 rounded-xl flex items-center gap-3 transition-all">
-                    <span class="text-2xl shrink-0">👛</span>
-                    <span class="font-bold text-slate-700 text-sm truncate">電子錢包</span>
-                </button>
             </div>
-            <p class="text-xs text-center text-slate-400 mt-5 font-semibold break-words">本平台採用銀行信託專戶管理，確保資金安全</p>
+            <p class="text-[10px] text-center text-slate-400 mt-5 font-semibold break-words">本平台採用銀行信託專戶管理，確保資金安全</p>
         </div>
     </div>
 
@@ -717,7 +864,24 @@
                     <label class="block text-xs font-bold text-slate-500 mb-2">設定新募資金額 (NT$)</label>
                     <input type="number" id="adminProjectRaised" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none font-semibold text-slate-800 text-xs font-mono">
                 </div>
-                <button type="submit" class="w-full bg-brand-500 text-white rounded-xl py-3 font-bold hover:bg-brand-600 transition-colors text-sm truncate">套用金額設定</button>
+                
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                    <h4 class="text-xs font-bold text-slate-700 flex items-center gap-1">🏦 信託撥款審查 (人工核收驗證)</h4>
+                    <label class="flex items-center gap-2 text-xs font-semibold text-slate-600 cursor-pointer select-none">
+                        <input type="checkbox" id="adminStage1" class="rounded border-slate-300 text-brand-500 focus:ring-brand-500 w-4 h-4">
+                        第一階段：結構安全檢測核收通過
+                    </label>
+                    <label class="flex items-center gap-2 text-xs font-semibold text-slate-600 cursor-pointer select-none">
+                        <input type="checkbox" id="adminStage2" class="rounded border-slate-300 text-brand-500 focus:ring-brand-500 w-4 h-4">
+                        第二階段：設備進場簽收核收通過
+                    </label>
+                    <label class="flex items-center gap-2 text-xs font-semibold text-slate-600 cursor-pointer select-none">
+                        <input type="checkbox" id="adminStage3" class="rounded border-slate-300 text-brand-500 focus:ring-brand-500 w-4 h-4">
+                        第三階段：併網完工發電核收通過
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-500 text-white rounded-xl py-3 font-bold hover:bg-brand-600 transition-colors text-sm truncate">套用工程與金額設定</button>
             </form>
             <div class="border-t border-slate-100 my-6 pt-6">
                 <h3 class="font-bold text-slate-800 mb-3 text-sm">插播平台公告 (推送到動態牆)</h3>
@@ -751,7 +915,7 @@
             
             <div id="chatMessages" class="flex-1 bg-slate-50 p-4 overflow-y-auto flex flex-col gap-3 text-sm scroll-smooth">
                 <div class="self-start bg-white p-3 rounded-2xl rounded-tl-sm border border-slate-100 max-w-[90%] text-slate-600 leading-relaxed font-semibold break-words">
-                    嗨！我是碳吉寶寶 🍃<br><br>你可以拖拉「投資試算區」的滑桿來試算減碳量，或是問我任何關於「手續費」、「回饋獎勵」或「如何贊助」的問題喔！
+                    嗨！我是碳吉寶寶 🍃<br><br>你可以拖拉投資試算區的滑桿來模擬減碳量，或是問我任何關於服務費、回饋獎勵或如何贊助的問題喔！
                 </div>
             </div>
 
@@ -775,7 +939,7 @@
                 <span class="text-4xl drop-shadow">🎉</span>
             </div>
             <h2 class="text-2xl font-black text-slate-800 mb-2 tracking-tight break-words">感謝您的贊助</h2>
-            <p class="text-sm text-slate-500 mb-6 leading-relaxed break-words flex-1">本次成功為地球減少了 <span id="modal-co2" class="font-black text-brand-500 text-base font-mono whitespace-nowrap"></span> kg 的碳排，帳戶已獲得 <span id="modal-exp" class="font-black text-blue-500 text-base font-mono whitespace-nowrap"></span> EXP。</p>
+            <p class="text-sm text-slate-500 mb-6 leading-relaxed break-words flex-1">本次成功為地球減少了 <span id="modal-co2" class="font-black text-brand-500 text-base font-mono whitespace-nowrap"></span> kg 的碳排，帳戶已獲得 <span id="modal-exp" class="font-black text-blue-500 text-base font-mono whitespace-nowrap"></span> 經驗值。</p>
             <button id="closeSuccessBtn" class="w-full bg-slate-800 hover:bg-slate-700 text-white rounded-xl py-3 font-bold text-sm transition-colors break-words truncate mt-auto shrink-0">
                 繼續探索專案
             </button>
@@ -802,7 +966,7 @@
                             <span class="text-[10px] bg-slate-800 text-white px-2 py-0.5 rounded-full font-bold font-mono whitespace-nowrap shrink-0" id="acc-level">Lv.1</span>
                         </h3>
                         <p class="text-sm text-brand-500 font-bold break-words flex items-baseline justify-center sm:justify-start w-full truncate">
-                            總經驗值：<span id="acc-exp" class="text-base font-black font-mono whitespace-nowrap truncate max-w-[100px] ml-1">0</span> <span class="ml-1 shrink-0 text-xs font-mono">EXP</span>
+                            總經驗值：<span id="acc-exp" class="text-base font-black font-mono whitespace-nowrap truncate max-w-[100px] ml-1">0</span> <span class="ml-1 shrink-0 text-xs font-mono">經驗值</span>
                         </p>
                     </div>
                 </div>
@@ -853,8 +1017,7 @@
                     </div>
                     <div class="border-t border-dashed border-slate-800 pt-3 flex flex-col gap-2">
                         <div class="flex justify-between items-center text-[9px] text-slate-400">
-                            <span>REDEEMABLE VOUCHERS</span>
-                            <span class="font-mono text-brand-400" id="cert-vouchers-status">0 / 3 解鎖</span>
+                            <span class="navy-vouchers-status" id="cert-vouchers-status">0 / 3 解鎖</span>
                         </div>
                         <div class="flex items-center justify-between gap-1 py-0.5" id="barcode-strip">
                             <div class="flex-1 h-8 bg-white/10 rounded overflow-hidden flex items-center justify-center relative">
@@ -879,6 +1042,35 @@
                 </button>
             </div>
 
+        </div>
+    </div>
+
+    <div id="rewardDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center transition-opacity p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full relative border border-slate-200 text-center transform scale-95 transition-all">
+            <button onclick="document.getElementById('rewardDetailModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 bg-slate-50 p-1.5 rounded-full z-10">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div id="reward-modal-icon" class="w-16 h-16 bg-brand-50 rounded-full mx-auto flex items-center justify-center mb-4 text-3xl border border-brand-100">☕</div>
+            <h3 id="reward-modal-title" class="text-xl font-black text-slate-800 mb-1">低碳咖啡兌換券</h3>
+            <p id="reward-modal-status" class="text-xs text-brand-500 font-bold mb-4">恭喜解鎖！請至合作店家出示兌換</p>
+            
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/60 my-4 space-y-3">
+                <div class="flex flex-col items-center justify-center p-2 bg-white rounded-lg border border-slate-200 shadow-sm">
+                    <div class="w-48 h-10 flex justify-around items-center opacity-80 mb-1">
+                        <span class="w-1 bg-slate-800 h-full"></span>
+                        <span class="w-0.5 bg-slate-800 h-full"></span>
+                        <span class="w-2 bg-slate-800 h-full"></span>
+                        <span class="w-0.5 bg-slate-800 h-full"></span>
+                        <span class="w-1.5 bg-slate-800 h-full"></span>
+                        <span class="w-1 bg-slate-800 h-full"></span>
+                        <span class="w-0.5 bg-slate-800 h-full"></span>
+                        <span class="w-2 bg-slate-800 h-full"></span>
+                    </div>
+                    <span id="reward-modal-code" class="text-xs font-mono font-bold tracking-widest text-slate-500">TJ-COFFEE-FREE88</span>
+                </div>
+                <p id="reward-modal-desc" class="text-xs text-slate-400 text-justify leading-relaxed">本券支持臺灣在地減碳農業，可於全台合作綠色創生商家免費兌換熱美式乙杯。限一次性兌換使用。</p>
+            </div>
+            <button onclick="document.getElementById('rewardDetailModal').classList.add('hidden')" class="w-full bg-slate-800 hover:bg-slate-700 text-white rounded-xl py-3 font-bold text-sm transition-colors">我知道了</button>
         </div>
     </div>
     
@@ -928,6 +1120,10 @@
         const paymentModal = document.getElementById('paymentModal');
         const paymentAmountDisplay = document.getElementById('payment-amount');
 
+        const mobileMenuToggleBtn = document.getElementById('mobileMenuToggleBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMobileMenuBtn = document.getElementById('closeMobileMenuBtn');
+
         const initialUserData = {
             invested: 0,
             co2: 0,
@@ -945,31 +1141,213 @@
         };
 
         const activeFeedsCache = [
-            { name: '台中王先生', action: '贊助了 漁電共生智慧養殖 3,000 元', exp: 300, timeStr: '1分鐘前' },
-            { name: '彰化林小姐', action: '贊助了 屏東養豬場沼氣發電 5,000 元', exp: 500, timeStr: '3分鐘前' },
-            { name: '高雄劉先生', action: '贊助了 100kW 廠房屋頂太陽能 10,000 元', exp: 1000, timeStr: '5分鐘前' }
+            { name: '台中王先生', action: '贊助了 漁電共生智慧養殖專案 3,000 元', exp: 300, timeStr: '1分鐘前' },
+            { name: '彰化林小姐', action: '贊助了 屏東養豬場沼氣發電專案 5,000 元', exp: 500, timeStr: '3分鐘前' },
+            { name: '高雄劉先生', action: '贊助了 廠房屋頂太陽能專案 10,000 元', exp: 1000, timeStr: '5分鐘前' }
         ];
 
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = `px-6 py-3.5 rounded-2xl shadow-lg text-sm font-bold transition-all duration-300 transform translate-y-2 opacity-0 flex items-center gap-2 pointer-events-auto bg-white border border-slate-200`;
-            if (type === 'error') {
-                toast.classList.add('text-red-600', 'border-red-100', 'bg-red-50');
-            } else {
-                toast.classList.add('text-brand-500', 'border-brand-100', 'bg-brand-50');
+        const rewardItemsData = {
+            1: { title: "專屬永續數位徽章", icon: "🏅", code: "TJ-BADGE-ACQUIRED", desc: "此徽章已自動防偽綁定您的電子憑證編號，可永久於個人憑證展示區作為綠色貢獻勳章展示。" },
+            2: { title: "低碳咖啡免費兌換券", icon: "☕", code: "TJ-COFFEE-FREE88", desc: "本券遵循經濟部能源署電力排碳係數方法學發放。出示此條碼可於全台合作減碳綠色咖啡店家免費兌換環保熱美式咖啡乙杯。" },
+            3: { title: "碳吉寶寶實體環保杯", icon: "🌱", code: "TJ-CUP-GO-GREEN99", desc: "限量再生材質環保杯！我們已將您的兌換編號寫入去中心化存根，後續將以 Email 寄送表單收集收件資訊。" }
+        };
+
+        const levelDefinition = [
+            { level: 1, title: "種子萌發期", emoji: "🌱", minExp: 0, nextExp: 100, statusText: "寶寶剛吸收了光合作用，正在大口呼吸！", img: "assets/tanjibaby/tanjibaby.png" },
+            { level: 2, title: "幼苗展葉期", emoji: "🌿", minExp: 100, nextExp: 300, statusText: "寶寶感受到屋頂型太陽能的能量，葉片正在發光！", img: "assets/tanjibaby/tanjibaby.png" },
+            { level: 3, title: "綠意灌木期", emoji: "🌳", minExp: 300, nextExp: 500, statusText: "寶寶的根系已經對接到屏東沼氣池，充滿科技動力！", img: "assets/tanjibaby/tanjibaby.png" },
+            { level: 4, title: "普惠大樹期", emoji: "🌴", minExp: 500, nextExp: 800, statusText: "寶寶進化成完全體了，正在為全台中小企業抵消碳足跡！", img: "assets/tanjibaby/tanjibaby.png" },
+            { level: 5, title: "淨零守護神", emoji: "👑", minExp: 800, nextExp: 2000, statusText: "檢測到爆發級淨零貢獻！寶寶正在發射發光特效！", img: "assets/tanjibaby/tanjibaby.png" }
+        ];
+
+        const projects = [
+            { 
+                title: "廠房屋頂太陽能專案", 
+                org: "提案方：在地綠能中小企業聯盟", 
+                raised: 3450000, 
+                goal: 5000000, 
+                time: "剩餘 15 天",
+                image: "assets/projects/project_solar.png",
+                badge: "太陽能",
+                yearlyKwh: 120000,
+                perk: "個人專屬淨零貢獻數位憑證與優先案場參訪資格",
+                escrowStage1: false, escrowStage2: false, escrowStage3: false,
+                desc: "協助在地傳統製造廠房進行能源轉型。募集資金用於採購高效能單晶矽太陽能模組、逆變器與綠電併網工程。透過信託專戶管理，確保資金專款專用，於工程建置達成特定里程碑後始得撥款。",
+                benefits: [
+                    "預估首年發電量：120,000 度潔淨綠電",
+                    "年減少溫室氣體：約 56.8 噸 CO2e 排放",
+                    "等同於種植了 5,000 棵樹的年均吸碳量效益"
+                ],
+                perks: [
+                    "獲得個人專屬淨零貢獻數位電子證書",
+                    "每季接收專案建置進度與實時發電量電子報",
+                    "優先獲得示範綠能廠區參訪資格"
+                ]
+            },
+            { 
+                title: "屏東養豬場沼氣發電專案", 
+                org: "提案方：循環農業合作社", 
+                raised: 840000, 
+                goal: 2000000, 
+                time: "剩餘 30 天",
+                image: "assets/projects/project_biomass.png",
+                badge: "生質能",
+                yearlyKwh: 95000,
+                perk: "優先獲贈合作農場生產之有機鮮果箱一份",
+                escrowStage1: false, escrowStage2: false, escrowStage3: false,
+                desc: "協助屏東萬丹鄉的中小型畜牧場導入先進厭氧發酵與沼氣收集發電系統。將豬隻糞尿與有機廢水轉化為綠電，並產出高品質無異味的有機沼渣肥料，完美實踐零廢棄、零污染的循環經濟願景。",
+                benefits: [
+                    "預估首年發電量：95,000 度生質綠能發電",
+                    "年減少溫室氣體：約 45.0 噸 CO2e 排放",
+                    "消除畜牧場周遭環境異味，改善鄰里生活品質"
+                ],
+                perks: [
+                    "獲得專屬沼氣循環經濟數位憑證與紀念徽章",
+                    "優先獲贈合作農場生產之有機鮮果箱",
+                    "定期收到循環農業產銷成果回報電子報"
+                ]
+            },
+            { 
+                title: "電商物流循環包裝專案", 
+                org: "提案方：綠色電商新創團隊", 
+                raised: 880000, 
+                goal: 1000000, 
+                time: "剩餘 5 天",
+                image: "assets/projects/project_circular.png",
+                badge: "循環經濟",
+                yearlyKwh: 100000,
+                perk: "獲得合作綠色電商平台免運券與 100 元折價券",
+                escrowStage1: false, escrowStage2: false, escrowStage3: false,
+                desc: "網購包裝正造成龐大的垃圾與碳排壓力。本專案旨在全台各大主流電商與超商通路全面導入可重覆使用 50 次以上的耐磨快遞箱，大幅減少一次性紙箱與塑膠膠帶的消耗。",
+                benefits: [
+                    "首年可減少網購廢棄包材垃圾約 15,000 公斤",
+                    "預估重覆使用次數達 50,000 次以上",
+                    "年減少溫室氣體：約 47.4 噸 CO2e 碳足跡"
+                ],
+                perks: [
+                    "獲得全站減塑先鋒數位憑證勳章",
+                    "獲得合作電商平台免運券與 100 元折價券",
+                    "專案成效報告與海洋保育成果數據即時推播"
+                ]
+            },
+            { 
+                title: "偏鄉節能照明計畫", 
+                org: "提案方：綠色社區創生協會", 
+                raised: 420000, 
+                goal: 800000, 
+                time: "剩餘 22 天",
+                image: "assets/projects/project_led.png",
+                badge: "節能轉型",
+                yearlyKwh: 80000,
+                perk: "獲贈偏鄉在地小農手作天然香草茶包組一份",
+                escrowStage1: false, escrowStage2: false, escrowStage3: false,
+                desc: "協助臺灣東部十個偏鄉部落更換老舊高耗能水銀燈泡為最新節能智慧 LED。除了能直接為弱勢社區省下 60% 的公用電費支出，更利用技術建立微型碳排抵消機制。",
+                benefits: [
+                    "預估首年節電量：80,000 度電力",
+                    "年減少溫室氣體：約 37.9 噸 CO2e 碳排",
+                    "協助偏鄉部落建立永續節能循環照明環境"
+                ],
+                perks: [
+                    "獲得個人專屬偏鄉節能貢獻數位憑證",
+                    "每季收到智慧節能電費回饋監測數據報告表",
+                    "獲得偏鄉在地小農手作天然香草茶包組一份"
+                ]
+            },
+            { 
+                title: "漁電共生智慧養殖計畫", 
+                org: "提案方：沿海永續水產聯盟", 
+                raised: 1250000, 
+                goal: 3000000, 
+                time: "剩餘 40 天",
+                image: "assets/projects/project_fishery.png",
+                badge: "漁電共生",
+                yearlyKwh: 210000,
+                perk: "獲得漁電共生科技綠色無毒蝦購買專屬 75 折優惠券",
+                escrowStage1: false, escrowStage2: false, escrowStage3: false,
+                desc: "推廣新型沿海永續水產養殖。於魚塭上方搭設透光式太陽能光電面板，下方則引進 AI 生態智慧科技，維持水質穩定，並於鄰近區域保留 20% 水鳥友善生態棲息地。",
+                benefits: [
+                    "預估首年發電量：210,000 度潔淨光電",
+                    "年減少溫室氣體：約 99.5 噸 CO2e 碳足跡",
+                    "復育 1.2 公頃水鳥友善沿海溼地與生態棲息地"
+                ],
+                perks: [
+                    "獲得個人專屬沿海生態守護者數位憑證",
+                    "獲得漁電共生科技綠色無毒蝦購買專屬 75 折優惠",
+                    "受邀參加每年秋季沿海棲地候鳥觀察與親子生態營"
+                ]
             }
-            toast.innerText = message;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.classList.remove('translate-y-2', 'opacity-0');
-            }, 50);
-            setTimeout(() => {
-                toast.classList.add('translate-y-2', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
+        ];
+
+        const successCases = [
+            {
+                title: "花蓮光復國小綠能與社會公益專案",
+                org: "合作單位：花蓮光復國小與社區發展協會",
+                image: "assets/projects/success_hualien.png",
+                badge: "已完工發電",
+                desc: "本專案成功號召了 1,250 位永續投資人共同支持，於花蓮光復國小校舍屋頂完成建置 50kW 屋頂型太陽能發電系統。多餘電力售予台電的收益更 100% 回饋成立環境教育基金。",
+                benefits: [
+                    "累計發電效益：每年約可產生 62,000 度潔淨綠電",
+                    "累積減少溫室氣體：約 30 噸 CO2e 年排放",
+                    "售電回饋效益：每年穩定支持 120 位偏鄉學童的環保科學課"
+                ],
+                perks: [
+                    "數位榮譽榜：所有贊助人姓名永久保留於校區紀念牆",
+                    "每年收到學童親筆手寫的永續感謝卡與成長日記",
+                    "受邀參加每年暑期舉辦之偏鄉綠能生態夏令營"
+                ]
+            },
+            {
+                title: "綠島低碳旅遊共享電動機車租賃計畫",
+                org: "合作單位：綠島民宿聯盟與低碳島推廣委員會",
+                image: "assets/projects/success_greenisland.png",
+                badge: "第一期結案",
+                desc: "為了解決綠島旺季旅遊期間燃油機車帶來的廢氣與強烈噪音污染，本專案首期發起募資，成功於島上建置了 3 座完全由太陽能供電的智慧機車充電站，並率先引進 50 輛共享電動機車。",
+                benefits: [
+                    "累計減少溫室氣體：約 15 噸 CO2e 碳排",
+                    "旅遊體驗升級：實現零碳排放、零分貝噪音之靜謐旅遊體驗",
+                    "充電站成效：3 座 100% 潔淨能源充電站運作正常"
+                ],
+                perks: [
+                    "獲得個人專屬綠島低碳守護者數位憑證",
+                    "前往綠島租賃合作機車享 8 折綠色推廣優惠",
+                    "獲得限量版碳吉島嶼手工木雕紀念鑰匙圈"
+                ]
+            }
+        ];
+
+        let currentProjectIndex = 0;
+        let globalCo2 = 124.5;
+        let hasCheckedInToday = false;
+
+        let confettiParticles = [];
+        let animationFrameId = null;
+
+        function getLocalData() {
+            try {
+                const stored = localStorage.getItem('tanji_local_store_' + appId);
+                return stored ? JSON.parse(stored) : null;
+            } catch (e) { return null; }
         }
-        window.showToast = showToast;
+
+        function setLocalData(data) {
+            try { localStorage.setItem('tanji_local_store_' + appId, JSON.stringify(data)); } catch (e) {}
+        }
+
+        function getLevelProgress(exp) {
+            let activeDef = levelDefinition[0];
+            for (let i = 0; i < levelDefinition.length; i++) {
+                if (exp >= levelDefinition[i].minExp) { activeDef = levelDefinition[i]; }
+            }
+            const currentExpInLevel = exp - activeDef.minExp;
+            const levelRange = activeDef.nextExp - activeDef.minExp;
+            let pct = Math.min(Math.floor((currentExpInLevel / levelRange) * 100), 100);
+            if (activeDef.level === 5) { pct = 100; }
+            return {
+                pct: pct, current: exp, max: activeDef.nextExp,
+                title: activeDef.title, emoji: activeDef.emoji,
+                statusText: activeDef.statusText, level: activeDef.level, img: activeDef.img
+            };
+        }
 
         function simulateLocalLogin(emailText, isAdmin = false) {
             currentUser = { uid: 'local-' + Date.now(), email: emailText, isAnonymous: emailText.includes('訪客') };
@@ -980,30 +1358,35 @@
             loginModal.classList.add('hidden');
             userEmailDisplay.innerText = currentUser.email;
 
-            if (isAdmin) {
+            const cache = getLocalData();
+            if (cache) {
+                Object.assign(personalData, cache);
+            } else if (isAdmin || emailText === 'admin@tanji.com') {
                 personalData.role = "admin";
                 personalData.exp = 2500;
                 personalData.level = 5;
                 personalData.invested = 25000;
                 personalData.co2 = 300.0;
-                document.getElementById('adminBtn').classList.remove('hidden');
+                setLocalData(personalData);
             } else {
                 Object.assign(personalData, initialUserData);
+                setLocalData(personalData);
+            }
+
+            if (personalData.role === 'admin') {
+                document.getElementById('adminBtn').classList.remove('hidden');
+            } else {
                 document.getElementById('adminBtn').classList.add('hidden');
             }
 
             updateUIFromData(personalData);
-            showToast(isAdmin ? "已以模擬管理員登入！" : "本地模擬登入成功！");
+            showToast(personalData.role === 'admin' ? "已以管理員權限登入" : "登入成功");
         }
 
         const initSilentAuth = async () => {
             try {
-                if (!auth.currentUser) {
-                    await signInAnonymously(auth);
-                }
-            } catch (err) {
-                console.warn(err);
-            }
+                if (!auth.currentUser) { await signInAnonymously(auth); }
+            } catch (err) { console.warn(err); }
         };
         initSilentAuth();
 
@@ -1019,14 +1402,15 @@
                 userEmailDisplay.innerText = user.isAnonymous ? '訪客使用者' : user.email;
 
                 const userDocRef = doc(db, 'artifacts', appId, 'users', user.uid, 'profile', 'data');
-                
                 try {
                     const docSnap = await getDoc(userDocRef);
                     if (!docSnap.exists()) {
-                        await setDoc(userDocRef, { ...initialUserData, email: user.isAnonymous ? "訪客 (匿名)" : user.email });
+                        const localCache = getLocalData() || initialUserData;
+                        await setDoc(userDocRef, { ...localCache, email: user.isAnonymous ? "訪客使用者" : user.email });
                     }
                 } catch(e) {
-                    Object.assign(personalData, initialUserData);
+                    const cache = getLocalData() || initialUserData;
+                    Object.assign(personalData, cache);
                     updateUIFromData(personalData);
                 }
 
@@ -1034,16 +1418,15 @@
                     if (docSnap.exists()) {
                         const data = docSnap.data();
                         Object.assign(personalData, data);
+                        setLocalData(personalData);
                         updateUIFromData(personalData);
-                        if (data.role === 'admin') {
+                        if (data.role === 'admin' || user.email === 'admin@tanji.com') {
                             document.getElementById('adminBtn').classList.remove('hidden');
                         } else {
                             document.getElementById('adminBtn').classList.add('hidden');
                         }
                     }
-                }, (error) => {
-                    console.warn(error);
-                });
+                }, (error) => { console.warn(error); });
 
             } else {
                 if(!currentUser || !currentUser.uid.startsWith('local-')) {
@@ -1052,21 +1435,20 @@
                     loginShowBtn.classList.remove('auth-hidden');
                     loginOverlay.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
                     document.getElementById('adminBtn').classList.add('hidden');
-                    Object.assign(personalData, initialUserData);
+                    const cache = getLocalData() || initialUserData;
+                    Object.assign(personalData, cache);
                     updateUIFromData(personalData);
                 }
             }
         });
 
-        const showError = (msg) => {
+        const Whitehead = (msg) => {
             authError.innerText = msg;
             authError.classList.remove('hidden');
             setTimeout(() => authError.classList.add('hidden'), 3000);
         };
 
-        loginShowBtn.addEventListener('click', () => {
-            loginModal.classList.remove('hidden');
-        });
+        loginShowBtn.addEventListener('click', () => { loginModal.classList.remove('hidden'); });
 
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -1078,7 +1460,7 @@
             }
             try {
                 await signInWithEmailAndPassword(auth, email, password);
-                showToast("登入成功！");
+                showToast("登入成功");
             } catch (error) {
                 simulateLocalLogin(email, false);
             }
@@ -1086,7 +1468,7 @@
 
         signUpBtn.addEventListener('click', async () => {
             if(!emailInput.validity.valid || !passwordInput.validity.valid) {
-                 showError("請輸入有效的電子郵件與密碼");
+                 Whitehead("請輸入有效的電子郵件與密碼");
                  return;
             }
             const email = emailInput.value;
@@ -1095,7 +1477,7 @@
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const userDocRef = doc(db, 'artifacts', appId, 'users', userCredential.user.uid, 'profile', 'data');
                 await setDoc(userDocRef, { ...initialUserData, email: email });
-                showToast("帳號註冊成功並已登入！");
+                showToast("帳號註冊成功");
             } catch (error) {
                 simulateLocalLogin(email);
             }
@@ -1105,14 +1487,15 @@
             try {
                 const userCredential = await signInAnonymously(auth);
                 const userDocRef = doc(db, 'artifacts', appId, 'users', userCredential.user.uid, 'profile', 'data');
-                await setDoc(userDocRef, { ...initialUserData, email: "訪客 (匿名)" });
-                showToast("已以訪客身分登入體驗！");
+                await setDoc(userDocRef, { ...initialUserData, email: "訪客使用者" });
+                showToast("已以訪客身分體驗");
             } catch (error) {
-                simulateLocalLogin('訪客 (本地體驗)');
+                simulateLocalLogin('訪客使用者');
             }
         });
 
         logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('tanji_local_store_' + appId);
             if(currentUser && currentUser.uid.startsWith('local-')) {
                 currentUser = null;
                 userControls.classList.add('auth-hidden');
@@ -1121,28 +1504,115 @@
                 document.getElementById('adminBtn').classList.add('hidden');
                 Object.assign(personalData, initialUserData);
                 updateUIFromData(personalData);
-                showToast("已安全登出。");
+                showToast("已安全登出");
             } else {
-                signOut(auth).then(() => {
-                    showToast("已安全登出。");
-                });
+                signOut(auth).then(() => { showToast("已安全登出"); });
             }
         });
 
+        mobileMenuToggleBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+        closeMobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        window.showMethodologyModal = function() {
+            document.getElementById('methodologyModal').classList.remove('hidden');
+        };
+
         function updateUIFromData(data) {
+            const prog = getLevelProgress(data.exp);
             personalTotalExpEl.innerText = data.exp.toLocaleString();
             updateRewards(data.exp);
-            accLevel.innerText = `Lv.${data.level}`;
+            accLevel.innerText = `Lv.${prog.level}`;
             accExp.innerText = data.exp.toLocaleString();
             accInvested.innerText = data.invested.toLocaleString();
             accCo2.innerText = data.co2.toFixed(1);
 
-            document.getElementById('cert-level-display').innerText = `Lv.${data.level}`;
+            document.getElementById('cert-level-display').innerText = `Lv.${prog.level}`;
             document.getElementById('cert-co2-display').innerText = data.co2.toFixed(1);
             document.getElementById('cert-email-display').innerText = currentUser ? currentUser.email : 'user@tanji.com';
             
             const randCode = currentUser ? currentUser.uid.substring(0, 5).toUpperCase() : '0000';
             document.getElementById('cert-id-display').innerText = `CERT #TJ-2026-${randCode}`;
+
+            document.getElementById('cta-baby-emoji').innerText = prog.emoji;
+            document.getElementById('cta-baby-title').innerText = `碳吉寶寶 ${prog.title}`;
+            document.getElementById('cta-progress-bar').style.width = `${prog.pct}%`;
+            document.getElementById('cta-progress-text').innerText = `${prog.current} / ${prog.max}`;
+            document.getElementById('sustainability-cta-desc').innerText = `距離下一次進化還差 ${prog.max - prog.current} 經驗值。點擊試算繼續累積！`;
+
+            babyImg.src = prog.img;
+            statusText.innerText = prog.statusText;
+            encouragementText.innerText = `當前形態：${prog.emoji} ${prog.title}`;
+
+            const currentProj = projects[currentProjectIndex];
+            
+            if (currentProj.escrowStage1) {
+                document.getElementById('escrow-badge-1').innerText = "已解鎖";
+                document.getElementById('escrow-badge-1').className = "absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
+                document.getElementById('escrow-card-1').className = "bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between";
+                document.getElementById('escrow-title-1').className = "text-xs font-bold mb-1 text-brand-500";
+                document.getElementById('escrow-status-icon-1').innerText = "✓";
+                document.getElementById('escrow-status-icon-1').className = "w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold";
+                document.getElementById('escrow-status-text-1').innerText = "驗證成功，信託專戶已安全核實撥款";
+                document.getElementById('escrow-status-text-1').className = "text-[10px] text-slate-500 font-semibold";
+            } else {
+                document.getElementById('escrow-badge-1').innerText = "鎖定中";
+                document.getElementById('escrow-badge-1').className = "absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
+                document.getElementById('escrow-card-1').className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between";
+                document.getElementById('escrow-title-1').className = "text-xs font-bold mb-1 text-slate-700";
+                document.getElementById('escrow-status-icon-1').innerText = "🔒";
+                document.getElementById('escrow-status-icon-1').className = "w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold";
+                document.getElementById('escrow-status-text-1').innerText = "待計畫方正式提交技師簽證報告核收";
+                document.getElementById('escrow-status-text-1').className = "text-[10px] text-slate-400 font-semibold";
+            }
+
+            if (currentProj.escrowStage2) {
+                document.getElementById('escrow-badge-2').innerText = "已解鎖";
+                document.getElementById('escrow-badge-2').className = "absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
+                document.getElementById('escrow-card-2').className = "bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between";
+                document.getElementById('escrow-title-2').className = "text-xs font-bold mb-1 text-brand-500";
+                document.getElementById('escrow-status-icon-2').innerText = "✓";
+                document.getElementById('escrow-status-icon-2').className = "w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold";
+                document.getElementById('escrow-status-text-2').innerText = "驗證成功，材料設備採購款已核放";
+                document.getElementById('escrow-status-text-2').className = "text-[10px] text-slate-500 font-semibold";
+            } else {
+                document.getElementById('escrow-badge-2').innerText = "鎖定中";
+                document.getElementById('escrow-badge-2').className = "absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
+                document.getElementById('escrow-card-2').className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between";
+                document.getElementById('escrow-title-2').className = "text-xs font-bold mb-1 text-slate-700";
+                document.getElementById('escrow-status-icon-2').innerText = "🔒";
+                document.getElementById('escrow-status-icon-2').className = "w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold";
+                document.getElementById('escrow-status-text-2').innerText = "待材料進場並提交核實清冊解鎖";
+                document.getElementById('escrow-status-text-2').className = "text-[10px] text-slate-400 font-semibold";
+            }
+
+            if (currentProj.escrowStage3) {
+                document.getElementById('escrow-badge-3').innerText = "已解鎖";
+                document.getElementById('escrow-badge-3').className = "absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
+                document.getElementById('escrow-card-3').className = "bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between";
+                document.getElementById('escrow-title-3').className = "text-xs font-bold mb-1 text-brand-500";
+                document.getElementById('escrow-status-icon-3').innerText = "✓";
+                document.getElementById('escrow-status-icon-3').className = "w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold";
+                document.getElementById('escrow-status-text-3').innerText = "併網成功，綠能數據已串接投產";
+                document.getElementById('escrow-status-text-3').className = "text-[10px] text-slate-500 font-semibold";
+            } else {
+                document.getElementById('escrow-badge-3').innerText = "鎖定中";
+                document.getElementById('escrow-badge-3').className = "absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
+                document.getElementById('escrow-card-3').className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between";
+                document.getElementById('escrow-title-3').className = "text-xs font-bold mb-1 text-slate-700";
+                document.getElementById('escrow-status-icon-3').innerText = "🔒";
+                document.getElementById('escrow-status-icon-3').className = "w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold";
+                document.getElementById('escrow-status-text-3').innerText = "待正式發電公文與監測對接解鎖";
+                document.getElementById('escrow-status-text-3').className = "text-[10px] text-slate-400 font-semibold";
+            }
         }
 
         const slider = document.getElementById('investSlider');
@@ -1196,153 +1666,6 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const projects = [
-            { 
-                title: "100kW 廠房屋頂太陽能建置專案", 
-                org: "提案方：在地綠能中小企業聯盟", 
-                raised: 3450000, 
-                goal: 5000000, 
-                time: "剩餘 15 天",
-                image: "assets/projects/project_solar.png",
-                badge: "太陽能",
-                desc: "本專案旨在協助三家在地傳統製造廠房進行能源轉型。募集資金將 100% 用於採購高效能單晶矽太陽能模組、逆變器與綠電併網工程。透過信託專戶管理，確保資金專款專用，於工程建置達成特定里程碑後始得撥款，提供贊助人最安心、最透明的氣候金融體驗。",
-                benefits: [
-                    "預估首年發電量：120,000 度潔淨綠電",
-                    "年減少溫室氣體：約 59.4 噸 CO2e 排放",
-                    "等同於種植了 5,000 棵樹的年均吸碳量效益"
-                ],
-                perks: [
-                    "獲得個人專屬「淨零貢獻數位電子證書」",
-                    "每季接收專案建置進度與實時發電量電子報",
-                    "優先獲得示範綠能廠區參訪資格（限額 50 名）"
-                ]
-            },
-            { 
-                title: "屏東養豬場沼氣發電專案", 
-                org: "提案方：循環農業合作社", 
-                raised: 840000, 
-                goal: 2000000, 
-                time: "剩餘 30 天",
-                image: "assets/projects/project_biomass.png",
-                badge: "生質能",
-                desc: "本專案將協助屏東萬丹鄉的中小型畜牧場導入先進厭氧發酵與沼氣收集發電系統。將豬隻糞尿與有機廢水轉化為綠電，並產出高品質無異味的有機沼渣肥料，完美實踐零廢棄、零污染的循環經濟願景。",
-                benefits: [
-                    "預估首年發電量：95,000 度生質綠能發電",
-                    "年減少溫室氣體：約 47.0 噸 CO2e 排放",
-                    "消除畜牧場周遭環境異味，改善鄰里生活品質"
-                ],
-                perks: [
-                    "獲得專屬「沼氣循環經濟數位憑證與紀念徽章」",
-                    "優先獲贈合作農場生產之「有機鮮果箱」（限量）",
-                    "定期收到循環農業產銷成果回報電子報"
-                ]
-            },
-            { 
-                title: "電商物流循環包裝導入專案", 
-                org: "提案方：綠色電商新創團隊", 
-                raised: 880000, 
-                goal: 1000000, 
-                time: "剩餘 5 天",
-                image: "assets/projects/project_circular.png",
-                badge: "循環經濟",
-                desc: "網購包裝正造成龐大的垃圾與碳排壓力。本專案旨在全台各大主流電商與超商通路全面導入可重覆使用 50 次以上的耐磨、防水循環快遞箱，並在各大超商建置 200 個便利回收服務點，大幅減少一次性紙箱與塑膠膠帶的消耗。",
-                benefits: [
-                    "首年可減少網購廢棄包材垃圾約 15,000 公斤",
-                    "預估重覆使用次數達 50,000 次以上",
-                    "年減少溫室氣體：約 22.5 噸 CO2e 碳足跡"
-                ],
-                perks: [
-                    "獲得全站「減塑先鋒數位憑證勳章」",
-                    "獲得合作電商平台「免運券與 100 元折價券」",
-                    "專案成效報告與海洋保育成果數據即時推播"
-                ]
-            },
-            { 
-                title: "偏鄉 LED 節能照明與碳權媒合計畫", 
-                org: "提案方：綠色社區創生協會", 
-                raised: 420000, 
-                goal: 800000, 
-                time: "剩餘 22 天",
-                image: "assets/projects/project_led.png",
-                badge: "節能與碳權",
-                desc: "本專案將協助台灣東部十個偏鄉部落更換老舊高耗能水銀燈泡為最新節能智慧 LED。除了能直接為弱勢社區省下 60% 的公用電費支出，更利用區塊鏈技術建立微型碳排抵消機制，協助投資人獲得專屬綠色碳抵消權益。",
-                benefits: [
-                    "預估首年節電量：80,000 度電力",
-                    "年減少溫室氣體：約 39.6 噸 CO2e 碳排",
-                    "協助偏鄉部落建立永續節能循環照明環境"
-                ],
-                perks: [
-                    "獲得個人專屬「偏鄉節能貢獻數位憑證」",
-                    "每季收到智慧節能電費回饋監測數據報告表",
-                    "獲得偏鄉在地小農手作天然香草茶包組一份"
-                ]
-            },
-            { 
-                title: "漁電共生智慧養殖與生態棲地復育", 
-                org: "提案方：沿海永續水產聯盟", 
-                raised: 1250000, 
-                goal: 3000000, 
-                time: "剩餘 40 天",
-                image: "assets/projects/project_fishery.png",
-                badge: "漁電共生",
-                desc: "本計畫旨在推廣新型沿海永續水產養殖。於魚塭上方搭設透光式太陽能光電面板，下方則引進 AI 生態智慧科技，維持水質穩定、減少過度抽取地下水，並於鄰近區域保留 20% 水鳥友善生態棲息地，實踐綠能、漁業、生態三贏之共榮典範。",
-                benefits: [
-                    "預估首年發電量：210,000 度潔淨光電",
-                    "年減少溫室氣體：約 103.9 噸 CO2e 碳足跡",
-                    "復育 1.2 公頃水鳥友善沿海溼地與生態棲息地"
-                ],
-                perks: [
-                    "獲得個人專屬「沿海生態守護者數位憑證」",
-                    "獲得「漁電共生科技綠色無毒蝦」購買專屬 75 折優惠",
-                    "受邀參加每年秋季沿海棲地候鳥觀察與親子生態營"
-                ]
-            }
-        ];
-
-        const successCases = [
-            {
-                title: "花蓮光復國小綠能與社會公益專案",
-                org: "合作單位：花蓮光復國小與社區發展協會",
-                image: "assets/projects/success_hualien.png",
-                badge: "已完工發電",
-                desc: "本專案成功號召了 1,250 位永續投資人共同支持，於花蓮光復國小校舍屋頂完成建置 50kW 屋頂型太陽能發電系統。本設備目前穩定供電予偏鄉校園，除了為學校省下可觀的電費，多餘電力售予台電的收益更 100% 回饋成立「永續環境教育基金」，讓綠色能源與偏鄉教育共生循環。",
-                benefits: [
-                    "累計發電效益：每年約可產生 62,000 度潔淨綠電",
-                    "累積減少溫室氣體：約 30 噸 CO2e 年排放",
-                    "售電回饋效益：每年穩定支持 120 位偏鄉學童的環保科學課"
-                ],
-                perks: [
-                    "數位榮譽榜：所有贊助人姓名永久保留於校區紀念牆",
-                    "每年收到學童親筆手寫的永續感謝卡與成長日記",
-                    "受邀參加每年暑期舉辦之偏鄉綠能生態夏令營"
-                ]
-            },
-            {
-                title: "綠島低碳旅遊共享電動機車租賃計畫",
-                org: "合作單位：綠島民宿聯盟與低碳島推廣委員會",
-                image: "assets/projects/success_greenisland.png",
-                badge: "第一期結案",
-                desc: "為了解決綠島旺季旅遊期間燃油機車帶來的廢氣與強烈噪音污染，本專案首期發起募資，成功於島上建置了 3 座完全由太陽能供電的智慧機車充電站，並率先引進 50 輛共享電動機車，成功降低島嶼觀光活動對脆弱海洋生態系之衝擊。",
-                benefits: [
-                    "累計減少溫室氣體：約 15 噸 CO2e 碳排",
-                    "旅遊體驗升級：實現零碳排放、零分貝噪音之靜謐旅遊體驗",
-                    "充電站成效：3 座 100% 潔淨能源充電站運作正常"
-                ],
-                perks: [
-                    "獲得個人專屬「綠島低碳守護者數位憑證」",
-                    "前往綠島租賃合作機車享 8 折綠色推廣優惠",
-                    "獲得限量版「碳吉島嶼手工木雕紀念鑰匙圈」"
-                ]
-            }
-        ];
-
-        let currentProjectIndex = 0;
-        let globalCo2 = 124.5;
-        let hasCheckedInToday = false;
-
-        let confettiParticles = [];
-        let animationFrameId = null;
-
         function createFloatingElement(x, y, emoji) {
             const el = document.createElement('div');
             el.className = 'floating-leaf';
@@ -1380,6 +1703,7 @@
             personalData.exp += 5;
             personalData.level = calculateLevel(personalData.exp);
             
+            setLocalData(personalData);
             if (currentUser && !currentUser.uid.startsWith('local-')) {
                 try {
                      const userDocRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'profile', 'data');
@@ -1388,7 +1712,7 @@
             }
             updateUIFromData(personalData);
             addFeedItem(0, 5, '每日永續打卡');
-            showToast("打卡成功！獲得 5 EXP！");
+            showToast("打卡成功！獲得 5 經驗值");
         });
 
         babyVid.addEventListener('ended', () => {
@@ -1397,7 +1721,7 @@
             
             statusText.innerText = '今日打卡任務完成！';
             statusText.className = 'text-xl font-bold text-slate-400 z-20 break-words';
-            encouragementText.innerText = '前往下方「投資試算區」探索更多計畫';
+            encouragementText.innerText = '前往下方投資試算區探索更多計畫';
         });
 
         window.showProjectDetails = function() {
@@ -1457,10 +1781,9 @@
             updateBabyInteraction(500);
 
             renderOtherProjects();
+            updateUIFromData(personalData);
 
-            if (openModal) {
-                window.showProjectDetails();
-            }
+            if (openModal) { window.showProjectDetails(); }
         }
 
         function renderOtherProjects() {
@@ -1470,16 +1793,18 @@
                 if (idx === currentProjectIndex) return;
                 const pct = Math.floor((p.raised / p.goal) * 100);
                 const card = document.createElement('div');
-                card.className = 'project-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 group flex flex-col';
+                card.className = 'project-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 group flex flex-col h-full justify-between';
                 card.onclick = () => { switchProject(idx, true); };
                 card.innerHTML = `
                     <div class="h-44 bg-slate-50 flex items-center justify-center relative overflow-hidden border-b border-slate-100 shrink-0">
                         <span class="absolute top-4 left-4 bg-white text-xs font-bold px-2.5 py-1 rounded text-brand-600 border border-slate-200 z-10 whitespace-nowrap">${p.badge}</span>
                         <img src="${p.image}" alt="${p.title}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23fef3c7\'/><text x=\'50\' y=\'55\' font-size=\'30\' text-anchor=\'middle\'>🌱</text></svg>'">
                     </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <h4 class="font-bold text-lg mb-1 text-slate-800 line-clamp-1 break-words">${p.title}</h4>
-                        <p class="text-xs sm:text-sm text-slate-400 mb-6 font-semibold break-words">${p.org}</p>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-bold text-lg mb-1 text-slate-800 line-clamp-1 break-words">${p.title}</h4>
+                            <p class="text-xs sm:text-sm text-slate-400 mb-6 font-semibold break-words">${p.org}</p>
+                        </div>
                         <div class="mt-auto">
                             <div class="w-full bg-slate-100 rounded-full h-1.5 mb-3"><div class="bg-brand-500 h-1.5 rounded-full" style="width: ${pct}%"></div></div>
                             <div class="flex justify-between text-xs font-bold text-slate-400"><span class="text-brand-500 font-mono">${pct}%</span><span class="whitespace-nowrap font-mono">${p.time}</span></div>
@@ -1501,35 +1826,41 @@
             let unlockedCount = 0;
 
             if(totalExp >= 100) { 
-                r1.classList.replace('reward-locked', 'reward-unlocked'); 
-                req1.innerText = '已解鎖';
+                r1.classList.remove('reward-locked');
+                r1.classList.add('reward-unlocked', 'cursor-pointer'); 
+                req1.innerText = '點擊檢視獎勵';
                 req1.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap';
                 unlockedCount++;
             } else {
-                r1.classList.replace('reward-unlocked', 'reward-locked'); 
-                req1.innerText = 'Ref. 100 EXP';
+                r1.classList.add('reward-locked');
+                r1.classList.remove('reward-unlocked', 'cursor-pointer'); 
+                req1.innerText = '需 100 經驗值';
                 req1.className = 'inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono';
             }
             
             if(totalExp >= 300) { 
-                r2.classList.replace('reward-locked', 'reward-unlocked'); 
-                req2.innerText = '已解鎖';
+                r2.classList.remove('reward-locked');
+                r2.classList.add('reward-unlocked', 'cursor-pointer'); 
+                req2.innerText = '點擊兌換條碼';
                 req2.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap';
                 unlockedCount++;
             } else {
-                r2.classList.replace('reward-unlocked', 'reward-locked'); 
-                req2.innerText = 'Ref. 300 EXP';
+                r2.classList.add('reward-locked');
+                r2.classList.remove('reward-unlocked', 'cursor-pointer'); 
+                req2.innerText = '需 300 經驗值';
                 req2.className = 'inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono';
             }
 
             if(totalExp >= 800) { 
-                r3.classList.replace('reward-locked', 'reward-unlocked'); 
-                req3.innerText = '已解鎖';
+                r3.classList.remove('reward-locked');
+                r3.classList.add('reward-unlocked', 'cursor-pointer'); 
+                req3.innerText = '點擊登記領取';
                 req3.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap';
                 unlockedCount++;
             } else {
-                r3.classList.replace('reward-unlocked', 'reward-locked'); 
-                req3.innerText = 'Ref. 800 EXP';
+                r3.classList.add('reward-locked');
+                r3.classList.remove('reward-unlocked', 'cursor-pointer'); 
+                req3.innerText = '需 800 經驗值';
                 req3.className = 'inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono';
             }
 
@@ -1540,14 +1871,31 @@
                 if (unlockedCount === 0) {
                     promoCodeEl.innerText = 'VOUCHER_LOCKED';
                 } else if (unlockedCount === 1) {
-                    promoCodeEl.innerText = 'TJ-BADGE-ACQUIRED';
+                    promoCodeEl.innerText = rewardItemsData[1].code;
                 } else if (unlockedCount === 2) {
-                    promoCodeEl.innerText = 'TJ-COFFEE-FREE88';
+                    promoCodeEl.innerText = rewardItemsData[2].code;
                 } else {
-                    promoCodeEl.innerText = 'TJ-CUP-GO-GREEN99';
+                    promoCodeEl.innerText = rewardItemsData[3].code;
                 }
             }
         }
+
+        function openRewardModal(id, requiredExp) {
+            if (personalData.exp < requiredExp) {
+                window.showToast(`經驗值不足！還需要 ${requiredExp - personalData.exp} 經驗值才能解鎖喔！`, 'error');
+                return;
+            }
+            const data = rewardItemsData[id];
+            document.getElementById('reward-modal-icon').innerText = data.icon;
+            document.getElementById('reward-modal-title').innerText = data.title;
+            document.getElementById('reward-modal-code').innerText = data.code;
+            document.getElementById('reward-modal-desc').innerText = data.desc;
+            document.getElementById('rewardDetailModal').classList.remove('hidden');
+        }
+
+        document.getElementById('reward-1').addEventListener('click', () => openRewardModal(1, 100));
+        document.getElementById('reward-2').addEventListener('click', () => openRewardModal(2, 300));
+        document.getElementById('reward-3').addEventListener('click', () => openRewardModal(3, 800));
 
         function calculateLevel(exp) {
             if(exp >= 2000) return 5;
@@ -1559,7 +1907,8 @@
 
         function syncValues(value) {
             const money = parseInt(value);
-            const co2 = ((money / 1000) * 12).toFixed(1);
+            const p = projects[currentProjectIndex];
+            const co2 = ((money / p.goal) * p.yearlyKwh * 0.474).toFixed(1);
             const exp = Math.floor(money / 10);
             
             co2Display.innerText = co2;
@@ -1643,11 +1992,7 @@
             if(currentUser && !currentUser.uid.startsWith('local-')) {
                 try {
                     await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'feeds'), {
-                        name: name,
-                        action: action,
-                        exp: exp,
-                        timestamp: Date.now(),
-                        timeStr: '剛剛'
+                        name: name, action: action, exp: exp, timestamp: Date.now(), timeStr: '剛剛'
                     });
                 } catch(e) {}
             } else {
@@ -1657,9 +2002,7 @@
 
         function pushNewFeed(name, action, exp, timeStr) {
             activeFeedsCache.unshift({ name, action, exp, timeStr });
-            if (activeFeedsCache.length > 3) {
-                activeFeedsCache.pop();
-            }
+            if (activeFeedsCache.length > 3) { activeFeedsCache.pop(); }
             renderFeedsCache();
         }
 
@@ -1673,15 +2016,13 @@
                     <div class="flex-1 min-w-0">
                         <p class="break-words text-slate-600 leading-tight font-semibold"><span class="font-bold text-brand-500 whitespace-nowrap">${data.name}</span> ${data.action}</p>
                         <div class="flex justify-between items-center mt-1.5">
-                            <span class="text-[10px] text-brand-500 font-bold bg-brand-50 px-2 py-0.5 rounded whitespace-nowrap shrink-0 font-mono">+${data.exp} EXP</span>
+                            <span class="text-[10px] text-brand-500 font-bold bg-brand-50 px-2 py-0.5 rounded whitespace-nowrap shrink-0 font-mono">+${data.exp} 經驗值</span>
                             <span class="text-[10px] text-slate-300 font-bold shrink-0 font-mono">${data.timeStr}</span>
                         </div>
                     </div>
                 `;
                 feedListContainer.appendChild(div);
-                setTimeout(() => {
-                    div.classList.remove('opacity-0', 'translate-y-2');
-                }, index * 80);
+                setTimeout(() => { div.classList.remove('opacity-0', 'translate-y-2'); }, index * 80);
             });
         }
 
@@ -1692,6 +2033,12 @@
             }
 
             const money = parseInt(numInput.value);
+            const p = projects[currentProjectIndex];
+            const co2 = ((money / p.goal) * p.yearlyKwh * 0.474).toFixed(1);
+
+            document.getElementById('payment-target-project').innerText = p.title;
+            document.getElementById('payment-project-perk').innerText = p.perk;
+            document.getElementById('payment-co2-val').innerText = co2;
             paymentAmountDisplay.innerText = money.toLocaleString();
             paymentModal.classList.remove('hidden');
         });
@@ -1701,7 +2048,8 @@
                 paymentModal.classList.add('hidden');
                 
                 const money = parseInt(numInput.value);
-                const co2 = parseFloat(((money / 1000) * 12).toFixed(1));
+                const p = projects[currentProjectIndex];
+                const co2 = parseFloat(((money / p.goal) * p.yearlyKwh * 0.474).toFixed(1));
                 const exp = Math.floor(money / 10);
 
                 if (currentUser && !currentUser.uid.startsWith('local-')) {
@@ -1710,22 +2058,23 @@
                         const docSnap = await getDoc(configRef);
                         const currentAmounts = docSnap.exists() && docSnap.data().raisedAmounts 
                             ? docSnap.data().raisedAmounts 
-                            : projects.map(p => p.raised);
+                            : projects.map(proj => proj.raised);
                         currentAmounts[currentProjectIndex] += money;
                         await setDoc(configRef, { raisedAmounts: currentAmounts });
                     } catch(e) {}
                 } else {
                     projects[currentProjectIndex].raised += money;
-                    const p = projects[currentProjectIndex];
                     let newPct = Math.floor((p.raised / p.goal) * 100);
                     if (newPct > 100) newPct = 100;
                     raisedAmountEl.innerText = p.raised.toLocaleString();
                     pctAmountEl.innerText = newPct;
                     heroProgress.style.width = newPct + '%';
+                    heroTime.innerText = `目前進度 ${newPct}% | ${p.time}`;
                 }
 
                 globalCo2 += co2;
                 globalCo2El.innerText = globalCo2.toFixed(1);
+                document.querySelectorAll('.global-co2-mobile').forEach(el => el.innerText = globalCo2.toFixed(1));
 
                 personalData.invested += money;
                 personalData.co2 += co2;
@@ -1767,6 +2116,7 @@
                 numInput.value = 500;
                 syncValues(500);
                 updateBabyInteraction(500);
+                window.location.reload();
             }, 200);
         });
 
@@ -1784,9 +2134,7 @@
             btn.addEventListener('click', () => {
                 accountModalContent.classList.remove('scale-100');
                 accountModalContent.classList.add('scale-95');
-                setTimeout(() => {
-                    accountModal.classList.add('hidden');
-                }, 200);
+                setTimeout(() => { accountModal.classList.add('hidden'); }, 200);
             });
         });
 
@@ -1805,27 +2153,100 @@
             btn.disabled = true;
             btn.innerText = "安全金鑰傳輸中...";
             btn.classList.add('animate-pulse', 'bg-brand-600');
-            
+
+            const canvas = document.createElement('canvas');
+            canvas.width = 1000;
+            canvas.height = 700;
+            const ctx = canvas.getContext('2d');
+
+            const gradient = ctx.createLinearGradient(0, 0, 1000, 700);
+            gradient.addColorStop(0, '#0a1f42');
+            gradient.addColorStop(1, '#005a63');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1000, 700);
+
+            ctx.strokeStyle = '#3cc4b2';
+            ctx.lineWidth = 10;
+            ctx.strokeRect(30, 30, 940, 640);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 42px sans-serif';
+            ctx.fillText('TanJi 永續綠能減碳憑證', 100, 120);
+
+            const certId = document.getElementById('cert-id-display').innerText;
+            ctx.fillStyle = '#3cc4b2';
+            ctx.font = '20px monospace';
+            ctx.fillText(certId, 100, 165);
+
+            ctx.fillStyle = '#cbd5e1';
+            ctx.font = '24px sans-serif';
+            ctx.fillText('茲證明此永續帳戶持有者：', 100, 270);
+
+            const userEmail = document.getElementById('cert-email-display').innerText;
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 30px monospace';
+            ctx.fillText(userEmail, 100, 330);
+
+            ctx.fillStyle = '#cbd5e1';
+            ctx.font = '24px sans-serif';
+            ctx.fillText('實質參與綠能與淨零碳排工程，已為地球抵消了', 100, 410);
+
+            const co2Val = document.getElementById('cert-co2-display').innerText;
+            ctx.fillStyle = '#3cc4b2';
+            ctx.font = 'bold 48px monospace';
+            ctx.fillText(`${co2Val} kg`, 100, 480);
+
+            ctx.fillStyle = '#cbd5e1';
+            ctx.font = '24px sans-serif';
+            ctx.fillText('的溫室氣體排放，特頒此證以資表揚。', 380, 470);
+
+            let mockHash = "";
+            for (let i = 0; i < 8; i++) {
+                mockHash += Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            }
+            mockHash = "SHA256: " + mockHash.toUpperCase();
+            ctx.fillStyle = '#author-color';
+            ctx.fillStyle = '#a855f7';
+            ctx.font = 'bold 18px monospace';
+            ctx.fillText(mockHash, 100, 530);
+
+            ctx.fillStyle = '#64748b';
+            ctx.font = '16px sans-serif';
+            const today = new Date().toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
+            ctx.fillText(`認證日期：${today}`, 100, 590);
+            ctx.fillText('臺灣『能』永續能源創意實作競賽 參賽團隊 認證發行', 480, 590);
+
             setTimeout(() => {
-                btn.disabled = false;
-                btn.innerText = "下載數位憑證";
-                btn.classList.remove('animate-pulse', 'bg-brand-600');
-                window.showToast("憑證檔案已安全同步至個人數位錢包！");
-            }, 2000);
+                try {
+                    const imageURL = canvas.toDataURL('image/png');
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = imageURL;
+                    downloadLink.download = `TanJi_Cert_${co2Val}kg.png`;
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+
+                    btn.disabled = false;
+                    btn.innerText = "下載數位憑證";
+                    btn.classList.remove('animate-pulse', 'bg-brand-600');
+                    window.showToast("憑證已成功生成並開始下載");
+                } catch (err) {
+                    btn.disabled = false;
+                    btn.innerText = "下載數位憑證";
+                    btn.classList.remove('animate-pulse', 'bg-brand-600');
+                    window.showToast("生成失敗，請再試一次", "error");
+                }
+            }, 1500);
         });
 
-        document.getElementById('viewDetailBtn').addEventListener('click', () => {
-            window.showProjectDetails();
-        });
+        document.getElementById('viewDetailBtn').addEventListener('click', () => { window.showProjectDetails(); });
 
         helpToggleBtn.addEventListener('click', () => {
             helpModal.classList.toggle('hidden');
             helpToggleBtn.querySelector('span').classList.add('hidden');
         });
         
-        closeHelpBtn.addEventListener('click', () => {
-            helpModal.classList.add('hidden');
-        });
+        closeHelpBtn.addEventListener('click', () => { helpModal.classList.add('hidden'); });
 
         function addMessage(text, isUser) {
             const div = document.createElement('div');
@@ -1857,17 +2278,17 @@
                 const loadEl = document.getElementById(loadingId);
                 if(loadEl) loadEl.remove();
 
-                let reply = "抱歉，我不太懂你的意思。你可以問我關於「手續費」、「回饋品」或「如何贊助」的問題喔！";
+                let reply = "抱歉，我不太懂你的意思。你可以問我關於服務費、回饋品或如何贊助的問題喔！";
                 if(text.includes('錢') || text.includes('手續費') || text.includes('抽成') || text.includes('費用')) {
-                    reply = "平台目前只收取 3% 的專案媒合服務費，大部分資金都會直接運用在幫助中小企業的綠能建設上喔！";
+                    reply = "平台只收取 3% 的專案媒合服務費，大部分資金都會直接運用在幫助中小企業的綠能建設上喔！";
                 } else if(text.includes('回饋') || text.includes('獎勵') || text.includes('禮物') || text.includes('徽章') || text.includes('杯')) {
-                    reply = "只要達到指定的 EXP 經驗值，就能解鎖數位徽章(100 EXP), 咖啡券(300 EXP)或實體環保杯(800 EXP)喔！";
+                    reply = "只要達到指定的經驗值，就能解鎖數位徽章(100 經驗值)、咖啡券(300 經驗值)或實體環保杯(800 經驗值)喔！";
                 } else if(text.includes('你好') || text.includes('嗨') || text.includes('哈囉')) {
                     reply = "你好呀！我是碳吉寶寶 🍃 很高興為你服務！";
                 } else if(text.includes('贊助') || text.includes('怎麼用') || text.includes('教學')) {
-                    reply = "很簡單！只要拖拉「投資試算區」的滑桿，選擇你想贊助的金額，再按下確認按鈕就可以囉！1000元就可以減少12kg碳排喔！";
+                    reply = "很簡單！只要拖拉投資試算區的滑桿，選擇你想贊助的金額，再按下確認按鈕就可以囉！1000元就可以精準按比例計算減碳喔！";
                 } else if(text.includes('碳吉') || text.includes('寶寶') || text.includes('名字')) {
-                    reply = "叫我嗎？我會一直陪著你完成淨零任務喔！記得每天來找我點擊「每日永續打卡」喔！";
+                    reply = "叫我嗎？我會一直陪著你完成淨零任務喔！記得每天來找我點擊每日永續打卡喔！";
                 }
 
                 addMessage(reply, false);
@@ -1875,9 +2296,7 @@
         }
 
         sendChatBtn.addEventListener('click', handleChat);
-        chatInput.addEventListener('keypress', (e) => {
-            if(e.key === 'Enter') handleChat();
-        });
+        chatInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleChat(); });
 
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
@@ -1886,12 +2305,20 @@
 
         document.getElementById('adminBtn').addEventListener('click', () => {
             document.getElementById('adminModal').classList.remove('hidden');
-            document.getElementById('adminProjectRaised').value = projects[currentProjectIndex].raised;
+            const targetProj = projects[parseInt(document.getElementById('adminProjectSelect').value)];
+            document.getElementById('adminProjectRaised').value = targetProj.raised;
+            document.getElementById('adminStage1').checked = targetProj.escrowStage1;
+            document.getElementById('adminStage2').checked = targetProj.escrowStage2;
+            document.getElementById('adminStage3').checked = targetProj.escrowStage3;
         });
 
         document.getElementById('adminProjectSelect').addEventListener('change', (e) => {
             const idx = parseInt(e.target.value);
-            document.getElementById('adminProjectRaised').value = projects[idx].raised;
+            const targetProj = projects[idx];
+            document.getElementById('adminProjectRaised').value = targetProj.raised;
+            document.getElementById('adminStage1').checked = targetProj.escrowStage1;
+            document.getElementById('adminStage2').checked = targetProj.escrowStage2;
+            document.getElementById('adminStage3').checked = targetProj.escrowStage3;
         });
 
         document.getElementById('adminForm').addEventListener('submit', async (e) => {
@@ -1900,6 +2327,10 @@
             const val = parseInt(document.getElementById('adminProjectRaised').value);
 
             projects[idx].raised = val;
+            projects[idx].escrowStage1 = document.getElementById('adminStage1').checked;
+            projects[idx].escrowStage2 = document.getElementById('adminStage2').checked;
+            projects[idx].escrowStage3 = document.getElementById('adminStage3').checked;
+
             if (idx === currentProjectIndex) {
                 switchProject(idx, false);
             } else {
@@ -1909,21 +2340,15 @@
             if (currentUser && !currentUser.uid.startsWith('local-')) {
                 try {
                     const configRef = doc(db, 'artifacts', appId, 'public', 'data', 'config', 'projects');
-                    const docSnap = await getDoc(configRef);
-                    const currentAmounts = docSnap.exists() && docSnap.data().raisedAmounts 
-                        ? docSnap.data().raisedAmounts 
-                        : projects.map(p => p.raised);
-                    currentAmounts[idx] = val;
-                    await setDoc(configRef, { raisedAmounts: currentAmounts });
-                    document.getElementById('adminModal').classList.add('hidden');
-                    showToast("數據套用成功！");
-                } catch(err) {
-                    showToast("套用失敗，請重試", "error");
-                }
-            } else {
-                document.getElementById('adminModal').classList.add('hidden');
-                showToast("模擬數據套用成功！");
+                    await setDoc(configRef, { 
+                        raisedAmounts: projects.map(p => p.raised),
+                        stages: projects.map(p => ({ s1: p.escrowStage1, s2: p.escrowStage2, s3: p.escrowStage3 }))
+                    });
+                } catch(err) {}
             }
+            document.getElementById('adminModal').classList.add('hidden');
+            showToast("工程查核與數據套用成功");
+            updateUIFromData(personalData);
         });
 
         document.getElementById('adminAnnouncementForm').addEventListener('submit', async (e) => {
@@ -1932,23 +2357,17 @@
             if (currentUser && !currentUser.uid.startsWith('local-')) {
                 try {
                     await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'feeds'), {
-                        name: '【平台公告】',
-                        action: msg,
-                        exp: 100,
-                        timestamp: Date.now(),
-                        timeStr: '即時'
+                        name: '【平台信託公告】', action: msg, exp: 100, timestamp: Date.now(), timeStr: '即時'
                     });
                     document.getElementById('adminAnnounceText').value = '';
                     document.getElementById('adminModal').classList.add('hidden');
-                    showToast("公告廣播成功！");
-                } catch(err) {
-                    showToast("發布失敗，請重試", "error");
-                }
+                    showToast("官方公告廣播成功");
+                } catch(err) {}
             } else {
-                pushNewFeed('【平台公告】', msg, 100, '即時');
+                pushNewFeed('【平台信託公告】', msg, 100, '即時');
                 document.getElementById('adminAnnounceText').value = '';
                 document.getElementById('adminModal').classList.add('hidden');
-                showToast("本地公告插播成功！");
+                showToast("本地公告插播成功");
             }
         });
 
@@ -1959,8 +2378,11 @@
                     const data = docSnap.data();
                     if (data.raisedAmounts) {
                         projects.forEach((p, idx) => {
-                            if (data.raisedAmounts[idx] !== undefined) {
-                                p.raised = data.raisedAmounts[idx];
+                            if (data.raisedAmounts[idx] !== undefined) { p.raised = data.raisedAmounts[idx]; }
+                            if (data.stages && data.stages[idx]) {
+                                p.escrowStage1 = data.stages[idx].s1;
+                                p.escrowStage2 = data.stages[idx].s2;
+                                p.escrowStage3 = data.stages[idx].s3;
                             }
                         });
                         const p = projects[currentProjectIndex];
@@ -1972,73 +2394,75 @@
                         heroProgress.style.width = pct + '%';
                         pctAmountEl.innerText = pct;
                         heroTime.innerText = `目前進度 ${pct}% | ${p.time}`;
+                        updateUIFromData(personalData);
                     }
-                } else {
-                    setDoc(configDocRef, {
-                        raisedAmounts: projects.map(p => p.raised)
-                    }).catch(e => {});
                 }
-            }, (error) => {
-                console.warn(error);
-            });
-        } catch (e) {
-            console.warn(e);
-        }
+            }, (error) => { console.warn(error); });
+        } catch (error) { console.warn(error); }
 
         try {
             const feedsColRef = collection(db, 'artifacts', appId, 'public', 'data', 'feeds');
             onSnapshot(feedsColRef, (snapshot) => {
                 let feeds = [];
-                snapshot.forEach(doc => {
-                    feeds.push({ id: doc.id, ...doc.data() });
-                });
+                snapshot.forEach(doc => { feeds.push({ id: doc.id, ...doc.data() }); });
                 feeds.sort((a, b) => b.timestamp - a.timestamp);
-                
                 if (feeds.length > 0) {
                     activeFeedsCache.length = 0;
                     feeds.slice(0, 3).forEach(f => {
                         activeFeedsCache.push({
-                            name: f.name || '熱心公民',
-                            action: f.action || '',
-                            exp: f.exp || 0,
-                            timeStr: f.timeStr || '剛剛'
+                            name: f.name || '熱心公民', action: f.action || '', exp: f.exp || 0, timeStr: f.timeStr || '剛剛'
                         });
                     });
                     renderFeedsCache();
-                } else {
-                    renderFeedsCache();
                 }
-            }, (error) => {
-                console.warn(error);
-                renderFeedsCache();
-            });
-        } catch (e) {
-            renderFeedsCache();
-        }
+            }, (error) => { renderFeedsCache(); });
+        } catch (e) { renderFeedsCache(); }
 
         function startMockFeedsSimulation() {
             const firstNames = ['台北林', '新北張', '桃園陳', '台中李', '台南黃', '高雄王', '屏東劉', '宜蘭蔡', '花蓮曾'];
             const lastNames = ['先生', '小姐'];
             const amounts = [500, 1000, 1500, 2000, 3000, 5000, 10000];
-            
             setInterval(() => {
                 const randomName = firstNames[Math.floor(Math.random() * firstNames.length)] + lastNames[Math.floor(Math.random() * lastNames.length)];
                 const randomProj = projects[Math.floor(Math.random() * projects.length)];
                 const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
                 const exp = Math.floor(randomAmount / 10);
-                
                 pushNewFeed(randomName, `贊助了 ${randomProj.title} ${randomAmount.toLocaleString()} 元`, exp, '剛剛');
-            }, 7000);
+            }, 9000);
         }
         startMockFeedsSimulation();
 
         window.switchProject = switchProject;
+
+        document.getElementById('sustainability-cta-card').addEventListener('click', function(e) {
+            e.preventDefault();
+            babyWrapper.classList.add('animate-bounce');
+            setTimeout(() => { babyWrapper.classList.remove('animate-bounce'); }, 1000);
+            document.getElementById('interaction-zone').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        babyImg.onerror = function() {
+            const emoji = levelDefinition[personalData.level - 1]?.emoji || "🌱";
+            this.src = `data:image/svg+xml;base64,` + btoa(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#007d8a"/><text x="50" y="65" font-size="45" text-anchor="middle">${emoji}</text></svg>`);
+        };
 
         const randomHeroIndex = Math.floor(Math.random() * projects.length);
         switchProject(randomHeroIndex, false);
         syncValues(slider.value);
         updateBabyInteraction(slider.value);
 
+        window.showToast = function(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `px-4 py-2.5 rounded-xl text-xs font-bold text-white shadow-md transition-all duration-300 transform translate-y-2 opacity-0 shrink-0 ${type === 'error' ? 'bg-red-500' : 'bg-slate-800'}`;
+            toast.innerText = message;
+            container.appendChild(toast);
+            setTimeout(() => { toast.classList.remove('opacity-0', 'translate-y-2'); }, 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => { toast.remove(); }, 300);
+            }, 2500);
+        }
     </script>
 </body>
 </html>
