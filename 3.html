@@ -190,7 +190,7 @@
                                     <span class="text-[10px] text-slate-400 font-bold mb-0.5 truncate w-full">獲得經驗值</span>
                                     <div class="text-xl font-black text-slate-800 flex items-baseline truncate w-full justify-center">
                                         <span id="expDisplay" class="font-mono truncate">50</span>
-                                        <span class="text-xs font-bold text-slate-500 ml-0.5 font-mono">EXP</span>
+                                        <span class="text-xs font-bold text-slate-500 ml-0.5 font-mono">經驗值</span>
                                     </div>
                                 </div>
                             </div>
@@ -300,7 +300,7 @@
                         </div>
                         <div class="text-left sm:text-right shrink-0">
                             <p class="text-[9px] text-slate-400 font-bold mb-1 uppercase tracking-wider">我的總經驗值</p>
-                            <p class="font-black text-brand-500 text-lg sm:text-xl whitespace-nowrap font-mono"><span id="personal-total-exp">0</span> <span class="text-xs">EXP</span></p>
+                            <p class="font-black text-brand-500 text-lg sm:text-xl whitespace-nowrap font-mono"><span id="personal-total-exp">0</span> 經驗值</p>
                         </div>
                     </div>
                     
@@ -431,7 +431,7 @@
                 <span class="text-brand-500 font-bold tracking-wider text-xs mb-2 block uppercase">Sustainability Platform</span>
                 <h2 class="text-2xl sm:text-3xl font-black text-slate-800 break-words">TanJi 永續小學堂</h2>
                 <div class="w-12 h-1 bg-brand-500 mx-auto mt-4 rounded-full"></div>
-                <p class="text-slate-400 mt-4 font-semibold text-sm sm:text-base px-2 break-words">建構於嚴謹學理基礎之上的氣候行動，深入了解微型資金如何驅動龐大的環境變革。</p>
+                <p class="text-slate-400 mt-4 font-semibold text-sm sm:text-base px-2 break-words">建構於嚴謹學理基礎之上的氣氣行動，深入了解微型資金如何驅動龐大的環境變革。</p>
             </div>
 
             <div class="space-y-4">
@@ -460,7 +460,7 @@
                     </button>
                     <div class="px-5 pb-5 hidden">
                         <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
-                            平台上的減碳量並非憑空估算，而是具備嚴謹的科學與數據基礎。專案效益評估採用經濟部能源署公布之最新電力排碳係數為計算基準。民眾所投資建置之再生能源設備，其產生的每一度潔淨綠電，皆可精準換算為替代傳統化石燃料發電所減少的溫室氣體排放量，確保氣候貢獻的透明與可追溯性。
+                            平台上的減碳量並非憑空估算，而是具備嚴謹的科學與數據基礎。專案效益評估採用經濟部能源署公布之電力排碳係數為計算基準。民眾所投資建置之再生能源設備，其產生的每一度潔淨綠電，皆可精準換算為替代傳統化石燃料發電所減少的溫室氣體排放量，確保氣候貢獻的透明與可追溯性。
                         </div>
                     </div>
                 </div>
@@ -476,6 +476,36 @@
                     <div class="px-5 pb-5 hidden">
                         <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
                             傳統綠色基礎建設的投資門檻極高，往往僅限於大型財團與機構投資人參與，這在無形中造成了氣候行動上的資本不平等。本平台運用數位金融科技，將投資門檻大幅降至百元級別，完美實踐普惠金融的核心價值。我們致力於落實聯合國永續發展目標，讓所有公民都能公平地參與並共享能源轉型帶來的環境與經濟紅利。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 rounded-2xl border border-slate-200/80 transition-all duration-300">
+                    <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
+                        <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
+                            <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">04</span>
+                            <span class="truncate break-words">智能合約與透明分潤</span>
+                        </span>
+                        <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="px-5 pb-5 hidden">
+                        <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
+                            為了確保回饋機制的公平與不可篡改性，平台計畫導入區塊鏈智能合約技術。當台電或監測設備確認綠電產生後，合約將自動觸發，精準地將減碳貢獻轉化為經驗值並發放至投資人的數位帳戶中。此舉不僅消除人為操作的風險，更建立起極高的信任基礎。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 rounded-2xl border border-slate-200/80 transition-all duration-300">
+                    <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
+                        <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
+                            <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">05</span>
+                            <span class="truncate break-words">循環經濟的在地實踐</span>
+                        </span>
+                        <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="px-5 pb-5 hidden">
+                        <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
+                            減碳不應僅止於工業端，更應落實於生活圈。平台推動能源轉型，更將實體回饋品與地方創生、循環農業及低碳商家結合。透過虛實整合的獎勵機制，引導投資人在日常消費中持續支持綠色產業，打造生生不息的在地永續生態系。
                         </div>
                     </div>
                 </div>
@@ -1127,7 +1157,7 @@
                 yearlyKwh: 95000,
                 perk: "優先獲贈合作農場生產之有機鮮果箱一份",
                 escrowStage1: false, escrowStage2: false, escrowStage3: false,
-                desc: "協助屏東萬丹鄉的中小型畜牧場導入先進厭氧發酵與沼氣收集發電系統。將豬隻糞尿與有機廢水轉化為綠電，並產出高品質無異味的有機沼渣肥料，完美實踐零廢棄、零污染的循環經濟願景。",
+                desc: "協助屏東萬丹鄉的中小型畜牧場導入先進厭氧發酵與沼氣收集發電系統。將豬隻糞尿與有機廢水轉化為綠電，並產出高品質無異味的有機沼渣肥料，完美實踐零廢棄、零污染 the 循環經濟願景。",
                 benefits: [
                     "預估首年發電量：95,000 度生質綠能發電",
                     "年減少溫室氣體：約 45.0 噸 CO2e 排放",
@@ -1230,7 +1260,7 @@
             },
             {
                 title: "綠島低碳旅遊共享電動機車租賃計畫",
-                org: "合作單位：綠島民宿聯盟與低碳島推廣委員會",
+                org: "合作單位：綠島民宿聯盟與低碳島推喚委員會",
                 image: "assets/projects/success_greenisland.png",
                 badge: "第一期結案",
                 desc: "為了解決綠島旺季旅遊期間燃油機車帶來的廢氣與強烈噪音污染，本專案首期發起募資，成功於島上建置了 3 座完全由太陽能供電的智慧機車充電站，並率先引進 50 輛共享電動機車。",
@@ -1253,338 +1283,6 @@
 
         let confettiParticles = [];
         let animationFrameId = null;
-
-        function getLocalData() {
-            try {
-                const stored = localStorage.getItem('tanji_local_store_' + appId);
-                return stored ? JSON.parse(stored) : null;
-            } catch (e) { return null; }
-        }
-
-        function setLocalData(data) {
-            try { localStorage.setItem('tanji_local_store_' + appId, JSON.stringify(data)); } catch (e) {}
-        }
-
-        function getLevelProgress(exp) {
-            let activeDef = levelDefinition[0];
-            for (let i = 0; i < levelDefinition.length; i++) {
-                if (exp >= levelDefinition[i].minExp) { activeDef = levelDefinition[i]; }
-            }
-            const currentExpInLevel = exp - activeDef.minExp;
-            const levelRange = activeDef.nextExp - activeDef.minExp;
-            let pct = Math.min(Math.floor((currentExpInLevel / levelRange) * 100), 100);
-            if (activeDef.level === 5) { pct = 100; }
-            return {
-                pct: pct, current: exp, max: activeDef.nextExp,
-                title: activeDef.title, emoji: activeDef.emoji,
-                statusText: activeDef.statusText, level: activeDef.level, img: activeDef.img
-            };
-        }
-
-        function simulateLocalLogin(emailText, isAdmin = false) {
-            currentUser = { uid: 'local-' + Date.now(), email: emailText, isAnonymous: emailText.includes('訪客') };
-            userControls.classList.remove('auth-hidden');
-            loginShowBtn.classList.add('auth-hidden');
-            loginOverlay.classList.add('opacity-0', 'pointer-events-none');
-            setTimeout(() => loginOverlay.classList.add('hidden'), 300);
-            loginModal.classList.add('hidden');
-            userEmailDisplay.innerText = currentUser.email;
-
-            const cache = getLocalData();
-            if (cache) {
-                Object.assign(personalData, cache);
-            } else if (isAdmin || emailText === 'admin@tanji.com') {
-                personalData.role = "admin";
-                personalData.exp = 2500;
-                personalData.level = 5;
-                personalData.invested = 25000;
-                personalData.co2 = 300.0;
-                setLocalData(personalData);
-            } else {
-                Object.assign(personalData, initialUserData);
-                setLocalData(personalData);
-            }
-
-            if (personalData.role === 'admin') {
-                document.getElementById('adminBtn').classList.remove('hidden');
-            } else {
-                document.getElementById('adminBtn').classList.add('hidden');
-            }
-
-            updateUIFromData(personalData);
-            showToast(personalData.role === 'admin' ? "已以管理員權限登入" : "登入成功");
-        }
-
-        const initSilentAuth = async () => {
-            try {
-                if (!auth.currentUser) { await signInAnonymously(auth); }
-            } catch (err) { console.warn(err); }
-        };
-        initSilentAuth();
-
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                currentUser = user;
-                userControls.classList.remove('auth-hidden');
-                loginShowBtn.classList.add('auth-hidden');
-                loginOverlay.classList.add('opacity-0', 'pointer-events-none');
-                setTimeout(() => loginOverlay.classList.add('hidden'), 300);
-                loginModal.classList.add('hidden');
-                
-                userEmailDisplay.innerText = user.isAnonymous ? '訪客使用者' : user.email;
-
-                const userDocRef = doc(db, 'artifacts', appId, 'users', user.uid, 'profile', 'data');
-                try {
-                    const docSnap = await getDoc(userDocRef);
-                    if (!docSnap.exists()) {
-                        const localCache = getLocalData() || initialUserData;
-                        await setDoc(userDocRef, { ...localCache, email: user.isAnonymous ? "訪客使用者" : user.email });
-                    }
-                } catch(e) {
-                    const cache = getLocalData() || initialUserData;
-                    Object.assign(personalData, cache);
-                    updateUIFromData(personalData);
-                }
-
-                onSnapshot(userDocRef, (docSnap) => {
-                    if (docSnap.exists()) {
-                        const data = docSnap.data();
-                        Object.assign(personalData, data);
-                        setLocalData(personalData);
-                        updateUIFromData(personalData);
-                        if (data.role === 'admin' || user.email === 'admin@tanji.com') {
-                            document.getElementById('adminBtn').classList.remove('hidden');
-                        } else {
-                            document.getElementById('adminBtn').classList.add('hidden');
-                        }
-                    }
-                }, (error) => { console.warn(error); });
-
-            } else {
-                if(!currentUser || !currentUser.uid.startsWith('local-')) {
-                    currentUser = null;
-                    userControls.classList.add('auth-hidden');
-                    loginShowBtn.classList.remove('auth-hidden');
-                    loginOverlay.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
-                    document.getElementById('adminBtn').classList.add('hidden');
-                    const cache = getLocalData() || initialUserData;
-                    Object.assign(personalData, cache);
-                    updateUIFromData(personalData);
-                }
-            }
-        });
-
-        const showError = (msg) => {
-            authError.innerText = msg;
-            authError.classList.remove('hidden');
-            setTimeout(() => authError.classList.add('hidden'), 3000);
-        };
-
-        loginShowBtn.addEventListener('click', () => { loginModal.classList.remove('hidden'); });
-
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = emailInput.value;
-            const password = passwordInput.value;
-            if (email === 'admin@tanji.com') {
-                simulateLocalLogin(email, true);
-                return;
-            }
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                showToast("登入成功");
-            } catch (error) {
-                simulateLocalLogin(email, false);
-            }
-        });
-
-        signUpBtn.addEventListener('click', async () => {
-            if(!emailInput.validity.valid || !passwordInput.validity.valid) {
-                 showError("請輸入有效的電子郵件與密碼");
-                 return;
-            }
-            const email = emailInput.value;
-            const password = passwordInput.value;
-            try {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const userDocRef = doc(db, 'artifacts', appId, 'users', userCredential.user.uid, 'profile', 'data');
-                await setDoc(userDocRef, { ...initialUserData, email: email });
-                showToast("帳號註冊成功");
-            } catch (error) {
-                simulateLocalLogin(email);
-            }
-        });
-
-        anonLoginBtn.addEventListener('click', async () => {
-            try {
-                const userCredential = await signInAnonymously(auth);
-                const userDocRef = doc(db, 'artifacts', appId, 'users', userCredential.user.uid, 'profile', 'data');
-                await setDoc(userDocRef, { ...initialUserData, email: "訪客使用者" });
-                showToast("已以訪客身分體驗");
-            } catch (error) {
-                simulateLocalLogin('訪客使用者');
-            }
-        });
-
-        logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('tanji_local_store_' + appId);
-            if(currentUser && currentUser.uid.startsWith('local-')) {
-                currentUser = null;
-                userControls.classList.add('auth-hidden');
-                loginShowBtn.classList.remove('auth-hidden');
-                loginOverlay.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
-                document.getElementById('adminBtn').classList.add('hidden');
-                Object.assign(personalData, initialUserData);
-                updateUIFromData(personalData);
-                showToast("已安全登出");
-            } else {
-                signOut(auth).then(() => { showToast("已安全登出"); });
-            }
-        });
-
-        window.showMethodologyModal = function() {
-            document.getElementById('methodologyModal').classList.remove('hidden');
-        };
-
-        function updateUIFromData(data) {
-            const prog = getLevelProgress(data.exp);
-            personalTotalExpEl.innerText = data.exp.toLocaleString();
-            updateRewards(data.exp);
-            accLevel.innerText = `Lv.${prog.level}`;
-            accExp.innerText = data.exp.toLocaleString();
-            accInvested.innerText = data.invested.toLocaleString();
-            accCo2.innerText = data.co2.toFixed(1);
-
-            document.getElementById('cert-level-display').innerText = `Lv.${prog.level}`;
-            document.getElementById('cert-co2-display').innerText = data.co2.toFixed(1);
-            document.getElementById('cert-email-display').innerText = currentUser ? currentUser.email : 'user@tanji.com';
-            
-            const randCode = currentUser ? currentUser.uid.substring(0, 5).toUpperCase() : '0000';
-            document.getElementById('cert-id-display').innerText = `CERT #TJ-2026-${randCode}`;
-
-            document.getElementById('cta-baby-emoji').innerText = prog.emoji;
-            document.getElementById('cta-baby-title').innerText = `碳吉寶寶 ${prog.title}`;
-            document.getElementById('cta-progress-bar').style.width = `${prog.pct}%`;
-            document.getElementById('cta-progress-text').innerText = `${prog.current} / ${prog.max}`;
-            document.getElementById('sustainability-cta-desc').innerText = `距離下一次進化還差 ${prog.max - prog.current} 經驗值。點擊試算繼續累積！`;
-
-            babyImg.src = prog.img;
-            statusText.innerText = prog.statusText;
-            encouragementText.innerText = `當前形態：${prog.emoji} ${prog.title}`;
-
-            const currentProj = projects[currentProjectIndex];
-            
-            if (currentProj.escrowStage1) {
-                document.getElementById('escrow-badge-1').innerText = "已解鎖";
-                document.getElementById('escrow-badge-1').className = "absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-1').className = "bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-1').className = "text-xs font-bold mb-1 text-brand-500";
-                document.getElementById('escrow-status-icon-1').innerText = "✓";
-                document.getElementById('escrow-status-icon-1').className = "w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold";
-                document.getElementById('escrow-status-text-1').innerText = "驗證成功，信託專戶已安全核實撥款";
-                document.getElementById('escrow-status-text-1').className = "text-[10px] text-slate-500 font-semibold";
-            } else {
-                document.getElementById('escrow-badge-1').innerText = "鎖定中";
-                document.getElementById('escrow-badge-1').className = "absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-1').className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-1').className = "text-xs font-bold mb-1 text-slate-700";
-                document.getElementById('escrow-status-icon-1').innerText = "🔒";
-                document.getElementById('escrow-status-icon-1').className = "w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold";
-                document.getElementById('escrow-status-text-1').innerText = "待計畫方正式提交技師簽證報告核收";
-                document.getElementById('escrow-status-text-1').className = "text-[10px] text-slate-400 font-semibold";
-            }
-
-            if (currentProj.escrowStage2) {
-                document.getElementById('escrow-badge-2').innerText = "已解鎖";
-                document.getElementById('escrow-badge-2').className = "absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-2').className = "bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-2').className = "text-xs font-bold mb-1 text-brand-500";
-                document.getElementById('escrow-status-icon-2').innerText = "✓";
-                document.getElementById('escrow-status-icon-2').className = "w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold";
-                document.getElementById('escrow-status-text-2').innerText = "驗證成功，材料設備採購款已核放";
-                document.getElementById('escrow-status-text-2').className = "text-[10px] text-slate-500 font-semibold";
-            } else {
-                document.getElementById('escrow-badge-2').innerText = "鎖定中";
-                document.getElementById('escrow-badge-2').className = "absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-2').className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-2').className = "text-xs font-bold mb-1 text-slate-700";
-                document.getElementById('escrow-status-icon-2').innerText = "🔒";
-                document.getElementById('escrow-status-icon-2').className = "w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold";
-                document.getElementById('escrow-status-text-2').innerText = "待材料進場並提交核實清冊解鎖";
-                document.getElementById('escrow-status-text-2').className = "text-[10px] text-slate-400 font-semibold";
-            }
-
-            if (currentProj.escrowStage3) {
-                document.getElementById('escrow-badge-3').innerText = "已解鎖";
-                document.getElementById('escrow-badge-3').className = "absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-3').className = "bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-3').className = "text-xs font-bold mb-1 text-brand-500";
-                document.getElementById('escrow-status-icon-3').innerText = "✓";
-                document.getElementById('escrow-status-icon-3').className = "w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold";
-                document.getElementById('escrow-status-text-3').innerText = "併網成功，綠能數據已串接投產";
-                document.getElementById('escrow-status-text-3').className = "text-[10px] text-slate-500 font-semibold";
-            } else {
-                document.getElementById('escrow-badge-3').innerText = "鎖定中";
-                document.getElementById('escrow-badge-3').className = "absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-3').className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-3').className = "text-xs font-bold mb-1 text-slate-700";
-                document.getElementById('escrow-status-icon-3').innerText = "🔒";
-                document.getElementById('escrow-status-icon-3').className = "w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold";
-                document.getElementById('escrow-status-text-3').innerText = "待正式發電公文與監測對接解鎖";
-                document.getElementById('escrow-status-text-3').className = "text-[10px] text-slate-400 font-semibold";
-            }
-        }
-
-        const slider = document.getElementById('investSlider');
-        const numInput = document.getElementById('investInput');
-        const co2Display = document.getElementById('co2Display');
-        const expDisplay = document.getElementById('expDisplay');
-        const babyImg = document.getElementById('baby-img');
-        const babyVid = document.getElementById('baby-vid');
-        const statusText = document.getElementById('status-text');
-        const encouragementText = document.getElementById('encouragement-text');
-        const dailyCheckInBtn = document.getElementById('dailyCheckInBtn');
-        const babyWrapper = document.getElementById('baby-wrapper');
-        const babyGlow = document.getElementById('baby-glow');
-        
-        const sponsorBtn = document.getElementById('sponsorBtn');
-        const successModal = document.getElementById('successModal');
-        const closeSuccessBtn = document.getElementById('closeSuccessBtn');
-        const modalCo2 = document.getElementById('modal-co2');
-        const modalExp = document.getElementById('modal-exp');
-        const successModalContent = document.getElementById('successModalContent');
-
-        const accountBtn = document.getElementById('accountBtn');
-        const accountModal = document.getElementById('accountModal');
-        const accountModalContent = document.getElementById('accountModalContent');
-        const accLevel = document.getElementById('acc-level');
-        const accExp = document.getElementById('acc-exp');
-        const accInvested = document.getElementById('acc-invested');
-        const accCo2 = document.getElementById('acc-co2');
-        const personalTotalExpEl = document.getElementById('personal-total-exp');
-
-        const raisedAmountEl = document.getElementById('raised-amount');
-        const heroProgress = document.getElementById('hero-progress');
-        const pctAmountEl = document.getElementById('pct-amount');
-        const globalCo2El = document.getElementById('global-co2');
-        const feedListContainer = document.getElementById('feed-list-container');
-        
-        const helpToggleBtn = document.getElementById('helpToggleBtn');
-        const helpModal = document.getElementById('helpModal');
-        const closeHelpBtn = document.getElementById('closeHelpBtn');
-        const chatInput = document.getElementById('chatInput');
-        const sendChatBtn = document.getElementById('sendChatBtn');
-        const chatMessages = document.getElementById('chatMessages');
-
-        const heroTitle = document.getElementById('hero-title');
-        const heroOrg = document.getElementById('hero-org');
-        const heroGoal = document.getElementById('hero-goal');
-        const heroTime = document.getElementById('hero-time');
-
-        const canvas = document.getElementById('confetti-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
 
         function createFloatingElement(x, y, emoji) {
             const el = document.createElement('div');
@@ -1747,7 +1445,7 @@
                 r1.classList.remove('reward-locked');
                 r1.classList.add('reward-unlocked', 'cursor-pointer'); 
                 req1.innerText = '點擊檢視獎勵';
-                req1.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap';
+                req1.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap animate-pulse';
                 unlockedCount++;
             } else {
                 r1.classList.add('reward-locked');
@@ -1760,7 +1458,7 @@
                 r2.classList.remove('reward-locked');
                 r2.classList.add('reward-unlocked', 'cursor-pointer'); 
                 req2.innerText = '點擊兌換條碼';
-                req2.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap';
+                req2.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap animate-pulse';
                 unlockedCount++;
             } else {
                 r2.classList.add('reward-locked');
@@ -1773,7 +1471,7 @@
                 r3.classList.remove('reward-locked');
                 r3.classList.add('reward-unlocked', 'cursor-pointer'); 
                 req3.innerText = '點擊登記領取';
-                req3.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap';
+                req3.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap animate-pulse';
                 unlockedCount++;
             } else {
                 r3.classList.add('reward-locked');
@@ -1903,8 +1601,8 @@
 
         async function addFeedItem(money, exp, projectName) {
             const name = currentUser ? (currentUser.isAnonymous ? '訪客使用者' : currentUser.email.split('@')[0]) : '熱心公民';
-            const action = money > 0 
-                ? `贊助了 ${projectName} ${money.toLocaleString()} 元` 
+            const action = money > 0 
+                ? `贊助了 ${projectName} ${money.toLocaleString()} 元` 
                 : `完成了 ${projectName}`;
 
             if(currentUser && !currentUser.uid.startsWith('local-')) {
@@ -1974,8 +1672,8 @@
                     try {
                         const configRef = doc(db, 'artifacts', appId, 'public', 'data', 'config', 'projects');
                         const docSnap = await getDoc(configRef);
-                        const currentAmounts = docSnap.exists() && docSnap.data().raisedAmounts 
-                            ? docSnap.data().raisedAmounts 
+                        const currentAmounts = docSnap.exists() && docSnap.data().raisedAmounts 
+                            ? docSnap.data().raisedAmounts 
                             : projects.map(proj => proj.raised);
                         currentAmounts[currentProjectIndex] += money;
                         await setDoc(configRef, { raisedAmounts: currentAmounts });
@@ -2028,7 +1726,7 @@
             successModalContent.classList.remove('scale-100');
             successModalContent.classList.add('scale-95');
             setTimeout(() => {
-                successModal.add('hidden');
+                successModal.classList.add('hidden');
                 slider.value = 500;
                 numInput.value = 500;
                 syncValues(500);
@@ -2122,7 +1820,6 @@
                 mockHash += Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
             }
             mockHash = "SHA256: " + mockHash.toUpperCase();
-            ctx.fillStyle = '#author-color';
             ctx.fillStyle = '#a855f7';
             ctx.font = 'bold 18px monospace';
             ctx.fillText(mockHash, 100, 530);
@@ -2310,7 +2007,7 @@
                         heroGoal.innerText = p.goal.toLocaleString();
                         heroProgress.style.width = pct + '%';
                         pctAmountEl.innerText = pct;
-                        heroTime.innerText = `目前進度 ${pct}% | ${p.time}`;
+                        heroTime.innerText = `目進度 ${pct}% | ${p.time}`;
                         updateUIFromData(personalData);
                     }
                 }
