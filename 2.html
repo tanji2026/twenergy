@@ -7,7 +7,7 @@
     <title>TanJi 淨零群募平台</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght=500;700;800&family=Plus+Jakarta+Sans:wght=500;700;800&family=Noto+Sans+TC:wght=400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -137,7 +137,7 @@
                         <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200/60 shadow-sm flex flex-col items-center text-center relative overflow-hidden justify-center min-h-[300px]" id="interaction-zone">
                             <div id="baby-glow" class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-500/5 via-white to-transparent opacity-50 transition-opacity duration-300"></div>
                             <div id="baby-wrapper" class="relative w-36 h-36 flex items-center justify-center bg-gradient-to-tr from-brand-50 to-white rounded-full shadow-sm mb-5 border border-slate-100 z-10 transition-transform duration-300 shrink-0">
-                                <img id="baby-img" src="assets/tanjibaby/tanjibaby9.png" alt="碳吉寶寶" class="w-[80%] h-[80%] object-cover rounded-full z-10 select-none anim-float" draggable="false" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzAwN2Q4YSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
+                                <img id="baby-img" src="assets/tanjibaby/tanjibaby.png" alt="碳吉寶寶" class="w-[80%] h-[80%] object-cover rounded-full z-10 select-none anim-float" draggable="false">
                                 <video id="baby-vid" src="assets/tanjibaby/tanjibaby_hi.mp4" preload="none" class="absolute inset-0 w-full h-full object-cover rounded-full z-20 hidden pointer-events-none" muted playsinline></video>
                             </div>
                             <button id="dailyCheckInBtn" class="mb-3 bg-brand-500 text-white hover:bg-brand-600 px-5 py-2.5 rounded-full font-bold text-xs transition-colors shadow-sm flex items-center gap-2 group relative z-30 border border-brand-600">
@@ -331,11 +331,20 @@
                     </div>
                 </div>
 
-                <a href="#interaction-zone" class="bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-center items-center text-center hover:border-brand-500 hover:scale-[1.02] transition-all duration-300 group cursor-pointer">
-                    <span class="text-4xl mb-3 group-hover:animate-bounce">🍃</span>
-                    <h4 class="font-bold text-slate-800 mb-1">永續行動，即刻出發</h4>
-                    <p id="sustainability-cta-desc" class="text-xs text-slate-400 max-w-[200px] leading-relaxed">您的每一筆支持，都將實時反映在系統動態與碳吉寶寶的成長軌跡中。點擊試算注入能量！</p>
-                </a>
+                <div id="sustainability-cta-card" class="bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between items-center text-center cursor-pointer hover:border-brand-500 hover:scale-[1.02] transition-all duration-300 group w-full">
+                    <div class="flex flex-col items-center">
+                        <span id="cta-baby-emoji" class="text-4xl mb-3 group-hover:animate-bounce">🌱</span>
+                        <h4 id="cta-baby-title" class="font-bold text-slate-800 mb-1">碳吉寶寶 成長監控</h4>
+                        <p id="sustainability-cta-desc" class="text-xs text-slate-400 max-w-[200px] leading-relaxed mb-4">您的每一筆支持，都將實時反映在系統動態與碳吉寶寶的成長軌跡中。點擊試算注入能量！</p>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2.5 mb-2 relative overflow-hidden">
+                        <div id="cta-progress-bar" class="bg-brand-500 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                    <div class="flex justify-between w-full text-[10px] text-slate-400 font-bold font-mono px-1">
+                        <span>等級進化度</span>
+                        <span id="cta-progress-text">0 / 100 EXP</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -368,6 +377,48 @@
                         <h4 class="text-base font-bold text-slate-800 mb-3 text-center break-words">智能補貼分潤</h4>
                         <p class="text-slate-500 leading-relaxed text-sm text-justify mb-6 flex-1">專案達標後，智能合約自動發放對應的 EXP 經驗值至您的帳戶，並提撥 3% 媒合服務費作為平台永續營運基金。</p>
                     </div>
+                </div>
+
+                <div class="mt-12 bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-8">
+                    <h3 class="text-base font-bold text-slate-800 mb-6 flex items-center">
+                        <span class="mr-2">🏦</span> 信託專戶資金撥款進度牆 (Escrow Milestones)
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+                        <div class="bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between">
+                            <div class="absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg">已解鎖 20%</div>
+                            <div>
+                                <p class="text-xs text-brand-500 font-bold mb-1">第一階段：結構安全檢測</p>
+                                <p class="text-[11px] text-slate-400">工廠屋頂結構評估安全，防漏與防風測試複檢通過。</p>
+                            </div>
+                            <div class="mt-4 flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold">✓</span>
+                                <span class="text-[10px] text-slate-500 font-semibold">驗證成功，資金已安全撥付施工廠商</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between">
+                            <div class="absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg">鎖定中 40%</div>
+                            <div>
+                                <p class="text-xs text-slate-600 font-bold mb-1">第二階段：設備進場簽收</p>
+                                <p class="text-[11px] text-slate-400">高效能太陽能板、逆變器與機組結構經監造簽章確認。</p>
+                            </div>
+                            <div class="mt-4 flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold">🔒</span>
+                                <span class="text-[10px] text-slate-400 font-semibold">待設備全數進場並提交監管報告解鎖</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between">
+                            <div class="absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg">鎖定中 40%</div>
+                            <div>
+                                <p class="text-xs text-slate-600 font-bold mb-1">第三階段：併網完工發電</p>
+                                <p class="text-[11px] text-slate-400">台電與市電併網工程驗收合格，正式啟動綠電生產運作。</p>
+                            </div>
+                            <div class="mt-4 flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold">🔒</span>
+                                <span class="text-[10px] text-slate-400 font-semibold">待發電數據確認並上傳監測系統解鎖</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-400 text-center mt-6">※ 遵循中華民國信託法規辦理，大眾資金由信託專戶100%獨立保管，不隸屬平台或開發商私有財產</p>
                 </div>
             </div>
         </div>
@@ -453,7 +504,7 @@
                     </button>
                     <div class="px-5 pb-5 hidden">
                         <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
-                            減碳不應僅止於工業端，更應落實於生活圈。平台不僅推動能源轉型，更將實體回饋品與地方創生、循環農業及低碳商家結合。透過虛實整合的獎勵機制，引導投資人在日常消費中持續支持綠色產業，打造生生不息的在地永續生態系。
+                            減碳不應僅止於工業端，更應落實於生活圈。平台推動能源轉型，更將實體回饋品與地方創生、循環農業及低碳商家結合。透過虛實整合的獎勵機制，引導投資人在日常消費中持續支持綠色產業，打造生生不息的在地永續生態系。
                         </div>
                     </div>
                 </div>
@@ -613,7 +664,7 @@
                     <ul id="modal-project-perks" class="list-disc list-inside text-sm space-y-1.5 ml-1 text-slate-500">
                         <li class="break-words">個人專屬「淨零貢獻數位證書」</li>
                         <li class="break-words">建置進度與發電報表每季電子報更新</li>
-                        <li class="break-words">優先參訪綠能示訪廠區資格（限額）</li>
+                        <li class="break-words">優先參訪綠能示範廠區資格（限額）</li>
                     </ul>
                 </div>
             </div>
@@ -980,31 +1031,43 @@
         ];
 
         const rewardItemsData = {
-            1: { title: "專屬永續數位徽章", icon: "🏅", code: "TJ-BADGE-ACQUIRED", desc: "此徽章已綁定您的電子憑證編號，可永久於個人憑證展示區作為永續勳章展示。" },
-            2: { title: "低碳咖啡免費兌換券", icon: "☕", code: "TJ-COFFEE-FREE88", desc: "感謝支持綠色創生！出示此條碼可於合作減碳咖啡店家免費兌換環保美式咖啡乙杯。" },
-            3: { title: "碳吉寶寶實體環保杯", icon: "🌱", code: "TJ-CUP-GO-GREEN99", desc: "限量再生材質環保杯！我們已登記您的兌換資格，後續將以 Email 寄送表單收集收件資訊。" }
+            1: { title: "專屬永續數位徽章", icon: "🏅", code: "TJ-BADGE-ACQUIRED", desc: "此徽章已自動防偽綁定您的電子憑證編號，可永久於個人憑證展示區作為綠色貢獻勳章展示。" },
+            2: { title: "低碳咖啡免費兌換券", icon: "☕", code: "TJ-COFFEE-FREE88", desc: "本券遵循經濟部能源署電力排碳係數方法學發放。出示此條碼可於全台合作減碳綠色咖啡店家免費兌換環保熱美式咖啡乙杯。" },
+            3: { title: "碳吉寶寶實體環保杯", icon: "🌱", code: "TJ-CUP-GO-GREEN99", desc: "限量再生材質環保杯！我們已將您的兌換編號寫入去中心化存根，後續將以 Email 寄送表單收集收件資訊。" }
         };
 
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = `px-6 py-3.5 rounded-2xl shadow-lg text-sm font-bold transition-all duration-300 transform translate-y-2 opacity-0 flex items-center gap-2 pointer-events-auto bg-white border border-slate-200`;
-            if (type === 'error') {
-                toast.classList.add('text-red-600', 'border-red-100', 'bg-red-50');
-            } else {
-                toast.classList.add('text-brand-500', 'border-brand-100', 'bg-brand-50');
+        const levelDefinition = [
+            { level: 1, title: "種子萌發期", emoji: "🌱", minExp: 0, nextExp: 100, statusText: "寶寶剛吸收了光合作用，正在大口呼吸！", img: "assets/tanjibaby/tanjibaby.png" },
+            { level: 2, title: "幼苗展葉期", emoji: "🌿", minExp: 100, nextExp: 300, statusText: "寶寶感受到屋頂型太陽能的能量，葉片正在發光！", img: "assets/tanjibaby/tanjibaby2.png" },
+            { level: 3, title: "綠意灌木期", emoji: "🌳", minExp: 300, nextExp: 500, statusText: "寶寶的根系已經對接到屏東沼氣池，充滿科技動力！", img: "assets/tanjibaby/tanjibaby3.png" },
+            { level: 4, title: "普惠大樹期", emoji: "🌴", minExp: 500, nextExp: 800, statusText: "寶寶進化成完全體了，正在為全台中小企業抵消碳足跡！", img: "assets/tanjibaby/tanjibaby4.png" },
+            { level: 5, title: "淨零守護神", emoji: "👑", minExp: 800, nextExp: 2000, statusText: "檢測到核爆級淨零貢獻！寶寶正在發射極光特效！", img: "assets/tanjibaby/tanjibaby9.png" }
+        ];
+
+        function getLevelProgress(exp) {
+            let activeDef = levelDefinition[0];
+            for (let i = 0; i < levelDefinition.length; i++) {
+                if (exp >= levelDefinition[i].minExp) {
+                    activeDef = levelDefinition[i];
+                }
             }
-            toast.innerText = message;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.classList.remove('translate-y-2', 'opacity-0');
-            }, 50);
-            setTimeout(() => {
-                toast.classList.add('translate-y-2', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
+            const currentExpInLevel = exp - activeDef.minExp;
+            const levelRange = activeDef.nextExp - activeDef.minExp;
+            let pct = Math.min(Math.floor((currentExpInLevel / levelRange) * 100), 100);
+            if (activeDef.level === 5) {
+                pct = 100;
+            }
+            return {
+                pct: pct,
+                current: exp,
+                max: activeDef.nextExp,
+                title: activeDef.title,
+                emoji: activeDef.emoji,
+                statusText: activeDef.statusText,
+                level: activeDef.level,
+                img: activeDef.img
+            };
         }
-        window.showToast = showToast;
 
         function simulateLocalLogin(emailText, isAdmin = false) {
             currentUser = { uid: 'local-' + Date.now(), email: emailText, isAnonymous: emailText.includes('訪客') };
@@ -1165,32 +1228,31 @@
         });
 
         function updateUIFromData(data) {
+            const prog = getLevelProgress(data.exp);
             personalTotalExpEl.innerText = data.exp.toLocaleString();
             updateRewards(data.exp);
-            accLevel.innerText = `Lv.${data.level}`;
+            accLevel.innerText = `Lv.${prog.level}`;
             accExp.innerText = data.exp.toLocaleString();
             accInvested.innerText = data.invested.toLocaleString();
             accCo2.innerText = data.co2.toFixed(1);
 
-            document.getElementById('cert-level-display').innerText = `Lv.${data.level}`;
+            document.getElementById('cert-level-display').innerText = `Lv.${prog.level}`;
             document.getElementById('cert-co2-display').innerText = data.co2.toFixed(1);
             document.getElementById('cert-email-display').innerText = currentUser ? currentUser.email : 'user@tanji.com';
             
             const randCode = currentUser ? currentUser.uid.substring(0, 5).toUpperCase() : '0000';
             document.getElementById('cert-id-display').innerText = `CERT #TJ-2026-${randCode}`;
 
-            const ctaDesc = document.getElementById('sustainability-cta-desc');
-            if (ctaDesc) {
-                if (data.exp < 100) {
-                    ctaDesc.innerText = "目前寶寶處於嫩芽期。點擊前往試算注入能量，累積 100 EXP 即可解鎖第一個綠色里程碑！";
-                } else if (data.exp < 300) {
-                    ctaDesc.innerText = "太棒了！寶寶已成功萌芽。點擊試算繼續支持，下一個目標 300 EXP 將解鎖低碳咖啡券！";
-                } else if (data.exp < 800) {
-                    ctaDesc.innerText = "寶寶長勢喜人！點擊前往支持，邁向 800 EXP 終極里程碑，解鎖專屬實體環保杯！";
-                } else {
-                    ctaDesc.innerText = "恭喜達成終極永續回饋！您已成功解鎖全站所有獎勵。點擊前往試算，繼續為地球減碳注入新能量！";
-                }
-            }
+            document.getElementById('cta-baby-emoji').innerText = prog.emoji;
+            document.getElementById('cta-baby-title').innerText = `碳吉寶寶 ${prog.title}`;
+            document.getElementById('cta-progress-bar').style.width = `${prog.pct}%`;
+            document.getElementById('cta-progress-text').innerText = `${prog.current} / ${prog.max} EXP`;
+            document.getElementById('sustainability-cta-desc').innerText = `距離下一次進化還差 ${prog.max - prog.current} EXP。點擊試算繼續累積！`;
+
+            babyImg.src = prog.img;
+            statusText.innerText = prog.statusText;
+            statusText.className = 'text-base font-bold text-brand-500 z-20 break-words';
+            encouragementText.innerText = `當前形態：${prog.emoji} ${prog.title}`;
         }
 
         const slider = document.getElementById('investSlider');
@@ -1321,7 +1383,7 @@
                 ],
                 perks: [
                     "獲得個人專屬「偏鄉節能貢獻數位憑證」",
-                    "每季收到智慧節能電費回饋監測數據報告表",
+                    "每季收到智慧節能電費回饋監數據報告表",
                     "獲得偏鄉在地小農手作天然香草茶包組一份"
                 ]
             },
@@ -1923,6 +1985,16 @@
             ctx.font = '24px sans-serif';
             ctx.fillText('的溫室氣體排放，特頒此證以資表揚。', 380, 470);
 
+            const hashInput = `${userEmail}-${co2Val}-${certId}-${Date.now()}`;
+            let mockHash = "";
+            for (let i = 0; i < 8; i++) {
+                mockHash += Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            }
+            mockHash = "SHA256: " + mockHash.toUpperCase();
+            ctx.fillStyle = '#a855f7';
+            ctx.font = 'bold 18px monospace';
+            ctx.fillText(mockHash, 100, 530);
+
             ctx.fillStyle = '#64748b';
             ctx.font = '16px sans-serif';
             const today = new Date().toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -2171,6 +2243,20 @@
         startMockFeedsSimulation();
 
         window.switchProject = switchProject;
+
+        document.getElementById('sustainability-cta-card').addEventListener('click', function(e) {
+            e.preventDefault();
+            babyWrapper.classList.add('animate-bounce');
+            setTimeout(() => {
+                babyWrapper.classList.remove('animate-bounce');
+            }, 1000);
+            document.getElementById('interaction-zone').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        babyImg.onerror = function() {
+            const emoji = levelDefinition[personalData.level - 1]?.emoji || "🌱";
+            this.src = `data:image/svg+xml;base64,` + btoa(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#007d8a"/><text x="50" y="65" font-size="45" text-anchor="middle">${emoji}</text></svg>`);
+        };
 
         const randomHeroIndex = Math.floor(Math.random() * projects.length);
         switchProject(randomHeroIndex, false);
