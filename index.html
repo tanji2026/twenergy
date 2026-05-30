@@ -2272,7 +2272,7 @@
             const loadingDiv = document.createElement('div');
             loadingDiv.id = loadingId;
             loadingDiv.className = 'self-start bg-white p-3 rounded-2xl rounded-tl-sm border border-slate-100 max-w-[90%] text-slate-400 text-[10px] font-bold flex items-center shrink-0 shadow-sm';
-            loadingDiv.innerHTML = '<span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce mr-1"></span><span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce mr-1" style="animation-delay: 0.1s"></span><span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce mr-2" style="animation-delay: 0.2s"></span> 碳吉寶寶思考中...';
+            loadingDiv.innerHTML = '<span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-pulse mr-1"></span><span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce mr-1" style="animation-delay: 0.1s"></span><span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce mr-2" style="animation-delay: 0.2s"></span> 碳吉寶寶思考中...';
             chatMessages.appendChild(loadingDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
@@ -2300,8 +2300,8 @@
 
                 addMessage(reply, false);
 
-                chatHistory.push({ isUser: true, text: text });
-                chatHistory.push({ isUser: false, text: reply });
+                chatHistory.push({ role: "user", parts: [{ text: text }] });
+                chatHistory.push({ role: "model", parts: [{ text: reply }] });
 
             } catch (error) {
                 const loadEl = document.getElementById(loadingId);
