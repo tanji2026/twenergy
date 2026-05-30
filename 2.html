@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex,nofollow">
     <title>TanJi 淨零群募平台</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght=500;700;800&family=Plus+Jakarta+Sans:wght=500;700;800&family=Noto+Sans+TC:wght=400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -32,8 +29,8 @@
         }
     </script>
     <style>
-        body { font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif; }
+        .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
         input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: #007d8a; cursor: pointer; margin-top: -8px; border: 3px solid #fff; box-shadow: 0 4px 10px rgba(0, 125, 138, 0.3); transition: transform 0.1s; position: relative; z-index: 10; }
         input[type=range]::-webkit-slider-thumb:hover, input[type=range]:active::-webkit-slider-thumb { transform: scale(1.15); }
@@ -331,19 +328,10 @@
                     </div>
                 </div>
 
-                <div id="sustainability-cta-card" class="bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between items-center text-center cursor-pointer hover:border-brand-500 hover:scale-[1.02] transition-all duration-300 group w-full">
-                    <div class="flex flex-col items-center">
-                        <span id="cta-baby-emoji" class="text-4xl mb-3 group-hover:animate-bounce">🌱</span>
-                        <h4 id="cta-baby-title" class="font-black text-slate-800 mb-1">碳吉寶寶 成長監控</h4>
-                        <p id="sustainability-cta-desc" class="text-xs text-slate-400 max-w-[200px] leading-relaxed mb-4">您的每一筆支持，都將實時反映在系統動態與碳吉寶寶的成長軌跡中。點擊試算注入能量！</p>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2.5 mb-2 relative overflow-hidden">
-                        <div id="cta-progress-bar" class="bg-brand-500 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
-                    </div>
-                    <div class="flex justify-between w-full text-[10px] text-slate-400 font-bold font-mono px-1">
-                        <span>等級進化度</span>
-                        <span id="cta-progress-text" class="font-mono">0 / 100 EXP</span>
-                    </div>
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-center items-center text-center">
+                    <span class="text-4xl mb-3">🍃</span>
+                    <h4 class="font-bold text-slate-800 mb-1">永續行動，即刻出發</h4>
+                    <p class="text-xs text-slate-400 max-w-[200px] leading-relaxed">您的每一筆支持，都將實時反映在系統動態與碳吉寶寶的成長軌跡中。</p>
                 </div>
             </div>
         </div>
@@ -377,48 +365,6 @@
                         <h4 class="text-base font-bold text-slate-800 mb-3 text-center break-words">智能補貼分潤</h4>
                         <p class="text-slate-500 leading-relaxed text-sm text-justify mb-6 flex-1">專案達標後，智能合約自動發放對應的 EXP 經驗值至您的帳戶，並提撥 3% 媒合服務費作為平台永續營運基金。</p>
                     </div>
-                </div>
-
-                <div class="mt-12 bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-8">
-                    <h3 class="text-base font-bold text-slate-800 mb-6 flex items-center">
-                        <span class="mr-2">🏦</span> 信託專戶資金撥款進度牆 (Escrow Milestones)
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-                        <div id="escrow-card-1" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between">
-                            <div class="absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg" id="escrow-badge-1">鎖定中</div>
-                            <div>
-                                <p class="text-xs font-bold mb-1" id="escrow-title-1">第一階段：結構安全檢測</p>
-                                <p class="text-[11px] text-slate-400">工廠屋頂結構評估安全，防漏與防風測試複檢通過。</p>
-                            </div>
-                            <div class="mt-4 flex items-center gap-2">
-                                <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold" id="escrow-status-icon-1">🔒</span>
-                                <span class="text-[10px] text-slate-400 font-semibold" id="escrow-status-text-1">待工程啟動並提交結構報告解鎖</span>
-                            </div>
-                        </div>
-                        <div id="escrow-card-2" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between">
-                            <div class="absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg" id="escrow-badge-2">鎖定中</div>
-                            <div>
-                                <p class="text-xs font-bold mb-1" id="escrow-title-2">第二階段：設備進場簽收</p>
-                                <p class="text-[11px] text-slate-400">高效能太陽能板、逆變器與機組結構經監造簽章確認。</p>
-                            </div>
-                            <div class="mt-4 flex items-center gap-2">
-                                <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold" id="escrow-status-icon-2">🔒</span>
-                                <span class="text-[10px] text-slate-400 font-semibold" id="escrow-status-text-2">待設備全數進場並提交監管報告解鎖</span>
-                            </div>
-                        </div>
-                        <div id="escrow-card-3" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between">
-                            <div class="absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg" id="escrow-badge-3">鎖定中</div>
-                            <div>
-                                <p class="text-xs font-bold mb-1" id="escrow-title-3">第三階段：併網完工發電</p>
-                                <p class="text-[11px] text-slate-400">台電與市電併網工程驗收合格，正式啟動綠電生產運作。</p>
-                            </div>
-                            <div class="mt-4 flex items-center gap-2">
-                                <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold" id="escrow-status-icon-3">🔒</span>
-                                <span class="text-[10px] text-slate-400 font-semibold" id="escrow-status-text-3">待發電數據確認並上傳監測系統解鎖</span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-[11px] text-slate-400 text-center mt-6">※ 預算撥付循信託保管流程，工程款隨進度核實分批解鎖，100%落實專款專用</p>
                 </div>
             </div>
         </div>
@@ -504,7 +450,7 @@
                     </button>
                     <div class="px-5 pb-5 hidden">
                         <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
-                            減碳不應僅止於工業端，更應落實於生活圈。平台推動能源轉型，更將實體回饋品與地方創生、循環農業及低碳商家結合。透過虛實整合的獎勵機制，引導投資人在日常消費中持續支持綠色產業，打造生生不息的在地永續生態系。
+                            減碳不應僅止於工業端，更應落實於生活圈。平台不僅推動能源轉型，更將實體回饋品與地方創生、循環農業及低碳商家結合。透過虛實整合的獎勵機制，引導投資人在日常消費中持續支持綠色產業，打造生生不息的在地永續生態系。
                         </div>
                     </div>
                 </div>
@@ -557,7 +503,7 @@
                 <span class="text-white font-bold text-lg tracking-wider break-words">TanJi 淨零群募平台</span>
             </div>
             <div class="font-medium text-sm text-center md:text-right text-slate-400 leading-relaxed min-w-0">
-                <p class="text-slate-300 mb-1 break-words">臺灣『能』永續能源創意實作競賽參賽隊伍｜作品受著作權法保護，未經授权請勿複製轉載</p>
+                <p class="text-slate-300 mb-1 break-words">臺灣『能』永續能源創意實作競賽參賽隊伍｜作品受著作權法保護，未經授權請勿複製轉載</p>
                 <p class="break-words font-mono">歡迎聯絡我們：tanji2026@gmail.com</p>
             </div>
         </div>
@@ -664,7 +610,7 @@
                     <ul id="modal-project-perks" class="list-disc list-inside text-sm space-y-1.5 ml-1 text-slate-500">
                         <li class="break-words">個人專屬「淨零貢獻數位證書」</li>
                         <li class="break-words">建置進度與發電報表每季電子報更新</li>
-                        <li class="break-words">優先參訪綠能示訪廠區資格（限額）</li>
+                        <li class="break-words">優先參訪綠能示範廠區資格（限額）</li>
                     </ul>
                 </div>
             </div>
@@ -782,7 +728,7 @@
 
     <div class="fixed bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end">
         <div id="helpModal" class="hidden bg-white w-[90vw] sm:w-80 max-w-[320px] rounded-3xl border border-slate-200 mb-4 flex flex-col overflow-hidden shadow-md transform transition-all" style="height: 380px;">
-            <div class="bg-slate-800 p-3.5 text-white flex justify-between items-center z-10 shrink-0 gap-2">
+            <div class="bg-slate-880 p-3.5 text-white flex justify-between items-center z-10 shrink-0 gap-2">
                 <div class="flex items-center min-w-0">
                     <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-2 border border-white/50 p-0.5 overflow-hidden shrink-0">
                         <img src="assets/tanjibaby/tanjibaby.png" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzAwN2Q4YSIvPjx0ZXh0IHg9IjUwIiB5PSI2MCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+56KzPC90ZXh0Pjwvc3ZnPg=='">
@@ -932,35 +878,6 @@
 
         </div>
     </div>
-
-    <div id="rewardDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center transition-opacity p-4">
-        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full relative border border-slate-200 text-center transform scale-95 transition-all">
-            <button onclick="document.getElementById('rewardDetailModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 bg-slate-50 p-1.5 rounded-full z-10">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-            <div id="reward-modal-icon" class="w-16 h-16 bg-brand-50 rounded-full mx-auto flex items-center justify-center mb-4 text-3xl border border-brand-100">☕</div>
-            <h3 id="reward-modal-title" class="text-xl font-black text-slate-800 mb-1">低碳咖啡兌換券</h3>
-            <p id="reward-modal-status" class="text-xs text-brand-500 font-bold mb-4">恭喜解鎖！請至合作店家出示兌換</p>
-            
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/60 my-4 space-y-3">
-                <div class="flex flex-col items-center justify-center p-2 bg-white rounded-lg border border-slate-200 shadow-sm">
-                    <div class="w-48 h-10 flex justify-around items-center opacity-80 mb-1">
-                        <span class="w-1 bg-slate-800 h-full"></span>
-                        <span class="w-0.5 bg-slate-800 h-full"></span>
-                        <span class="w-2 bg-slate-800 h-full"></span>
-                        <span class="w-0.5 bg-slate-800 h-full"></span>
-                        <span class="w-1.5 bg-slate-800 h-full"></span>
-                        <span class="w-1 bg-slate-800 h-full"></span>
-                        <span class="w-0.5 bg-slate-800 h-full"></span>
-                        <span class="w-2 bg-slate-800 h-full"></span>
-                    </div>
-                    <span id="reward-modal-code" class="text-xs font-mono font-bold tracking-widest text-slate-500">TJ-COFFEE-FREE88</span>
-                </div>
-                <p id="reward-modal-desc" class="text-xs text-slate-400 text-justify leading-relaxed">本券支持台灣在地減碳農業，可於全台合作綠色創生商家免費兌換熱美式乙杯。限一次性兌換使用。</p>
-            </div>
-            <button onclick="document.getElementById('rewardDetailModal').classList.add('hidden')" class="w-full bg-slate-800 hover:bg-slate-700 text-white rounded-xl py-3 font-bold text-sm transition-colors">我知道了</button>
-        </div>
-    </div>
     
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
@@ -1030,59 +947,26 @@
             { name: '高雄劉先生', action: '贊助了 100kW 廠房屋頂太陽能 10,000 元', exp: 1000, timeStr: '5分鐘前' }
         ];
 
-        const rewardItemsData = {
-            1: { title: "專屬永續數位徽章", icon: "🏅", code: "TJ-BADGE-ACQUIRED", desc: "此徽章已自動防偽綁定您的電子憑證編號，可永久於個人憑證展示區作為綠色貢獻勳章展示。" },
-            2: { title: "低碳咖啡免費兌換券", icon: "☕", code: "TJ-COFFEE-FREE88", desc: "本券遵循經濟部能源署電力排碳係數方法學發放。出示此條碼可於全台合作減碳綠色咖啡店家免費兌換環保熱美式咖啡乙杯。" },
-            3: { title: "碳吉寶寶實體環保杯", icon: "🌱", code: "TJ-CUP-GO-GREEN99", desc: "限量再生材質環保杯！我們已將您的兌換編號寫入去中心化存根，後續將以 Email 寄送表單收集收件資訊。" }
-        };
-
-        const levelDefinition = [
-            { level: 1, title: "種子萌發期", emoji: "🌱", minExp: 0, nextExp: 100, statusText: "寶寶剛吸收了光合作用，正在大口呼吸！", img: "assets/tanjibaby/tanjibaby.png" },
-            { level: 2, title: "幼苗展葉期", emoji: "🌿", minExp: 100, nextExp: 300, statusText: "寶寶感受到屋頂型太陽能的能量，葉片正在發光！", img: "assets/tanjibaby/tanjibaby2.png" },
-            { level: 3, title: "綠意灌木期", emoji: "🌳", minExp: 300, nextExp: 500, statusText: "寶寶的根系已經對接到屏東沼氣池，充滿科技動力！", img: "assets/tanjibaby/tanjibaby3.png" },
-            { level: 4, title: "普惠大樹期", emoji: "🌴", minExp: 500, nextExp: 800, statusText: "寶寶進化成完全體了，正在為全台中小企業抵消碳足跡！", img: "assets/tanjibaby/tanjibaby4.png" },
-            { level: 5, title: "淨零守護神", emoji: "👑", minExp: 800, nextExp: 2000, statusText: "檢測到核爆級淨零貢獻！寶寶正在發射極光特效！", img: "assets/tanjibaby/tanjibaby9.png" }
-        ];
-
-        function getLocalData() {
-            try {
-                const stored = localStorage.getItem('tanji_local_store_' + appId);
-                return stored ? JSON.parse(stored) : null;
-            } catch (e) {
-                return null;
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `px-6 py-3.5 rounded-2xl shadow-lg text-sm font-bold transition-all duration-300 transform translate-y-2 opacity-0 flex items-center gap-2 pointer-events-auto bg-white border border-slate-200`;
+            if (type === 'error') {
+                toast.classList.add('text-red-600', 'border-red-100', 'bg-red-50');
+            } else {
+                toast.classList.add('text-brand-500', 'border-brand-100', 'bg-brand-50');
             }
+            toast.innerText = message;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 50);
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
         }
-
-        function setLocalData(data) {
-            try {
-                localStorage.setItem('tanji_local_store_' + appId, JSON.stringify(data));
-            } catch (e) {}
-        }
-
-        function getLevelProgress(exp) {
-            let activeDef = levelDefinition[0];
-            for (let i = 0; i < levelDefinition.length; i++) {
-                if (exp >= levelDefinition[i].minExp) {
-                    activeDef = levelDefinition[i];
-                }
-            }
-            const currentExpInLevel = exp - activeDef.minExp;
-            const levelRange = activeDef.nextExp - activeDef.minExp;
-            let pct = Math.min(Math.floor((currentExpInLevel / levelRange) * 100), 100);
-            if (activeDef.level === 5) {
-                pct = 100;
-            }
-            return {
-                pct: pct,
-                current: exp,
-                max: activeDef.nextExp,
-                title: activeDef.title,
-                emoji: activeDef.emoji,
-                statusText: activeDef.statusText,
-                level: activeDef.level,
-                img: activeDef.img
-            };
-        }
+        window.showToast = showToast;
 
         function simulateLocalLogin(emailText, isAdmin = false) {
             currentUser = { uid: 'local-' + Date.now(), email: emailText, isAnonymous: emailText.includes('訪客') };
@@ -1093,20 +977,15 @@
             loginModal.classList.add('hidden');
             userEmailDisplay.innerText = currentUser.email;
 
-            const cache = getLocalData();
-            if (cache) {
-                Object.assign(personalData, cache);
-            } else if (isAdmin) {
+            if (isAdmin) {
                 personalData.role = "admin";
                 personalData.exp = 2500;
                 personalData.level = 5;
                 personalData.invested = 25000;
                 personalData.co2 = 300.0;
-                setLocalData(personalData);
                 document.getElementById('adminBtn').classList.remove('hidden');
             } else {
                 Object.assign(personalData, initialUserData);
-                setLocalData(personalData);
                 document.getElementById('adminBtn').classList.add('hidden');
             }
 
@@ -1141,12 +1020,10 @@
                 try {
                     const docSnap = await getDoc(userDocRef);
                     if (!docSnap.exists()) {
-                        const localCache = getLocalData() || initialUserData;
-                        await setDoc(userDocRef, { ...localCache, email: user.isAnonymous ? "訪客 (匿名)" : user.email });
+                        await setDoc(userDocRef, { ...initialUserData, email: user.isAnonymous ? "訪客 (匿名)" : user.email });
                     }
                 } catch(e) {
-                    const cache = getLocalData() || initialUserData;
-                    Object.assign(personalData, cache);
+                    Object.assign(personalData, initialUserData);
                     updateUIFromData(personalData);
                 }
 
@@ -1154,7 +1031,6 @@
                     if (docSnap.exists()) {
                         const data = docSnap.data();
                         Object.assign(personalData, data);
-                        setLocalData(personalData);
                         updateUIFromData(personalData);
                         if (data.role === 'admin') {
                             document.getElementById('adminBtn').classList.remove('hidden');
@@ -1173,8 +1049,7 @@
                     loginShowBtn.classList.remove('auth-hidden');
                     loginOverlay.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
                     document.getElementById('adminBtn').classList.add('hidden');
-                    const cache = getLocalData() || initialUserData;
-                    Object.assign(personalData, cache);
+                    Object.assign(personalData, initialUserData);
                     updateUIFromData(personalData);
                 }
             }
@@ -1235,7 +1110,6 @@
         });
 
         logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('tanji_local_store_' + appId);
             if(currentUser && currentUser.uid.startsWith('local-')) {
                 currentUser = null;
                 userControls.classList.add('auth-hidden');
@@ -1253,90 +1127,19 @@
         });
 
         function updateUIFromData(data) {
-            const prog = getLevelProgress(data.exp);
             personalTotalExpEl.innerText = data.exp.toLocaleString();
             updateRewards(data.exp);
-            accLevel.innerText = `Lv.${prog.level}`;
+            accLevel.innerText = `Lv.${data.level}`;
             accExp.innerText = data.exp.toLocaleString();
             accInvested.innerText = data.invested.toLocaleString();
             accCo2.innerText = data.co2.toFixed(1);
 
-            document.getElementById('cert-level-display').innerText = `Lv.${prog.level}`;
+            document.getElementById('cert-level-display').innerText = `Lv.${data.level}`;
             document.getElementById('cert-co2-display').innerText = data.co2.toFixed(1);
             document.getElementById('cert-email-display').innerText = currentUser ? currentUser.email : 'user@tanji.com';
             
             const randCode = currentUser ? currentUser.uid.substring(0, 5).toUpperCase() : '0000';
             document.getElementById('cert-id-display').innerText = `CERT #TJ-2026-${randCode}`;
-
-            document.getElementById('cta-baby-emoji').innerText = prog.emoji;
-            document.getElementById('cta-baby-title').innerText = `碳吉寶寶 ${prog.title}`;
-            document.getElementById('cta-progress-bar').style.width = `${prog.pct}%`;
-            document.getElementById('cta-progress-text').innerText = `${prog.current} / ${prog.max} EXP`;
-            document.getElementById('sustainability-cta-desc').innerText = `距離下一次進化還差 ${prog.max - prog.current} EXP。點擊試算繼續累積！`;
-
-            babyImg.src = prog.img;
-            statusText.innerText = prog.statusText;
-            encouragementText.innerText = `當前形態：${prog.emoji} ${prog.title}`;
-
-            if (data.exp >= 100) {
-                document.getElementById('escrow-badge-1').innerText = "已解鎖 20%";
-                document.getElementById('escrow-badge-1').className = "absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-1').className = "bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-1').className = "text-xs font-bold mb-1 text-brand-500";
-                document.getElementById('escrow-status-icon-1').innerText = "✓";
-                document.getElementById('escrow-status-icon-1').className = "w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold";
-                document.getElementById('escrow-status-text-1').innerText = "驗證成功，資金已安全撥付施工廠商";
-                document.getElementById('escrow-status-text-1').className = "text-[10px] text-slate-500 font-semibold";
-            } else {
-                document.getElementById('escrow-badge-1').innerText = "鎖定中";
-                document.getElementById('escrow-badge-1').className = "absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-1').className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-1').className = "text-xs font-bold mb-1 text-slate-600";
-                document.getElementById('escrow-status-icon-1').innerText = "🔒";
-                document.getElementById('escrow-status-icon-1').className = "w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold";
-                document.getElementById('escrow-status-text-1').innerText = "待工程啟動並提交結構報告解鎖";
-                document.getElementById('escrow-status-text-1').className = "text-[10px] text-slate-400 font-semibold";
-            }
-
-            if (data.exp >= 300) {
-                document.getElementById('escrow-badge-2').innerText = "已解鎖 60%";
-                document.getElementById('escrow-badge-2').className = "absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-2').className = "bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-2').className = "text-xs font-bold mb-1 text-brand-500";
-                document.getElementById('escrow-status-icon-2').innerText = "✓";
-                document.getElementById('escrow-status-icon-2').className = "w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold";
-                document.getElementById('escrow-status-text-2').innerText = "驗證成功，材料設備採購金已釋放";
-                document.getElementById('escrow-status-text-2').className = "text-[10px] text-slate-500 font-semibold";
-            } else {
-                document.getElementById('escrow-badge-2').innerText = "鎖定中";
-                document.getElementById('escrow-badge-2').className = "absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-2').className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-2').className = "text-xs font-bold mb-1 text-slate-600";
-                document.getElementById('escrow-status-icon-2').innerText = "🔒";
-                document.getElementById('escrow-status-icon-2').className = "w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold";
-                document.getElementById('escrow-status-text-2').innerText = "待設備全數進場並提交監管報告解鎖";
-                document.getElementById('escrow-status-text-2').className = "text-[10px] text-slate-400 font-semibold";
-            }
-
-            if (data.exp >= 800) {
-                document.getElementById('escrow-badge-3').innerText = "已解鎖 100%";
-                document.getElementById('escrow-badge-3').className = "absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-3').className = "bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-3').className = "text-xs font-bold mb-1 text-brand-500";
-                document.getElementById('escrow-status-icon-3').innerText = "✓";
-                document.getElementById('escrow-status-icon-3').className = "w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold";
-                document.getElementById('escrow-status-text-3').innerText = "併網發電成功，綠電系統完美運轉";
-                document.getElementById('escrow-status-text-3').className = "text-[10px] text-slate-500 font-semibold";
-            } else {
-                document.getElementById('escrow-badge-3').innerText = "鎖定中";
-                document.getElementById('escrow-badge-3').className = "absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-3').className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-3').className = "text-xs font-bold mb-1 text-slate-600";
-                document.getElementById('escrow-status-icon-3').innerText = "🔒";
-                document.getElementById('escrow-status-icon-3').className = "w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold";
-                document.getElementById('escrow-status-text-3').innerText = "待發電數據確認並上傳監測系統解鎖";
-                document.getElementById('escrow-status-text-3').className = "text-[10px] text-slate-400 font-semibold";
-            }
         }
 
         const slider = document.getElementById('investSlider');
@@ -1459,7 +1262,7 @@
                 time: "剩餘 22 天",
                 image: "assets/projects/project_led.png",
                 badge: "節能與碳權",
-                desc: "本專案將協助台灣東部十個偏鄉部落更換老舊高耗能水銀燈泡為最新節能智慧 LED。除了能直接為弱勢社區省下 60% 的公用電費支出，更利用區塊鏈技術建立微型碳排抵消機制，協助投資人獲得專屬綠色碳抵消權益。",
+                desc: "本專案將協助台灣東部十個偏鄉部落更換老舊高耗能水銀燈泡為最新節能智慧 LED。除了能直接為弱勢社區省下 60% 的公用電費支出，更利用區塊鏈技術建立微型智慧節能發電回饋監測數據報告表",
                 benefits: [
                     "預估首年節電量：80,000 度電力",
                     "年減少溫室氣體：約 39.6 噸 CO2e 碳排",
@@ -1516,7 +1319,7 @@
                 org: "合作單位：綠島民宿聯盟與低碳島推廣委員會",
                 image: "assets/projects/success_greenisland.png",
                 badge: "第一期結案",
-                desc: "為了解決綠島旺季旅遊期間燃油機車帶來的廢氣與強烈噪音污染，本專案首期發起募資，成功於島上建置了 3 座完全由太陽能供電的智慧機車充電站，並率先引進 50 輛共享電動機車，成功降低島嶼觀光活動對脆弱海洋生態系之衝擊。",
+                desc: "為了解決綠島旺季旅遊期間燃油機車帶來的廢氣與強烈噪音污染，本專案首期發起募資，成功於島上建置了 3 座完全由太陽能供電的智慧機車充電站，並率先引進 50 輛共享電動機車，成功降低島嶼觀光活動對脆弱海洋生態系之衝記。",
                 benefits: [
                     "累計減少溫室氣體：約 15 噸 CO2e 碳排",
                     "旅遊體驗升級：實現零碳排放、零分貝噪音之靜謐旅遊體驗",
@@ -1574,7 +1377,6 @@
             personalData.exp += 5;
             personalData.level = calculateLevel(personalData.exp);
             
-            setLocalData(personalData);
             if (currentUser && !currentUser.uid.startsWith('local-')) {
                 try {
                      const userDocRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'profile', 'data');
@@ -1696,41 +1498,35 @@
             let unlockedCount = 0;
 
             if(totalExp >= 100) { 
-                r1.classList.remove('reward-locked');
-                r1.classList.add('reward-unlocked', 'cursor-pointer'); 
-                req1.innerText = '點擊檢視獎勵';
-                req1.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap animate-pulse';
+                r1.classList.replace('reward-locked', 'reward-unlocked'); 
+                req1.innerText = '已解鎖';
+                req1.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap';
                 unlockedCount++;
             } else {
-                r1.classList.add('reward-locked');
-                r1.classList.remove('reward-unlocked', 'cursor-pointer'); 
-                req1.innerText = '需 100 EXP';
+                r1.classList.replace('reward-unlocked', 'reward-locked'); 
+                req1.innerText = 'Ref. 100 EXP';
                 req1.className = 'inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono';
             }
             
             if(totalExp >= 300) { 
-                r2.classList.remove('reward-locked');
-                r2.classList.add('reward-unlocked', 'cursor-pointer'); 
-                req2.innerText = '點擊兌換條碼';
-                req2.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap animate-pulse';
+                r2.classList.replace('reward-locked', 'reward-unlocked'); 
+                req2.innerText = '已解鎖';
+                req2.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap';
                 unlockedCount++;
             } else {
-                r2.classList.add('reward-locked');
-                r2.classList.remove('reward-unlocked', 'cursor-pointer'); 
-                req2.innerText = '需 300 EXP';
+                r2.classList.replace('reward-unlocked', 'reward-locked'); 
+                req2.innerText = 'Ref. 300 EXP';
                 req2.className = 'inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono';
             }
 
             if(totalExp >= 800) { 
-                r3.classList.remove('reward-locked');
-                r3.classList.add('reward-unlocked', 'cursor-pointer'); 
-                req3.innerText = '點擊登記領取';
-                req3.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap animate-pulse';
+                r3.classList.replace('reward-locked', 'reward-unlocked'); 
+                req3.innerText = '已解鎖';
+                req3.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap';
                 unlockedCount++;
             } else {
-                r3.classList.add('reward-locked');
-                r3.classList.remove('reward-unlocked', 'cursor-pointer'); 
-                req3.innerText = '需 800 EXP';
+                r3.classList.replace('reward-unlocked', 'reward-locked'); 
+                req3.innerText = 'Ref. 800 EXP';
                 req3.className = 'inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono';
             }
 
@@ -1741,31 +1537,14 @@
                 if (unlockedCount === 0) {
                     promoCodeEl.innerText = 'VOUCHER_LOCKED';
                 } else if (unlockedCount === 1) {
-                    promoCodeEl.innerText = rewardItemsData[1].code;
+                    promoCodeEl.innerText = 'TJ-BADGE-ACQUIRED';
                 } else if (unlockedCount === 2) {
-                    promoCodeEl.innerText = rewardItemsData[2].code;
+                    promoCodeEl.innerText = 'TJ-COFFEE-FREE88';
                 } else {
-                    promoCodeEl.innerText = rewardItemsData[3].code;
+                    promoCodeEl.innerText = 'TJ-CUP-GO-GREEN99';
                 }
             }
         }
-
-        function openRewardModal(id, requiredExp) {
-            if (personalData.exp < requiredExp) {
-                window.showToast(`經驗值不足！還需要 ${requiredExp - personalData.exp} EXP 才能解鎖喔！`, 'error');
-                return;
-            }
-            const data = rewardItemsData[id];
-            document.getElementById('reward-modal-icon').innerText = data.icon;
-            document.getElementById('reward-modal-title').innerText = data.title;
-            document.getElementById('reward-modal-code').innerText = data.code;
-            document.getElementById('reward-modal-desc').innerText = data.desc;
-            document.getElementById('rewardDetailModal').classList.remove('hidden');
-        }
-
-        document.getElementById('reward-1').addEventListener('click', () => openRewardModal(1, 100));
-        document.getElementById('reward-2').addEventListener('click', () => openRewardModal(2, 300));
-        document.getElementById('reward-3').addEventListener('click', () => openRewardModal(3, 800));
 
         function calculateLevel(exp) {
             if(exp >= 2000) return 5;
@@ -1950,7 +1729,6 @@
                 personalData.exp += exp;
                 personalData.level = calculateLevel(personalData.exp);
                 
-                setLocalData(personalData);
                 if (currentUser && !currentUser.uid.startsWith('local-')) {
                     try {
                          const userDocRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'profile', 'data');
@@ -2024,90 +1802,13 @@
             btn.disabled = true;
             btn.innerText = "安全金鑰傳輸中...";
             btn.classList.add('animate-pulse', 'bg-brand-600');
-
-            const canvas = document.createElement('canvas');
-            canvas.width = 1000;
-            canvas.height = 700;
-            const ctx = canvas.getContext('2d');
-
-            const gradient = ctx.createLinearGradient(0, 0, 1000, 700);
-            gradient.addColorStop(0, '#0a1f42');
-            gradient.addColorStop(1, '#005a63');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, 1000, 700);
-
-            ctx.strokeStyle = '#3cc4b2';
-            ctx.lineWidth = 10;
-            ctx.strokeRect(30, 30, 940, 640);
-
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 42px sans-serif';
-            ctx.fillText('TanJi 永續綠能減碳憑證', 100, 120);
-
-            const certId = document.getElementById('cert-id-display').innerText;
-            ctx.fillStyle = '#3cc4b2';
-            ctx.font = '20px monospace';
-            ctx.fillText(certId, 100, 165);
-
-            ctx.fillStyle = '#cbd5e1';
-            ctx.font = '24px sans-serif';
-            ctx.fillText('茲證明此永續帳戶持有者：', 100, 270);
-
-            const userEmail = document.getElementById('cert-email-display').innerText;
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 30px monospace';
-            ctx.fillText(userEmail, 100, 330);
-
-            ctx.fillStyle = '#cbd5e1';
-            ctx.font = '24px sans-serif';
-            ctx.fillText('實質參與綠能與淨零碳排工程，已為地球抵消了', 100, 410);
-
-            const co2Val = document.getElementById('cert-co2-display').innerText;
-            ctx.fillStyle = '#3cc4b2';
-            ctx.font = 'bold 48px monospace';
-            ctx.fillText(`${co2Val} kg`, 100, 480);
-
-            ctx.fillStyle = '#cbd5e1';
-            ctx.font = '24px sans-serif';
-            ctx.fillText('的溫室氣體排放，特頒此證以資表揚。', 380, 470);
-
-            const hashInput = `${userEmail}-${co2Val}-${certId}-${Date.now()}`;
-            let mockHash = "";
-            for (let i = 0; i < 8; i++) {
-                mockHash += Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-            }
-            mockHash = "SHA256: " + mockHash.toUpperCase();
-            ctx.fillStyle = '#a855f7';
-            ctx.font = 'bold 18px monospace';
-            ctx.fillText(mockHash, 100, 530);
-
-            ctx.fillStyle = '#64748b';
-            ctx.font = '16px sans-serif';
-            const today = new Date().toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
-            ctx.fillText(`認證日期：${today}`, 100, 590);
-            ctx.fillText('臺灣『能』永續能源創意實作競賽 參賽團隊 認證發行', 480, 590);
-
+            
             setTimeout(() => {
-                try {
-                    const imageURL = canvas.toDataURL('image/png');
-                    const downloadLink = document.createElement('a');
-                    downloadLink.href = imageURL;
-                    downloadLink.download = `TanJi_Cert_${co2Val}kg.png`;
-                    document.body.appendChild(downloadLink);
-                    downloadLink.click();
-                    document.body.removeChild(downloadLink);
-
-                    btn.disabled = false;
-                    btn.innerText = "下載數位憑證";
-                    btn.classList.remove('animate-pulse', 'bg-brand-600');
-                    window.showToast("憑證已成功生成並開始下載！");
-                } catch (err) {
-                    btn.disabled = false;
-                    btn.innerText = "下載數位憑證";
-                    btn.classList.remove('animate-pulse', 'bg-brand-600');
-                    window.showToast("生成失敗，請再試一次", "error");
-                }
-            }, 1500);
+                btn.disabled = false;
+                btn.innerText = "下載數位憑證";
+                btn.classList.remove('animate-pulse', 'bg-brand-600');
+                window.showToast("憑證檔案已安全同步至個人數位錢包！");
+            }, 2000);
         });
 
         document.getElementById('viewDetailBtn').addEventListener('click', () => {
@@ -2329,20 +2030,6 @@
         startMockFeedsSimulation();
 
         window.switchProject = switchProject;
-
-        document.getElementById('sustainability-cta-card').addEventListener('click', function(e) {
-            e.preventDefault();
-            babyWrapper.classList.add('animate-bounce');
-            setTimeout(() => {
-                babyWrapper.classList.remove('animate-bounce');
-            }, 1000);
-            document.getElementById('interaction-zone').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        babyImg.onerror = function() {
-            const emoji = levelDefinition[personalData.level - 1]?.emoji || "🌱";
-            this.src = `data:image/svg+xml;base64,` + btoa(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#007d8a"/><text x="50" y="65" font-size="45" text-anchor="middle">${emoji}</text></svg>`);
-        };
 
         const randomHeroIndex = Math.floor(Math.random() * projects.length);
         switchProject(randomHeroIndex, false);
