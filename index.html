@@ -83,11 +83,19 @@
                     <div class="text-[9px] text-slate-400 font-bold tracking-wider uppercase">全站累計溫室氣體減量效益</div>
                     <div class="text-base font-black text-brand-500 font-mono"><span id="global-co2">124.500</span> t CO<sub>2</sub>e</div>
                 </div>
-                <div id="user-controls" class="flex items-center gap-3 auth-hidden min-w-0">
-                    <span id="user-email-display" class="text-sm text-slate-500 font-medium hidden xl:block truncate max-w-[120px]"></span>
-                    <button id="accountBtn" class="bg-navy-800 text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-slate-800 transition-colors shadow-sm whitespace-nowrap shrink-0">我的帳戶</button>
-                    <button id="logoutBtn" class="text-slate-400 hover:text-slate-600 px-1 font-bold text-xs whitespace-nowrap shrink-0">登出</button>
+                
+                <div id="user-controls" class="relative auth-hidden shrink-0">
+                    <button id="userDropdownBtn" class="flex items-center gap-2 bg-white border border-slate-200 hover:border-slate-300 px-4 py-2 rounded-full text-xs font-bold text-slate-700 transition-all shadow-sm focus:outline-none">
+                        <span>👤</span>
+                        <span id="user-email-display" class="truncate max-w-[120px] font-medium text-slate-500"></span>
+                        <span id="userDropdownArrow" class="text-slate-400 text-[9px] transform transition-transform duration-200 inline-block">▼</span>
+                    </button>
+                    <div id="userDropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl py-2 z-50">
+                        <button id="accountBtn" class="w-full text-left px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors">我的帳戶</button>
+                        <button id="logoutBtn" class="w-full text-left px-4 py-2.5 text-xs font-bold text-red-500 hover:bg-red-50 transition-colors border-t border-slate-50">登出</button>
+                    </div>
                 </div>
+                
                 <button id="loginShowBtn" class="bg-brand-500 text-white px-5 py-2.5 rounded-full text-xs font-bold hover:bg-brand-600 transition-colors shadow-sm whitespace-nowrap shrink-0">登入/註冊</button>
                 <button id="mobileMenuToggleBtn" class="md:hidden text-slate-500 hover:text-slate-800 focus:outline-none p-2 rounded-lg shrink-0">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -104,6 +112,24 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
+            
+            <div id="mobile-user-card" class="hidden bg-slate-50 rounded-2xl p-4 border border-slate-200/80 mt-4 space-y-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-lg border border-slate-200 shrink-0">👤</div>
+                    <div class="min-w-0 flex-1">
+                        <p id="mobile-user-email" class="text-xs font-bold text-slate-800 truncate"></p>
+                        <p id="mobile-user-level" class="text-[10px] text-brand-600 font-bold font-mono"></p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                    <button id="mobileAccountBtn" class="bg-white border border-slate-200 rounded-lg py-2 text-[11px] font-bold text-slate-700 shadow-sm text-center">我的帳戶</button>
+                    <button id="mobileLogoutBtn" class="bg-red-50 border border-red-100 rounded-lg py-2 text-[11px] font-bold text-red-600 shadow-sm text-center">登出</button>
+                </div>
+            </div>
+            <div id="mobile-unauth-zone" class="mt-4">
+                <button id="mobileLoginBtn" class="w-full bg-brand-500 text-white py-2.5 rounded-xl text-xs font-bold hover:bg-brand-600 transition-colors shadow-sm">登入 / 註冊</button>
+            </div>
+
             <div class="flex flex-col gap-6 pt-8 font-semibold text-slate-600 text-lg">
                 <a href="#projects" class="hover:text-brand-500 transition-colors">探索專案</a>
                 <a href="#success-cases" class="hover:text-brand-500 transition-colors">成功案例</a>
@@ -501,7 +527,7 @@
                         </button>
                         <div class="px-5 pb-5 hidden">
                             <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
-                                平台所有專案之溫室氣體減量效益，皆以科學數據為基礎。電力減量係數參照經濟部能源署公告之最新售電電力排碳係數（0.474 kg CO₂e/度）；生質能與沼氣類專案更導入環境部國家溫室氣體排放清冊方法學，將甲烷等高全球暖化潛勢氣體折算為二氧化碳當量（CO₂e），確保效益的真實性與不可篡改性。
+                                平台所有專案之溫室氣體減量效益，皆以科學數據為基礎。電力減量係數依據經濟部能源署最新劃分標準實施雙軌計量：產業用電對接「產業電力排碳係數（0.466 kg CO₂e/度）」，民生住宅公共用電對接「民生住宅電力排碳係數（0.471 kg CO₂e/度）」。生質能、沼氣發電與循環包裝等專案更導入盤查指引方法學與網購生命週期評估（LCA），確保效益的真實性與不可篡改性。
                             </div>
                         </div>
                     </div>
@@ -652,21 +678,21 @@
             </button>
             <div class="mb-4 border-b border-slate-100 pb-4 mt-2">
                 <h3 class="text-xl font-black text-slate-800">溫室氣體減量效益計算方法學</h3>
-                <p class="text-xs text-brand-500 font-bold mt-1">依據經濟部能源署最新售電電力排碳係數與環境部當量指標驅動</p>
+                <p class="text-xs text-brand-500 font-bold mt-1">依據經濟部能源署公用售電業分類標準計算</p>
             </div>
             <div class="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed text-justify font-medium">
-                <p>本平台之減量效益當量（CO₂e）具備科學與數據基礎，全面排除任何憑空估算之漂綠風險。環境當量效益公式如下：</p>
+                <p>本平台溫室氣體減量效益當量（CO₂e）計算公式如下：</p>
                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-center font-bold text-slate-800 text-[11px] sm:text-xs">
                     個人溫室氣體減量效益 (kg CO₂e) = (個人參與額 / 專案總目標額) × 首年預估總減量當量 (kg CO₂e)
                 </div>
-                <p>其中，電力減量換算係數採用經濟部能源署最新公告之臺灣售電電力排碳係數 <span class="text-brand-600 font-bold">0.474 kg CO₂e / 度</span>。沼氣生質能等專案則依據環境部溫室氣體盤查指引，納入甲烷（CH₄）等溫室氣體之全球暖化潛勢值（GWP）進行範疇一科學當量折算。每單次參與項目金額每滿 10 元，另可獲得 1 經驗值注入碳吉寶寶成長系統中。</p>
+                <p>電力減量換算係數依據經濟部能源署標準劃分：中小型企業與產業營業用電專案（如太陽能、智慧養殖）採用<span class="text-brand-600 font-bold">產業電力排碳係數 0.466 kg CO₂e / 度</span>；社區與民生住宅公共用電更新（如偏鄉照明）採用<span class="text-brand-600 font-bold">民生住宅電力排碳係數 0.471 kg CO₂e / 度</span>。生質沼氣專案依據環境部指引，將甲烷（CH₄）之全球暖化潛勢值（GWP）折算為二氧化碳當量；循環包裝專案採用網購包裝生命週期評估數據，每循環使用一次減少 1.2 kg CO₂e。參與金額每滿 10 元，可獲得 1 經驗值計入碳吉寶寶系統。</p>
             </div>
             <div class="mt-6 text-center">
                 <button onclick="document.getElementById('methodologyModal').classList.add('hidden')" class="w-full sm:w-auto bg-slate-800 text-white px-6 py-2.5 rounded-xl font-bold text-xs hover:bg-slate-700 transition-colors">我明瞭了</button>
             </div>
         </div>
     </div>
-
+    
     <div id="impactModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center transition-opacity p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-3xl w-full relative max-h-[90dvh] overflow-y-auto border border-slate-200">
             <button onclick="document.getElementById('impactModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-2 rounded-full z-10 shrink-0">
@@ -758,7 +784,7 @@
                     <h3 class="text-base font-bold text-brand-600 mb-3 flex items-center break-words"><span class="text-lg mr-2 shrink-0">🌍</span> 預期永續效益</h3>
                     <ul id="modal-project-benefits" class="list-disc list-inside text-sm space-y-2 ml-1">
                         <li class="break-words">預估首年發電量：<span class="font-bold text-slate-800">120,000 度綠電</span></li>
-                        <li class="break-words">年減少溫室氣體當量：約 <span class="font-bold text-slate-800">56.8 噸 CO₂e</span></li>
+                        <li class="break-words">年減少溫室氣體當量：約 <span class="font-bold text-slate-800">55.9 噸 CO₂e</span></li>
                         <li class="break-words">等同於種植了 <span class="font-bold text-slate-800">5,000 棵樹</span> 的年吸碳當量效益</li>
                     </ul>
                 </div>
@@ -812,7 +838,7 @@
                     
                     <button type="button" id="anonLoginBtn" class="w-full bg-slate-800 text-white rounded-lg py-2.5 font-bold hover:bg-slate-700 transition-colors flex items-center justify-center text-sm truncate shrink-0">
                         <svg class="w-4 h-4 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                        以訪客身分進行環境效益試算
+                        以訪客身分登入
                     </button>
                 </div>
             </form>
@@ -1135,6 +1161,46 @@
         const mobileMenu = document.getElementById('mobileMenu');
         const closeMobileMenuBtn = document.getElementById('closeMobileMenuBtn');
 
+        const userDropdownBtn = document.getElementById('userDropdownBtn');
+        const userDropdownMenu = document.getElementById('userDropdownMenu');
+        const userDropdownArrow = document.getElementById('userDropdownArrow');
+
+        const mobileAccountBtn = document.getElementById('mobileAccountBtn');
+        const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
+        const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+        const mobileUserCard = document.getElementById('mobile-user-card');
+        const mobileUserEmail = document.getElementById('mobile-user-email');
+        const mobileUserLevel = document.getElementById('mobile-user-level');
+        const mobileUnauthZone = document.getElementById('mobile-unauth-zone');
+
+        userDropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdownMenu.classList.toggle('hidden');
+            userDropdownArrow.classList.toggle('rotate-180');
+        });
+
+        document.addEventListener('click', () => {
+            if (!userDropdownMenu.classList.contains('hidden')) {
+                userDropdownMenu.classList.add('hidden');
+                userDropdownArrow.classList.remove('rotate-180');
+            }
+        });
+
+        mobileAccountBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            document.getElementById('accountBtn').click();
+        });
+
+        mobileLogoutBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            document.getElementById('logoutBtn').click();
+        });
+
+        mobileLoginBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            loginModal.classList.remove('hidden');
+        });
+
         const initialUserData = {
             invested: 0,
             co2: 0,
@@ -1180,13 +1246,13 @@
                 time: "剩餘 15 天",
                 image: "assets/projects/project_solar.png",
                 badge: "太陽能",
-                yearlyCo2e: 56.8, 
+                yearlyCo2e: 55.9, 
                 perk: "個人專屬溫室氣體減量當量數位憑證與優先案場參訪資格",
                 escrowStage1: false, escrowStage2: false, escrowStage3: false,
                 desc: "協助在地傳統製造廠房進行環境能源轉型。募集資金用於採購高效能單晶矽太陽能模組、逆變器與綠電併網工程。透過信託專戶管理，確保資金專款專用，於工程建置達成特定里程碑後始得撥款。",
                 benefits: [
                     "預估首年發電量：120,000 度潔淨綠電",
-                    "年減少溫室氣體：約 56.8 噸 CO₂e 減量當量",
+                    "年減少溫室氣體：約 55.9 噸 CO₂e 減量當量",
                     "等同於種植了 5,000 棵樹的年均吸碳當量效益"
                 ],
                 perks: [
@@ -1249,13 +1315,13 @@
                 time: "剩餘 22 天",
                 image: "assets/projects/project_led.png",
                 badge: "節能轉型",
-                yearlyCo2e: 37.9, 
+                yearlyCo2e: 37.7, 
                 perk: "獲贈偏鄉在地小農手作天然香草茶包組一份",
                 escrowStage1: false, escrowStage2: false, escrowStage3: false,
                 desc: "協助臺灣東部偏鄉部落更換老舊高耗能燈具為最新節能智慧 LED。除了能直接為弱勢社區省下 60% 的公用電費支出，更利用智慧監測對接建立微型溫室氣體減量機制。",
                 benefits: [
                     "預估首年節電量：80,000 度電力當量",
-                    "年減少溫室氣體：約 37.9 噸 CO₂e 減量當量",
+                    "年減少溫室氣體：約 37.7 噸 CO₂e 減量當量",
                     "協助偏鄉部落建立永續節能循環照明體系"
                 ],
                 perks: [
@@ -1272,13 +1338,13 @@
                 time: "剩餘 40 天",
                 image: "assets/projects/project_fishery.png",
                 badge: "漁電共生",
-                yearlyCo2e: 99.5, 
+                yearlyCo2e: 97.9, 
                 perk: "獲得漁電共生科技綠色無毒蝦購買專屬 75 折優惠券",
                 escrowStage1: false, escrowStage2: false, escrowStage3: false,
                 desc: "推廣新型沿海永續水產養殖。於魚塭上方搭設透光式光電系統，下方引進 AI 生態養殖技術，並保留 20% 水鳥友善生態棲息地，兼顧光電環境減量效益與生態保育。",
                 benefits: [
                     "預估首年發電量：210,000 度潔淨光電",
-                    "年減少溫室氣體：約 99.5 噸 CO₂e 減量當量",
+                    "年減少溫室氣體：約 97.9 噸 CO₂e 減量當量",
                     "復育 1.2 公頃水鳥友善沿海溼地與生態棲息地"
                 ],
                 perks: [
@@ -1364,10 +1430,13 @@
             currentUser = { uid: 'local-' + Date.now(), email: emailText, isAnonymous: emailText.includes('訪客') };
             userControls.classList.remove('auth-hidden');
             loginShowBtn.classList.add('auth-hidden');
+            mobileUserCard.classList.remove('hidden');
+            mobileUnauthZone.classList.add('hidden');
             loginOverlay.classList.add('opacity-0', 'pointer-events-none');
             setTimeout(() => loginOverlay.classList.add('hidden'), 300);
             loginModal.classList.add('hidden');
             userEmailDisplay.innerText = currentUser.email;
+            mobileUserEmail.innerText = currentUser.email;
 
             const cache = getLocalData();
             if (cache) {
@@ -1406,18 +1475,22 @@
                 currentUser = user;
                 userControls.classList.remove('auth-hidden');
                 loginShowBtn.classList.add('auth-hidden');
+                mobileUserCard.classList.remove('hidden');
+                mobileUnauthZone.classList.add('hidden');
                 loginOverlay.classList.add('opacity-0', 'pointer-events-none');
                 setTimeout(() => loginOverlay.classList.add('hidden'), 300);
                 loginModal.classList.add('hidden');
                 
-                userEmailDisplay.innerText = user.isAnonymous ? '訪客使用者' : user.email;
+                const finalEmailText = user.isAnonymous ? '訪客使用者' : user.email;
+                userEmailDisplay.innerText = finalEmailText;
+                mobileUserEmail.innerText = finalEmailText;
 
                 const userDocRef = doc(db, 'artifacts', appId, 'users', user.uid, 'profile', 'data');
                 try {
                     const docSnap = await getDoc(userDocRef);
                     if (!docSnap.exists()) {
                         const localCache = getLocalData() || initialUserData;
-                        await setDoc(userDocRef, { ...localCache, email: user.isAnonymous ? "訪客使用者" : user.email });
+                        await setDoc(userDocRef, { ...localCache, email: finalEmailText });
                     }
                 } catch(e) {
                     const cache = getLocalData() || initialUserData;
@@ -1444,6 +1517,8 @@
                     currentUser = null;
                     userControls.classList.add('auth-hidden');
                     loginShowBtn.classList.remove('auth-hidden');
+                    mobileUserCard.classList.add('hidden');
+                    mobileUnauthZone.classList.remove('hidden');
                     loginOverlay.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
                     document.getElementById('adminBtn').classList.add('hidden');
                     const cache = getLocalData() || initialUserData;
@@ -1511,6 +1586,8 @@
                 currentUser = null;
                 userControls.classList.add('auth-hidden');
                 loginShowBtn.classList.remove('auth-hidden');
+                mobileUserCard.classList.add('hidden');
+                mobileUnauthZone.classList.remove('hidden');
                 loginOverlay.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
                 document.getElementById('adminBtn').classList.add('hidden');
                 Object.assign(personalData, initialUserData);
@@ -1549,6 +1626,10 @@
             document.getElementById('cert-level-display').innerText = `Lv.${prog.level}`;
             document.getElementById('cert-co2-display').innerText = data.co2.toFixed(1);
             document.getElementById('cert-email-display').innerText = currentUser ? currentUser.email : 'user@tanji.com';
+            
+            if (mobileUserLevel) {
+                mobileUserLevel.innerText = `Lv.${prog.level} ${prog.title}`;
+            }
             
             const randCode = currentUser ? currentUser.uid.substring(0, 5).toUpperCase() : '0000';
             document.getElementById('cert-id-display').innerText = `CERT #TJ-2026-${randCode}`;
@@ -2324,7 +2405,7 @@
                     } else if (lowerText.includes("回饋") || lowerText.includes("獎勵") || lowerText.includes("經驗") || lowerText.includes("exp") || lowerText.includes("寶寶") || lowerText.includes("進化")) {
                         reply = "當您參與環境低碳項目時，每投入 10 元即可累積 1 經驗值（EXP）。經驗值會即時反映在「碳吉寶寶」的成長軌跡中！累積至特定里程碑（100、300、800 EXP）即可在「累積里程碑與回饋」區塊，免費兌換數位永續徽章、低碳咖啡兌換券或限量再生材質環保杯。";
                     } else if (lowerText.includes("計算") || lowerText.includes("公式") || lowerText.includes("當量") || lowerText.includes("co2e") || lowerText.includes("方法學")) {
-                        reply = "我們的二氧化碳減量當量 (CO₂e) 計算具備嚴謹科學依據。對於再生能源發電類專案，計算公式為：個人減量效益 (kg CO₂e) = (個人參與金額 / 專案總目標) × 首年預估總減量當量 × 1000。生質能與沼氣發電更納入了 CH₄ 的全球暖化潛勢（GWP）折算，杜絕任何綠色漂綠。";
+                        reply = "我們的二氧化碳減量當量 (CO₂e) 計算具備嚴謹科學依據。對於再生能源發電類專案，依據經濟部最新標準精密計量：產業端採用「產業電力排碳係數 0.466 kg CO₂e/度」，民生端採用「民生住宅電力排碳係數 0.471 kg CO₂e/度」。計算公式為：個人減量效益 (kg CO₂e) = (個人參與金額 / 專案總目標) × 首年預估總減量當量 × 1000。生質能與沼氣發電更納入了 CH₄ 的全球暖化潛勢（GWP）折算，電商包裝則套用循環生命週期盤查係數（每單次循環減少 1.2 kg CO₂e），杜絕任何綠色漂綠。";
                     } else if (lowerText.includes("憑證") || lowerText.includes("證書") || lowerText.includes("下載")) {
                         reply = "當您完成專案參與後，可至「我的帳戶」點擊「查看數位憑證與回饋」查閱您的專屬永續憑證，並可直接下載附有去中心化防偽安全金鑰 (SHA256) 的 PNG 憑證圖像，公開分享或永久保存您的環境行動紀錄。";
                     } else {
