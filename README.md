@@ -4,7 +4,9 @@
 
 ### 1.1 系統目的簡介
 
-本系統旨在打造透明、低門檻的綠色金融媒合平台。透過「微型投資試算」與「遊戲化永續回饋（碳吉寶寶）」兩大核心功能，整合數位支付介面與虛實整合獎勵機制，將艱澀的氣候資金缺口與轉型金融，轉化為一般公民皆能輕鬆參與的日常減碳行動，落實普惠金融與氣候正義。
+本系統旨在打造全台首創**透明、低門檻的轉型金融（Transition Finance）群募媒合平台**。
+
+透過「多元淨零專案切換」、「微型投資效益即時試算」、「銀行信託撥款進度牆」與「遊戲化永續成長系統（碳吉寶寶）」等核心模組，結合現代化數位支付展示與去中心化防偽憑證（SHA256 金鑰加密展示），將艱澀的氣候資金缺口與轉型金融，轉化為一般大眾百元即可輕鬆參與的普惠金融行動，杜絕企業「漂綠（Greenwashing）」風險，實踐公正轉型與氣候正義。
 
 ---
 
@@ -12,137 +14,210 @@
 
 ### 2.1 系統架構圖
 
-本系統採用 Serverless 無伺服器架構 設計，前端採純前端框架整合 Tailwind CSS，後端依賴 Firebase 進行身分驗證與資料儲存。
+本系統採用 **Serverless 無伺服器架構** 設計，前端採 Vanilla JS 搭配 Tailwind CSS 進行響應式交互渲染，後端完全對接 Firebase 雲端生態系進行即時數據同步與去中心化驗證。
 
 ```mermaid
 graph TD
     %% 定義樣式顏色
-    classDef client fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:black
-    classDef auth fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:black
-    classDef logic fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:black
-    classDef data fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:black
+    classDef client fill:#f0f9fa,stroke:#007d8a,stroke-width:2px,color:#071528
+    classDef auth fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#071528
+    classDef logic fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#071528
+    classDef data fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#071528
 
     %% 1. 用戶端環境
-    subgraph Client_Zone [用戶端環境 - 前端展示層]
-        Browser[("使用者瀏覽器<br>HTML / Tailwind CSS / Vanilla JS")]:::client
+    subgraph Client_Zone [用戶端環境 - 前端展示與交互層]
+        Browser[("使用者瀏覽器<br>HTML5 / Tailwind CSS / ES6 Module")]:::client
     end
 
     %% 2. 雲端後端與數據層 (Firebase)
-    subgraph Cloud_Service [Firebase 雲端運算環境]
+    subgraph Cloud_Service [Firebase Cloud Serverless 環境]
         
         %% 驗證與授權層
-        subgraph Auth_Layer [身分驗證層]
-            FirebaseAuth["Firebase Authentication<br>(Email/密碼/匿名登入)"]:::auth
+        subgraph Auth_Layer [身分授權層]
+            FirebaseAuth["Firebase Authentication<br>(Email-密碼 / 匿名訪客)"]:::auth
         end
 
         %% 業務邏輯與數據交互
-        subgraph Data_Layer [即時數據層]
-            Firestore[("Cloud Firestore<br>使用者永續帳戶數據庫")]:::data
+        subgraph Data_Layer [分散式即時數據層]
+            Firestore[("Cloud Firestore<br>公共配置 / Feeds 動態 / 用戶 Profile")]:::data
         end
 
     end
 
     %% 3. 資料流向連線
-    Browser -- "1. 登入/註冊/訪客驗證" --> FirebaseAuth
-    FirebaseAuth -- "2. 回傳授權狀態與 UID" --> Browser
-    Browser -- "3. 讀取/寫入投資與減碳數據" --> Firestore
-    Firestore -- "4. 即時同步 (onSnapshot)" --> Browser
+    Browser -- "1. 帳戶登入/註冊/匿名認證" --> FirebaseAuth
+    FirebaseAuth -- "2. 回傳 Token 與 UID 安全上下文" --> Browser
+    Browser -- "3. 即時訂閱與雙向寫入數據 (Snapshot)" --> Firestore
+    Firestore -- "4. WebSocket 即時推播更新" --> Browser
+
 ```
 
 ### 2.2 系統範圍
 
-- 展示層: 採用 Tailwind CSS 建構響應式介面（RWD）。為提升渲染效能，全面採用純色與微透明邊框的卡片設計，並導入主次分明的排版架構。針對核心吉祥物打造「深色科技感培養艙」，運用放射狀漸層（Radial Gradient）與即時光影連動特效，配合跑馬燈與五彩紙屑（Confetti）動畫提升互動感。
-- 業務邏輯層: 負責處理投資金額轉換減碳量（$1000 = 12kg CO2e）、經驗值（EXP）升級算法、每日打卡邏輯，以及滑桿數值與吉祥物狀態的即時視覺連動計算。
-- 數據存取層: 串接 Firebase Authentication 處理多重登入管道，並利用 Cloud Firestore 儲存使用者的投資總額、碳排減少量、經驗值與等級。
+* **前端展示層（Tailwind CSS / HTML5 / Canvas）**：
+* 全站架構採用流暢的單頁式響應式設計（RWD），導入主次分明的高層級視覺架構（Visual Hierarchy）。
+* **碳吉寶寶培育艙**：利用放射狀漸層（Radial Gradient）與 CSS 動態浮動（Float Animation）技術模擬智慧溫室光影深度，避免大面積模糊濾鏡，大幅優化行動端滾動流暢度。
+* **動態特效模組**：內建 HTML5 Canvas 高效能五彩紙屑（Confetti）粒子物理碰撞系統，於完成專案投資時即時渲染慶祝動畫；每日打卡導入貝茲曲線浮動上升葉片特效（Floating Leaf Animation）。
+
+
+* **業務邏輯層（ES6 JavaScript）**：
+* 負責即時計算專案募資進度百分比、處理打卡防重複限制、計算碳吉寶寶 **5 大階段等級進化論算法**、以及依據不同專案方法學精準換算減碳效益當量與經驗值（EXP）。
+
+
+* **數據同步與安全層（Firebase Web SDK v10.11.0）**：
+* 串接安全授權層，若雲端資料庫連線因故受阻，系統將自動降級（Graceful Degradation）啟動**本地快取沙盒備援（LocalStorage / In-memory storage）**，確保用戶體驗不中斷。
+
+
 
 ### 2.3 交付項目
 
-1. 網頁應用程式: `index.html` (單頁式應用，內含完整模組化 JS)。
-2. 靜態圖資與多媒體: 存放於 `assets/` 目錄內之碳吉寶寶圖片（`.png`, `.jpg`）與互動影片（`.mp4`）。
-3. 系統規格文件: 本 `README.md` 規格書。
+1. **網頁應用程式核心**：單頁式高整合原始碼檔案 `index.html`（內含完整模組化 JS 與各視窗 Modal 元件）。
+2. **多媒體與圖資資產（Assets Package）**：
+* `assets/tanjibaby/`：包含碳吉寶寶各型態靜態圖像（`tanjibaby.png`、`tanjibaby9.png`、`tanjibaby_ceo.png`、`tanjibaby_tech.png`）及打卡動態交互影片（`tanjibaby_hi.mp4`）。
+* `assets/projects/`：淨零專案與成功案例縮圖資產（如 `project_solar.png`、`success_hualien.png` 等）。
+
+
+3. **合規合約文件檔（Docs Mimic）**：包含平台隱私條款、計算方法學說明書、信託契約範本、銀行撥款申請書等四大 PDF 靜態下載路徑。
+4. **系統規格說明書**：本 `README.md` 開發者規格文件。
 
 ---
 
 ## 3. 業務功能需求
 
-| 需求編號 | 功能名稱 | 參與者 | 功能描述 | 業務邏輯/備註 |
+| 需求編號 | 功能名稱 | 參與者 | 功能描述 | 業務邏輯 / 核心計量備註 |
 | --- | --- | --- | --- | --- |
-| FR-01 | 永續帳戶授權 | 投資人 | 提供 Email/密碼註冊、登入或「訪客匿名登入」功能，建立專屬帳戶。 | 透過 Firebase Auth 驗證，若斷線或異常則啟動本地（Local）模擬登入備援。 |
-| FR-02 | 微型投資試算與互動連動 | 投資人 | 拖拉滑桿或手動輸入，即時試算贊助的減碳貢獻與 EXP。同時觸發碳吉寶寶培養艙的視覺連動（金額越大，寶寶放大與發光效果越強）。 | 運算公式：每贊助 1,000 元減少 12kg 碳排；每 10 元獲取 1 EXP。 |
-| FR-03 | 多元支付模擬 | 投資人 | 提供信用卡、行動支付、超商代碼、電子錢包等支付選項介面。 | 完成支付後觸發前端 Confetti 動畫，並將數據寫入 Firestore。 |
-| FR-04 | 日常永續打卡 | 投資人 | 點擊按鈕進行每日任務打卡，獲取微量 EXP 並與碳吉寶寶互動。 | 打卡後獲得 5 EXP，介面切換動態 MP4 影像，當日限制單次觸發。 |
-| FR-05 | 里程碑回饋解鎖 | 系統 | 依據累積的總經驗值，自動解鎖對應的虛實整合獎勵。 | 門檻設定：100 EXP (數位徽章)、300 EXP (咖啡券)、800 EXP (環保杯)。 |
-| FR-06 | 個人/平台影響力報告 | 投資人/系統 | 可檢視個人總減碳量、等級；另提供全站總募集資金、參與人數與減碳達成率。 | 運用視覺化進度條與模態框（Modal）呈現即時數據與狀態。 |
+| **FR-01** | **多重永續帳戶授權** | 投資人 | 提供 Email/密碼註冊與登入。亦支援「訪客匿名登入」，免註冊即刻建立臨時 UID 展開淨零行動。 | 優先介接 Firebase Auth。若遇異常或特定行政帳號（`admin@tanji.com`）則無縫切換至本地快取模擬備援機制。 |
+| **FR-02** | **淨零專案調度與試算** | 投資人 | 支援切換全台 5 大淨零計畫。拖拉滑桿或輸入金額，系統即時連動試算該專案對應之減碳量、可得 EXP，並實時放大與加深寶寶培養艙光影。 | **減碳效益當量 ($CO_2e$) 運算公式**：<br>
+
+<br>$$\text{個人減碳效益 (kg } CO_2e\text{)} = \frac{\text{個人參與金額}}{\text{專案目標總額}} \times \text{首年預估總減量當量} \times 1000$$
+
+<br>
+
+<br>**EXP 公式**：每投入 **10 元**即可轉換為 $1\text{ EXP}$。 |
+| **FR-03** | **信託金流交付模擬** | 投資人 | 點擊參與跳出信託確認視窗，提供「信用卡繳款」、「行動支付轉帳」、「銀行虛擬帳號」三大信託專戶管道。 | 模擬完成後，金額累計至個人與專案總額，並異步觸發全螢幕 Canvas Confetti 煙火動畫。 |
+| FR-04 | **日常永續打卡任務** | 投資人 | 點擊每日打卡，按鈕切換為已完成鎖定狀態，培育艙顯示打卡成功視覺特效。 | 每日限點擊單次。完成可現賺 **5 EXP**，數據即時上傳或寫入快取，並驅動寶寶文字反饋。 |
+| **FR-05** | **五階段寶寶等級進化** | 系統 | 依據總 EXP 即時定義用戶等級與碳吉寶寶型態，解鎖不同狀態文字。 | **Lv.1 種子萌發期** ($0\text{+} \text{ EXP}$)<br>
+
+<br>**Lv.2 幼苗展葉期** ($200\text{+} \text{ EXP}$)<br>
+
+<br>**Lv.3 綠意灌木期** ($500\text{+} \text{ EXP}$)<br>
+
+<br>**Lv.4 普惠大樹期** ($1000\text{+} \text{ EXP}$)<br>
+
+<br>**Lv.5 淨零守護神** ($2000\text{+} \text{ EXP}$) |
+| FR-06 | **虛實整合里程碑回饋** | 投資人 | 「累積里程碑與回饋專區」會隨經驗值解鎖實體或數位獎勵卡片。 | 達 $100\text{ EXP}$ 解鎖**數位徽章**；達 $300\text{ EXP}$ 解鎖**低碳咖啡券**；達 $800\text{ EXP}$ 解鎖**實體環保杯登記**。未達標點擊則彈出 toast 警示。 |
+| **FR-07** | **管理員信託公告主控台** | 管理員 | 特權帳號專屬。可手動調整專案已募金額、勾選人工核收查驗報告（解鎖三階段信託撥款牆），並可發布緊急插播公告至動態牆。 | 後台入口綁定 `admin@tanji.com`，三階段撥款包含：結構安全檢測、設備進場簽收、併網完工營運。 |
+| **FR-08** | **碳吉寶寶 AI 智能助手** | 投資人 | 右下角常駐客服對話模組。點擊展開可進行多輪對話，內建精準關鍵字匹配模擬回覆。 | 針對「信託」、「服務費」、「公式/方法學」、「憑證」等氣候金融痛點，提供精準、去漂綠的專業法規學理解答。 |
+| FR-09 | **防偽數位憑證下載** | 投資人 | 進入帳戶模態框可切換至「憑證檢視區」，卡片會動態生成專屬編號與 Voucher 條碼。 | 點擊下載可透過 HTML5 Canvas 於背景動態繪製高解析度認證圖，附帶模擬 **SHA256 去中心化安全防偽金鑰明碼**並自動存檔為 `.png`。 |
 
 ---
 
-## 4. 非業務功能需求
+## 4. 非業務功能需求與學理合規
 
-### 4.1 安全性要求
+### 4.1 科學化減碳量化機制（計算方法學）
 
-- 權限控管: 依賴 Firebase 安全規則（Security Rules）保護使用者個人投資與 EXP 數據不被越權竄改。
-- 本地沙盒備援: 若外部 API (Firebase) 發生阻擋或異常，系統可自動降級為本地端物件狀態暫存（In-memory storage），確保功能可持續體驗。
+本平台之溫室氣體減量效益數據均具備嚴謹學理基礎，拒絕綠色虛報：
 
-### 4.2 系統效能 (Performance Optimized)
+1. **電力減量雙軌制**：電力減量係數嚴格依據經濟部能源署最新劃分標準實施。
+* **產業營業用電專案**（如：屋頂太陽能、智慧養殖）：對接**產業電力排碳係數（$0.466\text{ kg CO}_2\text{e/度}$）**。
+* **民生公共用電專案**（如：偏鄉節能照明）：對接**民生住宅電力排碳係數（$0.471\text{ kg CO}_2\text{e/度}$）**。
 
-- 前端渲染優化: 捨棄極度消耗 GPU 效能的毛玻璃（backdrop-filter）與大面積濾鏡模糊（filter: blur），全面改採純色背景、微透明邊框與 CSS 原生放射狀漸層（radial-gradient）來模擬光影深度，大幅提升中低階手機的渲染幀率與滾動流暢度。
-- 多媒體延遲載入 (Lazy Loading): 針對隱藏的互動式影片元素（碳吉寶寶打卡 MP4）加入 `preload="none"` 屬性，避免網頁初始載入時浪費頻寬下載暫未使用的媒體資源，縮短白畫面時間。
-- 資源載入順序: 預先載入 (Preconnect) Google Fonts 伺服器，提升自訂字型的繪製速度。
 
-### 4.3 可用性與準確性
+2. **生質沼氣專案**：導入環境部盤查指引方法學，將甲烷（$\text{CH}_4$）之全球暖化潛勢值（GWP）精準折算為二氧化碳當量。
+3. **循環經濟專案**：套用網購包裝生命週期評估（LCA）盤查數據，每單次循環使用減少 **$1.2\text{ kg CO}_2\text{e}$**。
 
-- 異常處理 (Fallback): 若 `assets/` 內的圖片或影片遺失，系統內建 Base64 SVG 的 `onerror` 替換機制，確保畫面不破圖。
-- 資訊層級 (Visual Hierarchy): 採用主次分明的版面架構，頂部整併「主資訊看板」，下方劃分「行動互動區」，降低使用者閱讀數據的認知負擔。
+### 4.2 嚴謹的金融信託合規架構
+
+1. **專款專用保管**：本平台非金融特許機構，所有群募資金遵循法規全數匯入合作商業銀行信託部進行代收代付保管。
+2. **工程進度查核牆**：建立透明的進度查驗機制。提案廠商必須依工程進度，檢具第三方查證報告（技師簽證、材料核實清冊、台電併網公文）送交銀行與平台核收，通過審查始得分批解鎖撥款，100% 杜絕資金挪用風險。
+3. **平台媒合收費**：平台不向參與大眾收取任何額外手續費，僅在專案成功達標撥款時，向提案廠商收取 **3% 的轉型媒合服務費**，用以支持物聯網監測對接與信託審查成本。
+
+### 4.3 介面效能優化 (Performance & UX Optimization)
+
+* **渲染流暢度優化**：主動捨棄高耗能的毛玻璃濾鏡（`backdrop-filter`）與全畫面模糊（`blur`），改採純色背景（如 `bg-slate-50`）配合微透明邊框（`border-slate-200/60`）與原生的放射狀漸層，使中低階行動裝置的滑動幀率穩定維持在 **60 FPS**。
+* **多媒體延遲載入 (Lazy Loading)**：針對隱藏的動態交互影片（`tanjibaby_hi.mp4`）設定 `preload="none"` 與 `muted playsinline` 屬性，防止網頁初次渲染時耗費頻寬載入未使用資源，優化首屏白畫面時間（FP/FCP）。
+* **不破圖防護機制 (Graceful Fallback)**：全面為 `<img>` 標籤配置 `onerror` 事件監聽器，當圖片因路徑或環境遺失時，自動注入內嵌的 **Base64 SVG 向量圖**，確保 UI 視覺不破裂。
 
 ---
 
-## 5. 系統介面設計
+## 5. 數據庫架構與實時 API 規格
 
-### 5.1 API 規格
+本系統主要依賴 Firebase Web SDK v10.11.0 進行分散式資料交互與實時異步訂閱（onSnapshot）。
 
-本系統主要依賴 Firebase Web SDK v10.11.0 進行資料交互。
+### 5.1 Cloud Firestore 數據庫路徑與 JSON 結構
 
-#### 介面 A: 身分驗證 (Firebase Auth)
+#### 1. 個人永續帳戶 Profile 節點
 
-- 模組: `signInWithEmailAndPassword`, `createUserWithEmailAndPassword`, `signInAnonymously`
-- 狀態監聽: `onAuthStateChanged`
-- 行為: 驗證通過後，讀取 `user.uid` 作為資料庫文檔的主鍵。
+* **路徑**：`artifacts/{appId}/users/{uid}/profile/data`
+* **結構範例**：
 
-#### 介面 B: 使用者數據同步 (Cloud Firestore)
-
-- 路徑: `artifacts/tanji-2026/users/{uid}`
-- 操作:
-  - `setDoc`: 寫入或更新個人投資總額、CO2、EXP 與 Level。
-  - `onSnapshot`: 建立即時監聽器，確保跨視窗操作時數據保持同步。
-- 資料結構 (JSON 格式):
 ```json
 {
-  "invested": 1500,
-  "co2": 18.0,
-  "exp": 150,
-  "level": 1
+  "email": "user@example.com",
+  "invested": 3500,
+  "co2": 42.1,
+  "exp": 350,
+  "level": 2,
+  "role": "user"
 }
+
+```
+
+#### 2. 公共專案資產與信託狀態配置節點
+
+* **路徑**：`artifacts/{appId}/public/data/config/projects`
+* **結構範例**：
+
+```json
+{
+  "raisedAmounts": [3451000, 840000, 880000, 420000, 1250000],
+  "stages": [
+    { "s1": true, "s2": false, "s3": false },
+    { "s1": false, "s2": false, "s3": false },
+    { "s1": true, "s2": true, "s3": true },
+    { "s1": false, "s2": false, "s3": false },
+    { "s1": false, "s2": false, "s3": false }
+  ]
+}
+
+```
+
+#### 3. 即時參與動態牆流水號節點
+
+* **路徑**：`artifacts/{appId}/public/data/feeds`
+* **結構範例**：
+
+```json
+{
+  "name": "台北林先生",
+  "action": "參與了 廠房屋頂太陽能建置專案 5,000 元",
+  "exp": 500,
+  "timestamp": 1780830000000,
+  "timeStr": "剛剛"
+}
+
 ```
 
 ---
 
-## 6. 專案安裝與部署
+## 6. 專案安裝與正式部署
 
-### 前置需求
+### 6.1 前置環境需求
 
-- 支援 ES6 模組（`<script type="module">`）的現代瀏覽器 (Chrome, Edge, Safari)。
-- Firebase 專案環境 (需啟用 Authentication 與 Cloud Firestore)。
+* 支援 ES6 模組標準（`<script type="module">`）之主流現代瀏覽器（Chrome、Edge、Safari）。
+* 已啟用的 Firebase Web 專案環境（需開啟 Authentication 匿名/Email 服務與 Cloud Firestore 資料庫）。
 
-### 部署步驟
+### 6.2 部署與啟動步驟
 
-1. 取得程式碼: 將 `index.html` 與相關素材放入專案資料夾。
-2. 素材準備: 於根目錄建立 `assets/` 資料夾，放置以下檔案：
-   - `tanjibaby.png` (靜態頭像)
-   - `tanjibaby2.jpg` (個人帳戶頭像)
-   - `tanjibaby_hi.mp4` (打卡互動影片)
-3. Firebase 設定 (可選):
-   - 預設程式碼已包含測試用配置檔（`firebaseConfig`）。若要連接至您自己的資料庫，請於 `<script type="module">` 內替換 `firebaseConfig` 變數。
-   - 確認您的 Firestore 規則允許客戶端讀寫（測試階段可短暫開啟）。
-4. 本機端測試: 
-   - 由於使用 ES6 Module 與 CORS 安全限制，請使用 Live Server 或本地伺服器（如 `python -m http.server` 或 `npx serve`）啟動網頁。
-5. 正式發布: 將專案推送至 GitHub，並透過 GitHub Pages 或 Vercel 等靜態託管服務直接發布即可上線。
+1. **取得程式碼與資源配置**：
+將 `index.html` 部署於您的 Web 伺服器根目錄，並確保依據 [2.3 交付項目] 的結構建立 `assets/` 資料夾與相關 PDF 靜態文件。
+2. **本地開發沙盒測試**：
+由於現代瀏覽器針對 ES6 模組有嚴格的 CORS 安全限制，**不可直接雙擊點開 `.html` 檔案**。請務必使用本地 HTTP 伺服器容器開啟：
+* *Node.js* 環境：`npx serve .` 或安裝 VS Code `Live Server` 擴充套件。
+* *Python* 環境：`python -m http.server 8000`
+
+
+3. **Firebase 金鑰對接**：
+原始碼內建一組參賽專用測試金鑰。如需更換為專屬生產資料庫，請直接修改 `<script type="module">` 內的 `firebaseConfig` 配置物件。
+4. **雲端靜態託管發布**：
+本平台屬於純前端 Serverless 架構，可直接一鍵推播發布至 GitHub Pages、Vercel 或 Firebase Hosting 等高效能 CDN 靜態託管服務，即可完成全站正式上線。
