@@ -53,19 +53,11 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .feed-card-transition { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        
-        /* Custom timeline styles */
-        .timeline-container { position: relative; padding-left: 24px; }
-        .timeline-container::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: #e2e8f0; border-radius: 1px; }
-        .timeline-item { position: relative; margin-bottom: 16px; }
-        .timeline-item::before { content: ''; position: absolute; left: -21px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #007d8a; border: 2px solid #fff; box-shadow: 0 0 0 1px #007d8a; }
-        .timeline-item:last-child { margin-bottom: 0; }
     </style>
 </head>
 <body class="text-slate-700 min-h-screen relative overflow-x-hidden bg-white">
 
     <canvas id="confetti-canvas"></canvas>
-
     <div id="toast-container" class="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
     <nav class="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-40">
@@ -77,7 +69,7 @@
             <div class="hidden md:flex flex-1 items-center gap-6 lg:gap-8 font-semibold text-slate-500 text-sm lg:text-base whitespace-nowrap overflow-x-auto no-scrollbar py-2 px-4 max-w-full justify-center">
                 <a href="#projects" class="hover:text-brand-500 transition-colors shrink-0">探索專案</a>
                 <a href="#success-cases" class="hover:text-brand-500 transition-colors shrink-0">成功案例</a>
-                <a href="#rewards" class="hover:text-brand-500 transition-colors shrink-0">永續回饋</a>
+                <a href="#rewards" class="hover:text-brand-500 transition-colors shrink-0">永續履歷</a>
                 <a href="#payment-flow" class="hover:text-brand-500 transition-colors shrink-0">金流安全</a>
                 <a href="#education" class="hover:text-brand-500 transition-colors shrink-0">永續小學堂</a>
                 <a href="#regulatory-compliance" class="hover:text-brand-500 transition-colors shrink-0">永續合規</a>
@@ -85,7 +77,6 @@
             </div>
 
             <div class="flex items-center gap-2 sm:gap-4 shrink-0 min-w-0 max-w-full">
-                <!-- 管理員按鈕 -->
                 <button id="adminBtn" class="hidden bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-full text-xs font-bold border border-red-100 transition-colors shadow-sm whitespace-nowrap shrink-0">管理工具</button>
                 
                 <div class="text-right hidden md:block shrink-0 border-r border-slate-200 pr-4">
@@ -100,7 +91,7 @@
                         <span id="userDropdownArrow" class="text-slate-400 text-[9px] transform transition-transform duration-200 inline-block">▼</span>
                     </button>
                     <div id="userDropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl py-2 z-50">
-                        <button id="accountBtn" class="w-full text-left px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors">我的帳戶</button>
+                        <button id="accountBtn" class="w-full text-left px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors">我的永續履歷</button>
                         <button id="logoutBtn" class="w-full text-left px-4 py-2.5 text-xs font-bold text-red-500 hover:bg-red-50 transition-colors border-t border-slate-50">登出</button>
                     </div>
                 </div>
@@ -131,7 +122,7 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-2 pt-1">
-                    <button id="mobileAccountBtn" class="bg-white border border-slate-200 rounded-lg py-2 text-[11px] font-bold text-slate-700 shadow-sm text-center">我的帳戶</button>
+                    <button id="mobileAccountBtn" class="bg-white border border-slate-200 rounded-lg py-2 text-[11px] font-bold text-slate-700 shadow-sm text-center">我的永續履歷</button>
                     <button id="mobileLogoutBtn" class="bg-red-50 border border-red-100 rounded-lg py-2 text-[11px] font-bold text-red-600 shadow-sm text-center">登出</button>
                 </div>
             </div>
@@ -140,13 +131,13 @@
             </div>
 
             <div class="flex flex-col gap-6 pt-8 font-semibold text-slate-600 text-lg">
-                <a href="#projects" class="hover:text-brand-500 transition-colors">探索專案</a>
-                <a href="#success-cases" class="hover:text-brand-500 transition-colors">成功案例</a>
-                <a href="#rewards" class="hover:text-brand-500 transition-colors">永續回饋</a>
-                <a href="#payment-flow" class="hover:text-brand-500 transition-colors">金流安全</a>
-                <a href="#education" class="hover:text-brand-500 transition-colors">永續小學堂</a>
-                <a href="#regulatory-compliance" class="hover:text-brand-500 transition-colors">永續合規</a>
-                <a href="#about" class="hover:text-brand-500 transition-colors">關於平台</a>
+                <a href="#projects" class="hover:text-brand-500 transition-colors mobile-link">探索專案</a>
+                <a href="#success-cases" class="hover:text-brand-500 transition-colors mobile-link">成功案例</a>
+                <a href="#rewards" class="hover:text-brand-500 transition-colors mobile-link">永續回饋</a>
+                <a href="#payment-flow" class="hover:text-brand-500 transition-colors mobile-link">金流安全</a>
+                <a href="#education" class="hover:text-brand-500 transition-colors mobile-link">永續小學堂</a>
+                <a href="#regulatory-compliance" class="hover:text-brand-500 transition-colors mobile-link">永續合規</a>
+                <a href="#about" class="hover:text-brand-500 transition-colors mobile-link">關於平台</a>
             </div>
         </div>
         <div class="pt-6 border-t border-slate-100">
@@ -166,8 +157,8 @@
                         <div class="absolute top-0 left-0 w-1.5 h-full bg-brand-500"></div>
                         <div class="flex-1 w-full self-start">
                             <span class="bg-brand-50 text-brand-600 text-xs font-bold px-3 py-1.5 rounded-md mb-3 inline-block tracking-wider uppercase border border-brand-100">現正募資中</span>
-                            <h1 id="hero-title" class="text-xl sm:text-2xl md:text-3xl font-black text-navy-800 leading-snug mb-3 break-words tracking-tight">廠房屋頂太陽能建置專案</h1>
-                            <p id="hero-org" class="text-xs md:text-sm text-slate-400 font-medium mb-6">提案方：在地綠能中小企業聯盟</p>
+                            <h1 id="hero-title" class="text-xl sm:text-2xl md:text-3xl font-black text-navy-800 leading-snug mb-3 break-words tracking-tight">載入中...</h1>
+                            <p id="hero-org" class="text-xs md:text-sm text-slate-400 font-medium mb-6">提案方：載入中...</p>
                             <button id="viewDetailBtn" class="inline-flex items-center justify-center bg-white border border-slate-200 text-slate-700 px-5 py-3 rounded-xl text-xs font-bold hover:bg-slate-50 transition-all duration-300 shadow-sm group whitespace-nowrap w-full sm:w-auto">
                                 查看專案詳情 
                                 <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -178,11 +169,11 @@
                             <div class="flex flex-wrap justify-between items-end gap-2 mb-4 border-b border-slate-200/60 pb-4">
                                 <div>
                                     <p class="text-[9px] text-slate-400 font-bold mb-1 tracking-wider uppercase">已募資金額</p>
-                                    <p class="text-xl sm:text-2xl font-black text-slate-800 font-mono break-words">NT$ <span id="raised-amount" class="text-navy-800">3,450,000</span></p>
+                                    <p class="text-xl sm:text-2xl font-black text-slate-800 font-mono break-words">NT$ <span id="raised-amount" class="text-navy-800">0</span></p>
                                 </div>
                                 <div class="text-left sm:text-right">
                                     <p class="text-[9px] text-slate-400 font-bold mb-1 tracking-wider uppercase">目標金額</p>
-                                    <p id="hero-goal" class="text-sm font-bold text-brand-500 font-mono break-words">5,000,000</p>
+                                    <p id="hero-goal" class="text-sm font-bold text-brand-500 font-mono break-words">0</p>
                                 </div>
                             </div>
                             <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden mb-3">
@@ -190,7 +181,7 @@
                             </div>
                             <div class="flex flex-wrap justify-between items-center gap-2 font-medium">
                                 <span class="text-xs text-slate-400">達成率 <span id="pct-amount" class="text-brand-500 text-base font-black font-mono ml-1">0</span>%</span>
-                                <span id="hero-time" class="bg-white px-2.5 py-1 rounded-lg text-slate-500 text-[11px] shadow-sm border border-slate-200/60 whitespace-nowrap font-mono">剩餘 15 天</span>
+                                <span id="hero-time" class="bg-white px-2.5 py-1 rounded-lg text-slate-500 text-[11px] shadow-sm border border-slate-200/60 whitespace-nowrap font-mono">計算中...</span>
                             </div>
                         </div>
                     </div>
@@ -199,7 +190,7 @@
                         <div class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200/60 shadow-sm flex flex-col items-center text-center relative overflow-hidden justify-center min-h-[300px]" id="interaction-zone">
                             <div id="baby-glow" class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-500/5 via-white to-transparent opacity-50 transition-opacity duration-300"></div>
                             <div id="baby-wrapper" class="relative w-36 h-36 flex items-center justify-center bg-gradient-to-tr from-brand-50 to-white rounded-full shadow-sm mb-5 border border-slate-100 z-10 transition-transform duration-300 shrink-0">
-                                <img id="baby-img" src="assets/tanjibaby/tanjibaby9.png" alt="碳吉寶寶" class="w-[80%] h-[80%] object-cover rounded-full z-10 select-none anim-float" draggable="false">
+                                <img id="baby-img" src="assets/tanjibaby/tanjibaby9.png" alt="碳吉寶寶" class="w-[80%] h-[80%] object-cover rounded-full z-10 select-none anim-float" draggable="false" onerror="this.src='https://placehold.co/150x150/007d8a/ffffff?text=Baby'">
                                 <video id="baby-vid" src="assets/tanjibaby/tanjibaby_hi.mp4" preload="none" class="absolute inset-0 w-full h-full object-cover rounded-full z-20 hidden pointer-events-none" muted playsinline></video>
                             </div>
                             <button id="dailyCheckInBtn" class="mb-3 bg-brand-500 text-white hover:bg-brand-600 px-5 py-2.5 rounded-full font-bold text-xs transition-colors shadow-sm flex items-center gap-2 group relative z-30 border border-brand-600">
@@ -216,8 +207,8 @@
                                         <span class="text-xl block">🔒</span>
                                     </div>
                                     <h4 class="font-black text-base mb-1 text-navy-800">請先登入以參與專案</h4>
-                                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">建立您的專屬永續帳戶，紀錄環境減量當量貢獻並解鎖綠色回饋。</p>
-                                    <button onclick="document.getElementById('loginModal').classList.remove('hidden')" class="w-full bg-brand-500 text-white px-4 py-2.5 rounded-xl font-bold hover:bg-brand-600 transition-colors shadow-sm truncate text-xs uppercase tracking-wider">立即登入 / 註冊</button>
+                                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">建立您的專屬永續帳戶，紀錄環境減量貢獻並解鎖綠色數位身分。</p>
+                                    <button id="heroLoginBtn" class="w-full bg-brand-500 text-white px-4 py-2.5 rounded-xl font-bold hover:bg-brand-600 transition-colors shadow-sm truncate text-xs uppercase tracking-wider">立即登入 / 註冊</button>
                                 </div>
                             </div>
 
@@ -257,7 +248,7 @@
                                         <button type="button" id="methodologyBtn" title="點擊查看當量計算方法學" class="text-base font-bold text-slate-400 hover:text-brand-500 transition-colors leading-none focus:outline-none px-0.5">ⓘ</button>
                                     </div>
                                     <div class="text-xl font-black text-slate-800 flex items-baseline truncate w-full justify-center mt-0.5">
-                                        <span id="co2Display" class="font-mono truncate">5.7</span>
+                                        <span id="co2Display" class="font-mono truncate">0.0</span>
                                         <span class="text-xs font-bold text-brand-500 ml-0.5 font-mono">kg CO<sub>2</sub>e</span>
                                     </div>
                                 </div>
@@ -285,6 +276,7 @@
                         即時參與動態
                     </h3>
                     <div class="flex-1 flex flex-col gap-4 justify-around xl:justify-between lg:grid lg:grid-cols-3 xl:flex lg:gap-4" id="feed-list-container">
+                        <!-- Loading placeholder -->
                         <div class="flex items-center text-xs bg-slate-50 p-4 rounded-xl border border-slate-200/80 h-24 shadow-sm feed-card-transition">
                             <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center mr-3 font-bold text-slate-600 shrink-0">載</div>
                             <div class="flex-1 min-w-0">
@@ -303,6 +295,7 @@
             <div class="flex justify-between items-end mb-10 border-b border-slate-100 pb-4">
                 <h2 class="text-2xl font-black text-slate-800 break-words">探索其他淨零專案</h2>
             </div>
+            <!-- JS will inject project cards here -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="project-list"></div>
         </div>
     </section>
@@ -311,15 +304,15 @@
         <div class="max-w-6xl mx-auto px-6 relative z-10">
             <div class="flex flex-wrap justify-between items-end gap-4 mb-12 border-b border-slate-200 pb-4">
                 <h2 class="text-2xl font-black text-slate-800 break-words">成功案例與環境影響力</h2>
-                <button onclick="document.getElementById('impactModal').classList.remove('hidden')" class="text-brand-500 font-bold hover:text-brand-600 text-sm hidden sm:flex items-center transition-colors whitespace-nowrap">
+                <button id="impactReportBtn" class="text-brand-500 font-bold hover:text-brand-600 text-sm hidden sm:flex items-center transition-colors whitespace-nowrap">
                     查看完整影響力報告 
-                    <svg class="w-4 h-4 ml-1 inline shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    <svg class="w-4 h-4 ml-1 inline shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012-2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                 </button>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 flex flex-col sm:flex-row gap-6 sm:gap-8 items-center cursor-pointer hover:border-brand-500 hover:shadow-md transition-all duration-300" onclick="showSuccessCaseDetails(0)">
+                <div class="success-case-card bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 flex flex-col sm:flex-row gap-6 sm:gap-8 items-center cursor-pointer hover:border-brand-500 hover:shadow-md transition-all duration-300" data-index="0">
                     <div class="w-full sm:w-1/3 h-32 bg-slate-50 rounded-xl flex items-center justify-center relative overflow-hidden border border-slate-200/60 shrink-0">
-                        <img src="assets/projects/success_hualien.png" alt="花蓮光復國小綠能與社會公益專案" class="w-full h-full object-cover">
+                        <img src="assets/projects/success_hualien.png" alt="花蓮專案" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/300x200/f1f5f9/007d8a?text=Case+1'">
                     </div>
                     <div class="flex-1 w-full min-w-0">
                         <span class="bg-brand-50 text-brand-600 text-xs font-bold px-2.5 py-1 rounded mb-3 inline-block border border-brand-100 whitespace-nowrap">已完工發電</span>
@@ -331,9 +324,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 flex flex-col sm:flex-row gap-6 sm:gap-8 items-center cursor-pointer hover:border-brand-500 hover:shadow-md transition-all duration-300" onclick="showSuccessCaseDetails(1)">
+                <div class="success-case-card bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 flex flex-col sm:flex-row gap-6 sm:gap-8 items-center cursor-pointer hover:border-brand-500 hover:shadow-md transition-all duration-300" data-index="1">
                     <div class="w-full sm:w-1/3 h-32 bg-slate-50 rounded-xl flex items-center justify-center relative overflow-hidden border border-slate-200/60 shrink-0">
-                        <img src="assets/projects/success_greenisland.png" alt="綠島低碳旅遊共享電動機車租賃計畫" class="w-full h-full object-cover">
+                        <img src="assets/projects/success_greenisland.png" alt="綠島專案" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/300x200/f1f5f9/007d8a?text=Case+2'">
                     </div>
                     <div class="flex-1 w-full min-w-0">
                         <span class="bg-blue-50 text-blue-600 text-xs font-bold px-2.5 py-1 rounded mb-3 inline-block border border-blue-100 whitespace-nowrap">第一期結案</span>
@@ -346,7 +339,7 @@
                     </div>
                 </div>
             </div>
-            <button onclick="document.getElementById('impactModal').classList.remove('hidden')" class="w-full mt-8 py-3 bg-white hover:bg-slate-50 text-brand-500 border border-slate-200 rounded-xl font-bold text-sm sm:hidden truncate">
+            <button id="impactReportBtnMobile" class="w-full mt-8 py-3 bg-white hover:bg-slate-50 text-brand-500 border border-slate-200 rounded-xl font-bold text-sm sm:hidden truncate">
                 查看完整影響力報告
             </button>
         </div>
@@ -358,8 +351,8 @@
                 <div class="lg:col-span-2 bg-slate-50 rounded-3xl p-6 md:p-10 border border-slate-200 shadow-sm flex flex-col">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8 pb-4 border-b border-slate-200">
                         <div class="min-w-0 w-full sm:w-auto">
-                            <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mb-1 break-words">建立個人永續履歷</h3>
-                            <p class="text-sm text-slate-400 font-semibold break-words">建立個人永續履歷，解鎖實體低碳消費與金融賦能獎勵。</p>
+                            <h3 class="text-xl sm:text-2xl font-bold text-slate-800 mb-1 break-words">個人永續履歷與賦能獎勵</h3>
+                            <p class="text-sm text-slate-400 font-semibold break-words">累積環境減量效益，建構綠色數位身分，解鎖實體低碳消費與金融優惠。</p>
                         </div>
                         <div class="text-left sm:text-right shrink-0">
                             <p class="text-[9px] text-slate-400 font-bold mb-1 uppercase tracking-wider">我的總經驗值</p>
@@ -565,13 +558,13 @@
                         <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
                             <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
                                 <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">05</span>
-                                <span class="truncate break-words">建構個人ESG永續履歷</span>
+                                <span class="truncate break-words">建構個人永續履歷</span>
                             </span>
                             <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="px-5 pb-5 hidden">
                             <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
-                                透過 SHA256 加密防偽技術，將您的微型投資減量貢獻轉化為具備公信力的「綠色數位身分資產」。此憑證可對接合作金融機構之低碳信貸優惠，或作為企業落實 ESG 員工福利之認列依據，將環境效益轉換為實體金融價值。
+                                透過 SHA256 加密防偽技術，將您的微型投資減量貢獻轉化為具備公信力的「綠色數位身分資產」。此憑證可對接合作金融機構之低碳信貸優惠，或作為企業落實ESG員工福利之認列依據，將環境效益轉換為實體金融價值。
                             </div>
                         </div>
                     </div>
@@ -594,19 +587,19 @@
             <div class="space-y-4">
                 <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 text-center md:text-left">官方合規文件下載</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <a href="docs/tanji_terms_privacy.pdf" target="_blank" class="flex items-center gap-3 bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-500 p-4 rounded-xl transition-all duration-300 group h-full shadow-sm">
+                    <a href="#" class="flex items-center gap-3 bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-500 p-4 rounded-xl transition-all duration-300 group h-full shadow-sm">
                         <span class="text-2xl shrink-0 group-hover:scale-110 transition-transform">📄</span>
                         <span class="font-bold text-slate-700 text-xs line-clamp-2">TanJi 平台服務條款與隱私權政策</span>
                     </a>
-                    <a href="docs/tanji_methodology.pdf" target="_blank" class="flex items-center gap-3 bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-500 p-4 rounded-xl transition-all duration-300 group h-full shadow-sm">
+                    <a href="#" class="flex items-center gap-3 bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-500 p-4 rounded-xl transition-all duration-300 group h-full shadow-sm">
                         <span class="text-2xl shrink-0 group-hover:scale-110 transition-transform">📄</span>
-                        <span class="font-bold text-slate-700 text-xs line-clamp-2">TanJi 淨零專案溫室氣體減量效益計算方法學說明書</span>
+                        <span class="font-bold text-slate-700 text-xs line-clamp-2">TanJi 淨零專案溫室氣體減量計算方法學</span>
                     </a>
-                    <a href="docs/tanji_trust_agreement.pdf" target="_blank" class="flex items-center gap-3 bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-500 p-4 rounded-xl transition-all duration-300 group h-full shadow-sm">
+                    <a href="#" class="flex items-center gap-3 bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-500 p-4 rounded-xl transition-all duration-300 group h-full shadow-sm">
                         <span class="text-2xl shrink-0 group-hover:scale-110 transition-transform">📄</span>
                         <span class="font-bold text-slate-700 text-xs line-clamp-2">綠能專案專款專用信託契約三方範本</span>
                     </a>
-                    <a href="docs/tanji_milestone_form.pdf" target="_blank" class="flex items-center gap-3 bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-500 p-4 rounded-xl transition-all duration-300 group h-full shadow-sm">
+                    <a href="#" class="flex items-center gap-3 bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-500 p-4 rounded-xl transition-all duration-300 group h-full shadow-sm">
                         <span class="text-2xl shrink-0 group-hover:scale-110 transition-transform">📄</span>
                         <span class="font-bold text-slate-700 text-xs line-clamp-2">工程階段驗證暨銀行撥款申請書表</span>
                     </a>
@@ -668,9 +661,10 @@
         </div>
     </footer>
 
+    <!-- All Modals container -->
     <div id="methodologyModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center transition-opacity p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-xl w-full relative max-h-[85dvh] overflow-y-auto border border-slate-200">
-            <button onclick="document.getElementById('methodologyModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-2 rounded-full shrink-0">
+            <button id="closeMethodologyBtn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-2 rounded-full shrink-0">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="mb-4 border-b border-slate-100 pb-4 mt-2">
@@ -682,17 +676,17 @@
                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-center font-bold text-slate-800 text-[11px] sm:text-xs">
                     個人溫室氣體減量效益 (kg CO₂e) = (個人參與額 / 專案總目標額) × 首年預估總減量當量 (kg CO₂e)
                 </div>
-                <p>電力減量換算係數依據經濟部能源署標準劃分：中小型企業與產業營業用電專案（如太陽能、智慧養殖）採用<span class="text-brand-600 font-bold">產業電力排碳係數 0.466 kg CO₂e / 度</span>；社區與民生住宅公共用電更新（如偏鄉照明）採用<span class="text-brand-600 font-bold">民生住宅電力排碳係數 0.471 kg CO₂e / 度</span>。生質沼氣專案依據環境部指引，將甲烷（CH₄）之全球暖化潛勢值（GWP）折算為二氧化碳當量；循環包裝專案採用網購包裝生命週期評估數據，每循環使用一次減少 1.2 kg CO₂e。參與金額每滿 10 元，可獲得 1 經驗值計入碳吉寶寶系統。</p>
+                <p>電力減量換算係數依據經濟部能源署標準劃分：中小型企業與產業營業用電專案採用<span class="text-brand-600 font-bold">產業電力排碳係數 0.466 kg CO₂e / 度</span>；社區與民生住宅公共用電更新採用<span class="text-brand-600 font-bold">民生住宅電力排碳係數 0.471 kg CO₂e / 度</span>。生質沼氣專案依據環境部指引，將甲烷（CH₄）全球暖化潛勢值（GWP）折算為二氧化碳當量；循環包裝專案採用網購包裝生命週期評估數據。參與金額每滿 10 元，可獲得 1 經驗值計入碳吉寶寶系統。</p>
             </div>
             <div class="mt-6 text-center">
-                <button onclick="document.getElementById('methodologyModal').classList.add('hidden')" class="w-full sm:w-auto bg-slate-800 text-white px-6 py-2.5 rounded-xl font-bold text-xs hover:bg-slate-700 transition-colors">我明瞭了</button>
+                <button id="closeMethodologyBtnBottom" class="w-full sm:w-auto bg-slate-800 text-white px-6 py-2.5 rounded-xl font-bold text-xs hover:bg-slate-700 transition-colors">我明瞭了</button>
             </div>
         </div>
     </div>
     
     <div id="impactModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center transition-opacity p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-3xl w-full relative max-h-[90dvh] overflow-y-auto border border-slate-200">
-            <button onclick="document.getElementById('impactModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-2 rounded-full z-10 shrink-0">
+            <button id="closeImpactBtn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-2 rounded-full z-10 shrink-0">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="text-center mb-8 border-b border-slate-100 pb-6 mt-4 sm:mt-0">
@@ -753,62 +747,54 @@
             </div>
             
             <div class="mt-8 pt-6 border-t border-slate-100 text-center">
-                <button onclick="document.getElementById('impactModal').classList.add('hidden')" class="w-full sm:w-auto bg-slate-800 text-white px-8 py-3.5 rounded-xl font-bold hover:bg-slate-700 transition-colors text-sm truncate">關閉報告</button>
+                <button id="closeImpactBtnBottom" class="w-full sm:w-auto bg-slate-800 text-white px-8 py-3.5 rounded-xl font-bold hover:bg-slate-700 transition-colors text-sm truncate">關閉報告</button>
             </div>
         </div>
     </div>
 
     <div id="projectDetailsModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center transition-opacity p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-2xl w-full relative max-h-[90dvh] overflow-y-auto border border-slate-200">
-            <button onclick="document.getElementById('projectDetailsModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-2 rounded-full z-10 shrink-0">
+            <button id="closeProjectDetailsBtn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-2 rounded-full z-10 shrink-0">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="mb-6 border-b border-slate-100 pb-4 mt-4 sm:mt-0 pr-8 sm:pr-0">
                 <span id="modal-project-badge" class="bg-brand-50 text-brand-600 text-xs font-bold px-3 py-1 rounded mb-3 inline-block whitespace-nowrap border border-brand-100">專案詳情</span>
-                <h2 class="text-2xl font-black text-slate-800 break-words" id="modal-project-title">100kW 廠房屋頂太陽能建置專案</h2>
-                <p class="text-slate-400 mt-1 font-semibold text-sm break-words" id="modal-project-org">提案方：在地綠能中小企業聯盟</p>
+                <h2 class="text-2xl font-black text-slate-800 break-words" id="modal-project-title">載入中...</h2>
+                <p class="text-slate-400 mt-1 font-semibold text-sm break-words" id="modal-project-org">提案方：載入中...</p>
             </div>
             
             <div class="space-y-6 text-slate-600 font-medium">
                 <div class="h-48 w-full bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 relative mb-4">
-                    <img id="modal-project-image" src="" alt="專案圖片" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23f1f5f9\'/><text x=\'50\' y=\'55\' font-size=\'10\' fill=\'%23007d8a\' text-anchor=\'middle\'>TanJi Green Crowdfunding</text></svg>'">
+                    <img id="modal-project-image" src="" alt="專案圖片" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x400/f1f5f9/007d8a?text=Project'">
                 </div>
                 <div>
                     <h3 class="text-base font-bold text-brand-600 mb-2 flex items-center break-words"><span class="text-lg mr-2 shrink-0">🎯</span> 專案目標與資金用途</h3>
-                    <p id="modal-project-desc" class="text-sm leading-relaxed text-justify">協助在地傳產工廠進行設備低碳更新與轉型。募集資金將 100% 用於採購高效能單晶矽太陽能模組、逆變器與綠電併網工程。透過信託部管理，確保資金專款專用，於設備建置達特定里程碑後始得撥款。</p>
+                    <p id="modal-project-desc" class="text-sm leading-relaxed text-justify"></p>
                 </div>
                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/60">
                     <h3 class="text-base font-bold text-brand-600 mb-3 flex items-center break-words"><span class="text-lg mr-2 shrink-0">🌍</span> 預期永續效益</h3>
-                    <ul id="modal-project-benefits" class="list-disc list-inside text-sm space-y-2 ml-1">
-                        <li class="break-words">預估首年發電量：<span class="font-bold text-slate-800">120,000 度綠電</span></li>
-                        <li class="break-words">年減少溫室氣體當量：約 <span class="font-bold text-slate-800">55,920 kg CO₂e</span></li>
-                        <li class="break-words">等同於種植了 <span class="font-bold text-slate-800">5,000 棵樹</span> 的年吸碳當量效益</li>
-                    </ul>
+                    <ul id="modal-project-benefits" class="list-disc list-inside text-sm space-y-2 ml-1"></ul>
                 </div>
                 <div>
                     <h3 class="text-base font-bold text-brand-600 mb-2 flex items-center break-words"><span class="text-lg mr-2 shrink-0">🎁</span> 參與者專屬權益</h3>
                     <p class="text-sm leading-relaxed mb-2 text-justify">除了獲得對應的經驗值以解鎖全站回饋品外，本專案將於完工後提供：</p>
-                    <ul id="modal-project-perks" class="list-disc list-inside text-sm space-y-1.5 ml-1 text-slate-500">
-                        <li class="break-words">個人專屬「溫室氣體減量當量貢獻數位電子憑證」</li>
-                        <li class="break-words">建置進度與發電數據每季電子報更新</li>
-                        <li class="break-words">優先參訪綠能示範案場資格（限額）</li>
-                    </ul>
+                    <ul id="modal-project-perks" class="list-disc list-inside text-sm space-y-1.5 ml-1 text-slate-500"></ul>
                 </div>
             </div>
             <div class="mt-8 pt-6 border-t border-slate-100 flex justify-end">
-                <button onclick="document.getElementById('projectDetailsModal').classList.add('hidden')" class="w-full sm:w-auto bg-slate-800 text-white px-6 py-3.5 rounded-xl font-bold text-xs hover:bg-slate-700 transition-colors truncate">我瞭解了，前往參與</button>
+                <button id="closeProjectDetailsBtnBottom" class="w-full sm:w-auto bg-slate-800 text-white px-6 py-3.5 rounded-xl font-bold text-xs hover:bg-slate-700 transition-colors truncate">我瞭解了，前往參與</button>
             </div>
         </div>
     </div>
 
     <div id="loginModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center transition-opacity p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full relative max-h-[90dvh] overflow-y-auto border border-slate-200 flex flex-col">
-            <button onclick="document.getElementById('loginModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-1.5 rounded-full z-10 shrink-0">
+            <button id="closeLoginBtn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-1.5 rounded-full z-10 shrink-0">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="text-center mb-6 mt-2 shrink-0">
                 <div class="w-12 h-12 bg-slate-50 rounded-full mx-auto flex items-center justify-center mb-3 border border-slate-200/60 overflow-hidden shrink-0">
-                    <img src="assets/tanjibaby/tanjibaby.png" class="w-full h-full object-cover rounded-full">
+                    <img src="assets/tanjibaby/tanjibaby.png" class="w-full h-full object-cover rounded-full" onerror="this.src='https://placehold.co/100x100/f1f5f9/007d8a?text=TJ'">
                 </div>
                 <h2 class="text-xl font-black text-slate-800 tracking-wide break-words">登入專屬永續帳戶</h2>
                 <p class="text-sm text-slate-400 mt-1 font-semibold break-words">即刻展開您的淨零行動</p>
@@ -844,7 +830,7 @@
 
     <div id="paymentModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center transition-opacity p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full relative max-h-[90dvh] overflow-y-auto border border-slate-200">
-            <button onclick="document.getElementById('paymentModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-2 rounded-full z-10 shrink-0">
+            <button id="closePaymentBtn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors bg-slate-50 p-2 rounded-full z-10 shrink-0">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="text-center mb-5 border-b border-slate-100 pb-4 mt-2">
@@ -879,7 +865,7 @@
 
     <div id="adminModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center transition-opacity p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full relative max-h-[90dvh] overflow-y-auto border border-slate-200">
-            <button onclick="document.getElementById('adminModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 bg-slate-50 p-2 rounded-full z-10 shrink-0">
+            <button id="closeAdminBtn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 bg-slate-50 p-2 rounded-full z-10 shrink-0">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <h2 class="text-2xl font-black text-slate-800 mb-6 tracking-tight pr-8 sm:pr-0">管理員主控台</h2>
@@ -953,7 +939,7 @@
             <div class="bg-slate-800 p-3.5 text-white flex justify-between items-center z-10 shrink-0 gap-2">
                 <div class="flex items-center min-w-0">
                     <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center mr-2 border border-white/50 p-0.5 overflow-hidden shrink-0">
-                        <img src="assets/tanjibaby/tanjibaby_tech.png" class="w-full h-full object-cover rounded-full">
+                        <img src="assets/tanjibaby/tanjibaby_tech.png" class="w-full h-full object-cover rounded-full" onerror="this.src='https://placehold.co/50x50/007d8a/ffffff?text=Bot'">
                     </div>
                     <div class="min-w-0">
                         <h4 class="font-bold text-xs tracking-wide truncate">碳吉寶寶智能助手</h4>
@@ -1014,7 +1000,7 @@
                 
                 <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-200/60 shrink-0">
                     <div class="w-16 h-16 bg-white rounded-full overflow-hidden border-2 border-white relative shrink-0">
-                        <img src="assets/tanjibaby/tanjibaby_ceo.png" class="w-full h-full object-cover rounded-full">
+                        <img src="assets/tanjibaby/tanjibaby_ceo.png" class="w-full h-full object-cover rounded-full" onerror="this.src='https://placehold.co/100x100/007d8a/ffffff?text=User'">
                     </div>
                     <div class="text-center sm:text-left flex-1 min-w-0 w-full">
                         <h3 class="font-black text-lg text-slate-800 mb-1 flex items-center justify-center sm:justify-start gap-2 break-words w-full">
@@ -1092,7 +1078,7 @@
                         <p class="text-xs text-slate-300 leading-relaxed text-justify">
                             茲證明此永續帳戶持有者，實質參與低碳綠能與環境轉型媒合工程，已為地球減量 <span class="text-brand-400 font-black font-mono" id="cert-co2-display">0.0</span> kg 溫室氣體二氧化碳當量（CO₂e），特頒此證以資表揚。
                         </p>
-                        <p class="text-[10px] text-slate-400 font-bold mt-2">此 SHA256 加密憑證可做為企業 ESG 員工福利認列，或向合作金融機構申請低碳信貸優惠之佐證。</p>
+                        <p class="text-[10px] text-slate-400 font-bold mt-2">此 SHA256 加密憑證可做為企業ESG員工福利認列，或向合作金融機構申請低碳信貸優惠之佐證。</p>
                     </div>
                     <div class="border-t border-dashed border-slate-800 pt-3 flex flex-col gap-2">
                         <div class="flex justify-between items-center text-[9px] text-slate-400">
@@ -1118,7 +1104,7 @@
 
     <div id="rewardDetailModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center transition-opacity p-4">
         <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full relative border border-slate-200 text-center transform scale-95 transition-all">
-            <button onclick="document.getElementById('rewardDetailModal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 bg-slate-50 p-1.5 rounded-full z-10">
+            <button id="closeRewardDetailBtn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 bg-slate-50 p-1.5 rounded-full z-10">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div id="reward-modal-icon" class="w-16 h-16 bg-brand-50 rounded-full mx-auto flex items-center justify-center mb-4 text-3xl border border-brand-100">☕</div>
@@ -1134,7 +1120,7 @@
                 </div>
                 <p id="reward-modal-desc" class="text-xs text-slate-400 text-justify leading-relaxed">本券支持臺灣在地減碳與低碳永續農業，可於全台合作綠色創生商家免費兌換熱美式乙杯。限一次性兌換使用。</p>
             </div>
-            <button onclick="document.getElementById('rewardDetailModal').classList.add('hidden')" class="w-full bg-slate-800 hover:bg-slate-700 text-white rounded-xl py-3 font-bold text-sm transition-colors">我知道了</button>
+            <button id="closeRewardDetailBtnBottom" class="w-full bg-slate-800 hover:bg-slate-700 text-white rounded-xl py-3 font-bold text-sm transition-colors">我知道了</button>
         </div>
     </div>
     
@@ -1143,6 +1129,9 @@
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInAnonymously, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
+        // ==========================================
+        // 1. Core Data and Configuration
+        // ==========================================
         let firebaseConfig = {
             apiKey: "AIzaSyBdclG4xaT78_2LbDZaUwB1bWCFWaHAcx4",
             authDomain: "twenergy-1e568.firebaseapp.com",
@@ -1156,105 +1145,22 @@
             try { firebaseConfig = JSON.parse(__firebase_config); } catch (e) { console.error(e); }
         }
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+        let app, auth, db;
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+        } catch (e) { console.warn("Firebase Init Error:", e); }
+        
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-tanji-app';
-
         let currentUser = null;
+        let currentProjectIndex = 0;
+        let globalCo2 = 124500;
+        let hasCheckedInToday = false;
+        let confettiParticles = [];
+        let animationFrameId = null;
 
-        const loginShowBtn = document.getElementById('loginShowBtn');
-        const userControls = document.getElementById('user-controls');
-        const loginModal = document.getElementById('loginModal');
-        const loginForm = document.getElementById('loginForm');
-        const emailInput = document.getElementById('emailInput');
-        const passwordInput = document.getElementById('passwordInput');
-        const signInBtn = document.getElementById('signInBtn');
-        const signUpBtn = document.getElementById('signUpBtn');
-        const anonLoginBtn = document.getElementById('anonLoginBtn');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const userEmailDisplay = document.getElementById('user-email-display');
-        const authError = document.getElementById('auth-error');
-        const loginOverlay = document.getElementById('login-overlay');
-
-        const paymentModal = document.getElementById('paymentModal');
-        const paymentAmountDisplay = document.getElementById('payment-amount');
-
-        const mobileMenuToggleBtn = document.getElementById('mobileMenuToggleBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const closeMobileMenuBtn = document.getElementById('closeMobileMenuBtn');
-
-        const userDropdownBtn = document.getElementById('userDropdownBtn');
-        const userDropdownMenu = document.getElementById('userDropdownMenu');
-        const userDropdownArrow = document.getElementById('userDropdownArrow');
-
-        const mobileAccountBtn = document.getElementById('mobileAccountBtn');
-        const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
-        const mobileLoginBtn = document.getElementById('mobileLoginBtn');
-        const mobileUserCard = document.getElementById('mobile-user-card');
-        const mobileUserEmail = document.getElementById('mobile-user-email');
-        const mobileUserLevel = document.getElementById('mobile-user-level');
-        const mobileUnauthZone = document.getElementById('mobile-unauth-zone');
-        
-        const slider = document.getElementById('investSlider');
-        const numInput = document.getElementById('investInput');
-        const co2Display = document.getElementById('co2Display');
-        const expDisplay = document.getElementById('expDisplay');
-        const babyImg = document.getElementById('baby-img');
-        const babyVid = document.getElementById('baby-vid');
-        const statusText = document.getElementById('status-text');
-        const encouragementText = document.getElementById('encouragement-text');
-        const dailyCheckInBtn = document.getElementById('dailyCheckInBtn');
-        const babyWrapper = document.getElementById('baby-wrapper');
-        const babyGlow = document.getElementById('baby-glow');
-        
-        const sponsorBtn = document.getElementById('sponsorBtn');
-        const successModal = document.getElementById('successModal');
-        const closeSuccessBtn = document.getElementById('closeSuccessBtn');
-        const modalCo2 = document.getElementById('modal-co2');
-        const modalExp = document.getElementById('modal-exp');
-        const successModalContent = document.getElementById('successModalContent');
-
-        const accountBtn = document.getElementById('accountBtn');
-        const accountModal = document.getElementById('accountModal');
-        const accountModalContent = document.getElementById('accountModalContent');
-        const accLevel = document.getElementById('acc-level');
-        const accExp = document.getElementById('acc-exp');
-        const accInvested = document.getElementById('acc-invested');
-        const accCo2 = document.getElementById('acc-co2');
-        const personalTotalExpEl = document.getElementById('personal-total-exp');
-
-        const raisedAmountEl = document.getElementById('raised-amount');
-        const heroProgress = document.getElementById('hero-progress');
-        const pctAmountEl = document.getElementById('pct-amount');
-        const globalCo2El = document.getElementById('global-co2');
-        const feedListContainer = document.getElementById('feed-list-container');
-        
-        const helpToggleBtn = document.getElementById('helpToggleBtn');
-        const helpModal = document.getElementById('helpModal');
-        const closeHelpBtn = document.getElementById('closeHelpBtn');
-        const chatInput = document.getElementById('chatInput');
-        const sendChatBtn = document.getElementById('sendChatBtn');
-        const chatMessages = document.getElementById('chatMessages');
-
-        const heroTitle = document.getElementById('hero-title');
-        const heroOrg = document.getElementById('hero-org');
-        const heroGoal = document.getElementById('hero-goal');
-        const heroTime = document.getElementById('hero-time');
-
-        const canvas = document.getElementById('confetti-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const initialUserData = {
-            invested: 0,
-            co2: 0,
-            exp: 0,
-            level: 1,
-            role: "user"
-        };
-
+        const initialUserData = { invested: 0, co2: 0, exp: 0, level: 1, role: "user" };
         const personalData = { ...initialUserData };
 
         const activeFeedsCache = [
@@ -1281,11 +1187,8 @@
             { 
                 title: "廠房屋頂太陽能建置專案", 
                 org: "提案方：在地綠能中小企業聯盟", 
-                raised: 3450000, 
-                goal: 5000000, 
-                time: "剩餘 15 天",
-                image: "assets/projects/project_solar.png",
-                badge: "太陽能",
+                raised: 3450000, goal: 5000000, time: "剩餘 15 天",
+                image: "assets/projects/project_solar.png", badge: "太陽能",
                 yearlyCo2e: 55.92, 
                 perk: "個人專屬溫室氣體減量當量數位憑證與優先案場參訪資格",
                 escrowStage1: false, escrowStage2: false, escrowStage3: false,
@@ -1304,11 +1207,8 @@
             { 
                 title: "屏東養豬場沼氣發電專案", 
                 org: "提案方：循環農業合作社", 
-                raised: 840000, 
-                goal: 2000000, 
-                time: "剩餘 30 天",
-                image: "assets/projects/project_biomass.png",
-                badge: "生質能",
+                raised: 840000, goal: 2000000, time: "剩餘 30 天",
+                image: "assets/projects/project_biomass.png", badge: "生質能",
                 yearlyCo2e: 45.0, 
                 perk: "優先獲贈合作農場生產之有機永續鮮果箱一份",
                 escrowStage1: false, escrowStage2: false, escrowStage3: false,
@@ -1327,11 +1227,8 @@
             { 
                 title: "電商物流循環包裝專案", 
                 org: "提案方：綠色電商新創團隊", 
-                raised: 880000, 
-                goal: 1000000, 
-                time: "剩餘 5 天",
-                image: "assets/projects/project_circular.png",
-                badge: "循環經濟",
+                raised: 880000, goal: 1000000, time: "剩餘 5 天",
+                image: "assets/projects/project_circular.png", badge: "循環經濟",
                 yearlyCo2e: 47.4, 
                 perk: "獲得合作綠色電商平台免運券與 100 元折價券",
                 escrowStage1: false, escrowStage2: false, escrowStage3: false,
@@ -1350,11 +1247,8 @@
             { 
                 title: "偏鄉節能照明更新計畫", 
                 org: "提案方：綠色社區創生協會", 
-                raised: 420000, 
-                goal: 800000, 
-                time: "剩餘 22 天",
-                image: "assets/projects/project_led.png",
-                badge: "節能轉型",
+                raised: 420000, goal: 800000, time: "剩餘 22 天",
+                image: "assets/projects/project_led.png", badge: "節能轉型",
                 yearlyCo2e: 37.68, 
                 perk: "獲贈偏鄉在地小農手作天然香草茶包組一份",
                 escrowStage1: false, escrowStage2: false, escrowStage3: false,
@@ -1373,11 +1267,8 @@
             { 
                 title: "漁電共生智慧養殖計畫", 
                 org: "提案方：沿海永續水產聯盟", 
-                raised: 1250000, 
-                goal: 3000000, 
-                time: "剩餘 40 天",
-                image: "assets/projects/project_fishery.png",
-                badge: "漁電共生",
+                raised: 1250000, goal: 3000000, time: "剩餘 40 天",
+                image: "assets/projects/project_fishery.png", badge: "漁電共生",
                 yearlyCo2e: 97.86, 
                 perk: "獲得漁電共生科技綠色無毒蝦購買專屬 75 折優惠券",
                 escrowStage1: false, escrowStage2: false, escrowStage3: false,
@@ -1432,24 +1323,91 @@
             }
         ];
 
-        let currentProjectIndex = 0;
-        let globalCo2 = 124500;
-        let hasCheckedInToday = false;
+        // ==========================================
+        // 2. Safe DOM Selectors & Utilities
+        // ==========================================
+        const loginShowBtn = document.getElementById('loginShowBtn');
+        const userControls = document.getElementById('user-controls');
+        const loginModal = document.getElementById('loginModal');
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('emailInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const signInBtn = document.getElementById('signInBtn');
+        const signUpBtn = document.getElementById('signUpBtn');
+        const anonLoginBtn = document.getElementById('anonLoginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userEmailDisplay = document.getElementById('user-email-display');
+        const authError = document.getElementById('auth-error');
+        const loginOverlay = document.getElementById('login-overlay');
 
-        let confettiParticles = [];
-        let animationFrameId = null;
+        const paymentModal = document.getElementById('paymentModal');
+        const paymentAmountDisplay = document.getElementById('payment-amount');
+
+        const mobileMenuToggleBtn = document.getElementById('mobileMenuToggleBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMobileMenuBtn = document.getElementById('closeMobileMenuBtn');
+        const userDropdownBtn = document.getElementById('userDropdownBtn');
+        const userDropdownMenu = document.getElementById('userDropdownMenu');
+        const userDropdownArrow = document.getElementById('userDropdownArrow');
+        
+        const mobileUserCard = document.getElementById('mobile-user-card');
+        const mobileUserEmail = document.getElementById('mobile-user-email');
+        const mobileUserLevel = document.getElementById('mobile-user-level');
+        const mobileUnauthZone = document.getElementById('mobile-unauth-zone');
+        
+        const slider = document.getElementById('investSlider');
+        const numInput = document.getElementById('investInput');
+        const co2Display = document.getElementById('co2Display');
+        const expDisplay = document.getElementById('expDisplay');
+        const babyImg = document.getElementById('baby-img');
+        const babyWrapper = document.getElementById('baby-wrapper');
+        const babyGlow = document.getElementById('baby-glow');
+        const statusText = document.getElementById('status-text');
+        const encouragementText = document.getElementById('encouragement-text');
+        const dailyCheckInBtn = document.getElementById('dailyCheckInBtn');
+        
+        const sponsorBtn = document.getElementById('sponsorBtn');
+        const successModal = document.getElementById('successModal');
+        const successModalContent = document.getElementById('successModalContent');
+
+        const accountModal = document.getElementById('accountModal');
+        const accountModalContent = document.getElementById('accountModalContent');
+        const accLevel = document.getElementById('acc-level');
+        const accExp = document.getElementById('acc-exp');
+        const accInvested = document.getElementById('acc-invested');
+        const accCo2 = document.getElementById('acc-co2');
+        const personalTotalExpEl = document.getElementById('personal-total-exp');
+
+        const raisedAmountEl = document.getElementById('raised-amount');
+        const heroProgress = document.getElementById('hero-progress');
+        const pctAmountEl = document.getElementById('pct-amount');
+        const globalCo2El = document.getElementById('global-co2');
+        const feedListContainer = document.getElementById('feed-list-container');
+        
+        const chatInput = document.getElementById('chatInput');
+        const chatMessages = document.getElementById('chatMessages');
+
+        const heroTitle = document.getElementById('hero-title');
+        const heroOrg = document.getElementById('hero-org');
+        const heroGoal = document.getElementById('hero-goal');
+        const heroTime = document.getElementById('hero-time');
+
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
 
         function getLocalData() {
-            try {
-                const stored = localStorage.getItem('tanji_local_store_' + appId);
-                return stored ? JSON.parse(stored) : null;
-            } catch (e) { return null; }
+            try { return JSON.parse(localStorage.getItem('tanji_local_store_' + appId)) || null; } catch (e) { return null; }
         }
-
         function setLocalData(data) {
             try { localStorage.setItem('tanji_local_store_' + appId, JSON.stringify(data)); } catch (e) {}
         }
-
+        function calculateLevel(exp) {
+            if(exp >= 2000) return 5;
+            if(exp >= 1000) return 4;
+            if(exp >= 500) return 3;
+            if(exp >= 200) return 2;
+            return 1;
+        }
         function getLevelProgress(exp) {
             let activeDef = levelDefinition[0];
             for (let i = 0; i < levelDefinition.length; i++) {
@@ -1458,25 +1416,335 @@
             const currentExpInLevel = exp - activeDef.minExp;
             const levelRange = activeDef.nextExp - activeDef.minExp;
             let pct = Math.min(Math.floor((currentExpInLevel / levelRange) * 100), 100);
-            if (activeDef.level === 5) { pct = 100; }
+            if (activeDef.level === 5) pct = 100;
             return {
                 pct: pct, current: exp, max: activeDef.nextExp,
                 title: activeDef.title, emoji: activeDef.emoji,
                 statusText: activeDef.statusText, level: activeDef.level, img: activeDef.img
             };
         }
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if(!container) return;
+            const toast = document.createElement('div');
+            toast.className = `px-4 py-2.5 rounded-xl text-xs font-bold text-white shadow-md transition-all duration-300 transform translate-y-2 opacity-0 shrink-0 ${type === 'error' ? 'bg-red-500' : 'bg-slate-800'}`;
+            toast.innerText = message;
+            container.appendChild(toast);
+            setTimeout(() => { toast.classList.remove('opacity-0', 'translate-y-2'); }, 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => { toast.remove(); }, 300);
+            }, 2500);
+        }
 
+        // ==========================================
+        // 3. UI Rendering & Interactions
+        // ==========================================
+        function renderOtherProjects() {
+            const listContainer = document.getElementById('project-list');
+            if (!listContainer) return;
+            listContainer.innerHTML = '';
+            projects.forEach((p, idx) => {
+                if (idx === currentProjectIndex) return;
+                const pct = Math.floor((p.raised / p.goal) * 100);
+                const card = document.createElement('div');
+                card.className = 'project-card bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 group flex flex-col h-full justify-between';
+                card.innerHTML = `
+                    <div class="h-44 bg-slate-50 flex items-center justify-center relative overflow-hidden border-b border-slate-100 shrink-0">
+                        <span class="absolute top-4 left-4 bg-white text-xs font-bold px-2.5 py-1 rounded text-brand-600 border border-slate-200 z-10 whitespace-nowrap">${p.badge}</span>
+                        <img src="${p.image}" alt="${p.title}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x300/f1f5f9/007d8a?text=Project'">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-bold text-lg mb-1 text-slate-800 line-clamp-1 break-words">${p.title}</h4>
+                            <p class="text-xs sm:text-sm text-slate-400 mb-6 font-semibold break-words line-clamp-1">${p.org}</p>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="w-full bg-slate-100 rounded-full h-1.5 mb-3"><div class="bg-brand-500 h-1.5 rounded-full" style="width: ${Math.min(pct, 100)}%"></div></div>
+                            <div class="flex justify-between text-xs font-bold text-slate-400"><span class="text-brand-500 font-mono">${pct}%</span><span class="whitespace-nowrap font-mono">${p.time}</span></div>
+                        </div>
+                    </div>
+                `;
+                card.addEventListener('click', () => switchProject(idx, true));
+                listContainer.appendChild(card);
+            });
+        }
+
+        function switchProject(index, openModal = true) {
+            currentProjectIndex = index;
+            const p = projects[index];
+            const pct = Math.floor((p.raised / p.goal) * 100);
+            
+            if(heroTitle) heroTitle.innerText = p.title;
+            if(heroOrg) heroOrg.innerText = p.org;
+            if(raisedAmountEl) raisedAmountEl.innerText = p.raised.toLocaleString();
+            if(heroGoal) heroGoal.innerText = p.goal.toLocaleString();
+            if(heroProgress) heroProgress.style.width = Math.min(pct, 100) + '%';
+            if(pctAmountEl) pctAmountEl.innerText = pct;
+            if(heroTime) heroTime.innerText = `目前進度 ${pct}% | ${p.time}`;
+            
+            if(slider && numInput) {
+                slider.value = 500;
+                numInput.value = 500;
+                syncValues(500);
+                updateBabyInteraction(500);
+            }
+
+            renderOtherProjects();
+            updateUIFromData(personalData);
+
+            const trialSelect = document.getElementById('trialProjectSelect');
+            if (trialSelect) trialSelect.value = index;
+
+            if (openModal) showProjectDetailsModal();
+        }
+
+        function syncValues(value) {
+            const money = parseInt(value);
+            const p = projects[currentProjectIndex];
+            const co2 = ((money / p.goal) * p.yearlyCo2e * 1000).toFixed(1);
+            const exp = Math.floor(money / 10);
+            if(co2Display) co2Display.innerText = co2;
+            if(expDisplay) expDisplay.innerText = exp;
+        }
+
+        function updateBabyInteraction(value) {
+            const money = parseInt(value);
+            const scale = 1 + (money / 10000) * 0.12;
+            const opacity = 0.2 + (money / 10000) * 0.6;
+            if(babyWrapper) babyWrapper.style.transform = `scale(${scale})`;
+            if(babyGlow) babyGlow.style.opacity = opacity;
+        }
+
+        function showProjectDetailsModal() {
+            const modal = document.getElementById('projectDetailsModal');
+            if(!modal) return;
+            const p = projects[currentProjectIndex];
+            document.getElementById('modal-project-badge').innerText = p.badge;
+            document.getElementById('modal-project-title').innerText = p.title;
+            document.getElementById('modal-project-org').innerText = p.org;
+            document.getElementById('modal-project-image').src = p.image;
+            document.getElementById('modal-project-desc').innerText = p.desc;
+            
+            const benefitsList = document.getElementById('modal-project-benefits');
+            benefitsList.innerHTML = p.benefits.map(b => `<li class="break-words">${b}</li>`).join('');
+            
+            const perksList = document.getElementById('modal-project-perks');
+            perksList.innerHTML = p.perks.map(k => `<li class="break-words">${k}</li>`).join('');
+            modal.classList.remove('hidden');
+        }
+
+        function updateUIFromData(data) {
+            const prog = getLevelProgress(data.exp);
+            if(personalTotalExpEl) personalTotalExpEl.innerText = data.exp.toLocaleString();
+            updateRewards(data.exp);
+            if(accLevel) accLevel.innerText = `Lv.${prog.level}`;
+            if(accExp) accExp.innerText = data.exp.toLocaleString();
+            if(accInvested) accInvested.innerText = data.invested.toLocaleString();
+            if(accCo2) accCo2.innerText = data.co2.toFixed(1);
+
+            const certLvl = document.getElementById('cert-level-display');
+            if(certLvl) certLvl.innerText = `Lv.${prog.level}`;
+            const certCo2 = document.getElementById('cert-co2-display');
+            if(certCo2) certCo2.innerText = data.co2.toFixed(1);
+            const certEmail = document.getElementById('cert-email-display');
+            if(certEmail) certEmail.innerText = currentUser ? currentUser.email : 'user@tanji.com';
+            
+            if (mobileUserLevel) { mobileUserLevel.innerText = `Lv.${prog.level} ${prog.title}`; }
+            
+            const randCode = currentUser ? currentUser.uid.substring(0, 5).toUpperCase() : '0000';
+            const certId = document.getElementById('cert-id-display');
+            if(certId) certId.innerText = `CERT #TJ-2026-${randCode}`;
+
+            if(document.getElementById('cta-baby-emoji')) document.getElementById('cta-baby-emoji').innerText = prog.emoji;
+            if(document.getElementById('cta-baby-title')) document.getElementById('cta-baby-title').innerText = `碳吉寶寶 ${prog.title}`;
+            if(document.getElementById('cta-progress-bar')) document.getElementById('cta-progress-bar').style.width = `${prog.pct}%`;
+            if(document.getElementById('cta-progress-text')) document.getElementById('cta-progress-text').innerText = `${prog.current} / ${prog.max}`;
+            if(document.getElementById('sustainability-cta-desc')) document.getElementById('sustainability-cta-desc').innerText = `距離下一次進化還差 ${prog.max - prog.current} 經驗值。點擊試算繼續累積！`;
+
+            if(babyImg) babyImg.src = prog.img;
+            if(statusText) statusText.innerText = prog.statusText;
+            if(encouragementText) encouragementText.innerText = `當前形態：${prog.emoji} ${prog.title}`;
+
+            const currentProj = projects[currentProjectIndex];
+            
+            const updateEscrowUI = (stageNum, isApproved, approvedText, pendingText) => {
+                const badge = document.getElementById(`escrow-badge-${stageNum}`);
+                const card = document.getElementById(`escrow-card-${stageNum}`);
+                const title = document.getElementById(`escrow-title-${stageNum}`);
+                const icon = document.getElementById(`escrow-status-icon-${stageNum}`);
+                const statusText = document.getElementById(`escrow-status-text-${stageNum}`);
+                if(!badge || !card || !title || !icon || !statusText) return;
+
+                if (isApproved) {
+                    badge.innerText = "已解鎖";
+                    badge.className = "absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
+                    card.className = "bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between";
+                    title.className = "text-xs font-bold mb-1 text-brand-500";
+                    icon.innerText = "✓";
+                    icon.className = "w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold";
+                    statusText.innerText = approvedText;
+                    statusText.className = "text-[10px] text-slate-500 font-semibold";
+                } else {
+                    badge.innerText = "鎖定中";
+                    badge.className = "absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
+                    card.className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between";
+                    title.className = "text-xs font-bold mb-1 text-slate-700";
+                    icon.innerText = "🔒";
+                    icon.className = "w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold";
+                    statusText.innerText = pendingText;
+                    statusText.className = "text-[10px] text-slate-400 font-semibold";
+                }
+            };
+
+            updateEscrowUI(1, currentProj.escrowStage1, "驗證成功，信託專戶已核實解鎖撥付", "待計畫方正式提交技師簽證報告核收");
+            updateEscrowUI(2, currentProj.escrowStage2, "驗證成功，材料設備採購款核實撥發", "待材料進場並提交核實清冊解鎖");
+            updateEscrowUI(3, currentProj.escrowStage3, "綠電併網成功，數據監測正常運作", "待正式發電公文與IoT數據監測對接解鎖");
+        }
+
+        function updateRewards(totalExp) {
+            const toggleRewardUI = (num, isUnlocked, text) => {
+                const el = document.getElementById(`reward-${num}`);
+                const req = document.getElementById(`req-${num}`);
+                const badge = document.getElementById(`badge-icon-${num}`);
+                if(el && req) {
+                    if (isUnlocked) {
+                        el.classList.remove('reward-locked');
+                        el.classList.add('reward-unlocked', 'cursor-pointer'); 
+                        req.innerText = text;
+                        req.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap';
+                    } else {
+                        el.classList.add('reward-locked');
+                        el.classList.remove('reward-unlocked', 'cursor-pointer'); 
+                        req.innerText = `需 ${text} 經驗值`;
+                        req.className = 'inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono';
+                    }
+                }
+                if(badge) {
+                    if(isUnlocked) {
+                        badge.classList.remove('opacity-40', 'grayscale');
+                        badge.classList.add('border-brand-500', 'bg-brand-50', 'text-brand-600', 'shadow-sm');
+                    } else {
+                        badge.classList.add('opacity-40', 'grayscale');
+                        badge.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-600', 'shadow-sm');
+                    }
+                }
+            };
+
+            let unlockedCount = 0;
+            if(totalExp >= 100) { toggleRewardUI(1, true, '點擊檢視獎勵'); unlockedCount++; } else { toggleRewardUI(1, false, '100'); }
+            if(totalExp >= 300) { toggleRewardUI(2, true, '點擊兌換條碼'); unlockedCount++; } else { toggleRewardUI(2, false, '300'); }
+            if(totalExp >= 800) { toggleRewardUI(3, true, '點擊登記領取'); unlockedCount++; } else { toggleRewardUI(3, false, '800'); }
+
+            const statusTextEl = document.getElementById('cert-vouchers-status');
+            const promoCodeEl = document.getElementById('cert-promo-code');
+            if (statusTextEl && promoCodeEl) {
+                statusTextEl.innerText = `${unlockedCount} / 3 賦能解鎖`;
+                if (unlockedCount === 0) promoCodeEl.innerText = 'VOUCHER_LOCKED';
+                else if (unlockedCount === 1) promoCodeEl.innerText = rewardItemsData[1].code;
+                else if (unlockedCount === 2) promoCodeEl.innerText = rewardItemsData[2].code;
+                else promoCodeEl.innerText = rewardItemsData[3].code;
+            }
+        }
+
+        // ==========================================
+        // 4. Event Listeners Setup
+        // ==========================================
+        
+        // Navigation & Modals
+        document.getElementById('methodologyBtn')?.addEventListener('click', () => {
+            document.getElementById('methodologyModal')?.classList.remove('hidden');
+        });
+        document.getElementById('closeMethodologyBtn')?.addEventListener('click', () => {
+            document.getElementById('methodologyModal')?.classList.add('hidden');
+        });
+        document.getElementById('closeMethodologyBtnBottom')?.addEventListener('click', () => {
+            document.getElementById('methodologyModal')?.classList.add('hidden');
+        });
+
+        document.getElementById('viewDetailBtn')?.addEventListener('click', () => {
+            showProjectDetailsModal();
+        });
+        document.getElementById('closeProjectDetailsBtn')?.addEventListener('click', () => {
+            document.getElementById('projectDetailsModal')?.classList.add('hidden');
+        });
+        document.getElementById('closeProjectDetailsBtnBottom')?.addEventListener('click', () => {
+            document.getElementById('projectDetailsModal')?.classList.add('hidden');
+            document.getElementById('investInput')?.focus();
+        });
+
+        document.getElementById('impactReportBtn')?.addEventListener('click', () => {
+            document.getElementById('impactModal')?.classList.remove('hidden');
+        });
+        document.getElementById('impactReportBtnMobile')?.addEventListener('click', () => {
+            document.getElementById('impactModal')?.classList.remove('hidden');
+        });
+        document.getElementById('closeImpactBtn')?.addEventListener('click', () => {
+            document.getElementById('impactModal')?.classList.add('hidden');
+        });
+        document.getElementById('closeImpactBtnBottom')?.addEventListener('click', () => {
+            document.getElementById('impactModal')?.classList.add('hidden');
+        });
+
+        // Rewards
+        document.getElementById('reward-1')?.addEventListener('click', () => {
+            if(personalData.exp >= 100) openRewardModal(1);
+            else showToast(`還需要 ${100 - personalData.exp} 經驗值才能解鎖！`, 'error');
+        });
+        document.getElementById('reward-2')?.addEventListener('click', () => {
+            if(personalData.exp >= 300) openRewardModal(2);
+            else showToast(`還需要 ${300 - personalData.exp} 經驗值才能解鎖！`, 'error');
+        });
+        document.getElementById('reward-3')?.addEventListener('click', () => {
+            if(personalData.exp >= 800) openRewardModal(3);
+            else showToast(`還需要 ${800 - personalData.exp} 經驗值才能解鎖！`, 'error');
+        });
+        
+        function openRewardModal(id) {
+            const data = rewardItemsData[id];
+            document.getElementById('reward-modal-icon').innerText = data.icon;
+            document.getElementById('reward-modal-title').innerText = data.title;
+            document.getElementById('reward-modal-code').innerText = data.code;
+            document.getElementById('reward-modal-desc').innerText = data.desc;
+            document.getElementById('rewardDetailModal').classList.remove('hidden');
+        }
+
+        document.getElementById('closeRewardDetailBtn')?.addEventListener('click', () => {
+            document.getElementById('rewardDetailModal')?.classList.add('hidden');
+        });
+        document.getElementById('closeRewardDetailBtnBottom')?.addEventListener('click', () => {
+            document.getElementById('rewardDetailModal')?.classList.add('hidden');
+        });
+
+        // Success Cases Cards
+        document.querySelectorAll('.success-case-card').forEach((card, index) => {
+            card.addEventListener('click', () => {
+                const modal = document.getElementById('projectDetailsModal');
+                const sc = successCases[index];
+                document.getElementById('modal-project-badge').innerText = sc.badge;
+                document.getElementById('modal-project-title').innerText = sc.title;
+                document.getElementById('modal-project-org').innerText = sc.org;
+                document.getElementById('modal-project-image').src = sc.image;
+                document.getElementById('modal-project-desc').innerText = sc.desc;
+                document.getElementById('modal-project-benefits').innerHTML = sc.benefits.map(b => `<li class="break-words">${b}</li>`).join('');
+                document.getElementById('modal-project-perks').innerHTML = sc.perks.map(k => `<li class="break-words">${k}</li>`).join('');
+                modal.classList.remove('hidden');
+            });
+        });
+
+        // Firebase Auth Logic
         function simulateLocalLogin(emailText, isAdmin = false) {
             currentUser = { uid: 'local-' + Date.now(), email: emailText, isAnonymous: emailText.includes('訪客') };
-            userControls.classList.remove('auth-hidden');
-            loginShowBtn.classList.add('auth-hidden');
-            mobileUserCard.classList.remove('hidden');
-            mobileUnauthZone.classList.add('hidden');
-            loginOverlay.classList.add('opacity-0', 'pointer-events-none');
-            setTimeout(() => loginOverlay.classList.add('hidden'), 300);
-            loginModal.classList.add('hidden');
-            userEmailDisplay.innerText = currentUser.email;
-            mobileUserEmail.innerText = currentUser.email;
+            userControls?.classList.remove('auth-hidden');
+            loginShowBtn?.classList.add('auth-hidden');
+            mobileUserCard?.classList.remove('hidden');
+            mobileUnauthZone?.classList.add('hidden');
+            loginOverlay?.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => loginOverlay?.classList.add('hidden'), 300);
+            loginModal?.classList.add('hidden');
+            
+            if(userEmailDisplay) userEmailDisplay.innerText = currentUser.email;
+            if(mobileUserEmail) mobileUserEmail.innerText = currentUser.email;
 
             const cache = getLocalData();
             if (cache) {
@@ -1494,117 +1762,19 @@
             }
 
             if (personalData.role === 'admin') {
-                document.getElementById('adminBtn').classList.remove('hidden');
+                document.getElementById('adminBtn')?.classList.remove('hidden');
             } else {
-                document.getElementById('adminBtn').classList.add('hidden');
+                document.getElementById('adminBtn')?.classList.add('hidden');
             }
 
             updateUIFromData(personalData);
             showToast(personalData.role === 'admin' ? "已以管理員權限登入" : "登入成功");
         }
 
-        const initSilentAuth = async () => {
-            try {
-                if (!auth.currentUser) { await signInAnonymously(auth); }
-            } catch (err) { console.warn(err); }
-        };
-        initSilentAuth();
+        loginShowBtn?.addEventListener('click', () => { loginModal?.classList.remove('hidden'); });
+        document.getElementById('closeLoginBtn')?.addEventListener('click', () => { loginModal?.classList.add('hidden'); });
 
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                currentUser = user;
-                userControls.classList.remove('auth-hidden');
-                loginShowBtn.classList.add('auth-hidden');
-                mobileUserCard.classList.remove('hidden');
-                mobileUnauthZone.classList.add('hidden');
-                loginOverlay.classList.add('opacity-0', 'pointer-events-none');
-                setTimeout(() => loginOverlay.classList.add('hidden'), 300);
-                loginModal.classList.add('hidden');
-                
-                const finalEmailText = user.isAnonymous ? '訪客使用者' : user.email;
-                userEmailDisplay.innerText = finalEmailText;
-                mobileUserEmail.innerText = finalEmailText;
-
-                const userDocRef = doc(db, 'artifacts', appId, 'users', user.uid, 'profile', 'data');
-                try {
-                    const docSnap = await getDoc(userDocRef);
-                    if (!docSnap.exists()) {
-                        const localCache = getLocalData() || initialUserData;
-                        await setDoc(userDocRef, { ...localCache, email: finalEmailText });
-                    }
-                } catch(e) {
-                    const cache = getLocalData() || initialUserData;
-                    Object.assign(personalData, cache);
-                    updateUIFromData(personalData);
-                }
-
-                onSnapshot(userDocRef, (docSnap) => {
-                    if (docSnap.exists()) {
-                        const data = docSnap.data();
-                        Object.assign(personalData, data);
-                        setLocalData(personalData);
-                        updateUIFromData(personalData);
-                        if (data.role === 'admin' || user.email === 'admin@tanji.com') {
-                            document.getElementById('adminBtn').classList.remove('hidden');
-                        } else {
-                            document.getElementById('adminBtn').classList.add('hidden');
-                        }
-                    }
-                }, (error) => { console.warn(error); });
-
-            } else {
-                if(!currentUser || !currentUser.uid.startsWith('local-')) {
-                    currentUser = null;
-                    userControls.classList.add('auth-hidden');
-                    loginShowBtn.classList.remove('auth-hidden');
-                    mobileUserCard.classList.add('hidden');
-                    mobileUnauthZone.classList.remove('hidden');
-                    loginOverlay.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
-                    document.getElementById('adminBtn').classList.add('hidden');
-                    const cache = getLocalData() || initialUserData;
-                    Object.assign(personalData, cache);
-                    updateUIFromData(personalData);
-                }
-            }
-        });
-
-        const Whitehead = (msg) => {
-            authError.innerText = msg;
-            authError.classList.remove('hidden');
-            setTimeout(() => authError.classList.add('hidden'), 3000);
-        };
-
-        userDropdownBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            userDropdownMenu.classList.toggle('hidden');
-            userDropdownArrow.classList.toggle('rotate-180');
-        });
-
-        document.addEventListener('click', () => {
-            if (!userDropdownMenu.classList.contains('hidden')) {
-                userDropdownMenu.classList.add('hidden');
-                userDropdownArrow.classList.remove('rotate-180');
-            }
-        });
-
-        mobileAccountBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            document.getElementById('accountBtn').click();
-        });
-
-        mobileLogoutBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            document.getElementById('logoutBtn').click();
-        });
-
-        mobileLoginBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            loginModal.classList.remove('hidden');
-        });
-
-        loginShowBtn.addEventListener('click', () => { loginModal.classList.remove('hidden'); });
-
-        loginForm.addEventListener('submit', async (e) => {
+        loginForm?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = emailInput.value;
             const password = passwordInput.value;
@@ -1612,383 +1782,216 @@
                 simulateLocalLogin(email, true);
                 return;
             }
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-                showToast("登入成功");
-            } catch (error) {
+            if(auth) {
+                try {
+                    await signInWithEmailAndPassword(auth, email, password);
+                    showToast("登入成功");
+                } catch (error) {
+                    simulateLocalLogin(email, false);
+                }
+            } else {
                 simulateLocalLogin(email, false);
             }
         });
 
-        signUpBtn.addEventListener('click', async () => {
+        signUpBtn?.addEventListener('click', async () => {
             if(!emailInput.validity.valid || !passwordInput.validity.valid) {
-                 Whitehead("請輸入有效的電子郵件與密碼");
+                 authError.innerText = "請輸入有效的電子郵件與密碼";
+                 authError.classList.remove('hidden');
+                 setTimeout(() => authError.classList.add('hidden'), 3000);
                  return;
             }
             const email = emailInput.value;
             const password = passwordInput.value;
-            try {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const userDocRef = doc(db, 'artifacts', appId, 'users', userCredential.user.uid, 'profile', 'data');
-                await setDoc(userDocRef, { ...initialUserData, email: email });
-                showToast("帳號註冊成功");
-            } catch (error) {
+            if(auth) {
+                try {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const userDocRef = doc(db, 'artifacts', appId, 'users', userCredential.user.uid, 'profile', 'data');
+                    await setDoc(userDocRef, { ...initialUserData, email: email });
+                    showToast("帳號註冊成功");
+                } catch (error) {
+                    simulateLocalLogin(email);
+                }
+            } else {
                 simulateLocalLogin(email);
             }
         });
 
-        anonLoginBtn.addEventListener('click', async () => {
-            try {
-                const userCredential = await signInAnonymously(auth);
-                const userDocRef = doc(db, 'artifacts', appId, 'users', userCredential.user.uid, 'profile', 'data');
-                await setDoc(userDocRef, { ...initialUserData, email: "訪客使用者" });
-                showToast("已以訪客身分體驗");
-            } catch (error) {
+        anonLoginBtn?.addEventListener('click', async () => {
+            if(auth) {
+                try {
+                    const userCredential = await signInAnonymously(auth);
+                    const userDocRef = doc(db, 'artifacts', appId, 'users', userCredential.user.uid, 'profile', 'data');
+                    await setDoc(userDocRef, { ...initialUserData, email: "訪客使用者" });
+                    showToast("已以訪客身分體驗");
+                } catch (error) {
+                    simulateLocalLogin('訪客使用者');
+                }
+            } else {
                 simulateLocalLogin('訪客使用者');
             }
         });
 
-        logoutBtn.addEventListener('click', () => {
+        const handleLogout = () => {
             localStorage.removeItem('tanji_local_store_' + appId);
             if(currentUser && currentUser.uid.startsWith('local-')) {
                 currentUser = null;
-                userControls.classList.add('auth-hidden');
-                loginShowBtn.classList.remove('auth-hidden');
-                mobileUserCard.classList.add('hidden');
-                mobileUnauthZone.classList.remove('hidden');
-                loginOverlay.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
-                document.getElementById('adminBtn').classList.add('hidden');
+                userControls?.classList.add('auth-hidden');
+                loginShowBtn?.classList.remove('auth-hidden');
+                mobileUserCard?.classList.add('hidden');
+                mobileUnauthZone?.classList.remove('hidden');
+                loginOverlay?.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+                document.getElementById('adminBtn')?.classList.add('hidden');
                 Object.assign(personalData, initialUserData);
                 updateUIFromData(personalData);
                 showToast("已安全登出");
-            } else {
+            } else if (auth) {
                 signOut(auth).then(() => { showToast("已安全登出"); });
             }
+        };
+        logoutBtn?.addEventListener('click', handleLogout);
+        document.getElementById('mobileLogoutBtn')?.addEventListener('click', handleLogout);
+
+        // Mobile Menu Toggles
+        mobileMenuToggleBtn?.addEventListener('click', () => { mobileMenu?.classList.remove('hidden'); });
+        closeMobileMenuBtn?.addEventListener('click', () => { mobileMenu?.classList.add('hidden'); });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => { mobileMenu?.classList.add('hidden'); });
         });
 
-        mobileMenuToggleBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
+        // Account Modals
+        document.getElementById('accountBtn')?.addEventListener('click', () => {
+            document.getElementById('account-profile-view')?.classList.remove('hidden');
+            document.getElementById('account-certificate-view')?.classList.add('hidden');
+            accountModal?.classList.remove('hidden');
+            setTimeout(() => {
+                accountModalContent?.classList.remove('scale-95');
+                accountModalContent?.classList.add('scale-100');
+            }, 10);
         });
-        closeMobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
+        document.getElementById('mobileAccountBtn')?.addEventListener('click', () => {
+            mobileMenu?.classList.add('hidden');
+            document.getElementById('accountBtn')?.click();
         });
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+        document.querySelectorAll('.close-account-trigger').forEach(btn => {
+            btn.addEventListener('click', () => {
+                accountModalContent?.classList.remove('scale-100');
+                accountModalContent?.classList.add('scale-95');
+                setTimeout(() => { accountModal?.classList.add('hidden'); }, 200);
             });
         });
+        document.getElementById('viewCertBtn')?.addEventListener('click', () => {
+            document.getElementById('account-profile-view')?.classList.add('hidden');
+            document.getElementById('account-certificate-view')?.classList.remove('hidden');
+        });
+        document.getElementById('backToProfileBtn')?.addEventListener('click', () => {
+            document.getElementById('account-certificate-view')?.classList.add('hidden');
+            document.getElementById('account-profile-view')?.classList.remove('hidden');
+        });
 
-        function updateUIFromData(data) {
-            const prog = getLevelProgress(data.exp);
-            personalTotalExpEl.innerText = data.exp.toLocaleString();
-            updateRewards(data.exp);
-            accLevel.innerText = `Lv.${prog.level}`;
-            accExp.innerText = data.exp.toLocaleString();
-            accInvested.innerText = data.invested.toLocaleString();
-            accCo2.innerText = data.co2.toFixed(1);
-
-            document.getElementById('cert-level-display').innerText = `Lv.${prog.level}`;
-            document.getElementById('cert-co2-display').innerText = data.co2.toFixed(1);
-            document.getElementById('cert-email-display').innerText = currentUser ? currentUser.email : 'user@tanji.com';
-            
-            if (mobileUserLevel) {
-                mobileUserLevel.innerText = `Lv.${prog.level} ${prog.title}`;
+        // Other bindings
+        userDropdownBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdownMenu?.classList.toggle('hidden');
+            userDropdownArrow?.classList.toggle('rotate-180');
+        });
+        document.addEventListener('click', () => {
+            if (userDropdownMenu && !userDropdownMenu.classList.contains('hidden')) {
+                userDropdownMenu.classList.add('hidden');
+                if(userDropdownArrow) userDropdownArrow.classList.remove('rotate-180');
             }
-            
-            const randCode = currentUser ? currentUser.uid.substring(0, 5).toUpperCase() : '0000';
-            document.getElementById('cert-id-display').innerText = `CERT #TJ-2026-${randCode}`;
+        });
 
-            document.getElementById('cta-baby-emoji').innerText = prog.emoji;
-            document.getElementById('cta-baby-title').innerText = `碳吉寶寶 ${prog.title}`;
-            document.getElementById('cta-progress-bar').style.width = `${prog.pct}%`;
-            document.getElementById('cta-progress-text').innerText = `${prog.current} / ${prog.max}`;
-            document.getElementById('sustainability-cta-desc').innerText = `距離下一次進化還差 ${prog.max - prog.current} 經驗值。點擊試算繼續累積！`;
+        // Firebase onAuthStateChanged
+        if (auth) {
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    currentUser = user;
+                    userControls?.classList.remove('auth-hidden');
+                    loginShowBtn?.classList.add('auth-hidden');
+                    mobileUserCard?.classList.remove('hidden');
+                    mobileUnauthZone?.classList.add('hidden');
+                    loginOverlay?.classList.add('opacity-0', 'pointer-events-none');
+                    setTimeout(() => loginOverlay?.classList.add('hidden'), 300);
+                    loginModal?.classList.add('hidden');
+                    
+                    const finalEmailText = user.isAnonymous ? '訪客使用者' : user.email;
+                    if(userEmailDisplay) userEmailDisplay.innerText = finalEmailText;
+                    if(mobileUserEmail) mobileUserEmail.innerText = finalEmailText;
 
-            babyImg.src = prog.img;
-            statusText.innerText = prog.statusText;
-            encouragementText.innerText = `當前形態：${prog.emoji} ${prog.title}`;
+                    const userDocRef = doc(db, 'artifacts', appId, 'users', user.uid, 'profile', 'data');
+                    try {
+                        const docSnap = await getDoc(userDocRef);
+                        if (!docSnap.exists()) {
+                            const localCache = getLocalData() || initialUserData;
+                            await setDoc(userDocRef, { ...localCache, email: finalEmailText });
+                        }
+                    } catch(e) {
+                        const cache = getLocalData() || initialUserData;
+                        Object.assign(personalData, cache);
+                        updateUIFromData(personalData);
+                    }
 
-            const currentProj = projects[currentProjectIndex];
-            
-            if (currentProj.escrowStage1) {
-                document.getElementById('escrow-badge-1').innerText = "已解鎖";
-                document.getElementById('escrow-badge-1').className = "absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-1').className = "bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-1').className = "text-xs font-bold mb-1 text-brand-500";
-                document.getElementById('escrow-status-icon-1').innerText = "✓";
-                document.getElementById('escrow-status-icon-1').className = "w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold";
-                document.getElementById('escrow-status-text-1').innerText = "驗證成功，信託專戶已核實解鎖撥付";
-                document.getElementById('escrow-status-text-1').className = "text-[10px] text-slate-500 font-semibold";
-            } else {
-                document.getElementById('escrow-badge-1').innerText = "鎖定中";
-                document.getElementById('escrow-badge-1').className = "absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-1').className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-1').className = "text-xs font-bold mb-1 text-slate-700";
-                document.getElementById('escrow-status-icon-1').innerText = "🔒";
-                document.getElementById('escrow-status-icon-1').className = "w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold";
-                document.getElementById('escrow-status-text-1').innerText = "待計畫方正式提交技師簽證報告核收";
-                document.getElementById('escrow-status-text-1').className = "text-[10px] text-slate-400 font-semibold";
-            }
+                    onSnapshot(userDocRef, (docSnap) => {
+                        if (docSnap.exists()) {
+                            const data = docSnap.data();
+                            Object.assign(personalData, data);
+                            setLocalData(personalData);
+                            updateUIFromData(personalData);
+                            if (data.role === 'admin' || user.email === 'admin@tanji.com') {
+                                document.getElementById('adminBtn')?.classList.remove('hidden');
+                            } else {
+                                document.getElementById('adminBtn')?.classList.add('hidden');
+                            }
+                        }
+                    }, (error) => { console.warn(error); });
 
-            if (currentProj.escrowStage2) {
-                document.getElementById('escrow-badge-2').innerText = "已解鎖";
-                document.getElementById('escrow-badge-2').className = "absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-2').className = "bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-2').className = "text-xs font-bold mb-1 text-brand-500";
-                document.getElementById('escrow-status-icon-2').innerText = "✓";
-                document.getElementById('escrow-status-icon-2').className = "w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold";
-                document.getElementById('escrow-status-text-2').innerText = "驗證成功，材料設備採購款核實撥發";
-                document.getElementById('escrow-status-text-2').className = "text-[10px] text-slate-500 font-semibold";
-            } else {
-                document.getElementById('escrow-badge-2').innerText = "鎖定中";
-                document.getElementById('escrow-badge-2').className = "absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-2').className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-2').className = "text-xs font-bold mb-1 text-slate-700";
-                document.getElementById('escrow-status-icon-2').innerText = "🔒";
-                document.getElementById('escrow-status-icon-2').className = "w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold";
-                document.getElementById('escrow-status-text-2').innerText = "待材料進場並提交核實清冊解鎖";
-                document.getElementById('escrow-status-text-2').className = "text-[10px] text-slate-400 font-semibold";
-            }
-
-            if (currentProj.escrowStage3) {
-                document.getElementById('escrow-badge-3').innerText = "已解鎖";
-                document.getElementById('escrow-badge-3').className = "absolute top-0 right-0 bg-brand-500 text-white text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-3').className = "bg-white p-5 rounded-2xl border border-brand-500/30 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-3').className = "text-xs font-bold mb-1 text-brand-500";
-                document.getElementById('escrow-status-icon-3').innerText = "✓";
-                document.getElementById('escrow-status-icon-3').className = "w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-brand-500 text-xs font-bold";
-                document.getElementById('escrow-status-text-3').innerText = "綠電併網成功，數據監測正常運作";
-                document.getElementById('escrow-status-text-3').className = "text-[10px] text-slate-500 font-semibold";
-            } else {
-                document.getElementById('escrow-badge-3').innerText = "鎖定中";
-                document.getElementById('escrow-badge-3').className = "absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] font-black px-2.5 py-1 rounded-bl-lg";
-                document.getElementById('escrow-card-3').className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-between";
-                document.getElementById('escrow-title-3').className = "text-xs font-bold mb-1 text-slate-700";
-                document.getElementById('escrow-status-icon-3').innerText = "🔒";
-                document.getElementById('escrow-status-icon-3').className = "w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold";
-                document.getElementById('escrow-status-text-3').innerText = "待正式發電公文與監測對接解鎖";
-                document.getElementById('escrow-status-text-3').className = "text-[10px] text-slate-400 font-semibold";
-            }
-        }
-
-        function updateRewards(totalExp) {
-            const r1 = document.getElementById('reward-1');
-            const r2 = document.getElementById('reward-2');
-            const r3 = document.getElementById('reward-3');
-            const req1 = document.getElementById('req-1');
-            const req2 = document.getElementById('req-2');
-            const req3 = document.getElementById('req-3');
-
-            let unlockedCount = 0;
-
-            if(totalExp >= 100) { 
-                r1.classList.remove('reward-locked');
-                r1.classList.add('reward-unlocked', 'cursor-pointer'); 
-                req1.innerText = '點擊檢視獎勵';
-                req1.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap';
-                unlockedCount++;
-            } else {
-                r1.classList.add('reward-locked');
-                r1.classList.remove('reward-unlocked', 'cursor-pointer'); 
-                req1.innerText = '需 100 經驗值';
-                req1.className = 'inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono';
-            }
-            
-            if(totalExp >= 300) { 
-                r2.classList.remove('reward-locked');
-                r2.classList.add('reward-unlocked', 'cursor-pointer'); 
-                req2.innerText = '點擊兌換條碼';
-                req2.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap';
-                unlockedCount++;
-            } else {
-                r2.classList.add('reward-locked');
-                r2.classList.remove('reward-unlocked', 'cursor-pointer'); 
-                req2.innerText = '需 300 經驗值';
-                req2.className = 'inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono';
-            }
-
-            if(totalExp >= 800) { 
-                r3.classList.remove('reward-locked');
-                r3.classList.add('reward-unlocked', 'cursor-pointer'); 
-                req3.innerText = '點擊登記領取';
-                req3.className = 'inline-block bg-brand-50 text-brand-600 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap';
-                unlockedCount++;
-            } else {
-                r3.classList.add('reward-locked');
-                r3.classList.remove('reward-unlocked', 'cursor-pointer'); 
-                req3.innerText = '需 800 經驗值';
-                req3.className = 'inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full font-bold whitespace-nowrap font-mono';
-            }
-
-            const statusTextEl = document.getElementById('cert-vouchers-status');
-            const promoCodeEl = document.getElementById('cert-promo-code');
-            if (statusTextEl && promoCodeEl) {
-                statusTextEl.innerText = `${unlockedCount} / 3 解鎖`;
-                if (unlockedCount === 0) {
-                    promoCodeEl.innerText = 'VOUCHER_LOCKED';
-                } else if (unlockedCount === 1) {
-                    promoCodeEl.innerText = rewardItemsData[1].code;
-                } else if (unlockedCount === 2) {
-                    promoCodeEl.innerText = rewardItemsData[2].code;
                 } else {
-                    promoCodeEl.innerText = rewardItemsData[3].code;
+                    if(!currentUser || !currentUser.uid.startsWith('local-')) {
+                        currentUser = null;
+                        userControls?.classList.add('auth-hidden');
+                        loginShowBtn?.classList.remove('auth-hidden');
+                        mobileUserCard?.classList.add('hidden');
+                        mobileUnauthZone?.classList.remove('hidden');
+                        loginOverlay?.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+                        document.getElementById('adminBtn')?.classList.add('hidden');
+                        const cache = getLocalData() || initialUserData;
+                        Object.assign(personalData, cache);
+                        updateUIFromData(personalData);
+                    }
                 }
-            }
+            });
         }
 
-        function openRewardModal(id, requiredExp) {
-            if (personalData.exp < requiredExp) {
-                window.showToast(`經驗值不足！還需要 ${requiredExp - personalData.exp} 經驗值才能解鎖喔！`, 'error');
-                return;
-            }
-            const data = rewardItemsData[id];
-            document.getElementById('reward-modal-icon').innerText = data.icon;
-            document.getElementById('reward-modal-title').innerText = data.title;
-            document.getElementById('reward-modal-code').innerText = data.code;
-            document.getElementById('reward-modal-desc').innerText = data.desc;
-            document.getElementById('rewardDetailModal').classList.remove('hidden');
+        // Project interaction bindings
+        const trialSelectEl = document.getElementById('trialProjectSelect');
+        if (trialSelectEl) {
+            trialSelectEl.addEventListener('change', function(e) {
+                const targetIdx = parseInt(e.target.value);
+                switchProject(targetIdx, false);
+            });
         }
 
-        document.getElementById('reward-1').addEventListener('click', () => openRewardModal(1, 100));
-        document.getElementById('reward-2').addEventListener('click', () => openRewardModal(2, 300));
-        document.getElementById('reward-3').addEventListener('click', () => openRewardModal(3, 800));
-
-        function calculateLevel(exp) {
-            if(exp >= 2000) return 5;
-            if(exp >= 1000) return 4;
-            if(exp >= 500) return 3;
-            if(exp >= 200) return 2;
-            return 1;
-        }
-
-        function syncValues(value) {
-            const money = parseInt(value);
-            const p = projects[currentProjectIndex];
-            const co2 = ((money / p.goal) * p.yearlyCo2e * 1000).toFixed(1);
-            const exp = Math.floor(money / 10);
-            
-            co2Display.innerText = co2;
-            expDisplay.innerText = exp;
-        }
-
-        function updateBabyInteraction(value) {
-            const money = parseInt(value);
-            const scale = 1 + (money / 10000) * 0.12;
-            const opacity = 0.2 + (money / 10000) * 0.6;
-            
-            babyWrapper.style.transform = `scale(${scale})`;
-            babyGlow.style.opacity = opacity;
-        }
-
-        slider.addEventListener('input', function() {
-            numInput.value = this.value;
+        slider?.addEventListener('input', function() {
+            if(numInput) numInput.value = this.value;
             syncValues(this.value);
             updateBabyInteraction(this.value);
         });
 
-        numInput.addEventListener('input', function() {
+        numInput?.addEventListener('input', function() {
             let val = parseInt(this.value) || 0;
             if(val > 10000) val = 10000;
-            slider.value = val;
+            if(slider) slider.value = val;
             syncValues(val);
             updateBabyInteraction(val);
         });
 
-        function createConfetti() {
-            const colors = ['#007d8a', '#3cc4b2', '#3b82f6', '#eab308', '#a855f7'];
-            for (let i = 0; i < 150; i++) {
-                confettiParticles.push({
-                    x: canvas.width / 2,
-                    y: canvas.height / 2 + 100,
-                    r: Math.random() * 5 + 2,
-                    dx: Math.random() * 16 - 8,
-                    dy: Math.random() * -12 - 4,
-                    color: colors[Math.floor(Math.random() * colors.length)],
-                    tilt: Math.floor(Math.random() * 10) - 10,
-                    tiltAngle: 0,
-                    tiltAngleInc: (Math.random() * 0.06) + 0.04
-                });
-            }
-        }
-
-        function drawConfetti() {
-            if (!ctx) return;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            let active = false;
-            confettiParticles.forEach((p) => {
-                p.tiltAngle += p.tiltAngleInc;
-                p.y += (Math.cos(p.tiltAngle) + 1 + p.r / 2) / 2;
-                p.x += Math.sin(p.tiltAngle) * 2;
-                p.dy += 0.08;
-                p.y += p.dy;
-                
-                if (p.y <= canvas.height) active = true;
-
-                ctx.beginPath();
-                ctx.lineWidth = p.r;
-                ctx.strokeStyle = p.color;
-                ctx.moveTo(p.x + p.tilt + p.r, p.y);
-                ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r);
-                ctx.stroke();
-            });
-
-            if (active) {
-                animationFrameId = requestAnimationFrame(drawConfetti);
-            } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                confettiParticles = [];
-            }
-        }
-
-        async function addFeedItem(money, exp, projectName) {
-            const name = currentUser ? (currentUser.isAnonymous ? '訪客使用者' : currentUser.email.split('@')[0]) : '熱心公民';
-            const action = money > 0 
-                ? `參與了 ${projectName} ${money.toLocaleString()} 元` 
-                : `完成了 ${projectName}`;
-
-            if(currentUser && !currentUser.uid.startsWith('local-')) {
-                try {
-                    await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'feeds'), {
-                        name: name, action: action, exp: exp, timestamp: Date.now(), timeStr: '剛剛'
-                    });
-                } catch(e) {}
-            } else {
-                pushNewFeed(name, action, exp, '剛剛');
-            }
-        }
-
-        function pushNewFeed(name, action, exp, timeStr) {
-            activeFeedsCache.unshift({ name, action, exp, timeStr });
-            if (activeFeedsCache.length > 3) { activeFeedsCache.pop(); }
-            renderFeedsCache();
-        }
-
-        function renderFeedsCache() {
-            feedListContainer.innerHTML = '';
-            activeFeedsCache.forEach((data, index) => {
-                const div = document.createElement('div');
-                div.className = 'flex items-center text-xs bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm flex-1 h-24 feed-card-transition opacity-0 transform translate-y-2';
-                div.innerHTML = `
-                    <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center mr-3 font-bold text-slate-500 shrink-0">${data.name.substring(0,1)}</div>
-                    <div class="flex-1 min-w-0">
-                        <p class="break-words text-slate-600 leading-tight font-semibold"><span class="font-bold text-brand-500 whitespace-nowrap">${data.name}</span> ${data.action}</p>
-                        <div class="flex justify-between items-center mt-1.5">
-                            <span class="text-[10px] text-brand-500 font-bold bg-brand-50 px-2 py-0.5 rounded whitespace-nowrap shrink-0 font-mono">+${data.exp} 經驗值</span>
-                            <span class="text-[10px] text-slate-300 font-bold shrink-0 font-mono">${data.timeStr}</span>
-                        </div>
-                    </div>
-                `;
-                feedListContainer.appendChild(div);
-                setTimeout(() => { div.classList.remove('opacity-0', 'translate-y-2'); }, index * 80);
-            });
-        }
-
-        sponsorBtn.addEventListener('click', async () => {
+        // Payment Simulation
+        sponsorBtn?.addEventListener('click', async () => {
             if (!currentUser) {
-                loginModal.classList.remove('hidden');
+                loginModal?.classList.remove('hidden');
                 return;
             }
-
             const money = parseInt(numInput.value);
             const p = projects[currentProjectIndex];
             const co2 = ((money / p.goal) * p.yearlyCo2e * 1000).toFixed(1);
@@ -1996,14 +1999,14 @@
             document.getElementById('payment-target-project').innerText = p.title;
             document.getElementById('payment-project-perk').innerText = p.perk;
             document.getElementById('payment-co2-val').innerText = co2;
-            paymentAmountDisplay.innerText = money.toLocaleString();
-            paymentModal.classList.remove('hidden');
+            if(paymentAmountDisplay) paymentAmountDisplay.innerText = money.toLocaleString();
+            paymentModal?.classList.remove('hidden');
         });
+        document.getElementById('closePaymentBtn')?.addEventListener('click', () => { paymentModal?.classList.add('hidden'); });
 
         document.querySelectorAll('.payment-method-btn').forEach(btn => {
             btn.addEventListener('click', async () => {
-                paymentModal.classList.add('hidden');
-                
+                paymentModal?.classList.add('hidden');
                 const money = parseInt(numInput.value);
                 const p = projects[currentProjectIndex];
                 const co2 = parseFloat(((money / p.goal) * p.yearlyCo2e * 1000).toFixed(1));
@@ -2017,20 +2020,20 @@
                             ? docSnap.data().raisedAmounts 
                             : projects.map(proj => proj.raised);
                         currentAmounts[currentProjectIndex] += money;
-                        await setDoc(configRef, { raisedAmounts: currentAmounts });
+                        await setDoc(configRef, { raisedAmounts: currentAmounts }, {merge: true});
                     } catch(e) {}
                 } else {
                     projects[currentProjectIndex].raised += money;
                     let newPct = Math.floor((p.raised / p.goal) * 100);
                     if (newPct > 100) newPct = 100;
-                    raisedAmountEl.innerText = p.raised.toLocaleString();
-                    pctAmountEl.innerText = newPct;
-                    heroProgress.style.width = newPct + '%';
-                    heroTime.innerText = `目前進度 ${newPct}% | ${p.time}`;
+                    if(raisedAmountEl) raisedAmountEl.innerText = p.raised.toLocaleString();
+                    if(pctAmountEl) pctAmountEl.innerText = newPct;
+                    if(heroProgress) heroProgress.style.width = newPct + '%';
+                    if(heroTime) heroTime.innerText = `目前進度 ${newPct}% | ${p.time}`;
                 }
 
                 globalCo2 += (co2 / 1000);
-                globalCo2El.innerText = globalCo2.toFixed(3);
+                if(globalCo2El) globalCo2El.innerText = globalCo2.toFixed(3);
                 document.querySelectorAll('.global-co2-mobile').forEach(el => el.innerText = globalCo2.toFixed(3));
 
                 personalData.invested += money;
@@ -2049,8 +2052,8 @@
 
                 updateUIFromData(personalData);
 
-                modalCo2.innerText = co2.toFixed(1);
-                modalExp.innerText = exp;
+                if(modalCo2) modalCo2.innerText = co2.toFixed(1);
+                if(modalExp) modalExp.innerText = exp;
 
                 addFeedItem(money, exp, projects[currentProjectIndex].title);
 
@@ -2058,242 +2061,74 @@
                 if(animationFrameId) cancelAnimationFrame(animationFrameId);
                 drawConfetti();
 
-                successModal.classList.remove('hidden');
+                successModal?.classList.remove('hidden');
                 setTimeout(() => {
-                    successModalContent.classList.remove('scale-95');
-                    successModalContent.classList.add('scale-100');
+                    successModalContent?.classList.remove('scale-95');
+                    successModalContent?.classList.add('scale-100');
                 }, 10);
             });
         });
 
-        closeSuccessBtn.addEventListener('click', () => {
-            successModalContent.classList.remove('scale-100');
-            successModalContent.classList.add('scale-95');
+        closeSuccessBtn?.addEventListener('click', () => {
+            successModalContent?.classList.remove('scale-100');
+            successModalContent?.classList.add('scale-95');
             setTimeout(() => {
-                successModal.classList.add('hidden');
-                slider.value = 500;
-                numInput.value = 500;
+                successModal?.classList.add('hidden');
+                if(slider) slider.value = 500;
+                if(numInput) numInput.value = 500;
                 syncValues(500);
                 updateBabyInteraction(500);
             }, 200);
         });
 
-        accountBtn.addEventListener('click', () => {
-            document.getElementById('account-profile-view').classList.remove('hidden');
-            document.getElementById('account-certificate-view').classList.add('hidden');
-            accountModal.classList.remove('hidden');
-            setTimeout(() => {
-                accountModalContent.classList.remove('scale-95');
-                accountModalContent.classList.add('scale-100');
-            }, 10);
-        });
+        function createFloatingElement(x, y, emoji) {
+            const el = document.createElement('div');
+            el.className = 'floating-leaf';
+            el.innerText = emoji;
+            el.style.left = (x - 15) + 'px';
+            el.style.top = (y - 15) + 'px';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 1200);
+        }
 
-        document.querySelectorAll('.close-account-trigger').forEach(btn => {
-            btn.addEventListener('click', () => {
-                accountModalContent.classList.remove('scale-100');
-                accountModalContent.classList.add('scale-95');
-                setTimeout(() => { accountModal.classList.add('hidden'); }, 200);
-            });
-        });
-
-        document.getElementById('viewCertBtn').addEventListener('click', () => {
-            document.getElementById('account-profile-view').classList.add('hidden');
-            document.getElementById('account-certificate-view').classList.remove('hidden');
-        });
-
-        document.getElementById('backToProfileBtn').addEventListener('click', () => {
-            document.getElementById('account-certificate-view').classList.add('hidden');
-            document.getElementById('account-profile-view').classList.remove('hidden');
-        });
-
-        document.getElementById('downloadCertBtn').addEventListener('click', function() {
-            const btn = this;
-            btn.disabled = true;
-            btn.innerText = "驗證金鑰對接中...";
-            btn.classList.add('animate-pulse', 'bg-brand-600');
-
-            const canvas = document.createElement('canvas');
-            canvas.width = 1000;
-            canvas.height = 700;
-            const ctx = canvas.getContext('2d');
-
-            const gradient = ctx.createLinearGradient(0, 0, 1000, 700);
-            gradient.addColorStop(0, '#0a1f42');
-            gradient.addColorStop(1, '#005a63');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, 1000, 700);
-
-            ctx.strokeStyle = '#3cc4b2';
-            ctx.lineWidth = 10;
-            ctx.strokeRect(30, 30, 940, 640);
-
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 36px sans-serif';
-            ctx.fillText('TanJi 永續溫室氣體減量憑證', 100, 120);
-
-            const certId = document.getElementById('cert-id-display').innerText;
-            ctx.fillStyle = '#3cc4b2';
-            ctx.font = '20px monospace';
-            ctx.fillText(certId, 100, 165);
-
-            ctx.fillStyle = '#cbd5e1';
-            ctx.font = '24px sans-serif';
-            ctx.fillText('茲證明此永續帳戶持有者：', 100, 270);
-
-            const userEmail = document.getElementById('cert-email-display').innerText;
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 30px monospace';
-            ctx.fillText(userEmail, 100, 330);
-
-            ctx.fillStyle = '#cbd5e1';
-            ctx.font = '24px sans-serif';
-            ctx.fillText('實質參與環境低碳更新工程，已為地球減量', 100, 410);
-
-            const co2Val = document.getElementById('cert-co2-display').innerText;
-            ctx.fillStyle = '#3cc4b2';
-            ctx.font = 'bold 48px monospace';
-            ctx.fillText(`${co2Val} kg`, 100, 480);
-
-            ctx.fillStyle = '#cbd5e1';
-            ctx.font = '24px sans-serif';
-            ctx.fillText('二氧化碳當量 (CO₂e)，特頒此證以資表揚。', 380, 470);
-
-            let mockHash = "";
-            for (let i = 0; i < 8; i++) {
-                mockHash += Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        dailyCheckInBtn?.addEventListener('click', async (e) => {
+            if (!currentUser) {
+                loginModal?.classList.remove('hidden');
+                return;
             }
-            mockHash = "SHA256: " + mockHash.toUpperCase();
-            ctx.fillStyle = '#a855f7';
-            ctx.font = 'bold 18px monospace';
-            ctx.fillText(mockHash, 100, 530);
+            if (hasCheckedInToday) return;
+            hasCheckedInToday = true;
+            
+            dailyCheckInBtn.innerHTML = '<span class="text-sm shrink-0">✅</span> <span class="truncate">今日已打卡</span>';
+            dailyCheckInBtn.className = 'mb-5 bg-slate-700 text-slate-400 px-6 py-3 rounded-full font-bold text-sm transition-colors shadow-sm flex items-center gap-2 cursor-not-allowed border border-slate-600';
 
-            ctx.fillStyle = '#64748b';
-            ctx.font = '16px sans-serif';
-            const today = new Date().toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
-            ctx.fillText(`認證日期：${today}`, 100, 590);
-            ctx.fillText('臺灣『能』永續能源創意實作競賽 參賽團隊 官方發行', 480, 590);
+            if(statusText) {
+                statusText.innerText = '寶寶覺得充滿能量！';
+                statusText.className = 'text-xl font-bold text-brand-500 z-20 break-words';
+            }
+            if(encouragementText) encouragementText.innerText = '感謝你今天的日常減量行動！';
 
-            setTimeout(() => {
+            const btnRect = dailyCheckInBtn.getBoundingClientRect();
+            createFloatingElement(btnRect.left + btnRect.width / 2, btnRect.top, '✨');
+
+            personalData.exp += 5;
+            personalData.level = calculateLevel(personalData.exp);
+            
+            setLocalData(personalData);
+            if (currentUser && !currentUser.uid.startsWith('local-')) {
                 try {
-                    const imageURL = canvas.toDataURL('image/png');
-                    const downloadLink = document.createElement('a');
-                    downloadLink.href = imageURL;
-                    downloadLink.download = `TanJi_Certificate_${co2Val}kg_CO2e.png`;
-                    document.body.appendChild(downloadLink);
-                    downloadLink.click();
-                    document.body.removeChild(downloadLink);
-
-                    btn.disabled = false;
-                    btn.innerText = "下載永續身分憑證 (CO₂e)";
-                    btn.classList.remove('animate-pulse', 'bg-brand-600');
-                    window.showToast("減量憑證已成功生成並開始下載");
-                } catch (err) {
-                    btn.disabled = false;
-                    btn.innerText = "下載永續身分憑證 (CO₂e)";
-                    btn.classList.remove('animate-pulse', 'bg-brand-600');
-                    window.showToast("生成失敗，請再試一次", "error");
-                }
-            }, 1500);
+                     const userDocRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'profile', 'data');
+                     await setDoc(userDocRef, personalData, { merge: true });
+                } catch(error) {}
+            }
+            updateUIFromData(personalData);
+            addFeedItem(0, 5, '每日永續打卡');
+            showToast("打卡成功！獲得 5 經驗值");
         });
 
-        document.getElementById('viewDetailBtn').addEventListener('click', () => { window.showProjectDetails(); });
-
-        helpToggleBtn.addEventListener('click', () => {
-            helpModal.classList.toggle('hidden');
-            helpToggleBtn.querySelector('span').classList.add('hidden');
-        });
-        
-        closeHelpBtn.addEventListener('click', () => { helpModal.classList.add('hidden'); });
-
-        let chatHistory = [];
-
-        function addMessage(text, isUser) {
-            const div = document.createElement('div');
-            if(isUser) {
-                div.className = 'self-end bg-brand-500 text-white p-3 rounded-2xl rounded-tr-sm max-w-[90%] font-semibold break-words shadow-sm';
-            } else {
-                div.className = 'self-start bg-white p-3 rounded-2xl rounded-tl-sm border border-slate-100 max-w-[90%] text-slate-600 font-semibold leading-relaxed break-words shadow-sm';
-            }
-            div.innerText = text;
-            chatMessages.appendChild(div);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        async function handleChat() {
-            const text = chatInput.value.trim();
-            if(!text) return;
-            
-            addMessage(text, true);
-            chatInput.value = '';
-            
-            const loadingId = 'loading-' + Date.now();
-            const loadingDiv = document.createElement('div');
-            loadingDiv.id = loadingId;
-            loadingDiv.className = 'self-start bg-white p-3 rounded-2xl rounded-tl-sm border border-slate-100 max-w-[90%] text-slate-400 text-[10px] font-bold flex items-center shrink-0 shadow-sm';
-            loadingDiv.innerHTML = '<span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-pulse mr-1"></span><span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce mr-1" style="animation-delay: 0.1s"></span><span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce mr-2" style="animation-delay: 0.2s"></span> 碳吉寶寶思考中...';
-            chatMessages.appendChild(loadingDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            try {
-                const response = await fetch('https://chatbot-dk75s66f5q-uc.a.run.app', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        message: text,
-                        history: chatHistory
-                    })
-                });
-
-                const loadEl = document.getElementById(loadingId);
-                if(loadEl) loadEl.remove();
-
-                if (!response.ok) throw new Error();
-
-                const data = await response.json();
-                const reply = data.reply;
-
-                addMessage(reply, false);
-
-                chatHistory.push({ role: "user", parts: [{ text: text }] });
-                chatHistory.push({ role: "model", parts: [{ text: reply }] });
-
-            } catch (error) {
-                const loadEl = document.getElementById(loadingId);
-                if(loadEl) loadEl.remove();
-
-                setTimeout(() => {
-                    let reply = "";
-                    const lowerText = text.toLowerCase();
-                    if (lowerText.includes("信託") || lowerText.includes("資金") || lowerText.includes("保管") || lowerText.includes("安全")) {
-                        reply = "TanJi 平台採用嚴謹的銀行信託保管機制，所有募集資金皆存入合作銀行的專屬代收代付專戶。計畫執行方需依工程進度，提供第三方驗證簽證報告（如結構安全、設備進場、台電併網公文），經人工核收審查無誤後方能分批解鎖撥款，落實 100% 專款專用。";
-                    } else if (lowerText.includes("服務費") || lowerText.includes("比例") || lowerText.includes("費用") || lowerText.includes("收費")) {
-                        reply = "本平台不向參與者收取任何額外服務費。專案募集達標後，僅向提案廠商收取 3% 的平台轉型媒合服務費，以支持平台的日常營運、發電數據監測對接與信託審查成本。";
-                    } else if (lowerText.includes("回饋") || lowerText.includes("獎勵") || lowerText.includes("經驗") || lowerText.includes("exp") || lowerText.includes("寶寶") || lowerText.includes("進化")) {
-                        reply = "當您參與環境低碳項目時，每投入 10 元即可累積 1 經驗值（EXP）。經驗值會即時反映在「碳吉寶寶」的成長軌跡中！累積至特定里程碑（100、300、800 EXP）即可在「累積里程碑與回饋」區塊，免費兌換數位永續徽章、低碳咖啡兌換券或限量再生材質環保杯。";
-                    } else if (lowerText.includes("計算") || lowerText.includes("公式") || lowerText.includes("當量") || lowerText.includes("co2e") || lowerText.includes("方法學")) {
-                        reply = "我們的二氧化碳減量當量 (CO₂e) 計算具備嚴謹科學依據。對於再生能源發電類專案，依據經濟部最新標準精密計量：產業端採用「產業電力排碳係數 0.466 kg CO₂e/度」，民生端採用「民生住宅電力排碳係數 0.471 kg CO₂e/度」。計算公式為：個人減量效益 (kg CO₂e) = (個人參與金額 / 專案總目標) × 首年預估總減量當量 × 1000。生質能與沼氣發電更納入了 CH₄ 的全球暖化潛勢（GWP）折算，電商包裝則套用循環生命週期盤查係數（每單次循環減少 1.2 kg CO₂e），杜絕任何綠色漂綠。";
-                    } else if (lowerText.includes("憑證") || lowerText.includes("證書") || lowerText.includes("下載")) {
-                        reply = "當您完成專案參與後，可至「我的帳戶」點擊「查看永續數位身分憑證」查閱您的專屬履歷，並可直接下載附有去中心化防偽安全金鑰 (SHA256) 的 PNG 憑證圖像，公開分享或永久保存您的環境行動紀錄。";
-                    } else {
-                        reply = "您好！我是您的永續智能助手碳吉寶寶。關於專案進度、信託撥款、環境當量計算公式、經驗值成長或帳戶數位憑證，我都能為您解答喔！🍃";
-                    }
-                    addMessage(reply, false);
-                }, 400);
-            }
-        }
-
-        sendChatBtn.addEventListener('click', handleChat);
-        chatInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleChat(); });
-
-        window.addEventListener('resize', () => {
-            if (canvas) {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-        });
-
-        document.getElementById('adminBtn').addEventListener('click', () => {
-            document.getElementById('adminModal').classList.remove('hidden');
+        // Admin functionality
+        document.getElementById('adminBtn')?.addEventListener('click', () => {
+            document.getElementById('adminModal')?.classList.remove('hidden');
             const targetProj = projects[parseInt(document.getElementById('adminProjectSelect').value)];
             document.getElementById('adminProjectRaised').value = targetProj.raised;
             document.getElementById('adminStage1').value = targetProj.escrowStage1 ? 'approved' : 'pending';
@@ -2301,7 +2136,9 @@
             document.getElementById('adminStage3').value = targetProj.escrowStage3 ? 'approved' : 'pending';
         });
 
-        document.getElementById('adminProjectSelect').addEventListener('change', (e) => {
+        document.getElementById('closeAdminBtn')?.addEventListener('click', () => { document.getElementById('adminModal')?.classList.add('hidden'); });
+
+        document.getElementById('adminProjectSelect')?.addEventListener('change', (e) => {
             const idx = parseInt(e.target.value);
             const targetProj = projects[idx];
             document.getElementById('adminProjectRaised').value = targetProj.raised;
@@ -2310,7 +2147,7 @@
             document.getElementById('adminStage3').value = targetProj.escrowStage3 ? 'approved' : 'pending';
         });
 
-        document.getElementById('adminForm').addEventListener('submit', async (e) => {
+        document.getElementById('adminForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const idx = parseInt(document.getElementById('adminProjectSelect').value);
             const val = parseInt(document.getElementById('adminProjectRaised').value);
@@ -2349,17 +2186,17 @@
                     await setDoc(configRef, { 
                         raisedAmounts: projects.map(p => p.raised),
                         stages: projects.map(p => ({ s1: p.escrowStage1, s2: p.escrowStage2, s3: p.escrowStage3 }))
-                    });
+                    }, {merge: true});
                 } catch(err) {}
             }
             
             btn.innerText = originalText;
-            document.getElementById('adminModal').classList.add('hidden');
+            document.getElementById('adminModal')?.classList.add('hidden');
             showToast("工程查核與數據套用成功");
             updateUIFromData(personalData);
         });
 
-        document.getElementById('adminAnnouncementForm').addEventListener('submit', async (e) => {
+        document.getElementById('adminAnnouncementForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const msg = document.getElementById('adminAnnounceText').value;
             if (currentUser && !currentUser.uid.startsWith('local-')) {
@@ -2379,52 +2216,209 @@
             }
         });
 
-        try {
-            const configDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'config', 'projects');
-            onSnapshot(configDocRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    if (data.raisedAmounts) {
-                        projects.forEach((p, idx) => {
-                            if (data.raisedAmounts[idx] !== undefined) { p.raised = data.raisedAmounts[idx]; }
-                            if (data.stages && data.stages[idx]) {
-                                p.escrowStage1 = data.stages[idx].s1;
-                                p.escrowStage2 = data.stages[idx].s2;
-                                p.escrowStage3 = data.stages[idx].s3;
-                            }
-                        });
-                        const p = projects[currentProjectIndex];
-                        const pct = Math.floor((p.raised / p.goal) * 100);
-                        heroTitle.innerText = p.title;
-                        heroOrg.innerText = p.org;
-                        raisedAmountEl.innerText = p.raised.toLocaleString();
-                        heroGoal.innerText = p.goal.toLocaleString();
-                        heroProgress.style.width = pct + '%';
-                        pctAmountEl.innerText = pct;
-                        heroTime.innerText = `目前進度 ${pct}% | ${p.time}`;
-                        updateUIFromData(personalData);
-                    }
-                }
-            }, (error) => { console.warn(error); });
-        } catch (error) { console.warn(error); }
+        // Canvas Downloads
+        document.getElementById('downloadCertBtn')?.addEventListener('click', function() {
+            const btn = this;
+            btn.disabled = true;
+            btn.innerText = "驗證金鑰對接中...";
+            btn.classList.add('animate-pulse', 'bg-brand-600');
 
-        try {
-            const feedsColRef = collection(db, 'artifacts', appId, 'public', 'data', 'feeds');
-            onSnapshot(feedsColRef, (snapshot) => {
-                let feeds = [];
-                snapshot.forEach(doc => { feeds.push({ id: doc.id, ...doc.data() }); });
-                feeds.sort((a, b) => b.timestamp - a.timestamp);
-                if (feeds.length > 0) {
-                    activeFeedsCache.length = 0;
-                    feeds.slice(0, 3).forEach(f => {
-                        activeFeedsCache.push({
-                            name: f.name || '熱心公民', action: f.action || '', exp: f.exp || 0, timeStr: f.timeStr || '剛剛'
-                        });
-                    });
-                    renderFeedsCache();
+            const cvs = document.createElement('canvas');
+            cvs.width = 1000;
+            cvs.height = 700;
+            const context = cvs.getContext('2d');
+
+            const gradient = context.createLinearGradient(0, 0, 1000, 700);
+            gradient.addColorStop(0, '#0a1f42');
+            gradient.addColorStop(1, '#005a63');
+            context.fillStyle = gradient;
+            context.fillRect(0, 0, 1000, 700);
+
+            context.strokeStyle = '#3cc4b2';
+            context.lineWidth = 10;
+            context.strokeRect(30, 30, 940, 640);
+
+            context.fillStyle = '#ffffff';
+            context.font = 'bold 36px sans-serif';
+            context.fillText('TanJi 永續溫室氣體減量憑證', 100, 120);
+
+            const certId = document.getElementById('cert-id-display').innerText;
+            context.fillStyle = '#3cc4b2';
+            context.font = '20px monospace';
+            context.fillText(certId, 100, 165);
+
+            context.fillStyle = '#cbd5e1';
+            context.font = '24px sans-serif';
+            context.fillText('茲證明此永續帳戶持有者：', 100, 270);
+
+            const userEmail = document.getElementById('cert-email-display').innerText;
+            context.fillStyle = '#ffffff';
+            context.font = 'bold 30px monospace';
+            context.fillText(userEmail, 100, 330);
+
+            context.fillStyle = '#cbd5e1';
+            context.font = '24px sans-serif';
+            context.fillText('實質參與環境低碳更新工程，已為地球減量', 100, 410);
+
+            const co2Val = document.getElementById('cert-co2-display').innerText;
+            context.fillStyle = '#3cc4b2';
+            context.font = 'bold 48px monospace';
+            context.fillText(`${co2Val} kg`, 100, 480);
+
+            context.fillStyle = '#cbd5e1';
+            context.font = '24px sans-serif';
+            context.fillText('二氧化碳當量 (CO₂e)，特頒此證以資表揚。', 380, 470);
+
+            let mockHash = "";
+            for (let i = 0; i < 8; i++) { mockHash += Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1); }
+            mockHash = "SHA256: " + mockHash.toUpperCase();
+            context.fillStyle = '#a855f7';
+            context.font = 'bold 18px monospace';
+            context.fillText(mockHash, 100, 530);
+
+            context.fillStyle = '#64748b';
+            context.font = '16px sans-serif';
+            const today = new Date().toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
+            context.fillText(`認證日期：${today}`, 100, 590);
+            context.fillText('臺灣『能』永續能源創意實作競賽 參賽團隊 官方發行', 480, 590);
+
+            setTimeout(() => {
+                try {
+                    const imageURL = cvs.toDataURL('image/png');
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = imageURL;
+                    downloadLink.download = `TanJi_Certificate_${co2Val}kg_CO2e.png`;
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                    btn.disabled = false;
+                    btn.innerText = "下載永續身分憑證 (CO₂e)";
+                    btn.classList.remove('animate-pulse', 'bg-brand-600');
+                    showToast("減量憑證已成功生成並開始下載");
+                } catch (err) {
+                    btn.disabled = false;
+                    btn.innerText = "下載永續身分憑證 (CO₂e)";
+                    btn.classList.remove('animate-pulse', 'bg-brand-600');
+                    showToast("生成失敗，請再試一次", "error");
                 }
-            }, (error) => { renderFeedsCache(); });
-        } catch (e) { renderFeedsCache(); }
+            }, 1500);
+        });
+
+        // Chatbot logic
+        let chatHistory = [];
+        function addMessage(text, isUser) {
+            if(!chatMessages) return;
+            const div = document.createElement('div');
+            if(isUser) { div.className = 'self-end bg-brand-500 text-white p-3 rounded-2xl rounded-tr-sm max-w-[90%] font-semibold break-words shadow-sm'; } 
+            else { div.className = 'self-start bg-white p-3 rounded-2xl rounded-tl-sm border border-slate-100 max-w-[90%] text-slate-600 font-semibold leading-relaxed break-words shadow-sm'; }
+            div.innerText = text;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function handleChat() {
+            if(!chatInput) return;
+            const text = chatInput.value.trim();
+            if(!text) return;
+            addMessage(text, true);
+            chatInput.value = '';
+            
+            const loadingId = 'loading-' + Date.now();
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = loadingId;
+            loadingDiv.className = 'self-start bg-white p-3 rounded-2xl rounded-tl-sm border border-slate-100 max-w-[90%] text-slate-400 text-[10px] font-bold flex items-center shrink-0 shadow-sm';
+            loadingDiv.innerHTML = '<span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-pulse mr-1"></span><span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce mr-1" style="animation-delay: 0.1s"></span><span class="w-1.5 h-1.5 bg-brand-500 rounded-full animate-bounce mr-2" style="animation-delay: 0.2s"></span> 碳吉寶寶思考中...';
+            if(chatMessages) { chatMessages.appendChild(loadingDiv); chatMessages.scrollTop = chatMessages.scrollHeight; }
+
+            try {
+                const response = await fetch('https://chatbot-dk75s66f5q-uc.a.run.app', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text, history: chatHistory })
+                });
+                const loadEl = document.getElementById(loadingId);
+                if(loadEl) loadEl.remove();
+                if (!response.ok) throw new Error();
+                const data = await response.json();
+                addMessage(data.reply, false);
+                chatHistory.push({ role: "user", parts: [{ text: text }] });
+                chatHistory.push({ role: "model", parts: [{ text: data.reply }] });
+            } catch (error) {
+                const loadEl = document.getElementById(loadingId);
+                if(loadEl) loadEl.remove();
+                setTimeout(() => {
+                    let reply = "";
+                    const lowerText = text.toLowerCase();
+                    if (lowerText.includes("信託") || lowerText.includes("資金") || lowerText.includes("保管") || lowerText.includes("安全")) {
+                        reply = "TanJi 平台採用嚴謹的銀行信託保管機制，所有募集資金皆存入合作銀行的專屬代收代付專戶。計畫執行方需依工程進度，提供第三方驗證簽證報告（如結構安全、設備進場、台電併網公文），經人工核收審查無誤後方能分批解鎖撥款，落實 100% 專款專用。";
+                    } else if (lowerText.includes("服務費") || lowerText.includes("比例") || lowerText.includes("費用") || lowerText.includes("收費")) {
+                        reply = "本平台不向參與者收取任何額外服務費。專案募集達標後，僅向提案廠商收取 3% 的平台轉型媒合服務費，以支持平台的日常營運、發電數據監測對接與信託審查成本。";
+                    } else if (lowerText.includes("回饋") || lowerText.includes("獎勵") || lowerText.includes("經驗") || lowerText.includes("exp") || lowerText.includes("寶寶") || lowerText.includes("進化")) {
+                        reply = "當您參與環境低碳項目時，每投入 10 元即可累積 1 經驗值（EXP）。經驗值會即時反映在「碳吉寶寶」的成長軌跡中！累積至特定里程碑（100、300、800 EXP）即可在「累積里程碑與回饋」區塊，免費兌換數位永續徽章、低碳咖啡兌換券或限量再生材質環保杯。";
+                    } else if (lowerText.includes("計算") || lowerText.includes("公式") || lowerText.includes("當量") || lowerText.includes("co2e") || lowerText.includes("方法學")) {
+                        reply = "我們的二氧化碳減量當量 (CO₂e) 計算具備嚴謹科學依據。對於再生能源發電類專案，依據經濟部最新標準精密計量：產業端採用「產業電力排碳係數 0.466 kg CO₂e/度」，民生端採用「民生住宅電力排碳係數 0.471 kg CO₂e/度」。計算公式為：個人減量效益 (kg CO₂e) = (個人參與金額 / 專案總目標) × 首年預估總減量當量 × 1000。生質能與沼氣發電更納入了 CH₄ 的全球暖化潛勢（GWP）折算，電商包裝則套用循環生命週期盤查係數（每單次循環減少 1.2 kg CO₂e），杜絕任何綠色漂綠。";
+                    } else if (lowerText.includes("憑證") || lowerText.includes("證書") || lowerText.includes("下載")) {
+                        reply = "當您完成專案參與後，可至「我的帳戶」點擊「查看永續數位身分憑證」查閱您的專屬履歷，並可直接下載附有去中心化防偽安全金鑰 (SHA256) 的 PNG 憑證圖像，公開分享或永久保存您的環境行動紀錄。";
+                    } else {
+                        reply = "您好！我是您的永續智能助手碳吉寶寶。關於專案進度、信託撥款、環境當量計算公式、經驗值成長或帳戶數位憑證，我都能為您解答喔！🍃";
+                    }
+                    addMessage(reply, false);
+                }, 400);
+            }
+        }
+        document.getElementById('sendChatBtn')?.addEventListener('click', handleChat);
+        chatInput?.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleChat(); });
+        document.getElementById('helpToggleBtn')?.addEventListener('click', () => {
+            const hm = document.getElementById('helpModal');
+            if(hm) hm.classList.toggle('hidden');
+            const span = document.getElementById('helpToggleBtn').querySelector('span');
+            if(span) span.classList.add('hidden');
+        });
+        document.getElementById('closeHelpBtn')?.addEventListener('click', () => { document.getElementById('helpModal')?.classList.add('hidden'); });
+
+        window.addEventListener('resize', () => {
+            if (canvas) { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        });
+
+        // Firebase background listeners & Mock Feeds
+        if (db) {
+            try {
+                const configDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'config', 'projects');
+                onSnapshot(configDocRef, (docSnap) => {
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        if (data.raisedAmounts) {
+                            projects.forEach((p, idx) => {
+                                if (data.raisedAmounts[idx] !== undefined) p.raised = data.raisedAmounts[idx];
+                                if (data.stages && data.stages[idx]) {
+                                    p.escrowStage1 = data.stages[idx].s1;
+                                    p.escrowStage2 = data.stages[idx].s2;
+                                    p.escrowStage3 = data.stages[idx].s3;
+                                }
+                            });
+                            switchProject(currentProjectIndex, false);
+                        }
+                    }
+                }, (e) => { console.warn(e); });
+            } catch (error) { console.warn(error); }
+
+            try {
+                const feedsColRef = collection(db, 'artifacts', appId, 'public', 'data', 'feeds');
+                onSnapshot(feedsColRef, (snapshot) => {
+                    let feeds = [];
+                    snapshot.forEach(doc => { feeds.push({ id: doc.id, ...doc.data() }); });
+                    feeds.sort((a, b) => b.timestamp - a.timestamp);
+                    if (feeds.length > 0) {
+                        activeFeedsCache.length = 0;
+                        feeds.slice(0, 3).forEach(f => {
+                            activeFeedsCache.push({ name: f.name || '熱心公民', action: f.action || '', exp: f.exp || 0, timeStr: f.timeStr || '剛剛' });
+                        });
+                        renderFeedsCache();
+                    }
+                }, (error) => { renderFeedsCache(); });
+            } catch (e) { renderFeedsCache(); }
+        } else {
+            renderFeedsCache();
+        }
 
         function startMockFeedsSimulation() {
             const firstNames = ['台北林', '新北張', '桃園陳', '台中李', '台南黃', '高雄王', '屏東劉', '宜蘭蔡', '花蓮曾'];
@@ -2438,124 +2432,21 @@
                 pushNewFeed(randomName, `參與了 ${randomProj.title} ${randomAmount.toLocaleString()} 元`, exp, '剛剛');
             }, 9000);
         }
-        startMockFeedsSimulation();
 
-        window.switchProject = switchProject;
-        window.showMethodologyModal = function() {
-            document.getElementById('methodologyModal').classList.remove('hidden');
-        };
-        window.showProjectDetails = function() {
-            const modal = document.getElementById('projectDetailsModal');
-            const p = projects[currentProjectIndex];
+        // ==========================================
+        // 5. Initial Execution
+        // ==========================================
+        function initApp() {
+            startMockFeedsSimulation();
+            const randomHeroIndex = Math.floor(Math.random() * projects.length);
+            switchProject(randomHeroIndex, false);
             
-            document.getElementById('modal-project-badge').innerText = p.badge;
-            document.getElementById('modal-project-title').innerText = p.title;
-            document.getElementById('modal-project-org').innerText = p.org;
-            document.getElementById('modal-project-image').src = p.image;
-            document.getElementById('modal-project-desc').innerText = p.desc;
-            
-            const benefitsList = document.getElementById('modal-project-benefits');
-            benefitsList.innerHTML = p.benefits.map(b => `<li class="break-words">${b}</li>`).join('');
-            
-            const perksList = document.getElementById('modal-project-perks');
-            perksList.innerHTML = p.perks.map(k => `<li class="break-words">${k}</li>`).join('');
-
-            modal.classList.remove('hidden');
-        };
-        window.showSuccessCaseDetails = function(index) {
-            const modal = document.getElementById('projectDetailsModal');
-            const sc = successCases[index];
-            
-            document.getElementById('modal-project-badge').innerText = sc.badge;
-            document.getElementById('modal-project-title').innerText = sc.title;
-            document.getElementById('modal-project-org').innerText = sc.org;
-            document.getElementById('modal-project-image').src = sc.image;
-            document.getElementById('modal-project-desc').innerText = sc.desc;
-            
-            const benefitsList = document.getElementById('modal-project-benefits');
-            benefitsList.innerHTML = sc.benefits.map(b => `<li class="break-words">${b}</li>`).join('');
-            
-            const perksList = document.getElementById('modal-project-perks');
-            perksList.innerHTML = sc.perks.map(k => `<li class="break-words">${k}</li>`).join('');
-
-            modal.classList.remove('hidden');
-        };
-        window.showToast = function(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = `px-4 py-2.5 rounded-xl text-xs font-bold text-white shadow-md transition-all duration-300 transform translate-y-2 opacity-0 shrink-0 ${type === 'error' ? 'bg-red-500' : 'bg-slate-800'}`;
-            toast.innerText = message;
-            container.appendChild(toast);
-            setTimeout(() => { toast.classList.remove('opacity-0', 'translate-y-2'); }, 10);
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-2');
-                setTimeout(() => { toast.remove(); }, 300);
-            }, 2500);
-        };
-
-        function createFloatingElement(x, y, emoji) {
-            const el = document.createElement('div');
-            el.className = 'floating-leaf';
-            el.innerText = emoji;
-            el.style.left = (x - 15) + 'px';
-            el.style.top = (y - 15) + 'px';
-            document.body.appendChild(el);
-            setTimeout(() => el.remove(), 1200);
+            // Critical fix: make sure renderOtherProjects is called explicitly after DOM setup
+            renderOtherProjects();
         }
 
-        dailyCheckInBtn.addEventListener('click', async (e) => {
-            if (!currentUser) {
-                loginModal.classList.remove('hidden');
-                return;
-            }
-            if (hasCheckedInToday) return;
-
-            hasCheckedInToday = true;
-            
-            dailyCheckInBtn.innerHTML = '<span class="text-sm shrink-0">✅</span> <span class="truncate">今日已打卡</span>';
-            dailyCheckInBtn.className = 'mb-5 bg-slate-700 text-slate-400 px-6 py-3 rounded-full font-bold text-sm transition-colors shadow-sm flex items-center gap-2 cursor-not-allowed border border-slate-600';
-
-            statusText.innerText = '寶寶覺得充滿能量！';
-            statusText.className = 'text-xl font-bold text-brand-500 z-20 break-words';
-            encouragementText.innerText = '感謝你今天的日常減量行動！';
-
-            const btnRect = dailyCheckInBtn.getBoundingClientRect();
-            createFloatingElement(btnRect.left + btnRect.width / 2, btnRect.top, '✨');
-
-            personalData.exp += 5;
-            personalData.level = calculateLevel(personalData.exp);
-            
-            setLocalData(personalData);
-            if (currentUser && !currentUser.uid.startsWith('local-')) {
-                try {
-                     const userDocRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'profile', 'data');
-                     await setDoc(userDocRef, personalData, { merge: true });
-                } catch(error) {}
-            }
-            updateUIFromData(personalData);
-            addFeedItem(0, 5, '每日永續打卡');
-            showToast("打卡成功！獲得 5 經驗值");
-        });
-
-        document.getElementById('sustainability-cta-card').addEventListener('click', function(e) {
-            e.preventDefault();
-            babyWrapper.classList.add('animate-bounce');
-            setTimeout(() => { babyWrapper.classList.remove('animate-bounce'); }, 1000);
-            document.getElementById('interaction-zone').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        const trialSelectEl = document.getElementById('trialProjectSelect');
-        if (trialSelectEl) {
-            trialSelectEl.addEventListener('change', function(e) {
-                const targetIdx = parseInt(e.target.value);
-                switchProject(targetIdx, false);
-            });
-        }
-
-        const randomHeroIndex = Math.floor(Math.random() * projects.length);
-        switchProject(randomHeroIndex, false);
-        syncValues(slider.value);
-        updateBabyInteraction(slider.value);
+        // Run initialization
+        initApp();
 
     </script>
 </body>
