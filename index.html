@@ -432,7 +432,7 @@
                     <div class="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-200 relative pt-12 hover:-translate-y-1 transition-transform duration-300 flex flex-col">
                         <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-slate-800 text-white rounded-full flex items-center justify-center text-sm font-black border-4 border-white shrink-0 font-mono">3</div>
                         <h4 class="text-base font-bold text-slate-800 mb-3 text-center break-words">實時數據驅動與監測</h4>
-                        <p class="text-slate-500 leading-relaxed text-sm text-justify mb-6 flex-1">專案完成併網或正式營運後，對接物聯網(IoT)智慧電錶，發電量與減量數據即時回傳，自動累積數位資產並對接憑證系統。</p>
+                        <p class="text-slate-500 leading-relaxed text-sm text-justify mb-6 flex-1">專案完成併網或正式營運後，串接物聯網智慧電錶，發電量與減量數據即時回傳，自動累積數位資產並傳輸至憑證系統。</p>
                     </div>
                 </div>
 
@@ -471,7 +471,7 @@
                             </div>
                             <div class="mt-4 flex items-center gap-2">
                                 <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 text-xs font-bold" id="escrow-status-icon-3">🔒</span>
-                                <span class="text-[10px] text-slate-400 font-semibold" id="escrow-status-text-3">待正式發電公文與IoT數據監測對接解鎖</span>
+                                <span class="text-[10px] text-slate-400 font-semibold" id="escrow-status-text-3">待正式發電公文與IoT數據監測</span>
                             </div>
                         </div>
                     </div>
@@ -517,7 +517,7 @@
                         </button>
                         <div class="px-5 pb-5 hidden">
                             <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
-                                平台所有專案之溫室氣體減量效益，皆以科學數據為基礎。電力減量係數依據經濟部能源署最新劃分標準實施雙軌計量：產業用電對接「產業電力排碳係數（0.466 kg CO₂e/度）」，民生住宅公共用電對接「民生住宅電力排碳係數（0.471 kg CO₂e/度）」。生質能、沼氣發電與循環包裝等專案更導入盤查指引方法學與網購生命週期評估（LCA），確保效益的真實性與不可篡改性。
+                                平台所有專案之溫室氣體減量效益，皆以科學數據為基礎。電力減量係數依據經濟部能源署最新劃分標準實施雙軌計量：產業電力排碳係數（0.466 kg CO₂e/度）及民生住宅電力排碳係數（0.471 kg CO₂e/度）。生質能、沼氣發電與循環包裝等專案更導入盤查指引方法學與網購生命週期評估（LCA），確保效益的真實性與不可篡改性。
                             </div>
                         </div>
                     </div>
@@ -543,13 +543,13 @@
                         <button class="w-full px-5 py-4 text-left font-bold text-slate-800 text-sm sm:text-base flex justify-between items-center focus:outline-none group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.arrow').classList.toggle('rotate-180');">
                             <span class="group-hover:text-brand-500 transition-colors flex items-center pr-4 min-w-0">
                                 <span class="w-6 h-6 rounded-full bg-white text-slate-500 flex items-center justify-center mr-3 text-xs shrink-0 font-bold border border-slate-200 font-mono">04</span>
-                                <span class="truncate break-words">物聯網(IoT)實時效益對接</span>
+                                <span class="truncate break-words">物聯網(IoT)實時效益</span>
                             </span>
                             <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-300 arrow shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="px-5 pb-5 hidden">
                             <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
-                                平台對接智慧邊緣運算與智慧電錶，確保專案發電效益即時、準確地寫入資料庫中，並作為信託專戶最終解鎖的數位條件。參與者可隨時檢視自身所貢獻之實質減量當量，並直接線上下載獲得官方防偽編碼金鑰之數位憑證。
+                                平台串接智慧邊緣運算與智慧電錶，確保專案發電效益即時、準確地寫入資料庫中，並作為信託專戶最終解鎖的數位條件。參與者可隨時檢視自身所貢獻之實質減量當量，並直接線上下載獲得官方防偽編碼金鑰之數位憑證。
                             </div>
                         </div>
                     </div>
@@ -564,7 +564,7 @@
                         </button>
                         <div class="px-5 pb-5 hidden">
                             <div class="pt-4 border-t border-slate-200/60 text-slate-500 leading-relaxed text-justify text-sm break-words">
-                                透過 SHA256 加密防偽技術，將您的微型投資減量貢獻轉化為具備公信力的「綠色數位身分資產」。此憑證可對接合作金融機構之低碳信貸優惠，或作為企業落實ESG員工福利之認列依據，將環境效益轉換為實體金融價值。
+                                透過 SHA256 加密防偽技術，將您的微型投資減量貢獻轉化為具備公信力的「綠色數位身分資產」。此憑證可申請合作金融機構之低碳信貸優惠，或作為企業落實ESG員工福利之認列依據，將環境效益轉換為實體金融價值。
                             </div>
                         </div>
                     </div>
@@ -980,7 +980,7 @@
                 <span class="text-4xl drop-shadow">🎉</span>
             </div>
             <h2 class="text-2xl font-black text-slate-800 mb-2 tracking-tight break-words">感謝您的環境行動參與</h2>
-            <p class="text-sm text-slate-500 mb-6 leading-relaxed break-words flex-1">本次成功為地球減少了溫室氣體排放當量 <span id="modal-co2" class="font-black text-brand-500 text-base font-mono whitespace-nowrap"></span> kg CO<sub>2</sub>e，您的永續帳戶已對接並獲得 <span id="modal-exp" class="font-black text-blue-500 text-base font-mono whitespace-nowrap"></span> 經驗值。</p>
+            <p class="text-sm text-slate-500 mb-6 leading-relaxed break-words flex-1">本次成功為地球減少了溫室氣體排放當量 <span id="modal-co2" class="font-black text-brand-500 text-base font-mono whitespace-nowrap"></span> kg CO<sub>2</sub>e，您的永續帳戶已獲得 <span id="modal-exp" class="font-black text-blue-500 text-base font-mono whitespace-nowrap"></span> 經驗值。</p>
             <button id="closeSuccessBtn" class="w-full bg-slate-800 hover:bg-slate-700 text-white rounded-xl py-3 font-bold text-sm transition-colors break-words truncate mt-auto shrink-0">
                 繼續探索專案
             </button>
@@ -1252,7 +1252,7 @@
                 yearlyCo2e: 37.68, 
                 perk: "獲贈偏鄉在地小農手作天然香草茶包組一份",
                 escrowStage1: false, escrowStage2: false, escrowStage3: false,
-                desc: "協助臺灣東部偏鄉部落更換老舊高耗能燈具為最新節能智慧 LED。除了能直接為弱勢社區省下 60% 的公用電費支出，更利用智慧監測對接建立微型溫室氣體減量機制。",
+                desc: "協助臺灣東部偏鄉部落更換老舊高耗能燈具為最新節能智慧 LED。除了能直接為弱勢社區省下 60% 的公用電費支出，更利用智慧監測建立微型溫室氣體減量機制。",
                 benefits: [
                     "預估首年節電量：80,000 度電力當量",
                     "年減少溫室氣體：約 37,680 kg CO₂e 減量當量",
@@ -1599,7 +1599,7 @@
 
             updateEscrowUI(1, currentProj.escrowStage1, "驗證成功，信託專戶已核實解鎖撥付", "待計畫方正式提交技師簽證報告核收");
             updateEscrowUI(2, currentProj.escrowStage2, "驗證成功，材料設備採購款核實撥發", "待材料進場並提交核實清冊解鎖");
-            updateEscrowUI(3, currentProj.escrowStage3, "綠電併網成功，數據監測正常運作", "待正式發電公文與IoT數據監測對接解鎖");
+            updateEscrowUI(3, currentProj.escrowStage3, "綠電併網成功，數據監測正常運作", "待正式發電公文與IoT數據監測");
         }
 
         function updateRewards(totalExp) {
@@ -2220,7 +2220,7 @@
         document.getElementById('downloadCertBtn')?.addEventListener('click', function() {
             const btn = this;
             btn.disabled = true;
-            btn.innerText = "驗證金鑰對接中...";
+            btn.innerText = "驗證金鑰串接中...";
             btn.classList.add('animate-pulse', 'bg-brand-600');
 
             const cvs = document.createElement('canvas');
@@ -2351,7 +2351,7 @@
                     if (lowerText.includes("信託") || lowerText.includes("資金") || lowerText.includes("保管") || lowerText.includes("安全")) {
                         reply = "TanJi 平台採用嚴謹的銀行信託保管機制，所有募集資金皆存入合作銀行的專屬代收代付專戶。計畫執行方需依工程進度，提供第三方驗證簽證報告（如結構安全、設備進場、台電併網公文），經人工核收審查無誤後方能分批解鎖撥款，落實 100% 專款專用。";
                     } else if (lowerText.includes("服務費") || lowerText.includes("比例") || lowerText.includes("費用") || lowerText.includes("收費")) {
-                        reply = "本平台不向參與者收取任何額外服務費。專案募集達標後，僅向提案廠商收取 3% 的平台轉型媒合服務費，以支持平台的日常營運、發電數據監測對接與信託審查成本。";
+                        reply = "本平台不向參與者收取任何額外服務費。專案募集達標後，僅向提案廠商收取 3% 的平台轉型媒合服務費，以支持平台的日常營運、發電數據監測與信託審查成本。";
                     } else if (lowerText.includes("回饋") || lowerText.includes("獎勵") || lowerText.includes("經驗") || lowerText.includes("exp") || lowerText.includes("寶寶") || lowerText.includes("進化")) {
                         reply = "當您參與環境低碳項目時，每投入 10 元即可累積 1 經驗值（EXP）。經驗值會即時反映在「碳吉寶寶」的成長軌跡中！累積至特定里程碑（100、300、800 EXP）即可在「累積里程碑與回饋」區塊，免費兌換數位永續徽章、低碳咖啡兌換券或限量再生材質環保杯。";
                     } else if (lowerText.includes("計算") || lowerText.includes("公式") || lowerText.includes("當量") || lowerText.includes("co2e") || lowerText.includes("方法學")) {
